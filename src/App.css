@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    /* font-family: 'General Sans', sans-serif; */
+
+    background-color: #040608;
+}
+
+
+
+
+/* Gradient Colors */
+.bg-gradient {
+    background: linear-gradient(90deg, #FF61DA, #7255FF);
+    /* Confirm button gradient */
+}
+
+.gradient-outer {
+    background: linear-gradient(90deg, #FF61DA, #7255FF);
+    border-radius: 100px;
+    padding: 2px;
+    height: fit-content;
+
+}
+
+.gradient-inner {
+    background: white;
+    border-radius: 100px;
+    height: fit-content;
+
+}
+
+.gradient-line {
+    height: 1px;
+    background: linear-gradient(to right, #040608, #26324d, #040608);
+    width: 80%;
+    margin: 20px auto;
+}
+
+
+.gradient-line-left {
+    height: 1px;
+    background: linear-gradient(to right, #26324d, #040608);
+    width: 80%;
+    margin: 20px 0;
+}
+
+.gradient-section {
+    background: linear-gradient(180deg, #090D15, #080B12, #070A10, #05070A, #040608);
+}
