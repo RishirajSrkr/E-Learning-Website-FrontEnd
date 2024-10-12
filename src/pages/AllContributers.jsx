@@ -12,7 +12,7 @@ function AllContributers() {
     }, [])
 
     return (
-        <div className='mt-20 flex flex-col justify-center items-center bg-bgColorOne'>
+        <div className='pt-20 flex flex-col justify-center items-center bg-bgColorOne'>
 
             <div className='w-full flex justify-center'>
                 <div className='flex gap-2 justify-between my-16 w-1/4'>

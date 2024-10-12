@@ -7,7 +7,7 @@ function VoteResources() {
     }
 
     return (
-        <div className='mt-2 flex flex-col h-screen justify-center items-center gap-8 text-white'>
+        <div className='flex flex-col h-screen bg-bgColorOne justify-center items-center gap-8 text-white'>
             <h1 className='text-5xl font-bold '>Something Different is coming!</h1>
 
             <h1 className='text-2xl  flex gap-2 justify-center items-center'>Click <span><button

@@ -13,6 +13,7 @@ import FullCoursePage from './pages/FullCoursePage'
 import Layout from './pages/Layout'
 import About from './pages/About'
 import VoteResources from './pages/VoteResources'
+import UserProfile from './pages/UserProfile'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +31,8 @@ function App() {
         <Route path='/profile/:id' element={<StudentProfile />} />
         <Route  path='/about' element={<About />}/>
         <Route  path='/vote' element={<VoteResources />}/>
+
+        <Route path='/user/profile' element={<UserProfile />}/>
       </Route>
 
     </Routes>

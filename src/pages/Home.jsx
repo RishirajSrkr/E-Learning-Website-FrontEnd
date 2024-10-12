@@ -3,6 +3,7 @@ import CourseCard from '../components/CourseCard';
 import { courses as coursesData } from '../data/courses';
 import { FaStarOfLife } from "react-icons/fa";
 import { IoChevronDownSharp } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 function Home() {
 
     const [courses, setCourses] = useState([]);
@@ -10,6 +11,11 @@ function Home() {
         setCourses(coursesData)
     }, [])
 
+    const navigate = useNavigate();
+
+    function handleOnClick(id){
+        navigate(`course/${id}`)
+    }
 
     return (
 
@@ -65,7 +71,7 @@ function Home() {
                             duration={course.duration}
                             description={course.description}
                             rating={course.rating}
-                            
+                            onClick={() => handleOnClick(course.id)}
                         />
                     })
                 }

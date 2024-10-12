@@ -22,7 +22,7 @@ function AllCourses() {
     return (
 
 
-        <div className='bg-bgColorOne mt-20'>
+        <div className='bg-bgColorOne py-20'>
 
             <h3 className='text-6xl font-bold text-center pt-10 bg-gradient bg-clip-text text-transparent'>{headline}</h3>
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import CourseForm from '../components/CourseForm'
+import AddCourseForm from '../components/AddCourseForm'
 
 function AddCoursePage() {
     return (
         <div>
-            <CourseForm />
+            <AddCourseForm />
         </div>
     )
 }
