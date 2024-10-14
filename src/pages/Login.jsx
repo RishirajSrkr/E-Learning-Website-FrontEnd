@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import {errorMessages} from '../data/errorMessages'
+import { errorMessages } from '../data/errorMessages'
+import axios from 'axios';
 
 function Login() {
-
-    const url = "http://localhost:8080/public"
 
     const [userCredential, setUserCredential] = useState({
         username: "",
@@ -25,45 +24,26 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(userCredential);
+        const x = import.meta.env.VITE_BASE_URL;
+
+        console.log(x);
+        console.log("Inside handle submit");
         
-
+        
         try {
-            const response = await fetch(`${url}/login`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            
-                body: JSON.stringify(userCredential),
-                credentials: 'include'  // This is important for including cookies
-            });
+            const response =  await axios.post(`${import.meta.env.VITE_BASE_URL}/login`,
+                 userCredential ,
+                { withCredentials: true }
 
-            console.log(response);
-            
-            if (!response.ok) {
-                const errorData = await response.text();
-                console.log(errorData);
-                
-                throw new Error("Oops, Failed to login.");
-            }
-           
-            
+            );
 
-            const data = await response.json();
-            console.log(data);
-            
-
-
-            //successfully logged in -> navigate the user to home page
-            navigate("/")
-
+            const data = await response.data;
+            console.log("Login successful : ", data);
 
         }
-        catch (e) {
-            console.log("The error is : ", e.message)
+        catch(e){
+            console.error("login failed : ", e)
         }
-
 
     }
 
@@ -122,7 +102,7 @@ function Login() {
                                 />
                             </div>
 
-                          
+
                             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                                 <button
                                     type="submit"

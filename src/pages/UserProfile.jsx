@@ -4,7 +4,7 @@ import Input from '../components/formComponents/Input'
 function UserProfile() {
 
     const [formData, setFormData] = useState({
-        username: "",
+        name: "",
         password: "",
     })
 
@@ -26,9 +26,9 @@ function UserProfile() {
                 totalWidth={"w-1/2"}
                 className={""}
                 type={"text"}
-                name={"username"}
-                value={formData.username}
-                placeholder={"your username"}
+                name={"name"}
+                value={formData.name}
+                placeholder={"your name"}
                 onChange={(e) => handleChange(e)}
                 reloadButtonShowOrHide={true}
                 onClick={(e) => handleReloadButton(e)}

@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { FaStarOfLife } from "react-icons/fa";
 
 function Navbar() {
-    const logo = <FaStarOfLife />
+    // const logo = <FaStarOfLife />
+    const logo = "BitByBit"
 
     const location = useLocation();
     const isAdd = location.pathname === '/add';
@@ -16,8 +17,7 @@ function Navbar() {
                 <ul className='flex w-full  rounded-full justify-between items-center bg-bgColorTwo px-3 pl-8 py-2'>
 
                     <div className='flex gap-3 justify-center items-center'>
-                        <div className='animate-spin-slow'>{logo}</div>
-                        <Link to={"/"} className='text-2xl font-extrabold'>ARC</Link>
+                        <Link to={"/"} className='text-2xl font-extrabold'>{logo}</Link>
                     </div>
 
                     <div className='flex gap-10'>
@@ -31,11 +31,11 @@ function Navbar() {
                 </ul>
             </div>
 
-            
+
             <div className='absolute w-12 h-12 bg-bgColorTwo rounded-full flex justify-center items-center border border-gray-800 right-10 top-4'>
                 <Link
-                to={"/user/profile"}
-                className='text-lg font-semibold'
+                    to={"/user/profile"}
+                    className='text-lg font-semibold'
                 >R</Link>
             </div>
 

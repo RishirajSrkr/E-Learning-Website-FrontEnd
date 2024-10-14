@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
+import axios from 'axios'
+
 function AddCourseForm() {
 
 
@@ -70,9 +72,28 @@ function AddCourseForm() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  function handleSubmitClick(e) {
+  async function handleSubmitClick(e) {
     e.preventDefault();
     isFormSubmitted(true);
+
+    console.log(formData);
+
+
+    try {
+      const response = await axios.post(`${import.meta.env.BASE_URL}/courses/create`, formData, {
+        headers: {
+          "name": "rishiraj"
+        }
+      });
+
+      console.log("response : ", response.data);
+
+    }
+    catch (e) {
+      console.log("error while creating course : ", e);
+
+    }
+
 
     setFormData({
       courseTitle: "",
@@ -115,7 +136,7 @@ function AddCourseForm() {
         <button name='popup' className='bg-yellow-500  '><IoCloseSharp size={16} onClick={() => isPopupVisible(prev => !prev)} /></button>
       </div>
       )} */}
-      
+
 
       <div className='flex flex-col gap-6 mb-8'>
         <div className='flex w-full gap-10'>
