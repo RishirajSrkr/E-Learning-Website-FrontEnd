@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaBook, FaGraduationCap, FaStar } from 'react-icons/fa';
-import { users as AllUsersData } from '../data/Users';
 
 const StudentProfile = () => {
     const { id } = useParams();

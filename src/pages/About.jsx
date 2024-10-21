@@ -2,9 +2,9 @@ import React from 'react';
 
 function About() {
     return (
-        <div className='w-full h-screen bg-bgColorOne'>
-            <div className='pt-32 w-1/2 text-gray-100 p-8 px-24'>
-                <h1 className='text-6xl font-bold w-fit bg-buttonGradient bg-clip-text text-transparent -mb-2 uppercase'>
+        <div className='w-full text-subtextColor h-screen bg-bgColorOne'>
+            <div className='pt-32 w-1/2 p-8 px-24'>
+                <h1 className='text-6xl font-bold w-fit text-accentColorOne -mb-2 uppercase'>
                     About Us.
                 </h1>
 

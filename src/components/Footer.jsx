@@ -5,14 +5,15 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram } from 'react-icons/fa';
 function Footer() {
 
   const location = useLocation();
-  const isAdd = location.pathname === "/add"
+  const hideFooter = location.pathname === "/register" || location.pathname === "/login"
+
 
   return (
-    <div className={`py-6 w-full ${isAdd ? 'bg-bgColorOne' : 'bg-bgColorOne'}`}>
+    <div className={`pb-6 w-full ${hideFooter ? 'hidden' : ''} bg-bgColorOne`}>
 
-      <div className='gradient-line'></div>
+      <div className='gradient-line mx-auto'></div>
 
-      <ul className='mt-6 flex gap-4 w-1/3 justify-between items-center font-medium mx-auto text-gray-500'>
+      <ul className='mt-6 flex gap-4 w-1/3 justify-between items-center font text-sm mx-auto text-white opacity-70'>
         <Link to='#'>
           <div className='flex gap-2 jusc
            items-center'>

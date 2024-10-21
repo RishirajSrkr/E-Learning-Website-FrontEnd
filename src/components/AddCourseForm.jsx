@@ -76,17 +76,13 @@ function AddCourseForm() {
     e.preventDefault();
     isFormSubmitted(true);
 
-    console.log(formData);
-
 
     try {
-      const response = await axios.post(`${import.meta.env.BASE_URL}/courses/create`, formData, {
-        headers: {
-          "name": "rishiraj"
-        }
-      });
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formData, {withCredentials: true});
 
-      console.log("response : ", response.data);
+      const data = await response.data;
+      console.log(data);
+      
 
     }
     catch (e) {

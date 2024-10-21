@@ -1,82 +1,116 @@
 import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard';
-import { courses as coursesData } from '../data/courses';
-import { FaStarOfLife } from "react-icons/fa";
 import { IoChevronDownSharp } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-function Home() {
+import axios from '../config/axiosConfig'
+import { ThreeDot } from 'react-loading-indicators'
 
-    const [courses, setCourses] = useState([]);
-    useEffect(() => {
-        setCourses(coursesData)
-    }, [])
+
+function Home() {
 
     const navigate = useNavigate();
 
-    function handleOnClick(id){
-        navigate(`course/${id}`)
+    const [courses, setCourses] = useState({});
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        async function getAllCourses() {
+            try {
+                setIsLoading(true)
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/all-courses`);
+                setCourses(response.data)
+            }
+            catch (e) {
+                console.error("Error fetching courses : ", e);
+            }
+            finally {
+                setIsLoading(false)
+            }
+        }
+        getAllCourses();
+
+    }, [])
+
+
+
+    function handleCourseCardClick(id) {
+        console.log("id :: ", id);
+
+        navigate(`/course/${id}`)
     }
+
 
     return (
 
-        <div className='bg-bgColorOne'>
+        <div className='bg-bgColorOne min-h-screen pb-12'>
 
-            <div className='gradient-section h-screen'>
+            <div className='h-screen'>
                 <div className='flex justify-center h-full items-center' style={{ position: "relative" }}>
-                    <div className='bg-buttonGradient w-fit bg-clip-text text-transparent  flex flex-col mx-auto uppercase justify-start scale-150'>
+                    <div className="text-center">
 
-                        <div className='flex  items-center gap-8'>
-                            <span className='text-9xl font-extrabold '>Best</span>
-                            <FaStarOfLife
-                                className='text-white text-6xl animate-spin-slow'
-                            />
-                        </div>
+                        <div className='text-accentColorOne font-md text-8xl tracking-tighter'>Discover the Best</div>
 
-                        <span style={{ marginTop: "-20px" }} className='text-7xl font-extrabold'>Resources</span>
+                        <div className='text-maintextColor font-md text-8xl tracking-tighter mb-10'>Developer Resources.</div>
 
 
-                        <div className='flex gap-2 items-center'>
+                        <div className='flex gap-2 items-center justify-center border border-borderColor px-4 py-1 rounded-full w-fit mx-auto'>
                             <span className="relative flex h-2.5 w-2.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sky-500"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentColorOne opacity-75"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentColorOne  opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accentColorOne "></span>
 
                             </span>
 
-                            <span className='text-sm lowercase text-gray-500 font-medium'>Voted by Developers Like You.</span>
+                            <span className='text text-center lowercase text-accentColorOne font-medium'>Voted by Developers Like You.</span>
                         </div>
                     </div>
                 </div>
 
                 <div className='animate-bounce' style={{ position: "absolute", bottom: "10%", left: "50%" }}>
                     <IoChevronDownSharp
-                        className='text-gray-500 text-xl'
+                        className='text-offWhite text-xl'
                     />
                 </div>
 
             </div>
 
 
+            {
+                isLoading ?
+                    (
+                        <div className='text-center'>
+                            <ThreeDot color="#E85533" size="small" />
+                        </div>
+                    )
 
-            <div className='gradient-line mb-24'></div>
+                    :
 
-            <div className='flex flex-wrap gap-4 justify-center items-start'>
-                {
-                    courses.map((course, index) => {
-                        return <CourseCard
+                    (
+                        <div className='masonry'>
+                            {
+                                Object.keys(courses).map((key) => {
+                                    return <div key={key}  className="masonry-item">
 
-                            key={index}
-                            title={course.title}
-                            instructor={course.instructor}
-                            duration={course.duration}
-                            description={course.description}
-                            rating={course.rating}
-                            onClick={() => handleOnClick(course.id)}
-                        />
-                    })
-                }
+                                        <CourseCard
+                                            title={courses[key].courseName}
+                                            instructor={courses[key].instructorName}
+                                            description={courses[key].courseDescription}
+                                            rating={courses[key].rating}
+                                            onClick={() => handleCourseCardClick(key)}
 
-            </div>
+
+                                        />
+                                    </div>
+
+                                })
+                            }
+
+                        </div>
+                    )
+            }
+
+
+
 
         </div>
 

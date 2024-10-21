@@ -7,18 +7,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        bgColorOne: '#040608',
-        bgColorTwo: '#090D15',
+        bgColorOne: '#100604',
+        bgColorTwo: '#130704',
+        bgColorThree: '#1C1210',
         cardBgColor: '#10151F',
-        tagBgColor: '#0D1118',
-        buttonBgColor: '#131313',
+        accentColorOne: '#E85533',
+        borderColor: '#3E2E2C',
+        offWhite: '#F6F5F5',
 
+        maintextColor: '#E5E6E6',
+        subtextColor: '#B5B3B2',
       },
       backgroundImage: {
-        'buttonGradient' : 'linear-gradient(to right, #DE5198, #657FFC)',
+        'buttonGradient' : 'linear-gradient(to right, #040608, #172554)',
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite'
+      },
+      transitionDuration:{
+        "400": "400ms"
       }
     },
   },
