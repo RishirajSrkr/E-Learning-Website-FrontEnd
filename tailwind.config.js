@@ -19,7 +19,7 @@ export default {
         subtextColor: '#B5B3B2',
       },
       backgroundImage: {
-        'buttonGradient' : 'linear-gradient(to right, #040608, #172554)',
+        'buttonGradient' : 'linear-gradient(to right, #1C1210, #100604)',
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite'

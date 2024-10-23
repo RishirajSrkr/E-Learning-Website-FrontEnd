@@ -17,6 +17,7 @@ import MyProfile from './pages/MyProfile'
 import { AuthProvider } from './context/AuthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { Toaster } from 'react-hot-toast'
+import CoursesUploadedByUser from './pages/CoursesUploadedByUser.jsx'
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
           <Route path='' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/contributers' element={<AllContributers />} />
+          <Route path='/contributors' element={<AllContributers />} />
 
           <Route path='/course/create' element={
             <ProtectedRoute>
@@ -40,22 +41,24 @@ function App() {
 
           <Route path='/all-courses' element={<AllCourses />} />
 
-          <Route path='/course/:id' element={
+          <Route path='/course/:courseId' element={
             <ProtectedRoute>
               <FullCoursePage />
             </ProtectedRoute>
           } />
 
-          <Route path='/profile/:id' element={<StudentProfile />} />
+      
           <Route path='/about' element={<About />} />
-          <Route path='/vote' element={<VoteResources />} />
+          <Route path='/vote-resources' element={<VoteResources />} />
 
 
-          <Route path='/myprofile' element={
+          <Route path='/my-profile' element={
             <ProtectedRoute>
               <MyProfile />
             </ProtectedRoute>
           } />
+
+          <Route path='/user/:userId/uploaded-courses' element={<CoursesUploadedByUser/>}/>
 
         </Route>
 

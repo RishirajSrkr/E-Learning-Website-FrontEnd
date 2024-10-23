@@ -1,10 +1,14 @@
 import React from 'react';
-import { FaEnvelope, FaBook, FaStar, FaUserPlus } from 'react-icons/fa';
+import { FaEnvelope, FaBook, FaArrowRight, FaStar, FaUserPlus } from 'react-icons/fa';
+import { IoChevronForward } from 'react-icons/io5'
+import { Link, useNavigate } from 'react-router-dom';
 
-function ContributerProfile({ name, email, bio, uploadedCourse}) {
+function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
+
+
     return (
         <div className='bg-bgColorOne border border-borderColor w-full px-6 py-4 flex justify-between items-center hover:bg-bgColorTwo transition-colors rounded-md'>
-            
+
             <div className='text-subtextColor'>
                 <div className='flex gap-4 text-maintextColor'>
                     <h2 className='font-bold text-2xl'>{name}</h2>
@@ -18,10 +22,14 @@ function ContributerProfile({ name, email, bio, uploadedCourse}) {
                     <FaBook className="mr-2" />
                     <h4>{bio}</h4>
                 </div>
-                <div className='flex items-center mt-2'>
-                    <FaStar className="mr-2" />
+
+                <button
+                    onClick={onClick}
+                    className='flex items-center mt-2 text-accentColorOne'>
+                    <FaArrowRight className="mr-2" size={12} />
                     <h4>Courses: {uploadedCourse}</h4>
-                </div>
+                </button>
+
             </div>
 
             {/* Follow Icon */}

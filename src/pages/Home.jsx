@@ -89,15 +89,16 @@ function Home() {
                         <div className='masonry'>
                             {
                                 Object.keys(courses).map((key) => {
-                                    return <div key={key}  className="masonry-item">
+                                    return <div key={key} className="masonry-item">
 
                                         <CourseCard
                                             title={courses[key].courseName}
                                             instructor={courses[key].instructorName}
                                             description={courses[key].courseDescription}
-                                            rating={courses[key].rating}
+                                            vote={courses[key].vote}
                                             onClick={() => handleCourseCardClick(key)}
-
+                                            showCTA={true}
+                                            text={"Enroll"}
 
                                         />
                                     </div>

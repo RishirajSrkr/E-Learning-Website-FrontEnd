@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Button({text, classname,onClick}) {
+function SecondaryButton({text, classname,onClick}) {
   return (
     <button
     className={`${classname} text-sm font-medium rounded-full px-5 py-1.5 bg-bgColorThree`}
@@ -13,4 +13,4 @@ function Button({text, classname,onClick}) {
   )
 }
 
-export default Button
+export default SecondaryButton

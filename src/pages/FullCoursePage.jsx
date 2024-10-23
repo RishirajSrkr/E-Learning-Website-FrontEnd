@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import axios from '../config/axiosConfig'
+import GoBack from '../components/GoBack';
+import PrimaryButton from '../components/formComponents/PrimaryButton'
 
 function FullCoursePage() {
 
-    const ref = useRef(null);
+    const ref = useRef();
+    const { courseId } = useParams();
+
+    const [course, setCourse] = useState(null)
+
 
     useEffect(() => {
         if (ref.current) {
@@ -12,15 +18,11 @@ function FullCoursePage() {
         }
     }, []);
 
-    const { id } = useParams();
-    console.log(id);
-
-    const [course, setCourse] = useState(null)
 
     useEffect(() => {
         async function getCourse() {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/course/${id}`);
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/course/${courseId}`);
                 const data = await response.data;
 
                 setCourse(data);
@@ -30,10 +32,32 @@ function FullCoursePage() {
             }
         }
         getCourse();
-    }, [id])
+    }, [])
 
 
-    console.log(course);
+
+
+
+    async function handleVoteClick(courseId) {
+        try {
+            console.log(courseId);
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/vote-course`);
+
+            const data = response.data;
+
+            console.log(data);
+            
+        }
+
+        catch (error) {
+            if (error.response && error.response.data) {
+                console.log(error.response.data);
+
+            }
+        }
+
+
+    }
 
 
     if (!course) {
@@ -44,6 +68,17 @@ function FullCoursePage() {
 
     return (
         <div ref={ref} className='bg-bgColorOne text-gray-400 px-24 pb-10 min-h-screen'>
+
+            <GoBack
+                text={"Go Back"}
+                goWhere={"/all-courses"}
+            />
+
+            <PrimaryButton
+                text={"Up Vote"}
+                classname={"fixed top-10 right-8"}
+                onClick={() => handleVoteClick(courseId)}
+            />
 
             <div className='w-2/3 pt-36'>
 

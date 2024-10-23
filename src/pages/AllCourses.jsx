@@ -34,10 +34,24 @@ function AllCourses() {
 
 
 
-    function handleCourseCardClick(id) {
+    async function handleCourseCardClick(id) {
         console.log("id :: ", id);
 
+        //take me to the full course page
         navigate(`/course/${id}`)
+
+        const s = `${import.meta.env.VITE_BASE_URL}/course/${id}/enroll-course`
+        console.log(s);
+
+        
+        //add this course to the users enrolled course list
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${id}/enroll-course`)
+        
+        const data = await response.data;
+
+        console.log(data);
+        
+
     }
 
 
@@ -74,9 +88,10 @@ function AllCourses() {
                                             title={courses[key].courseName}
                                             instructor={courses[key].instructorName}
                                             description={courses[key].courseDescription}
-                                            rating={courses[key].rating}
+                                            vote={courses[key].vote}
                                             onClick={() => handleCourseCardClick(key)}
-
+                                            showCTA={true}
+                                            text={"Enroll"}
 
                                         />
                                     </div>

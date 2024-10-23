@@ -4,11 +4,14 @@ import axios from 'axios'
 import Search from '../components/Search';
 import GoBack from '../components/GoBack';
 import { ThreeDot } from 'react-loading-indicators'
+import { useNavigate } from 'react-router-dom';
 
 
 function AllContributers() {
 
-    const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
+
+    const [users, setUsers] = useState({});
     const [isLoading, setIsLoading] = useState(false)
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -27,6 +30,8 @@ function AllContributers() {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/contributors`)
 
                 const data = await response.data;
+                console.log(data);
+
                 setUsers(data);
             }
             catch (e) {
@@ -41,12 +46,20 @@ function AllContributers() {
     }, [])
 
 
-    const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ||
-        user.email.split('@')[0].toLowerCase().includes(searchQuery.toLowerCase())
-    );
 
+    const filteredUsers = Object.keys(users).filter(key =>
+        users[key].name.toLowerCase().includes(searchQuery.toLowerCase())
+        ||
+        users[key].email.split('@')[0].toLowerCase().includes(searchQuery.toLowerCase())
+    ).map(key => users[key]);
+
+
+
+    function handleSeeCoursesClick(userId) {
+        console.log("handleSeeCoursesClick");
+
+        navigate(`/user/${userId}/uploaded-courses`)
+    }
 
     return (
         <div className='pt-32 flex flex-col items-center bg-bgColorOne h-screen w-full'>
@@ -79,20 +92,20 @@ function AllContributers() {
                                 searchQuery ?
 
                                     (
-                                        filteredUsers.length > 0 ?
+                                        Object.keys(filteredUsers).length > 0 ?
 
                                             (
                                                 (
-                                                    filteredUsers.map((user, index) => {
-                                                        const { email, name, bio, uploadedCourse } = user;
+                                                    Object.keys(filteredUsers).map((key) => {
 
                                                         return <ContributerProfile
 
-                                                            key={index}
-                                                            name={name}
-                                                            email={email}
-                                                            bio={bio}
-                                                            uploadedCourse={uploadedCourse}
+                                                            key={key}
+                                                            name={filteredUsers[key].name}
+                                                            email={filteredUsers[key].email}
+                                                            bio={filteredUsers[key].bio}
+                                                            uploadedCourse={filteredUsers[key].uploadedCourse}
+                                                            onClick={() => handleSeeCoursesClick(key)}
 
                                                         />
                                                     })
@@ -109,16 +122,16 @@ function AllContributers() {
                                     :
 
                                     (
-                                        users.map((user, index) => {
-                                            const { email, name, bio, uploadedCourse } = user;
+                                        Object.keys(users).map((key) => {
 
                                             return <ContributerProfile
 
-                                                key={index}
-                                                name={name}
-                                                email={email}
-                                                bio={bio}
-                                                uploadedCourse={uploadedCourse}
+                                                key={key}
+                                                name={users[key].name}
+                                                email={users[key].email}
+                                                bio={users[key].bio}
+                                                uploadedCourse={users[key].uploadedCourse}
+                                                onClick={() => handleSeeCoursesClick(key)}
 
                                             />
                                         })

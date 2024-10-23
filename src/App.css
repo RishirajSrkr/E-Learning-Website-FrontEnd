@@ -13,32 +13,31 @@ body {
 
 
 
+.active {
+    border: 1px solid #E85533 !important;
+}
+
+
+
 /* Gradient Colors */
 .bg-gradient {
     background: linear-gradient(90deg, #FF61DA, #7255FF);
     /* Confirm button gradient */
 }
 
-.gradient-outer {
-    background: linear-gradient(90deg, #FF61DA, #7255FF);
-    border-radius: 100px;
-    padding: 2px;
-    height: fit-content;
-
-}
-
-.gradient-inner {
-    background: white;
-    border-radius: 100px;
-    height: fit-content;
-
-}
 
 .gradient-line {
     height: 1px;
     background: linear-gradient(to right, #100604, #3E2E2C, #100604);
     width: 80%;
 }
+
+.gradient-line-vertical {
+    width: 1px;
+    background: linear-gradient(to bottom, #100604, #3E2E2C, #100604);
+    width: 80%;
+}
+
 
 .line-1 {
     height: 1px;
@@ -201,9 +200,9 @@ body {
 
 
 
-
+/* --------------------- grid ------------------ */
 .masonry {
-    
+
     width: fit-content;
     margin: auto;
 

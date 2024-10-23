@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import axios from 'axios'
+import axios from '../config/axiosConfig'
+import GoBack from '../components/GoBack'
 
 function AddCourseForm() {
 
@@ -26,9 +27,9 @@ function AddCourseForm() {
   });
 
   const ref = useRef();
-  // useEffect(() => {
-  //   ref.current.scrollIntoView({ behavior: "smooth" })
-  // }, [formData.chapters])
+  useEffect(() => {
+    ref.current.scrollIntoView({ behavior: "smooth" })
+  }, [formData.chapters])
 
 
   function handleAddChapterClick() {
@@ -78,11 +79,11 @@ function AddCourseForm() {
 
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formData, {withCredentials: true});
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formData, { withCredentials: true });
 
       const data = await response.data;
       console.log(data);
-      
+
 
     }
     catch (e) {
@@ -109,7 +110,13 @@ function AddCourseForm() {
 
 
   return (
-    <div className='py-32 px-20  bg-bgColorOne'>
+    <div ref={ref} className='py-32 px-20  bg-bgColorOne'>
+
+      <GoBack
+        text={"Go Back"}
+        goWhere={"/"}
+        classname={"bg-bgColorThree pl-4 pr-5 py-2 rounded-full"}
+      />
 
       {/* ----------- show form submitted popup ------------ */}
       {

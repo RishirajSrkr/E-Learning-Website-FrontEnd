@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
         try {
             localStorage.removeItem('jwtToken');
 
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/logot`);
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/logout`);
 
 
             setLoggedInUser("");
