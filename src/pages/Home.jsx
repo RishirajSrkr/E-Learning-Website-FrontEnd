@@ -4,6 +4,7 @@ import { IoChevronDownSharp } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig'
 import { ThreeDot } from 'react-loading-indicators'
+import HomeV2 from './HomeV2';
 
 
 function Home() {
@@ -42,7 +43,12 @@ function Home() {
 
     return (
 
-        <div className='bg-bgColorOne min-h-screen pb-12'>
+        <div className='relative bg-bgColorOne min-h-screen pb-12 '>
+
+            <div className='overflow-hidden bg-blend-multiply absolute top-0 translate-x-1/2 left-0 w-1/2 h-4/5'>
+                <HomeV2 />
+
+            </div>
 
             <div className='h-screen'>
                 <div className='flex justify-center h-full items-center' style={{ position: "relative" }}>

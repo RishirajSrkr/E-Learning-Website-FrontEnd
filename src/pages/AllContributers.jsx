@@ -5,6 +5,7 @@ import Search from '../components/Search';
 import GoBack from '../components/GoBack';
 import { ThreeDot } from 'react-loading-indicators'
 import { useNavigate } from 'react-router-dom';
+import { IoPersonSharp } from "react-icons/io5";
 
 
 function AllContributers() {
@@ -69,6 +70,8 @@ function AllContributers() {
             <Search
                 classname={"fixed top-8"}
                 onSearch={setQuery}
+                placeholder={"Search Contributors"}
+                icon={<IoPersonSharp />}
             />
 
 

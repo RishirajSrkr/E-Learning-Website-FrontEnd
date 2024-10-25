@@ -99,11 +99,11 @@ function Register() {
 
     return (
 
-        <div className='min-h-screen w-full flex'>
+        <div className='min-h-screen bg-bgColorOne pb-8 w-full flex'>
 
 
 
-            <div className='px-16 w-1/2 bg-bgColorOne flex justify-center flex-col gap-6'>
+            <div className='px-16 w-1/2 flex justify-center flex-col gap-6'>
 
                 {/* ---------------- headline -------------- */}
                 <div className='text-3xl text-maintextColor font-semibold flex gap-2 w-fit'>

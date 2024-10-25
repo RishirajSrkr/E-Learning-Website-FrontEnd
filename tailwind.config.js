@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         bgColorOne: '#100604',
-        bgColorTwo: '#130704',
+        bgColorTwo: '#170C0A',
         bgColorThree: '#1C1210',
         cardBgColor: '#10151F',
         accentColorOne: '#E85533',
@@ -19,7 +19,8 @@ export default {
         subtextColor: '#B5B3B2',
       },
       backgroundImage: {
-        'buttonGradient' : 'linear-gradient(to right, #1C1210, #100604)',
+        'buttonGradient' : 'linear-gradient(to right, #170C0A, #E85533, #170C0A)',
+        'buttonGradientY' : 'linear-gradient(to bottom, #170C0A, #E85533, #170C0A)',
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite'

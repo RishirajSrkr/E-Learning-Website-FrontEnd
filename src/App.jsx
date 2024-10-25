@@ -18,6 +18,7 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { Toaster } from 'react-hot-toast'
 import CoursesUploadedByUser from './pages/CoursesUploadedByUser.jsx'
+import HomeV2 from './pages/HomeV2.jsx'
 
 function App() {
 
@@ -61,6 +62,9 @@ function App() {
           <Route path='/user/:userId/uploaded-courses' element={<CoursesUploadedByUser/>}/>
 
         </Route>
+
+
+        <Route path='/home-v2' element={<HomeV2/>}/>
 
       </Routes>
     </AuthProvider>

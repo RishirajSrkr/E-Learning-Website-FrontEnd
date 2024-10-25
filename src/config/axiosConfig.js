@@ -15,7 +15,6 @@ axios.interceptors.request.use(
                 //token is expired, remove it from localstorage
                 localStorage.removeItem("jwtToken")
             
-                console.log("I am here..");
                 
                 window.location.href = "/"; //redirect to login page
             }

@@ -75,9 +75,9 @@ function Login() {
 
     return (
 
-        <div className='min-h-screen w-full flex'>
+        <div className='min-h-screen w-full pb-10 bg-bgColorOne flex'>
             
-            <div className='px-16 w-1/2 bg-bgColorOne flex justify-center flex-col gap-6'>
+            <div className='px-16 w-1/2 flex justify-center flex-col gap-6'>
 
                 {/* ---------------- headline -------------- */}
                 <div className='text-3xl text-maintextColor font-semibold flex gap-2 w-fit'>

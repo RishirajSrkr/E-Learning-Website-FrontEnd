@@ -219,3 +219,73 @@ body {
     margin-bottom: 1rem;
     /* Add space between rows */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------- css graph/ grid background -------------- */
+
+@keyframes run {
+    0% {
+        transform: translateX(10px);
+    }
+    20% {  /* 2 seconds out of 30 (2/30 * 100 = 6.67%) */
+        transform: translateX(1450px);
+    }
+    100% {
+        transform: translateX(1450px);  /* Remain at 1500px for the rest of the time */
+    }
+}
+
+@keyframes runY {
+    0% {
+        transform: translateY(0px);
+    }
+    20% {  /* 2 seconds out of 30 (2/30 * 100 = 6.67%) */
+        transform: translateY(650px);
+    }
+    100% {
+        transform: translateY(650px);  /* Remain at 1500px for the rest of the time */
+    }
+}
+
+
+
+.run-animation-1 {
+    animation: run 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: 0;
+}
+
+.run-animation-2 {
+    animation: run 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: 2s;
+}
+
+.run-animation-3 {
+    animation: run 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: 1s;
+}
+
+
+.run-animation-4 {
+    animation: runY 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: 0;
+}
+
+.run-animation-5 {
+    animation: runY 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: 2s;
+}
+
+.run-animation-6 {
+    animation: runY 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: 1s;
+}
