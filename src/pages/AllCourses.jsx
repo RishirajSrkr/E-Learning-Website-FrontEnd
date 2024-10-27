@@ -6,7 +6,7 @@ import { ThreeDot } from 'react-loading-indicators'
 import Search from '../components/Search'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
 import GoBack from '../components/GoBack';
-
+import { motion } from 'framer-motion'
 function AllCourses() {
 
     const navigate = useNavigate();
@@ -45,6 +45,7 @@ function AllCourses() {
 
     }, [])
 
+    console.log(courses);
 
 
     const filteredCourses = Object.keys(courses).filter(key =>
@@ -85,16 +86,15 @@ function AllCourses() {
 
     return (
 
-        <div className='bg-bgColorOne min-h-screen flex flex-col items-center relative overflow-hidden'>
+        <div className='bg-bgOne min-h-screen flex flex-col items-center relative overflow-hidden'>
 
             <GoBack text={"Go Back"} goWhere={"/"} />
 
-            <div className='w-full aspect-square rounded-full bg-accentColorOne blur-3xl absolute top-2/4 opacity-5'></div>
 
-            <h3 className='text-6xl font-bold text-center pt-10 text-maintextColor'>{headline}</h3>
+            <h3 className='text-6xl font-bold text-center pt-10 text-white'>{headline}</h3>
 
 
-            <h5 className='text-lg font-medium text-center mt-4 mb-12 text-subtextColor'>Unlock Your Future Today!</h5>
+            <h5 className='text-lg font-medium text-center mt-4 mb-12 text-gray'>Unlock Your Future Today!</h5>
 
             <Search
                 classname={""}
@@ -110,7 +110,7 @@ function AllCourses() {
                 isLoading ?
                     (
                         <div className='mt-40 text-center'>
-                            <ThreeDot color="#E85533" size="small" />
+                            <ThreeDot color="#9CF57F" size="small" />
                         </div>
                     )
                     :
@@ -119,7 +119,7 @@ function AllCourses() {
 
                         <div className='mt-12 relative'>
 
-                            {/* <SecondaryButton text={"Completed Courses"} classname={"text-maintextColor absolute -top-10 -right-0"} /> */}
+                            {/* <SecondaryButton text={"Completed Courses"} classname={"text-white absolute -top-10 -right-0"} /> */}
 
                             {
 
@@ -129,25 +129,38 @@ function AllCourses() {
                                         Object.keys(filteredCourses).length > 0 ?
 
                                             (
-                                                Object.keys(filteredCourses).map(key => {
-                                                    return <CourseCard
+                                                <div className='masonry'>
+                                                    {
+                                                        Object.keys(filteredCourses).map((key, index) => {
+                                                            return <motion.div
+                                                                initial={{ y: (100), opacity: 0 }}
+                                                                animate={{ y: 0, opacity: 100 }}
+                                                                transition={{ delay: 0.1 * index }}
+                                                                className='masonry-item'
+                                                            >
+                                                                <CourseCard
+                                                                    title={filteredCourses[key].courseName}
+                                                                    imageUrl={filteredCourses[key].imageUrl}
+                                                                    instructor={filteredCourses[key].instructorName}
+                                                                    description={filteredCourses[key].courseDescription}
+                                                                    vote={filteredCourses[key].vote}
+                                                                    onClick={() => handleCourseCardClick(key)}
+                                                                    showCTA={true}
+                                                                    text={"Enroll"}
 
-                                                        title={filteredCourses[key].courseName}
-                                                        instructor={filteredCourses[key].instructorName}
-                                                        description={filteredCourses[key].courseDescription}
-                                                        vote={filteredCourses[key].vote}
-                                                        onClick={() => handleCourseCardClick(key)}
-                                                        showCTA={true}
-                                                        text={"Enroll"}
+                                                                />
+                                                            </motion.div>
 
-                                                    />
-                                                })
+
+                                                        })
+                                                    }
+                                                </div>
                                             )
 
                                             :
 
                                             (
-                                                <p className=' mt-60 flex justify-center items-center text-subtextColor'>No contributors found!</p>
+                                                <p className=' mt-60 flex justify-center items-center text-gray'>No contributors found!</p>
                                             )
                                     )
 
@@ -156,10 +169,15 @@ function AllCourses() {
                                     (
 
                                         <div className='masonry'>
-                                            {Object.keys(courses).map(key => {
-                                                return <div className='masonry-item'>
+                                            {Object.keys(courses).map((key, index) => {
+                                                return <motion.div
+                                                    key={key}
+                                                    initial={{ y: (100), opacity: 0 }}
+                                                    animate={{ y: 0, opacity: 100 }}
+                                                    transition={{ delay: 0.1 * index }}
+                                                    className='masonry-item'>
                                                     <CourseCard
-
+                                                        imageUrl={courses[key].imageUrl}
                                                         title={courses[key].courseName}
                                                         instructor={courses[key].instructorName}
                                                         description={courses[key].courseDescription}
@@ -169,7 +187,7 @@ function AllCourses() {
                                                         text={"Enroll"}
 
                                                     />
-                                                </div>
+                                                </motion.div>
                                             })}
                                         </div>
                                     )

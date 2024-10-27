@@ -17,15 +17,41 @@ export default {
 
         maintextColor: '#E5E6E6',
         subtextColor: '#B5B3B2',
+
+
+
+
+        //bg one is darker
+        bgOne: '#050505',
+        bgTwo: '#131415',
+
+        //bgthree is accent color, like in buttons
+        bgThree: '#2060DF',
+
+        //gray is used for sub texts
+        gray: '#9CA1A4',
+
+        green: '#9CF57F',
+
+        border: '#232323',
+
       },
       backgroundImage: {
-        'buttonGradient' : 'linear-gradient(to right, #170C0A, #E85533, #170C0A)',
-        'buttonGradientY' : 'linear-gradient(to bottom, #170C0A, #E85533, #170C0A)',
+        'gradientOne': 'linear-gradient(to bottom, #100604, #170C0A)',
+        'gradientTwo': 'linear-gradient(to bottom, #3E2E2C, #100604)',
+        'gradientBorder': 'linear-gradient(to bottom, #3E2E2C, #100604)',
+        'text-gradient': 'linear-gradient(to right, #fff2ed, #fff8f5)',
+
+
+        'gradientForBorder': 'linear-gradient(to bottom, #050505, #131415)',
+        'gradientForBg': 'linear-gradient(to right, #D5FD7E, #7BF080)',
+
+
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite'
       },
-      transitionDuration:{
+      transitionDuration: {
         "400": "400ms"
       }
     },

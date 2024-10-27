@@ -10,23 +10,17 @@ function Input({ className, type, name, value, placeholder, onChange, totalWidth
     return (
         <div className={`${totalWidth} flex flex-col items-start justify-center gap-2 `}>
 
-            <label className=' text-maintextColor' htmlFor={name}>{labelName}</label>
+            <label className=' text-white' htmlFor={name}>{labelName}</label>
 
             <div className='flex items-center justify-center w-full '>
                 <input type={type}
                     name={name}
-                    className={`placeholder-subtextColor p-0 pr-8 w-full text-white bg-transparent flex items-center justify-center border-none focus:border-none focus:ring-0 ${className}`}
+                    className={`placeholder-gray p-0 pr-8 w-full text-white bg-transparent flex items-center justify-center border-none focus:border-none focus:ring-0 ${className}`}
                     value={value}
                     placeholder={placeholder}
                     onChange={onChange}
                 />
 
-                <button
-                className={`active:scale-90 active:text-green-400 transition-all text-subtextColor text-xl ${reloadButtonShowOrHide ? "" : "hidden"}`}
-                onClick={onClick}
-                >
-                    <RiArrowRightUpLine />
-                </button>
 
 
             </div>

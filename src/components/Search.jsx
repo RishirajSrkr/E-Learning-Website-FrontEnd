@@ -11,11 +11,11 @@ function Search({classname, onSearch, placeholder, icon}) {
                 <input
                     type="text"
                     placeholder={placeholder}
-                    className='pl-12 w-full bg-bgColorThree text-white border-borderColor focus:border-borderColor focus:ring-0 rounded-full py-3 placeholder-subtextColor '
+                    className='pl-12 w-full bg-bgTwo text-white border-border focus:border-border focus:ring-0 rounded-full py-3 placeholder-gray '
                     onChange={(e) => onSearch(e.target.value)}
                 />
 
-                <div className='text-accentColorOne absolute top-1/2 -translate-y-1/2 left-5'>
+                <div className='text-green absolute  top-1/2 -translate-y-1/2 left-5'>
                     {icon}
                 </div>
             </div>

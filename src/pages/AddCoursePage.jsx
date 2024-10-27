@@ -3,7 +3,7 @@ import AddCourseForm from '../components/AddCourseForm'
 
 function AddCoursePage() {
     return (
-        <div>
+        <div className='bg-bgOne w-full'>
             <AddCourseForm />
         </div>
     )

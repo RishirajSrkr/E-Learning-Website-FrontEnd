@@ -20,7 +20,7 @@ function HomeV2() {
                 <div className='w-full h-px bg-bgColorThree'></div>
                 <div className='w-full h-px bg-bgColorThree'></div>
                 <div className='w-full h-px bg-bgColorThree'></div>
-                <div className='w-full h-phreebg-bgColorThree'></div>
+                <div className='w-full h-px bg-bgColorThree'></div>
                 <div className='w-full h-px bg-bgColorThree'></div>
             </div>
 

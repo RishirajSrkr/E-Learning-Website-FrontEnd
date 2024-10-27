@@ -85,7 +85,19 @@ function FullCoursePage() {
     }
 
 
-    function handleEndCourse() {
+    async function handleEndCourse() {
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/end-course`)
+
+            console.log(courseId);
+            
+            const data = response.data;
+            console.log(data);
+        }
+        catch (e) {
+            console.log(e);
+
+        }
 
     }
 
@@ -93,7 +105,7 @@ function FullCoursePage() {
 
 
     return (
-        <div ref={ref} className='bg-bgColorOne text-gray-400 px-24 pb-10 min-h-screen'>
+        <div ref={ref} className='bg-bgOne text-white px-24 pb-10 min-h-screen'>
 
             <GoBack
                 text={"Go Back"}
@@ -107,20 +119,20 @@ function FullCoursePage() {
                     (
 
                         <div className='flex justify-center items-center min-h-screen text-center'>
-                            <ThreeDot color="#E85533" size="small" />
+                            <ThreeDot color="#9CF57F" size="small" />
                         </div>
                     )
 
                     :
 
                     (
-                        
+
 
 
                         <div>
                             <PrimaryButton
                                 text={"Up Vote"}
-                                classname={"fixed top-10 right-8"}
+                                classname={"fixed top-10 right-8 font-semibold"}
                                 onClick={() => handleVoteClick(courseId)}
                             />
 
@@ -129,21 +141,23 @@ function FullCoursePage() {
                                 <div className='flex gap-4 items-center mb-8'>
                                     <h1 className='text-4xl font-bold '>{course?.courseName}</h1>
 
-                                    <div className='bg-buttonGradient text-white w-fit px-6 py-2 rounded-full text-sm font-semibold'>{course?.chapters.length} Chapters</div>
+                                    <div className='bg-bgOne  border border-green w-fit px-6 py-2 rounded-full text-sm font-semibold'>{course?.chapters.length} Chapters</div>
                                 </div>
 
                                 <div>
                                     {
                                         course?.chapters?.map((chapter, index) => (
-                                            <div key={index} className='mb-8'>
+                                            <div key={index} className='mb-8 bg-bgTwo px-8 py-6 flex flex-col gap-y-4'>
 
-                                                <h2
-                                                    className='font-bold text-xl '
+                                                <div className='border px-4 py-2 border-border'>
+                                                    <h2 className='font-bold text-xl'>{chapter.chapterName}</h2>
+                                                </div>
 
-                                                >{chapter.chapterName}</h2>
 
+                                                <div className='border px-4 py-2 border-border'>
+                                                    <p>{chapter.chapterContent}</p>
+                                                </div>
 
-                                                <p>{chapter.chapterContent}</p>
                                             </div>
                                         ))
                                     }

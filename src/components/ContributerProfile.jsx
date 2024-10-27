@@ -7,26 +7,26 @@ function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
 
 
     return (
-        <div className='bg-bgColorOne border border-borderColor w-full px-6 py-4 flex justify-between items-center hover:bg-bgColorTwo transition-colors rounded-md'>
+        <div className='bg-bgOne border border-border w-full px-6 py-4 flex justify-between items-center hover:bg-bgTwo transition-colors rounded-md'>
 
-            <div className='text-subtextColor'>
-                <div className='flex gap-4 text-maintextColor'>
+            <div className='text-gray mr-12'>
+                <div className='flex gap-4 text-white'>
                     <h2 className='font-bold text-2xl'>{name}</h2>
                 </div>
 
-                <div className='flex items-center mt-2'>
-                    <FaEnvelope className="mr-2" />
+                <div className='flex items-center mb-3'>
+                    <FaEnvelope className="mr-2 " size={13} />
                     <h4>{email}</h4>
                 </div>
-                <div className='flex items-center mt-2'>
-                    <FaBook className="mr-2" />
+
+                <div className='flex items-start'>
                     <h4>{bio}</h4>
                 </div>
 
                 <button
                     onClick={onClick}
-                    className='flex items-center mt-2 text-accentColorOne'>
-                    <FaArrowRight className="mr-2" size={12} />
+                    className='flex items-center mt-2 bg-gradientForBg bg-clip-text text-transparent'>
+                    <FaArrowRight className="mr-2 text-green" size={12} />
                     <h4>Courses: {uploadedCourse}</h4>
                 </button>
 
@@ -34,7 +34,7 @@ function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
 
             {/* Follow Icon */}
             <div>
-                <FaUserPlus className='text-accentColorOne cursor-pointer transition-transform transform hover:scale-125' title="Follow" size={24} />
+                <FaUserPlus className='text-green cursor-pointer transition-transform transform hover:scale-125' title="Follow" size={24} />
             </div>
         </div>
     );

@@ -17,7 +17,7 @@ function NavbarV2() {
 
 
     return (
-        <div className={`${hideNavbar ? "hidden" : ""} ${isFullCoursePage ? "hidden" : ""} w-full flex flex-col justify-between items-center text-maintextColor text-sm font-medium p-5 fixed z-50 top-0 left-0 transition-all duration-300 bg-transparent backdrop-blur-2xl`}>
+        <div className={`${hideNavbar ? "hidden" : ""} ${isFullCoursePage ? "hidden" : ""} w-full flex flex-col justify-between items-center text-white text-sm font-medium p-5 fixed z-50 top-0 left-0 transition-all duration-300 bg-transparent backdrop-blur-2xl shadow-2xl shadow-bgOne`}>
 
             <div className='w-full flex'>
 
@@ -28,13 +28,13 @@ function NavbarV2() {
 
                 {/* --------------menu------------- */}
                 <div className='w-2/4 font-normal'>
-                    <div className='w-fit mx-auto flex justify-center items-center gap-6 border border-borderColor rounded-full px-8 py-2 text-subtextColor'>
+                    <div className='w-fit mx-auto flex justify-center items-center gap-6 border border-border rounded-full px-8 py-2 text-gray'>
 
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'text-maintextColor font-medium'
-                                    : 'hover:text-white active:text-maintextColor hover:font-medium transition-all duration-400'
+                                    ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
                             }
                             to="/all-courses"
                         >
@@ -45,8 +45,8 @@ function NavbarV2() {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'text-maintextColor font-medium'
-                                    : 'hover:text-white active:text-maintextColor hover:font-medium transition-all duration-400'
+                                     ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
                             }
                             to="/contributors"
                         >
@@ -58,8 +58,8 @@ function NavbarV2() {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'text-maintextColor font-medium'
-                                    : 'hover:text-white active:text-maintextColor hover:font-medium transition-all duration-400'
+                                      ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
                             }
                             to="/vote-resources"
                         >
@@ -72,8 +72,8 @@ function NavbarV2() {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'text-maintextColor font-medium'
-                                    : 'hover:text-white active:text-maintextColor hover:font-medium transition-all duration-400'
+                                      ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
                             }
                             to="/about"
                         >
@@ -100,7 +100,7 @@ function NavbarV2() {
 
 
                     {/* ------------ hide this if user not logged in ------------- */}
-                    <Link to={"/course/create"} className={`${loggedInUser ? "" : "hidden"} bg-bgColorThree border border-accentColorOne text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-blue-950`}>
+                    <Link to={"/course/create"} className={`${loggedInUser ? "" : "hidden"} bgTwo border border-green text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-lime-800`}>
                         Contribute
                     </Link>
                 </div>

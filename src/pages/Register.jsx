@@ -71,7 +71,6 @@ function Register() {
         }
     };
 
-    console.log(errors);
 
 
     // not showing the error message user is typing / changing formData
@@ -99,16 +98,14 @@ function Register() {
 
     return (
 
-        <div className='min-h-screen bg-bgColorOne pb-8 w-full flex'>
-
-
-
-            <div className='px-16 w-1/2 flex justify-center flex-col gap-6'>
+        <div className='min-h-screen w-full pb-10 bg-bgOne flex justify-between '>
+            
+        <div className=' w-1/2 flex justify-center items-start flex-col gap-6 ml-24'>
 
                 {/* ---------------- headline -------------- */}
                 <div className='text-3xl text-maintextColor font-semibold flex gap-2 w-fit'>
                     <h2>Developed by</h2>
-                    <h2 className='w-fit text-accentColorOne'>@Rishiraj</h2>
+                    <h2 className='w-fit bg-gradientForBg bg-clip-text text-transparent'>@Rishiraj</h2>
                 </div>
 
                 {/* ---------------- skills ----------------- */}
@@ -117,7 +114,7 @@ function Register() {
                     <div className=' flex gap-2 flex-wrap w-2/3'>
                         {
                             skills.map((skill, index) => (
-                                <div key={index} className={' px-4 py-1.5 bg-bgColorThree text-maintextColor border-borderColor rounded-sm'}>
+                                <div key={index} className={' px-4 py-1.5 bg-bgTwo text-white border-border rounded-sm'}>
                                     <p className={'text-xs font-medium'}>{skill}</p>
                                 </div>
                             ))
@@ -128,7 +125,7 @@ function Register() {
 
 
 
-            <div className='w-1/2 bg-bgColorOne '>
+            <div className='w-1/2 bg-bgOne '>
                 <form className='w-full flex flex-col justify-center items-center h-screen'>
 
                     <div className='h-24 w-1/2 '>
@@ -144,7 +141,7 @@ function Register() {
                             onClick={(e) => handleReloadButton(e)}
                         />
 
-                        {errors && <p className='mt-2 text-xs text-gray-400'>{errors.name}</p>}
+                        {errors && <p className='mt-2 text-xs text-gray'>{errors.name}</p>}
                     </div>
 
                     <div className='h-24 w-1/2 '>
@@ -159,7 +156,7 @@ function Register() {
                             reloadButtonShowOrHide={true}
                             onClick={(e) => handleReloadButton(e)}
                         />
-                        {errors && <p className='mt-2 text-xs text-gray-400'>{errors.email}</p>}
+                        {errors && <p className='mt-2 text-xs text-gray'>{errors.email}</p>}
 
                     </div>
 
@@ -176,7 +173,7 @@ function Register() {
                             reloadButtonShowOrHide={true}
                             onClick={(e) => handleReloadButton(e)}
                         />
-                        {errors && <p className='mt-2 text-xs text-gray-400'>{errors.password}</p>}
+                        {errors && <p className='mt-2 text-xs text-gray'>{errors.password}</p>}
 
                     </div>
 
@@ -192,18 +189,18 @@ function Register() {
                             reloadButtonShowOrHide={true}
                             onClick={(e) => handleReloadButton(e)}
                         />
-                        {errors && <p className='mt-2 text-xs text-gray-400'>{errors.bio}</p>}
+                        {errors && <p className='mt-2 text-xs text-gray'>{errors.bio}</p>}
                     </div>
 
 
 
                     <div className='w-1/2 flex justify-end'>
-                        <p className='text-subtextColor text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
+                        <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
                     </div>
 
                     <PrimaryButton
                         text={"Register"}
-                        classname={`fixed bottom-10 right-12 mt-10 bg-accentColorOne rounded-full text-white px-10 py-3 font-semibold`}
+                        classname={`fixed bottom-10 right-12 mt-10  rounded-full shadow-2xl shadow-lime-800  px-8 py-2.5 font-semibold`}
                         onClick={handleSubmit}
                     >Login</PrimaryButton>
 

@@ -63,7 +63,7 @@ function AllContributers() {
     }
 
     return (
-        <div className='pt-32 flex flex-col items-center bg-bgColorOne h-screen w-full'>
+        <div className='pt-32 pb-10 flex flex-col items-center bg-bgOne h-screen w-full'>
 
             <GoBack text={"Go Back"} goWhere={"/"} />
 
@@ -81,7 +81,7 @@ function AllContributers() {
                     (
 
                         <div className='mt-40 text-center'>
-                            <ThreeDot color="#E85533" size="small" />
+                            <ThreeDot color="#9CF57F" size="small" />
                         </div>
                     )
 
@@ -118,7 +118,7 @@ function AllContributers() {
                                             :
 
                                             (
-                                                <p className='text-center mt-10 text-subtextColor'>No contributors found!</p>
+                                                <p className='text-center mt-10 text-gray'>No contributors found!</p>
                                             )
                                     )
 

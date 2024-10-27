@@ -116,11 +116,13 @@ function MyProfile() {
     function handleSetEnrolledOrUpdated(value) {
         setEnrolledOrUpdated(value)
     }
+    console.log(enrolledOrUpdated);
+    
 
 
     return (
 
-        <div className='pt-32 pb-10 w-full min-h-screen bg-bgColorOne flex flex-col'>
+        <div className='pt-32 pb-10 w-full min-h-screen bg-bgOne flex flex-col'>
 
 
             <div className='w-1/2 flex flex-col items-center gap-6 '>
@@ -129,12 +131,12 @@ function MyProfile() {
                     <SecondaryButton
                         text={"Enrolled"}
                         onClick={() => handleSetEnrolledOrUpdated("enrolled")}
-                        classname={`text-subtextColor border border-bgColorThree rounded-md ${enrolledOrUpdated === 'enrolled' ? 'active' : ''}`}
+                        classname={`text-gray rounded-md ${enrolledOrUpdated === 'enrolled' ? "border-green" : "border-border"}`}
                     />
                     <SecondaryButton
                         text={"Uploaded"}
                         onClick={() => handleSetEnrolledOrUpdated("uploaded")}
-                        classname={`text-subtextColor border border-bgColorThree  rounded-md ${enrolledOrUpdated === 'uploaded' ? 'active' : ''}`}
+                        classname={`text-gray  rounded-md ${enrolledOrUpdated === 'uploaded' ? 'border-green' : 'border-border'}`}
                     />
                 </div>
 
@@ -144,10 +146,10 @@ function MyProfile() {
                 {
                     enrolledOrUpdated === "enrolled" &&
 
-                    <div className='w-1/2 text-maintextColor  items-start flex flex-col gap-4'>
+                    <div className='w-1/2 text-white  items-start flex flex-col gap-4'>
 
                         <div className='flex justify-start w-1/2'>
-                            <h2 className='uppercase text-maintextColor text-4xl font-semibold'>Enrolled <br /><span className='text-accentColorOne text-6xl'>Courses.</span></h2>
+                            <h2 className='uppercase text-white text-4xl font-semibold'>Enrolled <br /><span className='text-white text-6xl'>Courses.</span></h2>
                         </div>
 
 
@@ -179,10 +181,10 @@ function MyProfile() {
                 {
                     enrolledOrUpdated === "uploaded" &&
 
-                    <div className='w-1/2 text-maintextColor  items-start flex flex-col gap-4'>
+                    <div className='w-1/2 text-white  items-start flex flex-col gap-4'>
 
                         <div className='flex justify-start w-1/2'>
-                            <h2 className='uppercase text-maintextColor text-4xl font-semibold'>Uploaded <br /><span className='text-accentColorOne text-6xl'>Courses.</span></h2>
+                            <h2 className='uppercase text-white text-4xl font-semibold'>Uploaded <br /><span className='text-white text-6xl'>Courses.</span></h2>
                         </div>
 
 
@@ -236,7 +238,7 @@ function MyProfile() {
                         onClick={(e) => handleReloadButton(e)}
                     />
 
-                    {errors && <p className='mt-2 text-xs text-gray-400'>{errors.name}</p>}
+                    {errors && <p className='mt-2 text-xs text-gray'>{errors.name}</p>}
                 </div>
 
                 <div className='h-24 w-1/2 '>
@@ -251,7 +253,7 @@ function MyProfile() {
                         reloadButtonShowOrHide={true}
                         onClick={(e) => handleReloadButton(e)}
                     />
-                    {errors && <p className='mt-2 text-xs text-gray-400'>{errors.email}</p>}
+                    {errors && <p className='mt-2 text-xs text-gray'>{errors.email}</p>}
 
                 </div>
 
@@ -268,7 +270,7 @@ function MyProfile() {
                         reloadButtonShowOrHide={true}
                         onClick={(e) => handleReloadButton(e)}
                     />
-                    {errors && <p className='mt-2 text-xs text-gray-400'>{errors.password}</p>}
+                    {errors && <p className='mt-2 text-xs text-gray'>{errors.password}</p>}
 
                 </div>
 
@@ -284,7 +286,7 @@ function MyProfile() {
                         reloadButtonShowOrHide={true}
                         onClick={(e) => handleReloadButton(e)}
                     />
-                    {errors && <p className='mt-2 text-xs text-gray-400'>{errors.bio}</p>}
+                    {errors && <p className='mt-2 text-xs text-gray'>{errors.bio}</p>}
 
 
                 </div>
@@ -293,7 +295,7 @@ function MyProfile() {
                 <div className='flex w-1/2'>
                     <SecondaryButton
                         text={"Update Changes"}
-                        classname={`w-1/2 text-maintextColor py-3 rounded-none`}
+                        classname={`w-1/2 text-maintextColor py-3 rounded-none border-border`}
                         onClick={handleSubmit}
                     >Update Profile</SecondaryButton>
 

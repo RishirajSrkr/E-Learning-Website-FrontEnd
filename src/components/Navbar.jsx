@@ -14,7 +14,7 @@ function Navbar() {
 
     return (
 
-        <div className={`${hideNavbar ? 'hidden' : ''} text-gray-100 font-medium w-full fixed top-0 left-0 z-50`}>
+        <div className={`${hideNavbar ? 'hidden' : ''} text-offWhite font-medium w-full fixed top-0 left-0 z-50`}>
 
             <div className='gradient-outer w-1/2 mt-4 mb-2 mx-auto shadow-2xl shadow-bgColorOne'>
                 <ul className='flex w-full  rounded-full justify-between items-center bg-bgColorTwo px-3 pl-8 py-2'>
