@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard';
 import { IoChevronDownSharp } from "react-icons/io5";
-import { redirect, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig'
 import { ThreeDot } from 'react-loading-indicators'
 import HomeV2 from './HomeV2';
@@ -161,7 +161,7 @@ function Home() {
 
 
                     {/* ------------ cta button ---------------- */}
-                    <button className='text-bgOne bg-gradientForBg px-5 py-2 rounded-full text-sm font-semibold'>View Courses</button>
+                    <Link to={"/all-courses"} className='text-bgOne bg-gradientForBg px-5 py-2 rounded-full text-sm font-semibold'>View Courses</Link>
                 </div>
 
 
