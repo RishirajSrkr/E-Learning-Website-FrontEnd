@@ -31,8 +31,6 @@ export const AuthProvider = ({ children }) => {
             catch (e) {
                 console.log("Invalid token", e)
                 localStorage.removeItem("jwtToken")
-            }
-            finally {
                 setIsLoading(false)
             }
 
