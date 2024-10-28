@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import './App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -8,7 +6,6 @@ import { Route, Routes } from 'react-router-dom'
 import AllContributers from './pages/AllContributers'
 import AllCourses from './pages/AllCourses'
 import AddCoursePage from './pages/AddCoursePage'
-import StudentProfile from './pages/StudentProfile'
 import FullCoursePage from './pages/FullCoursePage'
 import Layout from './pages/Layout'
 import About from './pages/About'
@@ -18,7 +15,6 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { Toaster } from 'react-hot-toast'
 import CoursesUploadedByUser from './pages/CoursesUploadedByUser.jsx'
-import HomeV2 from './pages/HomeV2.jsx'
 
 function App() {
 
@@ -64,7 +60,6 @@ function App() {
         </Route>
 
 
-        <Route path='/home-v2' element={<HomeV2/>}/>
 
       </Routes>
     </AuthProvider>

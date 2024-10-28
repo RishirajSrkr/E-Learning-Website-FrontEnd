@@ -15,6 +15,8 @@ export const AuthProvider = ({ children }) => {
     //this state contains the name of the logged in user
     const [loggedInUser, setLoggedInUser] = useState("");
 
+    const [isLoading, setIsLoading] = useState(true)
+
     // Check for JWT in local storage or session storage to determine login status
     useEffect(() => {
 
@@ -30,11 +32,13 @@ export const AuthProvider = ({ children }) => {
                 console.log("Invalid token", e)
                 localStorage.removeItem("jwtToken")
             }
+            finally {
+                setIsLoading(false)
+            }
 
         }
     }, []);
 
-    console.log(loggedInUser);
 
     // Logout function to clear token and update state
     async function logout() {
@@ -45,11 +49,10 @@ export const AuthProvider = ({ children }) => {
 
 
             setLoggedInUser("");
-        
-            console.log(response.data);
-            
+
+
             return response.status;
-        
+
         }
         catch (error) {
             console.error("Failed to logout. Please try again.")
@@ -83,7 +86,7 @@ export const AuthProvider = ({ children }) => {
 
     // Provide isLoggedIn state and logout function to child components
     return (
-        <AuthContext.Provider value={{ loggedInUser, setLoggedInUser, logout, login }}>
+        <AuthContext.Provider value={{ loggedInUser, setLoggedInUser, logout, login, isLoading }}>
             {children}
         </AuthContext.Provider>
     );

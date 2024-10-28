@@ -71,20 +71,20 @@ function Reviews() {
                 slidesPerView={3}
                 spaceBetween={30}
                 freeMode={true}
-              
+
                 modules={[FreeMode]}
                 className="text-gray w-full cursor-move"
             >
 
                 {
-                    reviews.map(review => {
-                        return <SwiperSlide
+                    reviews.map((review, index) => {
+                        return <SwiperSlide key={index}
                             className='w-full bg-gradientForBorder p-2 rounded-lg'
                         >
-                          <div className='border border-border bg-bgTwo p-10 h-screen rounded-md'>
-                          <h4 className='text-white font-semibold text-xl mb-4'>{review.name}</h4>
-                          <p>{review.review}</p>
-                          </div>
+                            <div className='border border-border bg-bgTwo p-10 h-screen rounded-md'>
+                                <h4 className='text-white font-semibold text-xl mb-4'>{review.name}</h4>
+                                <p>{review.review}</p>
+                            </div>
                         </SwiperSlide>
                     })
                 }

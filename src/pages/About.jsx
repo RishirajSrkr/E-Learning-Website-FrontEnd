@@ -12,7 +12,7 @@ function About() {
         <div className='w-full min-h-screen bg-bgOne py-32 px-24 text-gray'>
 
           <div className='w-2/3'>
-          <h1 className='text-6xl font-bold w-fit mb-6 text-white'>
+          <h1 className='text-6xl font-bold w-fit mb-6 bg-gradientForBg bg-clip-text text-transparent'>
                 About Us.
             </h1>
 

@@ -18,10 +18,10 @@ const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, te
       )}
 
 
-      <h3 className="text-2xl font-bold mb-2 text-maintextColor">{title}</h3>
+      <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
 
 
-      <div className='text-subtextColor'>
+      <div className='text-gray'>
 
 
         {

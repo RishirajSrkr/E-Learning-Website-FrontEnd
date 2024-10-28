@@ -1,46 +1,114 @@
-import React, { useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { FaStarOfLife } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
-    // const logo = <FaStarOfLife />
-    const logo = "BitByBit"
 
-    const {isLoggedIn} = useContext(AuthContext);
+    const { loggedInUser } = useContext(AuthContext)
 
     const location = useLocation();
-    const hideNavbar = location.pathname === "/register" || location.pathname === "/login"
+    const hideNavbar = location.pathname === "/contributors" || location.pathname === "/all-courses";
+
+    const hideNavbarPaths = /^\/course\/[a-zA-Z0-9]+$/; // Regex for '/course/someCourseId'
+    const isFullCoursePage = hideNavbarPaths.test(location.pathname)
+
+
+
 
     return (
+        <div className={`${hideNavbar ? "hidden" : ""} ${isFullCoursePage ? "hidden" : ""} w-full flex flex-col justify-between items-center text-white text-sm font-medium p-5 fixed z-50 top-0 left-0 transition-all duration-300 bg-transparent backdrop-blur-2xl shadow-2xl shadow-bgOne`}>
 
-        <div className={`${hideNavbar ? 'hidden' : ''} text-offWhite font-medium w-full fixed top-0 left-0 z-50`}>
+            <div className='w-full flex'>
 
-            <div className='gradient-outer w-1/2 mt-4 mb-2 mx-auto shadow-2xl shadow-bgColorOne'>
-                <ul className='flex w-full  rounded-full justify-between items-center bg-bgColorTwo px-3 pl-8 py-2'>
+                {/* -------------logo----------- */}
+                <div className='w-1/4 flex justify-center items-center'>
+                    <Link className='font-semibold text-xl' to={"/"}>BitByBit</Link>
+                </div>
 
-                    <div className='flex gap-3 justify-center items-center'>
-                        <Link to={"/"} className='text-2xl font-extrabold'>{logo}</Link>
+                {/* --------------menu------------- */}
+                <div className='w-2/4 font-normal'>
+                    <div className='w-fit mx-auto flex justify-center items-center gap-6 border border-border rounded-full px-8 py-2 text-gray'>
+
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                    ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                            }
+                            to="/all-courses"
+                        >
+                            Courses
+                        </NavLink>
+
+
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                     ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                            }
+                            to="/contributors"
+                        >
+                            Contributers
+                        </NavLink>
+
+
+
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                      ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                            }
+                            to="/vote-resources"
+                        >
+                            Vote
+                        </NavLink>
+
+
+
+
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                      ? 'text-white font-medium'
+                                    : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                            }
+                            to="/about"
+                        >
+                            About
+                        </NavLink>
+
                     </div>
+                </div>
 
-                    <div className='flex gap-10 px-4'>
-                        <Link to={"/all-courses"}>All Courses</Link>
-                        <Link to={"/contributers"}>Contributors</Link>
-                        <Link to={"/vote"}>Vote</Link>
-                        <Link to={"/about"}>About</Link>
-                    </div>
+                {/* ------------------login--------------- */}
+                <div className='w-1/4 flex justify-center items-center gap-8'>
 
-                    <Link to={"/course/create"} className={`bg-buttonGradient px-6 py-2 text-sm rounded-full font-bold ${isLoggedIn ? "" : "hidden"}`}>Contribute</Link>
-                </ul>
+
+                    {
+                        loggedInUser &&
+                        <Link to={"/my-profile"}>{loggedInUser}</Link>
+                    }
+
+                    {
+                        !loggedInUser &&
+                        <Link to={"/login"}>Login</Link>
+                    }
+
+
+
+                    {/* ------------ hide this if user not logged in ------------- */}
+                    <Link to={"/course/create"} className={`${loggedInUser ? "" : "hidden"} bgTwo border border-green text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-lime-800`}>
+                        Contribute
+                    </Link>
+                </div>
+
             </div>
-
-
-            <Link to={"/user/profile"} className='absolute w-12 h-12 bg-bgColorTwo rounded-full flex justify-center items-center border border-gray-800 right-10 top-4'>
-             R
-            </Link>
-
+            {/* <div className='mt-5 gradient-line'></div> */}
         </div>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

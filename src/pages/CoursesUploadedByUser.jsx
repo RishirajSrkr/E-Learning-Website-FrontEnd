@@ -23,7 +23,6 @@ function CoursesUploadedByUser() {
 
                 const data = await response.data;
 
-                console.log(data);
 
 
                 setCourses(data)
@@ -40,7 +39,6 @@ function CoursesUploadedByUser() {
 
         getCourses();
 
-        console.log(courses);
         
 
     }, [])

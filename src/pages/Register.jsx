@@ -7,7 +7,7 @@ import PrimaryButton from '../components/formComponents/PrimaryButton';
 
 function Register() {
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -16,7 +16,6 @@ function Register() {
     });
 
 
-    const [errors, setErrors] = useState({});
 
     const handleInputChange = (e) => {
         setFormData(prev => ({
@@ -27,16 +26,11 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
-        console.log(formData);
+        setIsLoading(true)
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/register`, formData);
-            const data = await response.data;
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/public/register`, formData);
 
-            console.log(data);
-
-            
             toast.success("Registered Successfully!", {
                 position: "top-right",
                 style: {
@@ -49,6 +43,7 @@ function Register() {
             // Successfully registered, navigate to home
 
             navigate("/");
+
         } catch (error) {
             if (error.response && error.response.data) {
                 const errorMessage = error.response.data;
@@ -65,146 +60,129 @@ function Register() {
 
                 }
                 else {
-                    setErrors(errorMessage);
+                    toast.error("Fields cannot be empty", {
+                        position: "top-right",
+                        style: {
+                            background: "#1C1210",
+                            color: "#E5E6E6",
+                        }
+
+                    })
                 }
             }
+        }
+        finally {
+            setIsLoading(false)
         }
     };
 
 
 
-    // not showing the error message user is typing / changing formData
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, name: "" }))
-    }, [formData.name])
-
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, password: "" }))
-    }, [formData.password])
-
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, email: "" }))
-    }, [formData.email])
-
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, bio: "" }))
-    }, [formData.bio])
-
-
-
-
-
-    const skills = ["Java", "Spring Boot", "JWT", "React JS", "Spring Security", "Mongo DB", "Token Invalidation", "Role Based Authentication"]
 
     return (
+        <div className='py-24 w-full min-h-screen bg-bgOne justify-center flex flex-col'>
 
-        <div className='min-h-screen w-full pb-10 bg-bgOne flex justify-between '>
-            
-        <div className=' w-1/2 flex justify-center items-start flex-col gap-6 ml-24'>
 
-                {/* ---------------- headline -------------- */}
-                <div className='text-3xl text-maintextColor font-semibold flex gap-2 w-fit'>
-                    <h2>Developed by</h2>
-                    <h2 className='w-fit bg-gradientForBg bg-clip-text text-transparent'>@Rishiraj</h2>
-                </div>
+            {/* ---------- headline ---------- */}
 
-                {/* ---------------- skills ----------------- */}
-                <div className='text-subtextColor w-fit flex flex-col gap-4'>
-                    <p>I have build this app to practice</p>
-                    <div className=' flex gap-2 flex-wrap w-2/3'>
-                        {
-                            skills.map((skill, index) => (
-                                <div key={index} className={' px-4 py-1.5 bg-bgTwo text-white border-border rounded-sm'}>
-                                    <p className={'text-xs font-medium'}>{skill}</p>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
+            {/* <div className='w-96 mx-auto'>
+            <h2 className='bg-gradientForBg bg-clip-text text-transparent text-4xl font-semibold'>Welcome Back</h2>
+            <p className='text-gray mt-2'>Please enter your login credentials to continue</p>
+        </div> */}
+
+
+            {/* ------------ form -------------- */}
+
+            <div className='bg-gradientForBorderOpposite w-96 mx-auto p-[1px] rounded-lg mt-8'>
+
+                <form className='w-full p-12 rounded-lg flex flex-col justify-center  mx-auto bg-bgOne'>
 
 
 
-            <div className='w-1/2 bg-bgOne '>
-                <form className='w-full flex flex-col justify-center items-center h-screen'>
+                    <div>
+                        <div className='h-24 w-full '>
+                            <Input
+                                totalWidth={"w-full"}
+                                className={""}
+                                type={"text"}
+                                name={"name"}
+                                value={formData.name}
+                                placeholder={"your name"}
+                                onChange={(e) => handleInputChange(e)}
+                                reloadButtonShowOrHide={true}
+                                onClick={(e) => handleReloadButton(e)}
+                            />
 
-                    <div className='h-24 w-1/2 '>
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"text"}
-                            name={"name"}
-                            value={formData.name}
-                            placeholder={"your name"}
-                            onChange={(e) => handleInputChange(e)}
-                            reloadButtonShowOrHide={true}
-                            onClick={(e) => handleReloadButton(e)}
-                        />
+                        </div>
 
-                        {errors && <p className='mt-2 text-xs text-gray'>{errors.name}</p>}
-                    </div>
+                        <div className='h-24 w-full '>
+                            <Input
+                                totalWidth={"w-full"}
+                                className={""}
+                                type={"email"}
+                                name={"email"}
+                                value={formData.email}
+                                placeholder={"your email"}
+                                onChange={(e) => handleInputChange(e)}
+                                reloadButtonShowOrHide={true}
+                                onClick={(e) => handleReloadButton(e)}
+                            />
 
-                    <div className='h-24 w-1/2 '>
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"email"}
-                            name={"email"}
-                            value={formData.email}
-                            placeholder={"your email"}
-                            onChange={(e) => handleInputChange(e)}
-                            reloadButtonShowOrHide={true}
-                            onClick={(e) => handleReloadButton(e)}
-                        />
-                        {errors && <p className='mt-2 text-xs text-gray'>{errors.email}</p>}
-
-                    </div>
-
-                    <div className='h-24 w-1/2 '>
-
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"password"}
-                            name={"password"}
-                            value={formData.password}
-                            placeholder={"your password"}
-                            onChange={(e) => handleInputChange(e)}
-                            reloadButtonShowOrHide={true}
-                            onClick={(e) => handleReloadButton(e)}
-                        />
-                        {errors && <p className='mt-2 text-xs text-gray'>{errors.password}</p>}
-
-                    </div>
-
-                    <div className='h-24 w-1/2 '>
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"text"}
-                            name={"bio"}
-                            value={formData.bio}
-                            placeholder={"your bio"}
-                            onChange={(e) => handleInputChange(e)}
-                            reloadButtonShowOrHide={true}
-                            onClick={(e) => handleReloadButton(e)}
-                        />
-                        {errors && <p className='mt-2 text-xs text-gray'>{errors.bio}</p>}
+                        </div>
                     </div>
 
 
+                    <div>
+                        <div className='h-24 w-full '>
 
-                    <div className='w-1/2 flex justify-end'>
-                        <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
+                            <Input
+                                totalWidth={"w-full"}
+                                className={""}
+                                type={"password"}
+                                name={"password"}
+                                value={formData.password}
+                                placeholder={"your password"}
+                                onChange={(e) => handleInputChange(e)}
+                                reloadButtonShowOrHide={true}
+                                onClick={(e) => handleReloadButton(e)}
+                            />
+
+                        </div>
+
+                        <div className='h-24 w-full '>
+                            <Input
+                                totalWidth={"w-full"}
+                                className={""}
+                                type={"text"}
+                                name={"bio"}
+                                value={formData.bio}
+                                placeholder={"your bio"}
+                                onChange={(e) => handleInputChange(e)}
+                                reloadButtonShowOrHide={true}
+                                onClick={(e) => handleReloadButton(e)}
+                            />
+                        </div>
+
                     </div>
 
                     <PrimaryButton
+                        isLoading={isLoading}
                         text={"Register"}
-                        classname={`fixed bottom-10 right-12 mt-10  rounded-full shadow-2xl shadow-lime-800  px-8 py-2.5 font-semibold`}
+                        classname={'w-32 py-2 rounded-full shadow-2xl shadow-lime-800  font-semibold'}
                         onClick={handleSubmit}
-                    >Login</PrimaryButton>
+                    ></PrimaryButton>
+
+
+
+                    <div className='text-left mt-6'>
+                        <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
+                    </div>
+
+
 
                 </form>
+
+
             </div>
 
 

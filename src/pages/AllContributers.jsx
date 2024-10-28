@@ -21,7 +21,6 @@ function AllContributers() {
         setSearchQuery(query)
     }
 
-    console.log(searchQuery);
 
 
     useEffect(() => {
@@ -31,7 +30,6 @@ function AllContributers() {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/contributors`)
 
                 const data = await response.data;
-                console.log(data);
 
                 setUsers(data);
             }
@@ -57,7 +55,6 @@ function AllContributers() {
 
 
     function handleSeeCoursesClick(userId) {
-        console.log("handleSeeCoursesClick");
 
         navigate(`/user/${userId}/uploaded-courses`)
     }
@@ -118,7 +115,7 @@ function AllContributers() {
                                             :
 
                                             (
-                                                <p className='text-center mt-10 text-gray'>No contributors found!</p>
+                                                <p className='text-center mt-40 text-gray'>No contributors found!</p>
                                             )
                                     )
 

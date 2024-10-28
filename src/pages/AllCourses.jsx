@@ -17,12 +17,6 @@ function AllCourses() {
 
     const [searchQuery, setSearchQuery] = useState("");
 
-    // function setQuery(query) {
-    //     setSearchQuery(query)
-    // }
-
-    console.log(searchQuery);
-
 
 
     useEffect(() => {
@@ -45,7 +39,7 @@ function AllCourses() {
 
     }, [])
 
-    console.log(courses);
+
 
 
     const filteredCourses = Object.keys(courses).filter(key =>
@@ -60,13 +54,11 @@ function AllCourses() {
 
 
     async function handleCourseCardClick(id) {
-        console.log("id :: ", id);
 
         //take me to the full course page
         navigate(`/course/${id}`)
 
         const s = `${import.meta.env.VITE_BASE_URL}/course/${id}/enroll-course`
-        console.log(s);
 
 
         //add this course to the users enrolled course list
@@ -74,7 +66,6 @@ function AllCourses() {
 
         const data = await response.data;
 
-        console.log(data);
 
 
     }
@@ -160,7 +151,7 @@ function AllCourses() {
                                             :
 
                                             (
-                                                <p className=' mt-60 flex justify-center items-center text-gray'>No contributors found!</p>
+                                                <p className=' mt-40 flex justify-center items-center text-gray'>No courses found!</p>
                                             )
                                     )
 

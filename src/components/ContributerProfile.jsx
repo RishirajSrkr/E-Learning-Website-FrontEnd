@@ -7,10 +7,10 @@ function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
 
 
     return (
-        <div className='bg-bgOne border border-border w-full px-6 py-4 flex justify-between items-center hover:bg-bgTwo transition-colors rounded-md'>
+        <div className='bg-bgOne border border-border w-full px-8 py-4 flex justify-between items-center hover:bg-bgTwo transition-colors rounded-md'>
 
             <div className='text-gray mr-12'>
-                <div className='flex gap-4 text-white'>
+                <div className='flex gap-4 mb-2 text-white'>
                     <h2 className='font-bold text-2xl'>{name}</h2>
                 </div>
 

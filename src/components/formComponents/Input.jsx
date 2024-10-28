@@ -1,7 +1,7 @@
 import React from 'react'
 import { RiArrowRightUpLine } from "react-icons/ri";
 
-function Input({ className, type, name, value, placeholder, onChange, totalWidth, reloadButtonShowOrHide, onClick }) {
+function Input({ className, type, name, value, placeholder, onChange, totalWidth}) {
 
 
     const firstLetter = name.slice(0, 1).toUpperCase();

@@ -98,7 +98,6 @@ function AddCourseForm() {
 
   }
 
-  console.log(formData);
 
 
 
@@ -121,7 +120,6 @@ function AddCourseForm() {
 
     formDataWithImage.append("chapters", JSON.stringify(formData.chapters))
 
-    console.log(formDataWithImage);
 
 
     try {
@@ -159,7 +157,6 @@ function AddCourseForm() {
         setPreviewImage(null)
 
       }
-      console.log(data);
     }
     catch (e) {
       toast.error("Try Again", {
@@ -312,7 +309,7 @@ function AddCourseForm() {
         <SecondaryButton
           text={"New Chapter"}
           onClick={handleAddChapterClick}
-          classname={"text-subtextColor py-2"}
+          classname={"text-gray py-2"}
         />
 
 
@@ -320,7 +317,7 @@ function AddCourseForm() {
         <button
           ref={ref}
           type='submit'
-          className={`fixed bottom-10 right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
+          className={`fixed bottom-10  right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
           onClick={handleSubmitClick}
           disabled={!formData.courseTitle || !formData.courseCategory || !formData.courseDescription}
         >Submit</button>

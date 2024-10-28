@@ -9,38 +9,6 @@ function VoteResources() {
 
     const [courses, setCourses] = useState([]);
 
-    const data = [
-        {
-            courseName: "React JS",
-            instructor: "Rahul Kumar"
-        },
-        {
-            courseName: "Java Basics",
-            instructor: "Alice Johnson"
-        },
-        {
-            courseName: "Data Science",
-            instructor: "John Doe"
-        },
-        {
-            courseName: "Machine Learning",
-            instructor: "Sara Wilson"
-        },
-        {
-            courseName: "Node.js",
-            instructor: "David Lee"
-        },
-        {
-            courseName: "Algorithms",
-            instructor: "Emma Brown"
-        },
-        {
-            courseName: "Cloud Computing",
-            instructor: "Sophia Miller"
-        }
-    ];
-
-
     useEffect(() => {
 
         async function getTopVotedCourses() {
@@ -51,7 +19,6 @@ function VoteResources() {
                 const data = response.data;
                 setCourses(data)
 
-                console.log(data);
 
 
             }

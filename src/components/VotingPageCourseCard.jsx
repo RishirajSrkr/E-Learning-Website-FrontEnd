@@ -22,25 +22,25 @@ function VotingPageCourseCard({ courseName, instructor, index, imageUrl, vote })
 
             className='flex justify-start items-center w-full h-fit' >
 
-            <div ref={ref} className='w-full  bg-gradient-to-b from-bgTwo rounded-xl px-4 py-4'>
+            <div ref={ref} className='w-full  bg-gradient-to-b from-bgTwo to-bgOne rounded-xl px-4 py-4'>
 
                 <div className='w-full bg-gradientForBg to-bgOne rounded-lg px-0.5 py-0.5'>
 
-                    <div className='w-full bg-bgOne rounded-lg gap-4 text-maintextColor flex justify-between'>
+                    <div className='w-full bg-bgOne rounded-lg gap-4 px-6 text-white flex justify-between'>
 
 
 
                         <div className='w-1/6 flex justify-center '>
-                            <h4 className='flex gap-3 font-semibold text-xl justify-start items-center'> <BiSolidUpvote size={15} className='text-gray' /> {vote}</h4>
+                            <h4 className='flex gap-3 font-semibold text-xl justify-start items-center'> <BiSolidUpvote size={15} className='text-green' /> {vote}</h4>
                         </div>
 
 
                         <div className='w-4/6 flex justify-start'>
-                            <h4 className='my-12 text-4xl tracking-tighter font-bold flex justify-start items-center bg-text-gradient bg-clip-text text-transparent'>{courseName}</h4>
+                            <h4 className='py-10 text-4xl tracking-tighter font-bold flex justify-start items-center bg-gradientForBg bg-clip-text text-transparent'>{courseName}</h4>
                         </div>
 
                         <div className='  w-1/6 flex justify-center'>
-                            <h4 className='flex font-semibold text-xl gap-4 justify-start items-center'> <IoPersonSharp size={15} className='text-gray' /> {instructor}</h4>
+                            <h4 className='flex font-semibold text-xl gap-4 justify-start items-center'> <IoPersonSharp size={15} className='text-green' /> {instructor}</h4>
                         </div>
 
 

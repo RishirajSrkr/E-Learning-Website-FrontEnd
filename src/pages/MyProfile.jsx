@@ -39,7 +39,6 @@ function MyProfile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData);
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/update`, formData);
@@ -116,7 +115,6 @@ function MyProfile() {
     function handleSetEnrolledOrUpdated(value) {
         setEnrolledOrUpdated(value)
     }
-    console.log(enrolledOrUpdated);
     
 
 
@@ -295,7 +293,7 @@ function MyProfile() {
                 <div className='flex w-1/2'>
                     <SecondaryButton
                         text={"Update Changes"}
-                        classname={`w-1/2 text-maintextColor py-3 rounded-none border-border`}
+                        classname={`w-1/2 text-white py-3 rounded-none border-border`}
                         onClick={handleSubmit}
                     >Update Profile</SecondaryButton>
 

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard';
-import { IoChevronDownSharp } from "react-icons/io5";
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig'
 import { ThreeDot } from 'react-loading-indicators'
-import HomeV2 from './HomeV2';
 import Reviews from '../components/Reviews'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
@@ -44,7 +42,6 @@ function Home() {
 
 
     function handleCourseCardClick(id) {
-        console.log("id :: ", id);
 
         navigate(`/course/${id}`)
     }
