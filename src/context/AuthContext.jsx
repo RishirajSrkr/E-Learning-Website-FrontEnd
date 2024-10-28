@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
     // Check for JWT in local storage or session storage to determine login status
     useEffect(() => {
 
+
         const token = localStorage.getItem("jwtToken");
 
         if (token) {
@@ -31,10 +32,10 @@ export const AuthProvider = ({ children }) => {
             catch (e) {
                 console.log("Invalid token", e)
                 localStorage.removeItem("jwtToken")
-                setIsLoading(false)
             }
 
         }
+        setIsLoading(false)
     }, []);
 
 

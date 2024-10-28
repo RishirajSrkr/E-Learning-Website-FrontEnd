@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { Navigate } from 'react-router-dom';
-import {ThreeDot} from 'react-loading-indicators'
+import { ThreeDot } from 'react-loading-indicators'
 
 function ProtectedRoute({ children }) {
 
@@ -13,13 +13,8 @@ function ProtectedRoute({ children }) {
         </div>
     }
 
-    else if (loggedInUser) {
-        return children;
-    }
+    return loggedInUser ? children : <Navigate to={"/login"} />
 
-    else {
-        return <Navigate to={"/login"} />
-    }
 }
 
 export default ProtectedRoute
