@@ -14,10 +14,10 @@ function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
                     <h2 className='font-bold text-2xl'>{name}</h2>
                 </div>
 
-                <div className='flex items-center mb-3'>
+                {/* <div className='flex items-center mb-3'>
                     <FaEnvelope className="mr-2 " size={13} />
                     <h4>{email}</h4>
-                </div>
+                </div> */}
 
                 <div className='flex items-start'>
                     <h4>{bio}</h4>
