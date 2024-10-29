@@ -115,7 +115,7 @@ function AllContributers() {
                                             :
 
                                             (
-                                                <p className='text-center mt-40 text-gray'>No contributors found!</p>
+                                                <p className='text-center mt-40 text-gray'>No contributors found with the name : {searchQuery}</p>
                                             )
                                     )
 

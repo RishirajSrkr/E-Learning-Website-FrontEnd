@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard';
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig'
@@ -6,15 +6,16 @@ import { ThreeDot } from 'react-loading-indicators'
 import Reviews from '../components/Reviews'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { IoArrowForwardSharp } from "react-icons/io5";
+import { WindowWidthContext } from '../context/WindowWidthContext';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { FreeMode } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 // import required modules
-import { FreeMode } from 'swiper/modules';
 
 function Home() {
 
@@ -24,20 +25,7 @@ function Home() {
     const [isLoading, setIsLoading] = useState(false)
 
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    function handleWindowResize() {
-        setWindowWidth(window.innerWidth);
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowResize)
-
-        return () => { removeEventListener('resize', handleWindowResize) }
-
-    }, [])
-
-
+    const { isMobile } = useContext(WindowWidthContext)
 
 
     const { ref, inView } = useInView({
@@ -77,9 +65,8 @@ function Home() {
 
         <div className='relative bg-bgOne min-h-screen pb-12'>
 
+            <div className='w-full px-4 sm:min-h-screen bg-bgOne flex flex-col justify-center gap-4 sm:px-24 mb-6 sm:mb-0'>
 
-
-            <div className='w-full px-4 sm:min-h-screen bg-bgOne flex justify-center items-center sm:px-24 mb-6'>
 
 
                 <div className='w-full bg-bgTwo p-8 flex flex-col items-start gap-2 border border-border rounded-lg sm:p-20 sm:gap-6'>
@@ -101,6 +88,15 @@ function Home() {
                 </div>
 
 
+                {/* ----------------- notification for mobile view ---------------- */}
+                {
+                    isMobile && isLoading && <div className='flex gap-2 text-xs items-center'>
+                        <IoArrowForwardSharp className='text-green' />
+                        <p className='text-gray'>Deployed on Render free tier, please be patient.</p>
+                    </div>
+                }
+
+
             </div>
 
 
@@ -108,39 +104,58 @@ function Home() {
 
 
             {
+                isLoading &&
 
-                windowWidth < 640 ?
+                <div className='text-center mb-4 w-full' >
+                    <ThreeDot color="#9CF57F" size="small" />
+                </div>
+
+            }
+
+
+
+            {
+
+                isMobile ?
 
                     // -------------------- MOBILE VIEW ---------------------
                     (
 
-                        <Swiper
-                            slidesPerView={1.2}
-                            spaceBetween={10}
-                            freeMode={true}
+                        !isLoading && (
 
-                            modules={[FreeMode]}
-                            className="text-gray w-full cursor-move p-4"
-                        >
+                            <div className='min-h-96'>
+                                <Swiper
+                                    slidesPerView={1.2}
+                                    spaceBetween={12}
+                                    freeMode={true}
 
-                            {
-                                Object.keys(courses).map((key, index) => {
-                                    return <SwiperSlide key={index}>
-                                        <CourseCard
-                                            title={courses[key].courseName}
-                                            imageUrl={courses[key].imageUrl}
-                                            instructor={courses[key].instructorName}
-                                            description={courses[key].courseDescription}
-                                            vote={courses[key].vote}
-                                            onClick={() => handleCourseCardClick(key)}
-                                            showCTA={true}
-                                            text={"Enroll"}
+                                    modules={[FreeMode]}
+                                    className="text-gray w-full cursor-move p-4"
+                                >
 
-                                        />
-                                    </SwiperSlide>
-                                })
-                            }
-                        </Swiper>
+                                    {
+                                        Object.keys(courses).map((key, index) => {
+                                            return <SwiperSlide key={index}>
+                                                <CourseCard
+                                                    title={courses[key].courseName}
+                                                    imageUrl={courses[key].imageUrl}
+                                                    instructor={courses[key].instructorName}
+                                                    description={courses[key].courseDescription}
+                                                    vote={courses[key].vote}
+                                                    onClick={() => handleCourseCardClick(key)}
+                                                    showCTA={true}
+                                                    text={"Enroll"}
+
+                                                />
+                                            </SwiperSlide>
+                                        })
+                                    }
+                                </Swiper>
+
+                            </div>
+
+                        )
+
 
                     )
 
@@ -150,48 +165,41 @@ function Home() {
 
                     (
 
-                        <div className='px-24 w-full mb-20 min-h-screen flex justify-center items-center'>
+                        <div className='px-24 w-full mb-20  flex justify-center items-center'>
 
                             {
-                                isLoading ?
-                                    (
-                                        <div className='text-center' >
-                                            <ThreeDot color="#9CF57F" size="small" />
-                                        </div>
-                                    )
+                                !isLoading &&
 
-                                    :
+                                (
+                                    <div ref={ref} className='masonry'>
+                                        {
+                                            Object.keys(courses).map((key, index) => {
 
-                                    (
-                                        <div ref={ref} className='masonry'>
-                                            {
-                                                Object.keys(courses).map((key, index) => {
+                                                return <motion.div
+                                                    initial={{ y: (100), opacity: 0 }}
+                                                    animate={inView ? { y: 0, opacity: 100 } : {}}
+                                                    transition={{ delay: 0.1 * index }}
 
-                                                    return <motion.div
-                                                        initial={{ y: (100), opacity: 0 }}
-                                                        animate={inView ? { y: 0, opacity: 100 } : {}}
-                                                        transition={{ delay: 0.1 * index }}
+                                                    key={key} className="masonry-item">
 
-                                                        key={key} className="masonry-item">
+                                                    <CourseCard
+                                                        title={courses[key].courseName}
+                                                        imageUrl={courses[key].imageUrl}
+                                                        instructor={courses[key].instructorName}
+                                                        description={courses[key].courseDescription}
+                                                        vote={courses[key].vote}
+                                                        onClick={() => handleCourseCardClick(key)}
+                                                        showCTA={true}
+                                                        text={"Enroll"}
 
-                                                        <CourseCard
-                                                            title={courses[key].courseName}
-                                                            imageUrl={courses[key].imageUrl}
-                                                            instructor={courses[key].instructorName}
-                                                            description={courses[key].courseDescription}
-                                                            vote={courses[key].vote}
-                                                            onClick={() => handleCourseCardClick(key)}
-                                                            showCTA={true}
-                                                            text={"Enroll"}
+                                                    />
+                                                </motion.div>
 
-                                                        />
-                                                    </motion.div>
+                                            })
+                                        }
 
-                                                })
-                                            }
-
-                                        </div>
-                                    )
+                                    </div>
+                                )
                             }
 
 

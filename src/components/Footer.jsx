@@ -12,7 +12,7 @@ function Footer() {
     <div className={`w-full ${hideFooter ? 'hidden' : ''} bg-bgOne flex justify-center items-center py-4 sm:py-6 border-t border-border `}>
 
 
-      <ul className='flex gap-4 sm:w-1/5  justify-between items-center font text-xs sm:text-sm mx-auto text-gray'>
+      <ul className='flex gap-4 sm:w-1/5  justify-between items-center text-sm sm:text-sm mx-auto text-gray'>
 
         <Link to='https://github.com/RishirajSrkr' target='_blank'>
           <div className='flex gap-2 jusc

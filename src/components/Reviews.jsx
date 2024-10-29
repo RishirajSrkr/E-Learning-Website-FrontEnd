@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,8 +10,11 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { FreeMode } from 'swiper/modules';
+import { WindowWidthContext } from '../context/WindowWidthContext';
 
 function Reviews() {
+
+    const { isMobile } = useContext(WindowWidthContext);
 
     const [reviews, setReviews] = useState([]);
 
@@ -65,30 +68,10 @@ function Reviews() {
 
 
 
-    // --------------- CHECKING WINDOW SIZE -------------------
-
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    function handleWindowResize() {
-        setWindowWidth(window.innerWidth);
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowResize)
-
-        return () => { removeEventListener('resize', handleWindowResize) }
-
-    }, [])
-
-    // -----------------------------------------------------------------
-
-
-
-
     return (
         <>
             <Swiper
-                slidesPerView={`${windowWidth < 640 ? 1 : 3}`}
+                slidesPerView={`${isMobile ? 1 : 3}`}
                 spaceBetween={30}
                 freeMode={true}
 

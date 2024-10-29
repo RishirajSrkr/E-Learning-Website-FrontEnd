@@ -95,7 +95,7 @@ function Navbar() {
                 <div className='bg-bgOne pb-20 w-full' >
 
 
-                    <div className='fixed top-0 w-full flex h-12 z-50 gap-6  items-center px-4 bg-bgOne border-b border-border'>
+                    <div className='fixed top-0 w-full flex h-16 z-50 gap-6  items-center px-4 bg-bgOne border-b border-border'>
 
                         <button
                             className='text-white text-2xl z-50'
