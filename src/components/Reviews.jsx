@@ -65,10 +65,30 @@ function Reviews() {
 
 
 
+    // --------------- CHECKING WINDOW SIZE -------------------
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    function handleWindowResize() {
+        setWindowWidth(window.innerWidth);
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowResize)
+
+        return () => { removeEventListener('resize', handleWindowResize) }
+
+    }, [])
+
+    // -----------------------------------------------------------------
+
+
+
+
     return (
         <>
             <Swiper
-                slidesPerView={3}
+                slidesPerView={`${windowWidth < 640 ? 1 : 3}`}
                 spaceBetween={30}
                 freeMode={true}
 
@@ -81,9 +101,9 @@ function Reviews() {
                         return <SwiperSlide key={index}
                             className='w-full bg-gradientForBorder p-2 rounded-lg'
                         >
-                            <div className='border border-border bg-bgTwo p-10 h-screen rounded-md'>
-                                <h4 className='text-white font-semibold text-xl mb-4'>{review.name}</h4>
-                                <p>{review.review}</p>
+                            <div className='border border-border bg-bgTwo p-6 sm:p-10 h-fit sm:h-screen rounded-md'>
+                                <h4 className='text-white font-semibold text-base sm:text-xl mb-2 sm:mb-4'>{review.name}</h4>
+                                <p className='text-sm sm:text-base'>{review.review}</p>
                             </div>
                         </SwiperSlide>
                     })

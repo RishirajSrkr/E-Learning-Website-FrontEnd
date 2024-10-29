@@ -7,18 +7,18 @@ import SecondaryButton from './formComponents/SecondaryButton';
 const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, text, imageUrl }) => {
 
   return (
-    <div className="course-card relative bg-bgTwo p-6 max-w-sm w-96 overflow-hidden hover:border-2 hover:border-border border-2 border-bgTwo transition-all rounded-md h-fit">
+    <div className="course-card relative bg-bgTwo p-3 w-11/12 overflow-hidden hover:border-2 hover:border-border border-2 border-bgTwo transition-all rounded-md h-fit text-sm sm:w-full sm:text-base sm:96 sm:p-6">
 
       {imageUrl && (
         <img
           src={imageUrl}
           alt="courseThumbnailImage"
-          className="w-full h-48 object-cover rounded-sm mb-6"
+          className="w-full h-40 object-cover rounded-sm mb-6 sm:h-48"
         />
       )}
 
 
-      <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
+      <h3 className="text-xl font-semibold mb-2 text-white sm:text-2xl">{title}</h3>
 
 
       <div className='text-gray'>
@@ -26,8 +26,8 @@ const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, te
 
         {
           instructor && <div className=' flex gap-2 items-center mb-2'>
-            <IoPersonSharp className='text-green' size={14} />
-            <p className="font-semibold">{instructor}</p>
+            <IoPersonSharp className='text-green text-sm' />
+            <p className="font-semibold ">{instructor}</p>
           </div>
         }
 

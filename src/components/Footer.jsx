@@ -9,29 +9,29 @@ function Footer() {
 
 
   return (
-    <div className={`pb-6 w-full ${hideFooter ? 'hidden' : ''} bg-bgOne`}>
+    <div className={`w-full ${hideFooter ? 'hidden' : ''} bg-bgOne flex justify-center items-center py-4 sm:py-6 border-t border-border `}>
 
-      <div className='gradient-line mx-auto'></div>
 
-      <ul className='mt-6 flex gap-4 w-1/4 justify-between items-center font text-sm mx-auto text-gray'>
+      <ul className='flex gap-4 sm:w-1/5  justify-between items-center font text-xs sm:text-sm mx-auto text-gray'>
+
         <Link to='https://github.com/RishirajSrkr' target='_blank'>
           <div className='flex gap-2 jusc
            items-center'>
-            <FaGithub size={16} />
+            <FaGithub  />
             <h4>Github</h4>
           </div>
         </Link>
         <Link to='https://www.linkedin.com/in/rishiraj-sarkar/' target='_blank'>
           <div className='flex gap-2 jusc
            items-center'>
-            <FaLinkedin size={16} />
+            <FaLinkedin  />
             <h4>LinkedIn</h4>
           </div>
         </Link>
         <Link to='mailto:rishirajsarkar.jpg@gmail.com' target='_blank'>
           <div className='flex gap-2 jusc
            items-center'>
-            <FaEnvelope size={16} />
+            <FaEnvelope />
             <h4>Email</h4>
           </div>
         </Link>

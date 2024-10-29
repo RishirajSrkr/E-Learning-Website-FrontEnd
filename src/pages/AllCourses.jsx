@@ -77,7 +77,7 @@ function AllCourses() {
 
     return (
 
-        <div className='bg-bgOne min-h-screen flex flex-col items-center relative overflow-hidden'>
+        <div className='bg-bgOne min-h-screen px-24 flex flex-col items-center relative overflow-hidden py-12'>
 
             <GoBack text={"Go Back"} goWhere={"/"} />
 
