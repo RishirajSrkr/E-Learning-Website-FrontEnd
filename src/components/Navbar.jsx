@@ -31,7 +31,7 @@ function Navbar() {
         const timer = setTimeout(() => {
             setShowNotificationDiv(false)
 
-        }, 3000);
+        }, 60000);
         return () => { clearTimeout(timer) }
     }, [])
 
