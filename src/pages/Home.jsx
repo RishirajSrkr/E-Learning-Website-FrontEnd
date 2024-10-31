@@ -123,14 +123,14 @@ function Home() {
 
                         !isLoading && (
 
-                            <div className='min-h-96'>
+                            <div className='min-h-96 px-4'>
                                 <Swiper
                                     slidesPerView={1.2}
                                     spaceBetween={12}
                                     freeMode={true}
 
                                     modules={[FreeMode]}
-                                    className="text-gray w-full cursor-move p-4"
+                                    className="text-gray w-full cursor-move"
                                 >
 
                                     {

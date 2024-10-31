@@ -45,7 +45,7 @@ function CoursesUploadedByUser() {
 
      return (
 
-        <div className='bg-bgColorOne pt-32 pb-10 min-h-screen'>
+        <div className='bg-bgOne pt-36 px-12 pb-10 min-h-screen'>
 
 
 
@@ -53,7 +53,7 @@ function CoursesUploadedByUser() {
                 isLoading ?
                     (
                         <div className='mt-40 text-center'>
-                            <ThreeDot color="#E85533" size="small" />
+                            <ThreeDot color="#9CF57F" size="small" />
                         </div>
                     )
                     :
@@ -67,7 +67,7 @@ function CoursesUploadedByUser() {
 
                                             title={course.courseName}
                                             description={course.courseDescription}
-                                            rating={course.rating}
+                                            vote={course.vote}
                                             showCTA={false}
 
                                         />

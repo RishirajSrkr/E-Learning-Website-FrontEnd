@@ -3,14 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { NavLink } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
-
+import { MdAccountCircle } from "react-icons/md";
 import Hamburger from 'hamburger-react'
-
+import { IoArrowForwardSharp } from "react-icons/io5";
 import { motion } from 'framer-motion'
+import { WindowWidthContext } from '../context/WindowWidthContext';
 
 
 function Navbar() {
 
+    const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
 
     const location = useLocation();
@@ -38,22 +40,6 @@ function Navbar() {
 
 
 
-    // --------------- CHECKING WINDOW SIZE -------------------
-
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    function handleWindowResize() {
-        setWindowWidth(window.innerWidth);
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowResize)
-
-        return () => { removeEventListener('resize', handleWindowResize) }
-
-    }, [])
-
-    // -----------------------------------------------------------------
 
 
     const [showNavbar, setShowNavbar] = useState(false)
@@ -85,7 +71,7 @@ function Navbar() {
 
 
 
-        windowWidth < 640 ?
+        isMobile ?
 
             // ----------------------------- MOBILE VIEW -----------------------------
 
@@ -95,18 +81,20 @@ function Navbar() {
                 <div className='bg-bgOne pb-20 w-full' >
 
 
-                    <div className='fixed top-0 w-full flex h-16 z-50 gap-6  items-center px-4 bg-bgOne border-b border-border'>
-
-                        <button
-                            className='text-white text-2xl z-50'
-
-                        >
-                            <Hamburger size={24} toggled={showNavbar} toggle={setShowNavbar} />
-
-                        </button>
+                    <div className='fixed top-0 w-full flex h-16 z-50 gap-6 items-center justify-between px-4 bg-bgOne border-b border-border'>
 
 
-                        <Link to={"/"} className='font-bold bg-gradientForBg text-xl bg-clip-text text-transparent '>BitByBit</Link>
+                        <Hamburger size={24} color='white' toggled={showNavbar} toggle={setShowNavbar} />
+
+                        <Link to={"/"} className='font-bold bg-gradientForBg text-2xl bg-clip-text text-transparent '>BitByBit</Link>
+
+
+
+
+
+                        <Link to={`${loggedInUser ? "/my-profile" : "/login"}`} className='pr-2 text-white font-medium'><MdAccountCircle size={23} /></Link>
+
+
                     </div>
 
 
@@ -114,66 +102,126 @@ function Navbar() {
                         showNavbar &&
 
                         (
-                            <div className='w-full fixed z-50 bg-bgOne top-12 pt-20 min-h-screen flex flex-col text-gray uppercase font-bold text-4xl gap-2 px-8'>
-
+                            <div className='w-full fixed z-50 bg-bgOne top-12 pt-20 min-h-screen flex flex-col text-white uppercase font-bold text-4xl gap-2 px-8'>
 
                                 <motion.div
-                                    initial={{ y:50, opacity: 0 }}
+                                    initial={{ y: 50, opacity: 0 }}
                                     animate={{ y: 0, opacity: 100 }}
                                     transition={{ delay: 0 }}
                                 >
-                                    <NavLink
-                                        to="/all-courses"
+                                    <Link
+                                        to="/"
                                         onClick={handleNavLinkClick}
-                                        className={"hover:text-white transition-colors duration-400"}
+                                        className=' flex gap-2 items-center'
+
                                     >
-                                        Courses
-                                    </NavLink>
+                                        <span className=''>
+                                            <IoArrowForwardSharp size={20} />
+                                        </span>
+                                        Home
+                                    </Link>
                                 </motion.div>
 
+
+
+
                                 <motion.div
-                                       initial={{ y: 50, opacity: 0 }}
-                                       animate={{ y: 0, opacity: 100 }}
+                                    initial={{ y: 50, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 100 }}
                                     transition={{ delay: 0.1 }}
                                 >
-                                    <NavLink
-                                        to="/contributors"
+                                    <Link
+                                        to="/all-courses"
                                         onClick={handleNavLinkClick}
-                                        className={"hover:text-white transition-colors duration-400"}
+                                        className=' flex gap-2 items-center'
+
                                     >
-                                        Contributors
-                                    </NavLink>
+                                        <span className=''>
+                                            <IoArrowForwardSharp size={20}/>
+                                        </span>
+                                        Courses
+                                    </Link>
                                 </motion.div>
 
-
-
                                 <motion.div
-                                     initial={{ y: 50, opacity: 0 }}
-                                     animate={{ y: 0, opacity: 100 }}
+                                    initial={{ y: 50, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 100 }}
                                     transition={{ delay: 0.2 }}
                                 >
-                                    <NavLink
+                                    <Link
+                                        to="/contributors"
+                                        onClick={handleNavLinkClick}
+                                        className=' flex gap-2 items-center'
+
+                                    >
+                                        <span className=''>
+                                            <IoArrowForwardSharp size={20} />
+                                        </span>
+                                        Contributors
+                                    </Link>
+                                </motion.div>
+
+
+
+                                <motion.div
+                                    initial={{ y: 50, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 100 }}
+                                    transition={{ delay: 0.3 }}
+                                >
+                                    <Link
                                         to="/vote-resources"
                                         onClick={handleNavLinkClick}
-                                        className={"hover:text-white transition-colors duration-400"}
+                                        className=' flex gap-2 items-center'
+
                                     >
+                                        <span className=''>
+                                            <IoArrowForwardSharp size={20}/>
+                                        </span>
                                         Vote
-                                    </NavLink>
+                                    </Link>
                                 </motion.div>
 
                                 <motion.div
-                                      initial={{ y: 50, opacity: 0 }}
-                                      animate={{ y: 0, opacity: 100 }}
-                                    transition={{ delay: 0.3 }}
+                                    initial={{ y: 50, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 100 }}
+                                    transition={{ delay: 0.4 }}
                                 >
-                                    <NavLink
+                                    <Link
                                         to="/about"
                                         onClick={handleNavLinkClick}
-                                        className={"hover:text-white transition-colors duration-400"}
+                                        className=' flex gap-2 items-center'
+
                                     >
+                                        <span className=''>
+                                            <IoArrowForwardSharp size={20}/>
+                                        </span>
                                         About
-                                    </NavLink>
+                                    </Link>
                                 </motion.div>
+
+
+                                {
+
+                                    loggedInUser && <motion.div
+                                        initial={{ y: 50, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 100 }}
+                                        transition={{ delay: 0.5 }}
+                                    >
+                                        <Link
+                                            to="/course/create"
+                                            onClick={handleNavLinkClick}
+                                            className='bg-gradientForBg bg-clip-text text-transparent flex gap-2 items-center'
+                                        >
+                                            <span className='text-green'>
+                                                <IoArrowForwardSharp size={20} />
+                                            </span> 
+                                            Contribute
+
+                                        </Link>
+                                    </motion.div>
+
+
+                                }
 
 
 
@@ -294,9 +342,12 @@ function Navbar() {
 
 
                             {/* ------------ hide this if user not logged in ------------- */}
-                            <Link to={"/course/create"} className={`${loggedInUser ? "" : "hidden"} bgTwo border border-green text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-lime-800`}>
-                                Contribute
-                            </Link>
+                            {
+                                loggedInUser && <Link to={"/course/create"} className={` bgTwo border border-green text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-lime-800`}>
+                                    Contribute
+                                </Link>
+                            }
+
                         </div>
 
                     </div>

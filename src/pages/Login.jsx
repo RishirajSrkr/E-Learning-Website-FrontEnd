@@ -74,8 +74,8 @@ function Login() {
 
 
     return (
-        <div className='py-2 bg-bgOne'>
-            <div className='w-full min-h-screen bg-bgOne justify-center  flex flex-col gap-8'>
+        <div className='pt-12 sm:pb-1 bg-bgOne'>
+            <div className='w-full min-h-screen bg-bgOne justify-start sm:justify-center flex flex-col gap-8'>
 
 
                 {/* ---------- headline ---------- */}

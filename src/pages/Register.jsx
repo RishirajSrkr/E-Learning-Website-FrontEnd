@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
 import Input from '../components/formComponents/Input'
@@ -12,16 +12,31 @@ function Register() {
         email: "",
         password: "",
         name: "",
-        bio: ""
+        bio: "",
+        image: null,
     });
 
+    const [profileImage, setProfileimage] = useState(null);
+
+    const profileImageRef = useRef();
 
 
     const handleInputChange = (e) => {
-        setFormData(prev => ({
-            ...prev, [e.target.name]: e.target.value
-        }));
+      
+        if (e.target.name === 'profileImage') {
+            setFormData(prev => ({ ...prev, image: e.target.files[0]}))
+            console.log("yes its image");
+            
+        }
+        else {
+            setFormData(prev => ({
+                ...prev, [e.target.name]: e.target.value
+            }));
+        }
+
     };
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -80,90 +95,98 @@ function Register() {
 
 
     return (
-        <div className='py-24 w-full min-h-screen bg-bgOne justify-center flex flex-col'>
-
-
-            {/* ---------- headline ---------- */}
-
-            {/* <div className='w-96 mx-auto'>
-            <h2 className='bg-gradientForBg bg-clip-text text-transparent text-4xl font-semibold'>Welcome Back</h2>
-            <p className='text-gray mt-2'>Please enter your login credentials to continue</p>
-        </div> */}
+        <div className='pt-28 sm:pb-24 w-full min-h-screen bg-bgOne sm:justify-center flex flex-col'>
 
 
             {/* ------------ form -------------- */}
 
-            <div className='bg-gradientForBorderOpposite w-96 mx-auto p-[1px] rounded-lg mt-8'>
+            <div className='bg-gradientForBorderOpposite w-11/12 sm:w-96 mx-auto p-[1px] rounded-lg -mt-16 sm:mt-8'>
 
-                <form className='w-full p-12 rounded-lg flex flex-col justify-center  mx-auto bg-bgOne'>
+                <form className='w-full p-6 sm:p-12 rounded-lg flex flex-col justify-center mx-auto bg-bgOne'>
 
 
 
-                    <div>
-                        <div className='h-24 w-full '>
-                            <Input
-                                totalWidth={"w-full"}
-                                className={""}
-                                type={"text"}
-                                name={"name"}
-                                value={formData.name}
-                                placeholder={"your name"}
-                                onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
-                            />
 
-                        </div>
+                    <div className='h-24 w-full '>
+                        <Input
+                            totalWidth={"w-full"}
+                            className={""}
+                            type={"text"}
+                            name={"name"}
+                            value={formData.name}
+                            placeholder={"your name"}
+                            onChange={(e) => handleInputChange(e)}
 
-                        <div className='h-24 w-full '>
-                            <Input
-                                totalWidth={"w-full"}
-                                className={""}
-                                type={"email"}
-                                name={"email"}
-                                value={formData.email}
-                                placeholder={"your email"}
-                                onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
-                            />
+                        />
 
-                        </div>
+                    </div>
+
+                    <div className='h-24 w-full '>
+                        <Input
+                            totalWidth={"w-full"}
+                            className={""}
+                            type={"email"}
+                            name={"email"}
+                            value={formData.email}
+                            placeholder={"your email"}
+                            onChange={(e) => handleInputChange(e)}
+
+                        />
+
                     </div>
 
 
-                    <div>
-                        <div className='h-24 w-full '>
+ {/* ------------------ image preview ----------------- */}
+<div>
 
-                            <Input
-                                totalWidth={"w-full"}
-                                className={""}
-                                type={"password"}
-                                name={"password"}
-                                value={formData.password}
-                                placeholder={"your password"}
-                                onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
-                            />
+</div>
 
-                        </div>
+                    <input
+                        type="file"
+                        className='hidden'
+                        ref={profileImageRef}
+                        name='profileImage'
+                        onChange={handleInputChange}
+                    />
 
-                        <div className='h-24 w-full '>
-                            <Input
-                                totalWidth={"w-full"}
-                                className={""}
-                                type={"text"}
-                                name={"bio"}
-                                value={formData.bio}
-                                placeholder={"your bio"}
-                                onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
-                            />
-                        </div>
+                    <div
+                        onClick={() => profileImageRef.current.click()}
+                        className='border border-dashed border-border h-14 mb-6 flex justify-center text-white items-center cursor-pointer'>
+                        Image Upload
+                    </div>
+
+
+
+
+                    <div className='h-24 w-full '>
+
+                        <Input
+                            totalWidth={"w-full"}
+                            className={""}
+                            type={"password"}
+                            name={"password"}
+                            value={formData.password}
+                            placeholder={"your password"}
+                            onChange={(e) => handleInputChange(e)}
+
+                        />
 
                     </div>
+
+                    <div className='h-24 w-full '>
+                        <Input
+                            totalWidth={"w-full"}
+                            className={""}
+                            type={"text"}
+                            name={"bio"}
+                            value={formData.bio}
+                            placeholder={"your bio"}
+                            onChange={(e) => handleInputChange(e)}
+
+                        />
+                    </div>
+
+
 
                     <PrimaryButton
                         isLoading={isLoading}
@@ -174,7 +197,7 @@ function Register() {
 
 
 
-                    <div className='text-left mt-6'>
+                    <div className='text-left  mt-4 sm:mt-6'>
                         <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
                     </div>
 

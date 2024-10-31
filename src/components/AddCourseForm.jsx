@@ -8,9 +8,11 @@ import SecondaryButton from '../components/formComponents/SecondaryButton'
 import CourseCard from '../components/CourseCard'
 import { AuthContext } from '../context/AuthContext'
 import { MdUpload } from "react-icons/md";
+import { WindowWidthContext } from '../context/WindowWidthContext'
 function AddCourseForm() {
 
   const { loggedInUser } = useContext(AuthContext)
+  const { isMobile } = useContext(WindowWidthContext);
 
   //restricting the user to delete a chapter if only one chapter is left
   const [deleteButtonDisable, isDeleteButtonDisable] = useState(false);
@@ -178,13 +180,15 @@ function AddCourseForm() {
 
     <div className='flex'>
 
-      <div ref={ref} className='py-32 px-10  w-4/6'>
+      <div ref={ref} className='py-12 sm:py-32 px-10 w-full sm:w-4/6'>
 
-        <GoBack
-          text={"Go Back"}
-          goWhere={"/"}
-          classname={"bg-bgTwo pl-4 pr-5 py-2 rounded-full"}
-        />
+        {
+          !isMobile && <GoBack
+            text={"Go Back"}
+            goWhere={"/"}
+            classname={"bg-bgTwo pl-4 pr-5 py-2 rounded-full"}
+          />
+        }
 
 
         <div className='flex flex-col gap-6 mb-8'>
@@ -203,7 +207,7 @@ function AddCourseForm() {
             </div>
 
             <div className='w-2/5 flex flex-col items-start justify-center gap-2'>
-              <label className=' text-white' htmlFor="courseCategory">Course Category</label>
+              <label className=' text-white' htmlFor="courseCategory">Category</label>
               <input type="text"
                 name='courseCategory'
                 className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
@@ -243,7 +247,6 @@ function AddCourseForm() {
 
 
 
-
           <input ref={fileInputRef}
             type="file"
             id='courseImage'
@@ -254,7 +257,7 @@ function AddCourseForm() {
           <div
             onClick={() => fileInputRef.current.click()}
             className='border border-dashed border-border h-20 flex justify-center items-center cursor-pointer'>
-              <MdUpload className='text-white' size={24} />
+            <MdUpload className='text-white' size={24} />
           </div>
 
 
@@ -317,7 +320,7 @@ function AddCourseForm() {
         <button
           ref={ref}
           type='submit'
-          className={`fixed bottom-10  right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
+          className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
           onClick={handleSubmitClick}
           disabled={!formData.courseTitle || !formData.courseCategory || !formData.courseDescription}
         >Submit</button>
@@ -329,17 +332,21 @@ function AddCourseForm() {
 
 
 
-      <div className='w-2/6 border-l text-white border-border pt-20 px-4 flex justify-center '>
+      {
+        !isMobile && <div className='w-2/6 border-l text-white border-border pt-12 px-4 flex justify-center '>
 
-        <CourseCard
-          title={`${formData.courseTitle ? formData.courseTitle : "Spring Boot & Spring Security"}`}
-          instructor={loggedInUser}
-          description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}
-          showCTA={true}
-          text={"Enroll"}
-          vote={0}
-        />
-      </div>
+          <CourseCard
+            title={`${formData.courseTitle ? formData.courseTitle : "Spring Boot & Spring Security"}`}
+            instructor={loggedInUser}
+            description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}
+            showCTA={true}
+            text={"Enroll"}
+            vote={0}
+          />
+        </div>
+
+      }
+
     </div>
   )
 }
