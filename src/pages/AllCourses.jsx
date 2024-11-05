@@ -8,7 +8,7 @@ import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
 import GoBack from '../components/GoBack';
 import { motion } from 'framer-motion'
 import { WindowWidthContext } from '../context/WindowWidthContext';
-
+import { toast } from 'react-hot-toast'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
@@ -24,6 +24,7 @@ function AllCourses() {
     const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(true);
+
 
     const [courses, setCourses] = useState({})
 
@@ -70,19 +71,39 @@ function AllCourses() {
 
 
     async function handleCourseCardClick(id) {
+        try {
 
-        //take me to the full course page
-        navigate(`/course/${id}`)
+            //take me to the full course page
+            navigate(`/course/${id}`)
 
-        const s = `${import.meta.env.VITE_BASE_URL}/course/${id}/enroll-course`
+            toast.success("Course Enrolled", {
+                position: "top-right",
+                style: {
+                    background: "#1C1210",
+                    color: "#E5E6E6",
+                }
+
+            })
 
 
-        //add this course to the users enrolled course list
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${id}/enroll-course`)
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${id}/enroll-course`);
 
-        const data = await response.data;
+            console.log(response.data);
 
 
+        }
+        catch (error) {
+            toast.error("Enroll Failed", {
+                position: "top-right",
+                style: {
+                    background: "#1C1210",
+                    color: "#E5E6E6",
+                }
+
+            })
+            console.log(error);
+
+        }
 
     }
 
@@ -178,41 +199,53 @@ function AllCourses() {
                     // --------------------- DESKTOP VIEW -------------------------
                     (
 
-                        !isLoading &&
-                        (
-                            <div className='mt-12 relative'>
-
-                                {searchQuery && filteredCourses.length == 0 && <p className='text-gray mt-28'>No course found with the name : {searchQuery}</p>}
-
-                                <div className='masonry'>
-                                    {
-                                        Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => {
-                                            return <motion.div
-                                                initial={{ y: (100), opacity: 0 }}
-                                                animate={{ y: 0, opacity: 100 }}
-                                                transition={{ delay: 0.1 * index }}
-                                                className='masonry-item'
-                                            >
-                                                <CourseCard
-                                                    title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
-                                                    imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
-                                                    instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
-                                                    description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
-                                                    vote={searchQuery ? filteredCourses[key].vote : courses[key].vote}
-                                                    onClick={() => handleCourseCardClick(key)}
-                                                    showCTA={true}
-                                                    text={"Enroll"}
-                                                />
-
-                                            </motion.div>
 
 
-                                        })
-                                    }
-                                </div>
+                        !isLoading && courses.length == 0 ?
+                            (
+                                <p className='text-gray mt-32 text-center'>No courses available.</p>
+                            )
 
-                            </div>
-                        )
+                            :
+
+                            (
+
+                                (
+                                    <div className='mt-12 relative'>
+
+                                        {searchQuery && filteredCourses.length == 0 && <p className='text-gray mt-28'>No course found with the name : {searchQuery}</p>}
+
+                                        <div className='masonry'>
+                                            {
+                                                Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => {
+                                                    return <motion.div
+                                                        initial={{ y: (100), opacity: 0 }}
+                                                        animate={{ y: 0, opacity: 100 }}
+                                                        transition={{ delay: 0.1 * index }}
+                                                        className='masonry-item'
+                                                    >
+                                                        <CourseCard
+                                                            title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
+                                                            imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
+                                                            instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
+                                                            description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
+                                                            vote={searchQuery ? filteredCourses[key].vote : courses[key].vote}
+                                                            onClick={() => handleCourseCardClick(key)}
+                                                            showCTA={true}
+                                                            text={"Enroll"}
+                                                        />
+
+                                                    </motion.div>
+
+
+                                                })
+                                            }
+                                        </div>
+
+                                    </div>
+                                )
+                            )
+
 
                     )
 

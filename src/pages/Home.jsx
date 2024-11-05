@@ -53,6 +53,7 @@ function Home() {
     }, [])
 
 
+console.log(courses);
 
     function handleCourseCardClick(id) {
 
@@ -78,7 +79,7 @@ function Home() {
                     </div>
 
                     {/* ------------- subtext ------------ */}
-                    <div className='text-gray text-sm mb-4 sm:mb-0'>
+                    <div className='text-gray text-lg mb-4 sm:mb-0'>
                         <p>Voted by developers like you, for you.</p>
                     </div>
 

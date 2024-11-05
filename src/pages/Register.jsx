@@ -13,22 +13,31 @@ function Register() {
         password: "",
         name: "",
         bio: "",
-        image: null,
+        profileImage: null,
     });
 
-    const [profileImage, setProfileimage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null)
 
     const profileImageRef = useRef();
 
 
     const handleInputChange = (e) => {
-      
+
+
         if (e.target.name === 'profileImage') {
-            setFormData(prev => ({ ...prev, image: e.target.files[0]}))
+
+            const file = e.target.files[0];
+
+            setFormData(prev => ({ ...prev, profileImage: file }))
+
+            const imageUrl = URL.createObjectURL(file)
+            setImagePreview(imageUrl)
+
             console.log("yes its image");
-            
+
         }
         else {
+
             setFormData(prev => ({
                 ...prev, [e.target.name]: e.target.value
             }));
@@ -36,15 +45,45 @@ function Register() {
 
     };
 
+    console.log(formData);
+
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formDataWithImage = new FormData();
 
-        setIsLoading(true)
+
+        const registerUserDto = {
+            name: formData.name,
+            email: formData.email,
+            bio: formData.bio,
+            password: formData.password,
+        }
+
+        formDataWithImage.append("registerUserDto", JSON.stringify(registerUserDto));
+
+
+        if (formData.profileImage) {
+            formDataWithImage.append("file", formData.profileImage)
+        }
+
+
+        console.log(formDataWithImage);
+
+
+
+
 
         try {
-            await axios.post(`${import.meta.env.VITE_BASE_URL}/public/register`, formData);
+            setIsLoading(true)
+
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/register`, formDataWithImage);
+
+            const data = response.data;
+
+            console.log(data);
+
 
             toast.success("Registered Successfully!", {
                 position: "top-right",
@@ -93,6 +132,16 @@ function Register() {
 
 
 
+    useEffect(() => {
+        return () => {
+            if (imagePreview) {
+                URL.revokeObjectURL(imagePreview)
+            }
+        }
+    }, [imagePreview])
+
+
+
 
     return (
         <div className='pt-28 sm:pb-24 w-full min-h-screen bg-bgOne sm:justify-center flex flex-col'>
@@ -136,26 +185,6 @@ function Register() {
                     </div>
 
 
- {/* ------------------ image preview ----------------- */}
-<div>
-
-</div>
-
-                    <input
-                        type="file"
-                        className='hidden'
-                        ref={profileImageRef}
-                        name='profileImage'
-                        onChange={handleInputChange}
-                    />
-
-                    <div
-                        onClick={() => profileImageRef.current.click()}
-                        className='border border-dashed border-border h-14 mb-6 flex justify-center text-white items-center cursor-pointer'>
-                        Image Upload
-                    </div>
-
-
 
 
                     <div className='h-24 w-full '>
@@ -185,6 +214,40 @@ function Register() {
 
                         />
                     </div>
+
+
+                    {/* ------------------ image preview ----------------- */}
+
+                    <div className='flex gap-3 items-center mb-10'>
+
+                        <div className=' min-h-12 min-w-12  border border-border border-dashed'>
+                            {imagePreview && (
+
+                                <img src={imagePreview} alt="Profile image preview" className='w-12 h-12 object-cover rounded' />
+
+                            )}
+                        </div>
+
+
+
+                        <input
+                            type="file"
+                            className='hidden'
+                            accept='image/*'
+                            ref={profileImageRef}
+                            name='profileImage'
+                            onChange={handleInputChange}
+                        />
+
+                        <div
+                            onClick={() => profileImageRef.current.click()}
+                            className='border w-full border-dashed border-border h-12 flex justify-center text-white items-center cursor-pointer text-sm '>
+                            Image Upload
+                        </div>
+                    </div>
+
+
+
 
 
 

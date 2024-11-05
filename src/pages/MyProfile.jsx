@@ -40,52 +40,50 @@ function MyProfile() {
     });
 
 
-    const [errors, setErrors] = useState({});
-
     const handleInputChange = (e) => {
         setFormData(prev => ({
             ...prev, [e.target.name]: e.target.value
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleUpdateSubmit = async (e) => {
         e.preventDefault();
+
+        console.log(formData);
 
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/update`, formData);
+            const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/user/update-profile`, formData);
 
-            if (response.status !== 200) {
-                throw new Error("Failed to create a new user.");
-            }
+            const data = response.data;
+            console.log(data);
+
+            toast.success("Updated Successfully", {
+                position: "top-right",
+                style: {
+                    background: "#131415",
+                    color: "#9CF57F",
+                }
+
+            })
+
 
             // Successfully registered, navigate to home
             navigate("/");
         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                setErrors(error.response.data);
-            }
+
+            toast.error("Failed to Update", {
+                position: "top-right",
+                style: {
+                    background: "#131415",
+                    color: "#9CF57F",
+                }
+
+            })
+            console.log(error);
+
         }
     };
-
-
-
-    // not showing the error message user is typing / changing formData
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, name: "" }))
-    }, [formData.name])
-
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, password: "" }))
-    }, [formData.password])
-
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, email: "" }))
-    }, [formData.email])
-
-    useEffect(() => {
-        setErrors(prev => ({ ...prev, bio: "" }))
-    }, [formData.bio])
 
 
 
@@ -117,6 +115,9 @@ function MyProfile() {
         }
         getUploadedCourses();
     }, [])
+
+
+    console.log(enrolledCourses);
 
 
     function handleCourseCardClick(id) {
@@ -201,10 +202,6 @@ function MyProfile() {
                             </Swiper>
 
                         }
-
-
-
-
 
 
 
@@ -310,8 +307,7 @@ function MyProfile() {
                                 value={formData.name}
                                 placeholder={"your name"}
                                 onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
+
                             />
 
                             {errors && <p className='mt-2 text-xs text-gray'>{errors.name}</p>}
@@ -326,8 +322,7 @@ function MyProfile() {
                                 value={formData.email}
                                 placeholder={"your email"}
                                 onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
+
                             />
                             {errors && <p className='mt-2 text-xs text-gray'>{errors.email}</p>}
 
@@ -343,8 +338,7 @@ function MyProfile() {
                                 value={formData.password}
                                 placeholder={"your password"}
                                 onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
+
                             />
                             {errors && <p className='mt-2 text-xs text-gray'>{errors.password}</p>}
 
@@ -359,13 +353,15 @@ function MyProfile() {
                                 value={formData.bio}
                                 placeholder={"your bio"}
                                 onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
+
                             />
                             {errors && <p className='mt-2 text-xs text-gray'>{errors.bio}</p>}
 
 
                         </div>
+
+
+
 
 
                         <div className='flex w-full'>
@@ -403,6 +399,8 @@ function MyProfile() {
 
 
 
+            {/* ----------------- update profile form ------------------ */}
+
             {!isMobile && <form className='mt-8 w-1/2 flex flex-col justify-start items-center sm:fixed right-0 top-0 translate-y-1/3'>
 
                 <div className='h-24 w-1/2 '>
@@ -414,11 +412,8 @@ function MyProfile() {
                         value={formData.name}
                         placeholder={"your name"}
                         onChange={(e) => handleInputChange(e)}
-                        reloadButtonShowOrHide={true}
-                        onClick={(e) => handleReloadButton(e)}
                     />
 
-                    {errors && <p className='mt-2 text-xs text-gray'>{errors.name}</p>}
                 </div>
 
                 <div className='h-24 w-1/2 '>
@@ -430,10 +425,7 @@ function MyProfile() {
                         value={formData.email}
                         placeholder={"your email"}
                         onChange={(e) => handleInputChange(e)}
-                        reloadButtonShowOrHide={true}
-                        onClick={(e) => handleReloadButton(e)}
                     />
-                    {errors && <p className='mt-2 text-xs text-gray'>{errors.email}</p>}
 
                 </div>
 
@@ -447,10 +439,7 @@ function MyProfile() {
                         value={formData.password}
                         placeholder={"your password"}
                         onChange={(e) => handleInputChange(e)}
-                        reloadButtonShowOrHide={true}
-                        onClick={(e) => handleReloadButton(e)}
                     />
-                    {errors && <p className='mt-2 text-xs text-gray'>{errors.password}</p>}
 
                 </div>
 
@@ -463,20 +452,29 @@ function MyProfile() {
                         value={formData.bio}
                         placeholder={"your bio"}
                         onChange={(e) => handleInputChange(e)}
-                        reloadButtonShowOrHide={true}
-                        onClick={(e) => handleReloadButton(e)}
                     />
-                    {errors && <p className='mt-2 text-xs text-gray'>{errors.bio}</p>}
-
 
                 </div>
+
+
+                <div>
+                    <input type="file" name="profileImage"
+                        className='hidden'
+                        onChange={(e) => handleInputChange(e)}
+                    />
+
+                    <div className='border border-border border-dashed text-sm'>
+                        Update Image
+                    </div>
+                </div>
+
 
 
                 <div className='flex w-1/2'>
                     <SecondaryButton
                         text={"Update Changes"}
                         classname={`w-1/2 text-white py-3 rounded-none border-border`}
-                        onClick={handleSubmit}
+                        onClick={handleUpdateSubmit}
                     >Update Profile</SecondaryButton>
 
 

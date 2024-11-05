@@ -127,8 +127,6 @@ function AddCourseForm() {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formDataWithImage);
 
-      const data = response.data;
-
       if (response.status === 200) {
 
         //show the success toast

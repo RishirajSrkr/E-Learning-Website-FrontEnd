@@ -8,12 +8,18 @@ import Hamburger from 'hamburger-react'
 import { IoArrowForwardSharp } from "react-icons/io5";
 import { motion } from 'framer-motion'
 import { WindowWidthContext } from '../context/WindowWidthContext';
+import { UserContext } from '../context/UserContext';
 
 
 function Navbar() {
 
     const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
+    const { user } = useContext(UserContext)
+
+    console.log(user);
+
+
 
     const location = useLocation();
     const hideNavbar = location.pathname === "/contributors" || location.pathname === "/all-courses";
@@ -137,7 +143,7 @@ function Navbar() {
 
                                     >
                                         <span className=''>
-                                            <IoArrowForwardSharp size={20}/>
+                                            <IoArrowForwardSharp size={20} />
                                         </span>
                                         Courses
                                     </Link>
@@ -175,7 +181,7 @@ function Navbar() {
 
                                     >
                                         <span className=''>
-                                            <IoArrowForwardSharp size={20}/>
+                                            <IoArrowForwardSharp size={20} />
                                         </span>
                                         Vote
                                     </Link>
@@ -193,7 +199,7 @@ function Navbar() {
 
                                     >
                                         <span className=''>
-                                            <IoArrowForwardSharp size={20}/>
+                                            <IoArrowForwardSharp size={20} />
                                         </span>
                                         About
                                     </Link>
@@ -214,7 +220,7 @@ function Navbar() {
                                         >
                                             <span className='text-green'>
                                                 <IoArrowForwardSharp size={20} />
-                                            </span> 
+                                            </span>
                                             Contribute
 
                                         </Link>
@@ -331,7 +337,13 @@ function Navbar() {
 
                             {
                                 loggedInUser &&
-                                <Link to={"/my-profile"}>{loggedInUser}</Link>
+
+                                <div className='flex gap-3 justify-center items-center'>
+
+                                    <img className='h-10 w-10 rounded-full border border-border object-cover' src={user?.profileImage} alt="" />
+                                    <Link to={"/my-profile"}>{loggedInUser}</Link>
+                                
+                                </div>
                             }
 
                             {

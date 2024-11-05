@@ -1,19 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useParams, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import axios from '../config/axiosConfig'
 import GoBack from '../components/GoBack';
 import { toast } from 'react-hot-toast';
 import PrimaryButton from '../components/formComponents/PrimaryButton'
 import { ThreeDot } from 'react-loading-indicators';
+import { AuthContext } from '../context/AuthContext'
 
 function FullCoursePage() {
 
+    const navigate = useNavigate();
     const ref = useRef();
     const { courseId } = useParams();
 
+    const { loggedInUser } = useContext(AuthContext)
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-
+    const [endCourseIsLoading, setEndCourseIsLoading] = useState(false)
 
     useEffect(() => {
         if (ref.current) {
@@ -27,8 +30,7 @@ function FullCoursePage() {
             try {
                 setIsLoading(true)
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/course/${courseId}`);
-                const data = await response.data;
-
+                const data = response.data;
                 setCourse(data);
             }
             catch (e) {
@@ -45,9 +47,9 @@ function FullCoursePage() {
 
 
 
+
     async function handleVoteClick(courseId) {
         try {
-            console.log(courseId);
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/vote-course`);
 
             const data = response.data;
@@ -62,7 +64,6 @@ function FullCoursePage() {
                 })
             }
 
-            console.log(data);
 
         }
 
@@ -87,16 +88,36 @@ function FullCoursePage() {
 
     async function handleEndCourse() {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/end-course`)
+            setEndCourseIsLoading(true)
 
-            console.log(courseId);
-            
-            const data = response.data;
-            console.log(data);
+            toast.success("Course removed", {
+                position: "top-right",
+                style: {
+                    background: "#1C1210",
+                    color: "#E5E6E6",
+                }
+
+            })
+
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/end-course`)
+            navigate("/")
+
         }
         catch (e) {
+
+            toast.error("Last action failed", {
+                position: "top-right",
+                style: {
+                    background: "#1C1210",
+                    color: "#E5E6E6",
+                }
+
+            })
             console.log(e);
 
+        }
+        finally {
+            setEndCourseIsLoading(false)
         }
 
     }
@@ -130,11 +151,14 @@ function FullCoursePage() {
 
 
                         <div>
-                            <PrimaryButton
-                                text={"Up Vote"}
-                                classname={"fixed top-10 right-8 font-semibold"}
-                                onClick={() => handleVoteClick(courseId)}
-                            />
+
+                            {
+                                course?.instructorName != loggedInUser && <PrimaryButton
+                                    text={"Up Vote"}
+                                    classname={"fixed top-10 right-8 font-semibold"}
+                                    onClick={() => handleVoteClick(courseId)}
+                                />
+                            }
 
                             <div className='w-2/3 pt-36'>
 
@@ -165,11 +189,18 @@ function FullCoursePage() {
                             </div>
 
 
-                            {/* when a user ends a course, course will be removed from the user's 'Enrolled course list' and now this course will be visbile in the 'all-course' page but under the filter - 'view finished courses' */}
+                            {/* when a user ends a course, course will be removed from the user's 'Enrolled course list' */}
 
-                            <button
-                                onClick={handleEndCourse}
-                            >End Course</button>
+                            {/* also if the course is uploaded by the logged in user, do not show 'end course' */}
+
+                            {
+                                course?.instructorName != loggedInUser && <PrimaryButton
+                                    onClick={handleEndCourse}
+                                    text={"End Course"}
+                                    isLoading={endCourseIsLoading}
+                                />
+                            }
+
                         </div>
                     )
 

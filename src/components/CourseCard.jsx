@@ -4,7 +4,7 @@ import { IoPersonSharp } from "react-icons/io5";
 import SecondaryButton from './formComponents/SecondaryButton';
 
 
-const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, text, imageUrl }) => {
+const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, text, imageUrl, isLoading }) => {
 
   return (
     <div className="course-card relative bg-bgTwo p-3 w-74 overflow-hidden hover:border-2 hover:border-border border-2 border-bgTwo transition-all rounded-md h-fit text-sm sm:w-full sm:text-base sm:96 sm:p-6">
@@ -41,7 +41,7 @@ const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, te
       </div>
 
       {
-        showCTA && <SecondaryButton text={text} classname={"text-gray"} onClick={onClick} />
+        showCTA && <SecondaryButton isLoading={isLoading} text={text} classname={"text-gray"} onClick={onClick} />
       }
     </div>
   );

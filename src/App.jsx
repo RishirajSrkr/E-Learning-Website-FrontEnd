@@ -12,6 +12,7 @@ import About from './pages/About'
 import VoteResources from './pages/VoteResources'
 import MyProfile from './pages/MyProfile'
 import { AuthProvider } from './context/AuthContext.jsx'
+import {UserContextProvider} from './context/UserContext.jsx'
 import {WindowWidthProvider} from './context/WindowWidthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { Toaster } from 'react-hot-toast'
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <UserContextProvider>
       <WindowWidthProvider >
         <Toaster />
 
@@ -66,6 +68,7 @@ function App() {
         </Routes>
 
       </WindowWidthProvider>
+      </UserContextProvider>
     </AuthProvider>
 
   )
