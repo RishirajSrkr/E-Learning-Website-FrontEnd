@@ -53,7 +53,7 @@ function Home() {
     }, [])
 
 
-console.log(courses);
+    console.log(courses);
 
     function handleCourseCardClick(id) {
 
@@ -66,11 +66,15 @@ console.log(courses);
 
         <div className='relative bg-bgOne min-h-screen pb-12'>
 
+            
+            
             <div className='w-full px-4 sm:min-h-screen bg-bgOne flex flex-col justify-center gap-4 sm:px-24 mb-6 sm:mb-0'>
 
 
 
                 <div className='w-full bg-bgTwo p-8 flex flex-col items-start gap-2 border border-border rounded-lg sm:p-20 sm:gap-6'>
+
+                <p className='text-gray font-medium'>Beta Version</p>
 
                     {/* ---------- headline ------------ */}
                     <div className='text-white text-3xl tracking-tight font-semibold sm:text-7xl'>
