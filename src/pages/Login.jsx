@@ -45,8 +45,8 @@ function Login() {
                 toast.success("Login Successful!", {
                     position: "top-right",
                     style: {
-                        background: "#1C1210",
-                        color: "#E5E6E6",
+                        background: "#131415",
+                        color: "#FFFFFF",
                     }
 
                 })
@@ -55,8 +55,8 @@ function Login() {
                 toast.error("Incorrect Credentials", {
                     position: "top-right",
                     style: {
-                        background: "#1C1210",
-                        color: "#E5E6E6",
+                        background: "#131415",
+                        color: "#FFFFFF",
                     }
                 })
             }

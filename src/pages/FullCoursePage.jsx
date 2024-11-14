@@ -4,6 +4,7 @@ import axios from '../config/axiosConfig'
 import GoBack from '../components/GoBack';
 import { toast } from 'react-hot-toast';
 import PrimaryButton from '../components/formComponents/PrimaryButton'
+import SecondaryButton from '../components/formComponents/SecondaryButton'
 import { ThreeDot } from 'react-loading-indicators';
 import { AuthContext } from '../context/AuthContext'
 
@@ -128,12 +129,6 @@ function FullCoursePage() {
     return (
         <div ref={ref} className='bg-bgOne text-white px-24 pb-10 min-h-screen'>
 
-            <GoBack
-                text={"Go Back"}
-                goWhere={"/all-courses"}
-            />
-
-
             {
                 isLoading ?
 
@@ -160,7 +155,7 @@ function FullCoursePage() {
                                 />
                             }
 
-                            <div className='w-2/3 pt-36'>
+                            <div className='w-2/3 pt-24'>
 
                                 <div className='flex gap-4 items-center mb-8'>
                                     <h1 className='text-4xl font-bold '>{course?.courseName}</h1>
@@ -194,8 +189,9 @@ function FullCoursePage() {
                             {/* also if the course is uploaded by the logged in user, do not show 'end course' */}
 
                             {
-                                course?.instructorName != loggedInUser && <PrimaryButton
+                                course?.instructorName != loggedInUser && <SecondaryButton
                                     onClick={handleEndCourse}
+                                    classname={"font-semibold py-3 px-8 text-gray"}
                                     text={"End Course"}
                                     isLoading={endCourseIsLoading}
                                 />

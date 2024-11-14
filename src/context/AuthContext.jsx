@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
 
     //this state contains the name of the logged in user
-    const [loggedInUser, setLoggedInUser] = useState("");
+    const [loggedInUser, setLoggedInUser] = useState(null);
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -42,12 +42,12 @@ export const AuthProvider = ({ children }) => {
     // Logout function to clear token and update state
     async function logout() {
         try {
-            localStorage.removeItem('jwtToken');
+            
 
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/logout`);
+localStorage.removeItem('jwtToken');
 
-
-            setLoggedInUser("");
+            setLoggedInUser(null);
 
 
             return response.status;

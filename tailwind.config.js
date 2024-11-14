@@ -11,6 +11,7 @@ export default {
         //bg one is darker
         bgOne: '#050505',
         bgTwo: '#131415',
+        bgThree: '#1b1c1e',
 
         //gray is used for sub texts
         gray: '#9CA1A4',
@@ -18,6 +19,8 @@ export default {
         green: '#9CF57F',
 
         border: '#232323',
+
+
 
       },
       backgroundImage: {

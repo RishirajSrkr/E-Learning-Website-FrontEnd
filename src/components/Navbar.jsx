@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { NavLink } from 'react-router-dom';
@@ -9,26 +9,28 @@ import { IoArrowForwardSharp } from "react-icons/io5";
 import { motion } from 'framer-motion'
 import { WindowWidthContext } from '../context/WindowWidthContext';
 import { UserContext } from '../context/UserContext';
+import { RxDashboard } from "react-icons/rx";
+import { CgProfile } from "react-icons/cg";
 
 
 function Navbar() {
+
+    const location = useLocation();
+
+    const hideNavbar = location.pathname === "/contributors" || location.pathname === "/all-courses";
+    const hideNavbarPaths = /^\/course\/[a-zA-Z0-9]+$/; // Regex for '/course/someCourseId'
+    const isFullCoursePage = hideNavbarPaths.test(location.pathname)
+
 
     const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
     const { user } = useContext(UserContext)
 
-    console.log(user);
 
-
-
-    const location = useLocation();
-    const hideNavbar = location.pathname === "/contributors" || location.pathname === "/all-courses";
-
-    const hideNavbarPaths = /^\/course\/[a-zA-Z0-9]+$/; // Regex for '/course/someCourseId'
-    const isFullCoursePage = hideNavbarPaths.test(location.pathname)
-
-
+    const [showDropdown, setShowDropdown] = useState(false)
     const [showNotificationDiv, setShowNotificationDiv] = useState(true)
+    const [showNavbar, setShowNavbar] = useState(false)
+
 
 
     function handleNotificationDivClose() {
@@ -45,10 +47,6 @@ function Navbar() {
 
 
 
-
-
-
-    const [showNavbar, setShowNavbar] = useState(false)
 
     // Effect to handle body scroll behavior
     useEffect(() => {
@@ -70,6 +68,17 @@ function Navbar() {
     const handleNavLinkClick = () => {
         setShowNavbar(false); // Close the navbar
     };
+
+
+
+    function handleToggleDropdown() {
+        setShowDropdown(prev => !prev)
+
+    }
+    function handleDropDownClose() {
+        setShowDropdown(false)
+    }
+
 
 
     return (
@@ -341,8 +350,23 @@ function Navbar() {
                                 <div className='flex gap-3 justify-center items-center'>
 
                                     <img className='h-10 w-10 rounded-full border border-border object-cover' src={user?.profileImage} alt="" />
-                                    <Link to={"/my-profile"}>{loggedInUser}</Link>
-                                
+                                    <Link onClick={handleToggleDropdown} >{loggedInUser}</Link>
+
+                                    {
+                                        showDropdown && <motion.div
+
+                                            initial={{ y: 50, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 100 }}
+                                            transition={{ delay: 0 }}
+
+                                            className='bg-bgTwo px-8 py-4 rounded-lg absolute top-16 flex flex-col gap-2 items-start'>
+
+                                            <Link onClick={handleDropDownClose} className='flex justify-center items-center gap-2' to={"/dashboard"}><RxDashboard /> Dashboard</Link>
+                                            <Link onClick={handleDropDownClose} className='flex justify-center items-center gap-2' to={"/my-profile"}><CgProfile />My Profile</Link>
+
+                                        </motion.div>
+                                    }
+
                                 </div>
                             }
 

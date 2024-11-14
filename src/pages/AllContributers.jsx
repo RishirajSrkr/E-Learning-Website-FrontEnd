@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ContributerProfile from '../components/ContributerProfile';
+import ContributorProfile from '../components/ContributorProfile';
 import axios from 'axios'
 import Search from '../components/Search';
 import GoBack from '../components/GoBack';
@@ -98,7 +98,7 @@ function AllContributers() {
                                                 (
                                                     Object.keys(filteredUsers).map((key) => {
 
-                                                        return <ContributerProfile
+                                                        return <ContributorProfile
 
                                                             key={key}
                                                             name={filteredUsers[key].name}
@@ -124,7 +124,7 @@ function AllContributers() {
                                     (
                                         Object.keys(users).map((key) => {
 
-                                            return <ContributerProfile
+                                            return <ContributorProfile
 
                                                 key={key}
                                                 name={users[key].name}
@@ -132,6 +132,7 @@ function AllContributers() {
                                                 bio={users[key].bio}
                                                 uploadedCourse={users[key].uploadedCourse}
                                                 onClick={() => handleSeeCoursesClick(key)}
+                                                profileImage={users[key].profileImage}
 
                                             />
                                         })

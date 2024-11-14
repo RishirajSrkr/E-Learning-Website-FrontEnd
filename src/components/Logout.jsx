@@ -6,19 +6,17 @@ import { AuthContext } from '../context/AuthContext';
 function Logout() {
 
     const { logout } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const { loggedInUser } = useContext(AuthContext)
 
     async function handleLogout() {
 
         try {
             const status = await logout();
-            if (status === 200) {
-
+            if (status == 200) {
                 console.log("Logout Success");
-
                 navigate("/");
-            }
-            else {
-                console.log("Logout Failed");
+
             }
 
         } catch (error) {
@@ -30,7 +28,7 @@ function Logout() {
     return (
 
         <button
-            className={`w-1/2 text-sm px-5 bg-gradientForBg text-bgOne py-3 font-medium`}
+            className={`w-full rounded-md text-sm px-5 bg-bgTwo text-gray py-3 font-medium`}
             onClick={handleLogout}
         >
             Logout Profile

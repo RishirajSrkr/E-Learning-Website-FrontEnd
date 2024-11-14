@@ -38,12 +38,17 @@ function AddCourseForm() {
   const ref = useRef(null);
   const fileInputRef = useRef(null);
 
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   useEffect(() => {
-    ref.current.scrollIntoView({ behavior: "smooth" })
-  }, [formData.chapters])
-
-
+    // If it's the initial load, skip and mark it as loaded
+    if (isInitialLoad) {
+      setIsInitialLoad(false)
+      return;
+    }
+    // Scroll into view on updates after initial load
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  }, [formData.chapters]);
   function handleAddChapterClick() {
 
     setFormData((prev) => (
@@ -60,7 +65,7 @@ function AddCourseForm() {
     else {
       isDeleteButtonDisable(false)
     }
-  }, [formData.chapters])
+  }, [formData.chapters, isInitialLoad])
 
 
 
@@ -178,16 +183,7 @@ function AddCourseForm() {
 
     <div className='flex'>
 
-      <div ref={ref} className='py-12 sm:py-32 px-10 w-full sm:w-4/6'>
-
-        {
-          !isMobile && <GoBack
-            text={"Go Back"}
-            goWhere={"/"}
-            classname={"bg-bgTwo pl-4 pr-5 py-2 rounded-full"}
-          />
-        }
-
+      <div className='py-12 sm:py-14 px-10 w-full sm:w-4/6'>
 
         <div className='flex flex-col gap-6 mb-8'>
           <div className='flex w-full gap-10'>
@@ -307,6 +303,7 @@ function AddCourseForm() {
           ))
         }
 
+
         <SecondaryButton
           text={"New Chapter"}
           onClick={handleAddChapterClick}
@@ -316,7 +313,6 @@ function AddCourseForm() {
 
 
         <button
-          ref={ref}
           type='submit'
           className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
           onClick={handleSubmitClick}
@@ -324,6 +320,7 @@ function AddCourseForm() {
         >Submit</button>
 
 
+        <div ref={ref}></div>
 
       </div>
 

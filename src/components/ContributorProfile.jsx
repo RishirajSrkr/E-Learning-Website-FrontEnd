@@ -3,15 +3,16 @@ import { FaEnvelope, FaBook, FaArrowRight, FaStar, FaUserPlus } from 'react-icon
 import { IoChevronForward } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom';
 
-function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
+function ContributorProfile({ name, email, profileImage, bio, uploadedCourse, onClick }) {
 
 
     return (
         <div className='bg-bgOne border border-border w-full px-8 py-4 flex justify-between items-center hover:bg-bgTwo transition-colors rounded-md'>
 
             <div className='text-gray mr-12'>
-                <div className='flex gap-4 mb-2 text-white'>
-                    <h2 className='font-bold text-2xl'>{name}</h2>
+                <div className='flex gap-4 mb-2 text-white items-center'>
+                    <img className='w-10 h-10 object-cover rounded-full' src={profileImage} alt="" />
+                    <h2 className='font-semibold text-2xl'>{name}</h2>
                 </div>
 
                 {/* <div className='flex items-center mb-3'>
@@ -40,4 +41,4 @@ function ContributerProfile({ name, email, bio, uploadedCourse, onClick }) {
     );
 }
 
-export default ContributerProfile;
+export default ContributorProfile;
