@@ -21,7 +21,6 @@ import ErrorPage from './pages/ErrorPage.jsx'
 import UpdateProfile from './pages/UpdateProfile.jsx'
 import DashBoard from './pages/DashBoard.jsx'
 import EnrolledUserOfACourse from './pages/EnrolledUserOfACourse.jsx'
-import { ToastContainer } from 'react-toastify';
 function App() {
 
   return (
@@ -30,7 +29,6 @@ function App() {
       <UserContextProvider>
         <WindowWidthProvider >
           <Toaster />
-          <ToastContainer />
 
           <Routes>
             <Route path='/' element={<Layout />}>
