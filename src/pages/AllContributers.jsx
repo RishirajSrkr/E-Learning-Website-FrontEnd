@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ContributorProfile from '../components/ContributorProfile';
-import axios from 'axios'
-import Search from '../components/Search';
-import GoBack from '../components/GoBack';
+import axios from '../config/axiosConfig'
 import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 import { IoPersonSharp } from "react-icons/io5";
@@ -27,9 +25,11 @@ function AllContributers() {
         async function fetchALlContributors() {
             try {
                 setIsLoading(true)
+                
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/contributors`)
 
-                const data = await response.data;
+                const data =  response.data;
+                console.log(data);
 
                 setUsers(data);
             }
@@ -46,7 +46,7 @@ function AllContributers() {
 
 
 
-    const filteredUsers = Object.keys(users).filter(key =>
+    const filteredUsers = Object.keys(users?.users || {}).filter(key =>
         users[key].name.toLowerCase().includes(searchQuery.toLowerCase())
         ||
         users[key].email.split('@')[0].toLowerCase().includes(searchQuery.toLowerCase())
