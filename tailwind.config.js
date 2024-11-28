@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -15,8 +16,9 @@ export default {
 
         //gray is used for sub texts
         gray: '#9CA1A4',
-
-        green: '#9CF57F',
+        offwhite: '#FFFFF7',
+        // accentColor: '#FE5328',
+        accentColor: '#E7B8E8',
 
         border: '#232323',
 
@@ -28,7 +30,7 @@ export default {
         'gradientForBorder': 'linear-gradient(to bottom, #050505, #131415)',
         'gradientForBorderOpposite': 'linear-gradient(to top, #050505, #131415)',
 
-        'gradientForBg': 'linear-gradient(to right, #D5FD7E, #7BF080)',
+        'gradientForBg': 'linear-gradient(to right, #FFFFF7, #FFFFFF)',
 
 
       },

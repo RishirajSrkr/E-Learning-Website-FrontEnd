@@ -5,9 +5,10 @@ import GoBack from '../components/GoBack';
 import { toast } from 'react-hot-toast';
 import PrimaryButton from '../components/formComponents/PrimaryButton'
 import SecondaryButton from '../components/formComponents/SecondaryButton'
-import { ThreeDot } from 'react-loading-indicators';
+import { MdCheckCircle, MdRadioButtonUnchecked } from 'react-icons/md';
 import { AuthContext } from '../context/AuthContext'
-
+import Loader from '../components/Loader'
+import { CgMenuGridR } from "react-icons/cg";
 function FullCoursePage() {
 
     const navigate = useNavigate();
@@ -18,6 +19,19 @@ function FullCoursePage() {
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [endCourseIsLoading, setEndCourseIsLoading] = useState(false)
+    const [showVoteAndOtherOptions, setShowVoteAndOtherOptions] = useState(false)
+
+    //we need to store this info in localstorage
+    const [markedChapters, setMarkedChapters] = useState([]);
+
+    //when website loads up, load the marked chapters from localstorage to the markedChapters state
+    useEffect(() => {
+        const storedMarkedChapters = localStorage.getItem("marked_chapters");
+        if (storedMarkedChapters) {
+            setMarkedChapters(JSON.parse(storedMarkedChapters));
+        }
+    }, [])
+
 
     useEffect(() => {
         if (ref.current) {
@@ -32,6 +46,8 @@ function FullCoursePage() {
                 setIsLoading(true)
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/course/${courseId}`);
                 const data = response.data;
+                console.log(data);
+
                 setCourse(data);
             }
             catch (e) {
@@ -42,14 +58,52 @@ function FullCoursePage() {
             }
         }
         getCourse();
-    }, [])
+    }, [courseId])
 
 
+    function convertDateToSuitableFormat(timestamp) {
+        // Convert to Date object
+        const date = new Date(timestamp);
+
+        // Format the date
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = date.toLocaleDateString('en-US', options);
+
+        return formattedDate;
+    }
+
+    function handleMarkClick(chapterIndex) {
+
+        //if the chapter is already marked complete, and the user clicks again it means the user is trying to mark it incomplete
+        if (isChapterMarkedComplete(chapterIndex)) {
+            const newMarkedChapters = markedChapters.filter(index => index != chapterIndex);
+            setMarkedChapters(newMarkedChapters);
+            localStorage.setItem("marked_chapters", JSON.stringify(newMarkedChapters))
+
+        }
 
 
+        else {
+            const oldMarkedChapters = JSON.parse(localStorage.getItem("marked_chapters")) || [];
+            const newMarkedChapters = [...oldMarkedChapters, chapterIndex];
+
+            localStorage.setItem("marked_chapters", JSON.stringify(newMarkedChapters))
+
+            setMarkedChapters(newMarkedChapters)
+        }
 
 
-    async function handleVoteClick(courseId) {
+    }
+    function isChapterMarkedComplete(chapterIndex) {
+        const ans = markedChapters?.filter(index => index == chapterIndex)
+        return ans?.length != 0;
+        //if length 0 it means chapterIndex is not present in markedChapters
+    }
+
+    console.log(markedChapters);
+
+
+    async function handleVoteClick() {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/vote-course`);
 
@@ -100,7 +154,9 @@ function FullCoursePage() {
 
             })
 
-            await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/end-course`)
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/end-course/${courseId}`)
+            console.log(response.data);
+
             navigate("/")
 
         }
@@ -127,16 +183,13 @@ function FullCoursePage() {
 
 
     return (
-        <div ref={ref} className='bg-bgOne text-white px-24 pb-10 min-h-screen'>
+        <div ref={ref} className='bg-bgOne text-white pb-10 min-h-screen w-full'>
 
             {
                 isLoading ?
 
                     (
-
-                        <div className='flex justify-center items-center min-h-screen text-center'>
-                            <ThreeDot color="#9CF57F" size="small" />
-                        </div>
+                        <Loader classname={"h-screen"} />
                     )
 
                     :
@@ -145,36 +198,83 @@ function FullCoursePage() {
 
 
 
-                        <div>
+                        <div className='w-full relative px-24'>
 
                             {
-                                course?.instructorName != loggedInUser && <PrimaryButton
-                                    text={"Up Vote"}
-                                    classname={"fixed top-10 right-8 font-semibold"}
-                                    onClick={() => handleVoteClick(courseId)}
-                                />
+                                course?.instructorName != loggedInUser && <button
+                                    onClick={() => setShowVoteAndOtherOptions(prev => !prev)}
+                                    className='fixed right-10 top-10'
+                                ><CgMenuGridR size={22} /></button>
+
                             }
 
-                            <div className='w-2/3 pt-24'>
+                            {
 
-                                <div className='flex gap-4 items-center mb-8'>
-                                    <h1 className='text-4xl font-bold '>{course?.courseName}</h1>
+                                showVoteAndOtherOptions && <div className='flex flex-col gap-2 fixed top-20 w-36 right-10 bg-bgTwo p-6 rounded-lg'>
 
-                                    <div className='bg-bgOne  border border-green w-fit px-6 py-2 rounded-full text-sm font-semibold'>{course?.chapters.length} Chapters</div>
+
+                                    <button
+                                        onClick={handleVoteClick}
+                                        className='text-sm font-medium flex gap-2 items-center justify-start'
+                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Up Vote</button>
+
+                                    <button
+                                        onClick={handleEndCourse}
+                                        className='text-sm font-medium flex gap-2 items-center justify-start'
+                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>End Course</button>
+
+                                    <button
+                                        onClick={handleEndCourse}
+                                        className='text-sm font-medium flex gap-2 items-center justify-start'
+                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Instructor</button>
+
+                                </div>
+                            }
+
+
+
+                            <div className='w-5/6 pt-24 '>
+
+                                <div className='flex flex-col gap-4 mb-8'>
+                                    <h1 className='text-5xl font-semibold '>{course?.courseName}</h1>
+
+                                    <div className='mt-2 w-full h-[1px] bg-bgThree'></div>
+
+                                    <div className='flex gap-10'>
+                                        <div>
+                                            <p className='text-gray font-medium'>Published on</p>
+                                            <p className='font-semibold'>{convertDateToSuitableFormat(course?.createdAt)}</p>
+                                        </div>
+
+                                        <div>
+                                            <p className='text-gray font-medium'>Last Updated</p>
+                                            <p className='font-semibold'>{convertDateToSuitableFormat(course?.createdAt)}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* <div className='bg-bgOne  border border-green w-fit px-6 py-2 rounded-full text-sm font-semibold'>{course?.chapters.length} Chapters</div> */}
                                 </div>
 
-                                <div>
+                                <div className='w-full'>
                                     {
                                         course?.chapters?.map((chapter, index) => (
-                                            <div key={index} className='mb-8 bg-bgTwo px-8 py-6 flex flex-col gap-y-4'>
+                                            <div key={index} className={`relative mb-8 px-10 py-8 flex w-full flex-col gap-y-4 border border-border rounded-xl ${isChapterMarkedComplete(index) ? "opacity-40" : "opacity-100"}`}>
 
-                                                <div className='border px-4 py-2 border-border'>
-                                                    <h2 className='font-bold text-xl'>{chapter.chapterName}</h2>
+
+                                                <button onClick={() => handleMarkClick(index)} className=' absolute right-8 flex w-full items-center justify-end gap-2'>
+                                                    <p>Mark Complete</p>
+                                                    <span>{isChapterMarkedComplete(index) == true ? <MdCheckCircle /> : < MdRadioButtonUnchecked />}</span>
+                                                </button>
+
+
+                                                <div className='flex gap-4 items-center w-full'>
+                                                    <div className='h-3 w-3 bg-accentColor rounded-full'></div>
+                                                    <h2 className='font-semibold text-4xl break-words w-3/4'>{chapter.chapterName}</h2>
                                                 </div>
 
 
-                                                <div className='border px-4 py-2 border-border'>
-                                                    <p>{chapter.chapterContent}</p>
+                                                <div className=''>
+                                                    <p className='text-lg'>{chapter.chapterContent}</p>
                                                 </div>
 
                                             </div>
@@ -184,18 +284,7 @@ function FullCoursePage() {
                             </div>
 
 
-                            {/* when a user ends a course, course will be removed from the user's 'Enrolled course list' */}
-
-                            {/* also if the course is uploaded by the logged in user, do not show 'end course' */}
-
-                            {
-                                course?.instructorName != loggedInUser && <SecondaryButton
-                                    onClick={handleEndCourse}
-                                    classname={"font-semibold py-3 px-8 text-gray"}
-                                    text={"End Course"}
-                                    isLoading={endCourseIsLoading}
-                                />
-                            }
+                    
 
                         </div>
                     )
@@ -205,6 +294,7 @@ function FullCoursePage() {
 
 
         </div>
+
     )
 
 

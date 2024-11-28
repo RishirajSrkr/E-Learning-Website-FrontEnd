@@ -254,7 +254,7 @@ function Register() {
                     <PrimaryButton
                         isLoading={isLoading}
                         text={"Register"}
-                        classname={'w-32 py-2 rounded-full shadow-2xl shadow-lime-800  font-semibold'}
+                        classname={'w-28 py-2 rounded-full  font-semibold'}
                         onClick={handleSubmit}
                     ></PrimaryButton>
 

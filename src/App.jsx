@@ -21,6 +21,7 @@ import ErrorPage from './pages/ErrorPage.jsx'
 import UpdateProfile from './pages/UpdateProfile.jsx'
 import DashBoard from './pages/DashBoard.jsx'
 import EnrolledUserOfACourse from './pages/EnrolledUserOfACourse.jsx'
+import Documentation from './pages/Documentation.jsx'
 function App() {
 
   return (
@@ -53,7 +54,7 @@ function App() {
               } />
 
 
-              <Route path='/about' element={<About />} />
+              <Route path='/doc' element={<Documentation />} />
               <Route path='/vote-resources' element={<VoteResources />} />
 
 

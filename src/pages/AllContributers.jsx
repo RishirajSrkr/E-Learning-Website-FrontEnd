@@ -3,7 +3,7 @@ import ContributorProfile from '../components/ContributorProfile';
 import axios from 'axios'
 import Search from '../components/Search';
 import GoBack from '../components/GoBack';
-import { ThreeDot } from 'react-loading-indicators'
+import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 import { IoPersonSharp } from "react-icons/io5";
 
@@ -60,16 +60,21 @@ function AllContributers() {
     }
 
     return (
-        <div className='pt-32 pb-10 flex flex-col items-center bg-bgOne h-screen w-full'>
+        <div className='pt-12 pb-10 flex flex-col items-center bg-bgOne h-screen w-full'>
 
-            <GoBack text={"Go Back"} goWhere={"/"} />
+            <div className='relative w-1/3'>
 
-            <Search
-                classname={"fixed top-8"}
-                onSearch={setQuery}
-                placeholder={"Search Contributors"}
-                icon={<IoPersonSharp />}
-            />
+                <input
+                    type="text"
+                    placeholder="Search Contributor"
+                    className={`pl-12 w-full bg-bgTwo pr-6 text-white border-border focus:border-border focus:ring-0 rounded-full py-3 placeholder-gray `}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+
+                <div className='text-accentColor absolute  top-1/2 -translate-y-1/2 left-5'>
+                    <IoPersonSharp/>
+                </div>
+            </div>
 
 
             {
@@ -77,9 +82,7 @@ function AllContributers() {
 
                     (
 
-                        <div className='mt-40 text-center'>
-                            <ThreeDot color="#9CF57F" size="small" />
-                        </div>
+                        <Loader classname={"h-[500px]"} />
                     )
 
                     :

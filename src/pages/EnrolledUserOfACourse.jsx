@@ -1,29 +1,152 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from '../config/axiosConfig'
 import { useParams } from 'react-router-dom'
-
+import UserCard_Box from '../components/User Specific/UserCard_Box';
+import { ThreeDot } from 'react-loading-indicators';
 function EnrolledUserOfACourse() {
+
+    const userData = [
+        {
+            name: "John Doe",
+            email: "johndoe@example.com",
+            bio: "A passionate backend developer specializing in Java and Spring Boot.",
+            profileImageUrl: "https://via.placeholder.com/150/0000FF/FFFFFF?text=John"
+        },
+        {
+            name: "Jane Smith",
+            email: "janesmith@example.com",
+            bio: "Frontend enthusiast and React expert who loves crafting elegant UIs.",
+            profileImageUrl: "https://via.placeholder.com/150/FF5733/FFFFFF?text=Jane"
+        },
+        {
+            name: "Michael Brown",
+            email: "michaelb@example.com",
+            bio: "Data scientist exploring the world of machine learning and AI.",
+            profileImageUrl: "https://via.placeholder.com/150/28A745/FFFFFF?text=Michael"
+        },
+        {
+            name: "Emily Davis",
+            email: "emilyd@example.com",
+            bio: "Digital marketer with a knack for SEO and analytics.",
+            profileImageUrl: "https://via.placeholder.com/150/FFC107/FFFFFF?text=Emily"
+        },
+        {
+            name: "David Wilson",
+            email: "davidw@example.com",
+            bio: "Full-stack developer with a love for MERN and cloud technologies.",
+            profileImageUrl: "https://via.placeholder.com/150/DC3545/FFFFFF?text=David"
+        },
+        {
+            name: "Sophia Garcia",
+            email: "sophiag@example.com",
+            bio: "UI/UX designer creating intuitive and beautiful digital experiences.",
+            profileImageUrl: "https://via.placeholder.com/150/6F42C1/FFFFFF?text=Sophia"
+        },
+        {
+            name: "James Johnson",
+            email: "jamesj@example.com",
+            bio: "DevOps engineer focusing on CI/CD and infrastructure automation.",
+            profileImageUrl: "https://via.placeholder.com/150/20C997/FFFFFF?text=James"
+        },
+        {
+            name: "Olivia Martinez",
+            email: "oliviam@example.com",
+            bio: "Mobile app developer proficient in Flutter and Kotlin.",
+            profileImageUrl: "https://via.placeholder.com/150/17A2B8/FFFFFF?text=Olivia"
+        },
+        {
+            name: "Ethan Miller",
+            email: "ethanm@example.com",
+            bio: "Cybersecurity analyst ensuring robust security systems.",
+            profileImageUrl: "https://via.placeholder.com/150/E83E8C/FFFFFF?text=Ethan"
+        },
+        {
+            name: "Isabella Anderson",
+            email: "isabellaa@example.com",
+            bio: "Cloud engineer working with AWS, Azure, and Kubernetes.",
+            profileImageUrl: "https://via.placeholder.com/150/6610F2/FFFFFF?text=Isabella"
+        },
+        {
+            name: "Liam Thomas",
+            email: "liamt@example.com",
+            bio: "Game developer creating immersive gaming experiences.",
+            profileImageUrl: "https://via.placeholder.com/150/FD7E14/FFFFFF?text=Liam"
+        },
+        {
+            name: "Ava Scott",
+            email: "avas@example.com",
+            bio: "Technical writer making complex topics simple and accessible.",
+            profileImageUrl: "https://via.placeholder.com/150/ADB5BD/000000?text=Ava"
+        }
+    ];
+
 
     const { courseId } = useParams();
 
+    const [enrolledUsers, setEnrolledUsers] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
+        
 
-        (async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/enrolled-users`);
-            const data = response.data;
-            console.log(data);
+            (async () => {
+                setIsLoading(true)
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/enrollments/course/${courseId}`);
+
+                const data = response.data;
+
+                // setEnrolledUsers(data)
+                setEnrolledUsers(userData)
+
+                console.log("Enrolled users of course :: " + courseId + " :: ", data);
 
 
-        })();
+                setIsLoading(false)
+
+            })();
+
     }, [])
     return (
-        <div className='min-h-screen bg-bgOne'>
 
-            <p className='text-white'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam incidunt ipsam vitae, eligendi error harum expedita consequatur at cum sed? Eum quo perferendis, cupiditate ad provident in impedit architecto quidem!
 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam eaque harum blanditiis, labore earum totam doloribus adipisci beatae voluptas excepturi veritatis rerum sapiente magnam quas delectus quae repudiandae molestiae repellendus sit! Cum esse eos, porro temporibus non quas rerum iusto libero. Sit, odio rem libero pariatur maiores quibusdam hic enim neque vero molestiae consequatur labore necessitatibus voluptate minima iusto voluptatum eius suscipit modi alias incidunt aliquid nesciunt ab. Mollitia incidunt vitae ratione debitis, voluptatum corrupti architecto illum veritatis quod numquam asperiores dignissimos maxime, unde omnis in! Aperiam, ea consequatur fugiat minima facere eaque corporis rem, sequi placeat modi id obcaecati aut vitae ex harum quam laudantium omnis nesciunt est sint reiciendis. Cupiditate obcaecati delectus enim, sapiente suscipit officiis aspernatur, ducimus facilis tempora voluptate pariatur ipsa unde laudantium similique. Mollitia omnis facere repudiandae sequi laboriosam amet nam non at ipsum cumque debitis sit quisquam, impedit recusandae velit quas illo, delectus hic esse labore similique voluptas tempora odio cum! Sed temporibus, fugit nulla aspernatur non, amet sint ipsam placeat laudantium explicabo voluptate quod distinctio aliquid at cupiditate? Iusto odio repudiandae non officia aut, vel commodi laudantium labore fuga repellendus soluta molestias voluptates ex deleniti dolorum, reiciendis unde similique maiores esse iste dolorem? Voluptate doloremque neque cupiditate eius harum veritatis hic deleniti asperiores reprehenderit, tempore temporibus suscipit iure excepturi, ratione odio, fugiat iusto porro accusantium quibusdam voluptates debitis dolor! Temporibus nesciunt nobis unde praesentium, assumenda libero omnis quo reprehenderit maxime illo magni inventore voluptate, quos dignissimos facilis vel at officiis placeat similique, amet velit reiciendis. Excepturi sint quidem quo amet officiis aliquam adipisci recusandae impedit sapiente dolorum fuga esse natus, vitae sed, quisquam placeat mollitia incidunt! Quae eligendi recusandae ea exercitationem sed quo dolorum, rerum unde minus voluptatibus ipsa nisi saepe blanditiis ab nulla dolorem similique asperiores soluta id repellat quia. Minus, fugit?
-            </p>
+        <div className='min-h-screen py-32 bg-bgOne px-56 flex justify-center items-center w-full'>
+
+
+            {
+                isLoading &&
+
+                <div className='text-center mb-4 w-full' >
+                    <ThreeDot color="#9CF57F" size="small" />
+                </div>
+
+            }
+
+
+           {
+            !isLoading &&  <div className='flex flex-wrap justify-center items-center gap-1 relative'>
+            {
+                enrolledUsers?.map(user => {
+                    const { name, email, profileImageUrl } = user;
+                    return <UserCard_Box
+                        name={name}
+                        email={email}
+                        profileImage={profileImageUrl}
+                    />
+
+                })
+            }
+
+            <div className='h-full absolute w-full  bottom-0 bg-gradient-to-b from-transparent to-bgOne flex  justify-center items-center'>
+
+                <button className='bg-gradientForBg px-6 py-3 text-bgOne font-semibold text-lg rounded-md'>
+                    Subscribe to Unlock!
+                </button>
+
+            </div>
+        </div>
+
+           }
+
         </div>
     )
 }

@@ -6,14 +6,17 @@ import { RiFileUploadLine } from "react-icons/ri";
 import { FaBookOpen } from "react-icons/fa";
 import { ThreeDot } from 'react-loading-indicators';
 import axios from '../config/axiosConfig';
-import CourseCard from '../components/CourseCard';
 import { Link, useNavigate } from 'react-router-dom';
 import { TbReload } from "react-icons/tb";
 import { BsThreeDots } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaShareAlt } from "react-icons/fa";
-import {toast} from 'react-hot-toast'
+import { toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
+import { RiArrowRightLine } from "react-icons/ri";
+
+
 function DashBoard() {
 
   const navigate = useNavigate();
@@ -43,8 +46,10 @@ function DashBoard() {
 
   async function fetchEnrolledCourses() {
 
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/course/enrolled-courses`)
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/enrollments`)
     setEnrolledCourses(response.data)
+    console.log("Enrolled courses", response.data);
+
   }
 
   async function fetchUploadedCourses() {
@@ -67,6 +72,7 @@ function DashBoard() {
   }
 
 
+
   //setting up course share link when someone clicks on share button
   function handleCourseLinkToShare(courseId) {
     setShowDropdown(null)
@@ -84,10 +90,13 @@ function DashBoard() {
       }
 
     })
-
   }
+
+
+
+
   return (
-    <div className='min-h-screen bg-bgOne flex justify-center  w-full' >
+    <div className='min-h-screen bg-bgOne flex justify-center w-full' >
 
       {
         isLoading ?
@@ -109,7 +118,7 @@ function DashBoard() {
               <div className='flex justify-center items-center gap-4 relative'>
 
                 <div onClick={() => fetchEnrolledCourses()} className='cursor-pointer bg-bgTwo p-2 rounded-full absolute left-0 -top-10'>
-                  <TbReload className='text-green' />
+                  <TbReload className='text-accentColor' />
                 </div>
 
                 <DashBoardCard
@@ -117,8 +126,10 @@ function DashBoard() {
                   headtext={"Uploaded Courses"}
                   subtext={"We appreciate your efforts!"}
                   value={Object.keys(uploadedCourses).length}
-                  icon={<RiFileUploadLine className='text-green' />}
+                  icon={<RiFileUploadLine className={`${selected === "uploaded-courses" ? "text-accentColor" : "text-gray"}`} />}
                   onClick={() => setSelected("uploaded-courses")}
+                  isSelected={selected == "uploaded-courses"}
+
 
                 />
 
@@ -127,8 +138,9 @@ function DashBoard() {
                   headtext={"Enrolled Courses"}
                   subtext={"Level up your skills!"}
                   value={Object.keys(enrolledCourses).length}
-                  icon={<FaBookOpen className='text-green' />}
+                  icon={<FaBookOpen className={`${selected === "enrolled-courses" ? "text-accentColor" : "text-gray"}`} />}
                   onClick={() => setSelected("enrolled-courses")}
+                  isSelected={selected == "enrolled-courses"}
 
                 />
 
@@ -137,16 +149,32 @@ function DashBoard() {
                   headtext={"Total Votes"}
                   subtext={"People are loving your courses!"}
                   value={votes}
-                  icon={<BiLike className='text-green' />}
-                  onClick={() => setSelected("uploaded-courses")}
+                  icon={<BiLike className={`${selected === "top-voted" ? "text-accentColor" : "text-gray"}`} />}
+                  onClick={() => setSelected("top-voted")}
+                  isSelected={selected == "top-voted"}
 
                 />
               </div>
 
-              <div className='gradient-line my-8'></div>
+              <div className='my-8'></div>
 
               {
                 selected == "uploaded-courses" && <div className='flex flex-col gap-2 w-full'>
+
+                  {
+                    Object.keys(uploadedCourses).length == 0 && <div className='text-gray text-center'>
+                      <p>You don't have any uploaded courses.</p>
+                      <p>Contribute now & be a part of the journey.</p>
+
+                      <button
+                        className='mt-3 flex gap-1 text-white  mx-auto items-center underline underline-offset-2'
+                        onClick={() => navigate("/course/create")}
+                      >
+                        <p>Contribute</p>
+                      </button>
+
+                    </div>
+                  }
                   {
                     Object.keys(uploadedCourses).map((key) => {
                       return <div key={key}
@@ -161,8 +189,11 @@ function DashBoard() {
                         />
 
                         {
-                          showDropdown === key && <div
-                            className='bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-1.5 top-11 z-50'
+                          showDropdown === key && <motion.div
+                            initial={{ x: 50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 100 }}
+                            transition={{ delay: 0 }}
+                            className='bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
                           >
 
 
@@ -173,7 +204,7 @@ function DashBoard() {
 
                             <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm flex items-center gap-2'>  <FaShareAlt size={12} />Share</Link>
 
-                          </div>
+                          </motion.div>
                         }
 
                       </div>
@@ -186,22 +217,50 @@ function DashBoard() {
 
 
               {
-                selected == "enrolled-courses" && <div className='flex flex-col gap-2'>
+                selected == "enrolled-courses" && <div className='flex flex-col gap-2 w-full'>
+
+                  {
+                    Object.keys(enrolledCourses).length == 0 && <div className='text-gray text-center'>
+                      <p>You don't have any enrolled courses.</p>
+                      <p>Enroll now & be a part of the journey.</p>
+
+                      <button
+                        className='mt-3 flex gap-1 text-white  mx-auto items-center underline underline-offset-2'
+                        onClick={() => navigate("/all-courses")}
+                      >
+                        <p>All Courses</p>
+                      </button>
+
+                    </div>
+
+                  }
+
+
                   {
                     Object.keys(enrolledCourses).map((key) => {
                       return <div key={key}
-                        className=''
+                        className='text-white bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
                       >
+                        {enrolledCourses[key].courseName}
 
-                        <CourseCard
-                          title={enrolledCourses[key].courseName}
-                          instructor={enrolledCourses[key].instructorName}
-                          description={enrolledCourses[key].courseDescription}
-                          vote={enrolledCourses[key].vote}
-                          onClick={() => handleCourseCardClick(key)}
-                          showCTA={true}
-                          text={"Continue"}
+                        <BsThreeDots
+                          onClick={() => handleToggleDropdown(key)}
+                          size={20}
+                          className='text-gray cursor-pointer'
                         />
+
+                        {
+                          showDropdown === key && <div
+                            className='bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
+                          >
+
+
+                            <Link to={`/course/${key}`} className='text-sm flex items-center gap-2'>  <FaArrowUpRightFromSquare size={12} />View</Link>
+
+                            <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm flex items-center gap-2'>  <FaShareAlt size={12} />Share</Link>
+
+                          </div>
+                        }
 
                       </div>
                     })

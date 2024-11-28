@@ -127,7 +127,7 @@ function Login() {
                         <PrimaryButton
                             isLoading={isLoading}
                             text={"Login"}
-                            classname={'rounded-full w-24 py-2 shadow-2xl shadow-lime-800  font-semibold'}
+                            classname={'rounded-full h-10 w-24 py-2 font-semibold'}
                             onClick={handleSubmit}
                         ></PrimaryButton>
 

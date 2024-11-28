@@ -26,7 +26,7 @@ const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, te
 
         {
           instructor && <div className=' flex gap-2 items-center mb-2'>
-            <IoPersonSharp className='text-green text-sm' />
+            <IoPersonSharp className='text-accentColor text-sm' />
             <p className="font-semibold ">{instructor}</p>
           </div>
         }
@@ -41,7 +41,7 @@ const CourseCard = ({ onClick, title, instructor, description, vote, showCTA, te
       </div>
 
       {
-        showCTA && <SecondaryButton isLoading={isLoading} text={text} classname={"text-gray"} onClick={onClick} />
+        showCTA && <SecondaryButton isLoading={isLoading} text={text} classname={"text-gray bg-bgThree"} onClick={onClick} />
       }
     </div>
   );

@@ -224,7 +224,7 @@ function UpdateProfile() {
                     <PrimaryButton
                         isLoading={isLoading}
                         text={"Update Profile"}
-                        classname={' py-3 w-full rounded-md shadow-2xl shadow-lime-800  font-semibold'}
+                        classname={' py-3 w-full rounded-md font-semibold'}
                         onClick={handleSubmit}
                     ></PrimaryButton>
 

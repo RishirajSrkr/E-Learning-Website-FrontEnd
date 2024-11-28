@@ -18,6 +18,8 @@ function VoteResources() {
 
                 const data = response.data;
                 setCourses(data)
+                console.log(data);
+
 
 
 
@@ -50,27 +52,39 @@ function VoteResources() {
             {/* -------------- headline -------------- */}
             <div className='min-h-screen flex flex-col justify-center items-center text-center'>
 
-                <motion.h2
-                    initial={{ y: (400), opacity: 0 }}
-                    animate={{ y: 0, opacity: 100 }}
-                    transition={{ delay: 0.1 }}
-                    className='font-semibold bg-gradientForBg bg-clip-text text-transparent font-md text-8xl tracking-tighter'>Discover, Vote,</motion.h2>
+                <div className='flex gap-0 w-full'>
+                    <motion.h2
+                        initial={{ y: (100), opacity: 0 }}
+                        animate={{ y: 0, opacity: 100 }}
+                        transition={{ delay: 0.1 }}
+                        className='font-semibold bg-gradient-to-r p-4 w-full from-gray to-offwhite bg-clip-text text-transparent font-md text-7xl tracking-tighter'>Discover,</motion.h2>
+
+                    <motion.h2
+                        initial={{ y: (100), opacity: 0 }}
+                        animate={{ y: 0, opacity: 100 }}
+                        transition={{ delay: 0.15 }}
+                        className='font-semibold -mx-4 bg-gradient-to-r p-4 w-full from-gray to-offwhite bg-clip-text text-transparent  text-7xl tracking-tighter text'
+                    >
+                        Vote,
+                    </motion.h2>
+
+                    <motion.h2
+                        initial={{ y: (100), opacity: 0 }}
+                        animate={{ y: 0, opacity: 100 }}
+                        transition={{ delay: 0.20 }}
+                        className='font-semibold bg-gradient-to-r p-4 w-full from-gray to-offwhite bg-clip-text text-transparent  text-7xl tracking-tighter text'
+                    >
+                        Elevate
+                    </motion.h2>
+
+                </div>
 
                 <motion.h2
-                    initial={{ y: (400), opacity: 0 }}
+                    initial={{ y: (100), opacity: 0 }}
                     animate={{ y: 0, opacity: 100 }}
-                    transition={{ delay: 0.15 }}
-                    className='font-semibold bg-gradientForBg bg-clip-text text-transparent  text-8xl tracking-tighter text'
-                >
-                    Elevate <span className='font-light text-white'>the Best </span>
-                </motion.h2>
+                    transition={{ delay: 0.25 }}
 
-                <motion.h2
-                    initial={{ y: (400), opacity: 0 }}
-                    animate={{ y: 0, opacity: 100 }}
-                    transition={{ delay: 0.20 }}
-
-                    className='-mt-1 text-white font-light font-md text-8xl tracking-tighter'>Courses.
+                    className=' bg-gradient-to-r from-gray to-offwhite bg-clip-text text-transparent mt-0 font-medium text-3xl tracking-tighter'>the best courses.
                 </motion.h2>
 
 
@@ -83,14 +97,15 @@ function VoteResources() {
             <div className='w-full flex flex-col px-40 overflow-y-hidden'>
 
                 {
-                    courses.map((course, index) => {
+
+                    courses?.map((course, index) => {
                         return <VotingPageCourseCard
                             key={index}
                             courseName={course.courseName}
                             instructor={course.instructorName}
                             imageUrl={course.imageUrl}
                             index={index + 1}
-                            vote={course.vote}
+                            vote={course.votes}
                         />
                     })
                 }

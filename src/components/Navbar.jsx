@@ -17,7 +17,7 @@ function Navbar() {
 
     const location = useLocation();
 
-    const hideNavbar = location.pathname === "/contributors" || location.pathname === "/all-courses";
+    const hideNavbar = location.pathname === "/contributors";
     const hideNavbarPaths = /^\/course\/[a-zA-Z0-9]+$/; // Regex for '/course/someCourseId'
     const isFullCoursePage = hideNavbarPaths.test(location.pathname)
 
@@ -78,6 +78,29 @@ function Navbar() {
     function handleDropDownClose() {
         setShowDropdown(false)
     }
+
+
+
+    const dropdownRef = useRef();
+
+    const handleClickOutside = (event) => {
+        // Close dropdown if the click is outside of the dropdown element
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setShowDropdown(false);
+        }
+    };
+
+    useEffect(() => {
+        // Attach the event listener to handle clicks outside
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+
 
 
 
@@ -227,7 +250,7 @@ function Navbar() {
                                             onClick={handleNavLinkClick}
                                             className='bg-gradientForBg bg-clip-text text-transparent flex gap-2 items-center'
                                         >
-                                            <span className='text-green'>
+                                            <span className='text-accentColor'>
                                                 <IoArrowForwardSharp size={20} />
                                             </span>
                                             Contribute
@@ -256,7 +279,7 @@ function Navbar() {
             // ------------------------- DSEKTOP VIEW -------------------
 
             (
-                <div className={`${hideNavbar ? "hidden" : ""} ${isFullCoursePage ? "hidden" : ""} w-full flex flex-col justify-between items-center text-white text-sm font-medium fixed z-50 top-0 left-0 transition-all duration-300 bg-transparent backdrop-blur-2xl shadow-2xl shadow-bgOne`}>
+                <div className={`${hideNavbar ? "hidden" : ""} ${isFullCoursePage ? "hidden" : ""}  w-full flex flex-col justify-between items-center text-white text-sm font-medium fixed z-50 top-0 left-0 transition-all duration-300 bg-transparent backdrop-blur-2xl shadow-2xl shadow-bgOne`}>
 
 
                     {/* ------------------- notification banner ----------------- */}
@@ -285,29 +308,40 @@ function Navbar() {
 
                         {/* --------------menu------------- */}
                         <div className='w-2/4 font-normal'>
-                            <div className='w-fit mx-auto flex justify-center items-center gap-6 border border-border rounded-full px-8 py-2 text-gray'>
+                            <div className='w-fit mx-auto flex justify-center items-center gap-1 border border-border rounded-full font-medium p-2 text-gray bg-transparent'>
 
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'text-white font-medium'
-                                            : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                                            ? 'text-white font-medium px-5 py-2.5 rounded-full border border-border'
+                                            :
+                                            'hover:text-white active:text-white transition-all duration-300 border hover:border hover:border-border border-transparent px-5 py-2.5 rounded-full'
                                     }
                                     to="/all-courses"
                                 >
-                                    Courses
+                                    {({ isActive }) => (
+                                        <div className='flex gap-2 items-center justify-center'>
+                                            <div className={`h-2 w-2 ${!isActive ? "bg-bgThree" : "bg-accentColor"}  rounded-full`}></div>
+                                            Courses
+                                        </div>
+                                    )}
                                 </NavLink>
 
 
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'text-white font-medium'
-                                            : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                                            ?  'text-white font-medium px-5 py-2.5 rounded-full border border-border'
+                                            : 'hover:text-white active:text-white transition-all duration-300 border hover:border hover:border-border border-transparent px-5 py-2.5 rounded-full'
                                     }
                                     to="/contributors"
                                 >
-                                    Contributers
+                                     {({ isActive }) => (
+                                        <div className='flex gap-2 items-center justify-center'>
+                                            <div className={`h-2 w-2 ${!isActive ? "bg-bgThree" : "bg-accentColor"}  rounded-full`}></div>
+                                            Contributor
+                                        </div>
+                                    )}
                                 </NavLink>
 
 
@@ -315,12 +349,17 @@ function Navbar() {
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'text-white font-medium'
-                                            : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                                            ?  'text-white font-medium px-5 py-2.5 rounded-full border border-border'
+                                            : 'hover:text-white active:text-white transition-all duration-300 border hover:border hover:border-border border-transparent px-5 py-2.5 rounded-full'
                                     }
                                     to="/vote-resources"
                                 >
-                                    Vote
+                                     {({ isActive }) => (
+                                        <div className='flex gap-2 items-center justify-center'>
+                                            <div className={`h-2 w-2 ${!isActive ? "bg-bgThree" : "bg-accentColor"}  rounded-full`}></div>
+                                            Vote
+                                        </div>
+                                    )}
                                 </NavLink>
 
 
@@ -329,13 +368,41 @@ function Navbar() {
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'text-white font-medium'
-                                            : 'hover:text-white active:text-white hover:font-medium transition-all duration-400'
+                                            ?  'text-white font-medium px-5 py-2.5 rounded-full border border-border'
+                                            : 'hover:text-white active:text-white transition-all duration-300 border hover:border hover:border-border border-transparent px-5 py-2.5 rounded-full'
                                     }
-                                    to="/about"
+                                    to="/doc"
                                 >
-                                    About
+                                     {({ isActive }) => (
+                                        <div className='flex gap-2 items-center justify-center'>
+                                            <div className={`h-2 w-2 ${!isActive ? "bg-bgThree" : "bg-accentColor"}  rounded-full`}></div>
+                                            Docs
+                                        </div>
+                                    )}
                                 </NavLink>
+
+
+
+                                {/* ------------ hide this if user not logged in ------------- */}
+                                {
+                                    loggedInUser && <NavLink
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ?  'text-white font-medium px-5 py-2.5 rounded-full border border-border'
+                                                : 'hover:text-white active:text-white transition-all duration-300 border hover:border hover:border-border border-transparent px-5 py-2.5 rounded-full'
+                                        }
+                                        to={"/course/create"}
+                                    >
+                                         {({ isActive }) => (
+                                        <div className='flex gap-2 items-center justify-center'>
+                                            <div className={`h-2 w-2 ${!isActive ? "bg-bgThree" : "bg-accentColor"}  rounded-full`}></div>
+                                            Contribute
+                                        </div>
+                                    )}
+                                    </NavLink>
+                                }
+
+
 
                             </div>
                         </div>
@@ -354,6 +421,7 @@ function Navbar() {
 
                                     {
                                         showDropdown && <motion.div
+                                            ref={dropdownRef}
 
                                             initial={{ y: 50, opacity: 0 }}
                                             animate={{ y: 0, opacity: 100 }}
@@ -376,13 +444,14 @@ function Navbar() {
                             }
 
 
-
                             {/* ------------ hide this if user not logged in ------------- */}
-                            {
-                                loggedInUser && <Link to={"/course/create"} className={` bgTwo border border-green text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-lime-800`}>
+                            {/* {
+                                loggedInUser && <Link to={"/course/create"} className={` bgTwo border border-accentColor text-white font-semibold px-5 py-2 rounded-full  shadow-2xl shadow-lime-800`}>
                                     Contribute
                                 </Link>
-                            }
+                            } */}
+
+
 
                         </div>
 

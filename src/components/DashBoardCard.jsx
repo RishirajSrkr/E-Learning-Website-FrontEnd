@@ -1,10 +1,10 @@
 import React from 'react'
 import { MdArrowOutward } from "react-icons/md";
 import { TiStarOutline } from "react-icons/ti";
-function DashBoardCard({user, headtext, onClick, subtext, value, icon}) {
+function DashBoardCard({user, headtext, onClick, subtext, value, icon, classname, isSelected}) {
     return (
     
-          <div onClick={onClick} className='cursor-pointer bg-bgTwo border border-border px-10 py-8 rounded-xl w-80 text-white flex flex-col gap-4'>
+          <div onClick={onClick} className={`${classname} cursor-pointer bg-One border border-border px-10 py-8 rounded-xl w-80 text-white flex flex-col gap-4 hover:bg-bgTwo transition-all duration-300`}>
     
             <div className='flex justify-between items-center'>
               <h3 className='text-5xl font-semibold'>{`${value < 10 ? "0" + value : value}`}</h3>
@@ -18,7 +18,7 @@ function DashBoardCard({user, headtext, onClick, subtext, value, icon}) {
     
               <div className='flex gap-1 items-center'>
                 <div className='p-1 bg-bgOne rounded-full'>
-                  <TiStarOutline className='text-green text-xs' />
+                  <TiStarOutline className={`${isSelected ? "text-accentColor" : "text-gray"} text-xs`}/>
                 </div>
                 <p className='text-sm text-gray'>{subtext}</p>
               </div>

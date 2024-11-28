@@ -27,7 +27,7 @@ function ContributorProfile({ name, email, profileImage, bio, uploadedCourse, on
                 <button
                     onClick={onClick}
                     className='flex items-center mt-2 bg-gradientForBg bg-clip-text text-transparent'>
-                    <FaArrowRight className="mr-2 text-green" size={12} />
+                    <FaArrowRight className="mr-2 text-accentColor" size={12} />
                     <h4>Courses: {uploadedCourse}</h4>
                 </button>
 
@@ -35,7 +35,7 @@ function ContributorProfile({ name, email, profileImage, bio, uploadedCourse, on
 
             {/* Follow Icon */}
             <div>
-                <FaUserPlus className='text-green cursor-pointer transition-transform transform hover:scale-125' title="Follow" size={24} />
+                <FaUserPlus className='text-accentColor cursor-pointer transition-transform transform hover:scale-125' title="Follow" size={24} />
             </div>
         </div>
     );
