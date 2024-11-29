@@ -72,21 +72,24 @@ function Reviews() {
         <>
             <Swiper
                 slidesPerView={`${isMobile ? 1 : 3}`}
-                spaceBetween={30}
+                spaceBetween={10}
                 freeMode={true}
 
                 modules={[FreeMode]}
-                className="text-gray w-full cursor-move"
+                className="text-gray w-full relative select-none"
             >
+
+<div className='h-96 w-48 bg-gradient-to-r from-bgOne to-transparent absolute top-0 z-50'></div>
+<div className='h-96 w-48 bg-gradient-to-l from-bgOne to-transparent absolute top-0 right-0 z-50'></div>
 
                 {
                     reviews.map((review, index) => {
                         return <SwiperSlide key={index}
-                            className='w-full bg-gradientForBorder p-2 rounded-lg'
+                            className='w-full p-2 rounded-lg cursor-grab '
                         >
-                            <div className='border border-border bg-bgTwo p-6 sm:p-10 h-fit sm:h-screen rounded-md'>
-                                <h4 className='text-white font-semibold text-base sm:text-xl mb-2 sm:mb-4'>{review.name}</h4>
-                                <p className='text-sm sm:text-base'>{review.review}</p>
+                            <div className='border border-border bg-bgOneLight p-6 h-60 rounded-md'>
+                                <h4 className='text-white font-semibold text-base sm:text-xl mb-2'>{review.name}</h4>
+                                <p className='text-sm'>{review.review}</p>
                             </div>
                         </SwiperSlide>
                     })
@@ -99,3 +102,6 @@ function Reviews() {
 }
 
 export default Reviews
+
+
+

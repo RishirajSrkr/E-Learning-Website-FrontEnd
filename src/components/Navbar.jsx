@@ -322,7 +322,7 @@ function Navbar() {
                                     {({ isActive }) => (
                                         <div className='flex gap-2 items-center justify-center'>
                                             <div className={`h-2 w-2 ${!isActive ? "bg-bgThree" : "bg-accentColor"}  rounded-full`}></div>
-                                            Courses
+                                            Resources
                                         </div>
                                     )}
                                 </NavLink>

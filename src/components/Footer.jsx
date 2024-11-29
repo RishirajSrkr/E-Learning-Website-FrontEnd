@@ -12,27 +12,22 @@ function Footer() {
     <div className={`w-full ${hideFooter ? 'hidden' : ''} bg-bgOne flex justify-center items-center py-4 sm:py-6 border-t border-border `}>
 
 
-      <ul className='flex gap-4 sm:w-1/5  justify-between items-center text-sm sm:text-sm mx-auto text-gray'>
+      <ul className='flex gap-2 sm:w-1/5  justify-between items-center text-sm sm:text-sm mx-auto text-gray'>
 
+        <p>Developer by @Rishiraj Sarkar</p>
         <Link to='https://github.com/RishirajSrkr' target='_blank'>
-          <div className='flex gap-2 jusc
-           items-center'>
-            <FaGithub  />
-            <h4>Github</h4>
+          <div className='flex gap-2 items-center'>
+            <FaGithub />
           </div>
         </Link>
         <Link to='https://www.linkedin.com/in/rishiraj-sarkar/' target='_blank'>
-          <div className='flex gap-2 jusc
-           items-center'>
-            <FaLinkedin  />
-            <h4>LinkedIn</h4>
+          <div className='flex gap-2 items-center'>
+            <FaLinkedin />
           </div>
         </Link>
         <Link to='mailto:rishirajsarkar.jpg@gmail.com' target='_blank'>
-          <div className='flex gap-2 jusc
-           items-center'>
+          <div className='flex gap-2 items-center'>
             <FaEnvelope />
-            <h4>Email</h4>
           </div>
         </Link>
       </ul>

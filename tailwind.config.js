@@ -11,8 +11,10 @@ export default {
     
         //bg one is darker
         bgOne: '#050505',
+        bgOneLight: '#0A0A0A',
         bgTwo: '#131415',
         bgThree: '#1b1c1e',
+  
 
         //gray is used for sub texts
         gray: '#9CA1A4',
