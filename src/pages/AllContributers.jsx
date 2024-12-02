@@ -25,10 +25,10 @@ function AllContributers() {
         async function fetchALlContributors() {
             try {
                 setIsLoading(true)
-                
+
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/contributors`)
 
-                const data =  response.data;
+                const data = response.data;
                 console.log(data);
 
                 setUsers(data);
@@ -72,7 +72,7 @@ function AllContributers() {
                 />
 
                 <div className='text-accentColor absolute  top-1/2 -translate-y-1/2 left-5'>
-                    <IoPersonSharp/>
+                    <IoPersonSharp />
                 </div>
             </div>
 

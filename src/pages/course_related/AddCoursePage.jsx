@@ -1,5 +1,5 @@
 import React from 'react'
-import AddCourseForm from '../components/AddCourseForm'
+import AddCourseForm from '../../components/AddCourseForm'
 
 function AddCoursePage() {
     return (

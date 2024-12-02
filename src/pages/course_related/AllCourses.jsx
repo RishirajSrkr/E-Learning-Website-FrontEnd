@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CourseCard from '../components/CourseCard'
+import CourseCard from '../../components/CourseCard'
 import { useNavigate } from 'react-router-dom'
-import axios from '../config/axiosConfig'
-import { ThreeDot } from 'react-loading-indicators'
-import Search from '../components/Search'
+import axios from '../../config/axiosConfig'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
-import GoBack from '../components/GoBack';
 import { motion } from 'framer-motion'
-import { WindowWidthContext } from '../context/WindowWidthContext';
+import { WindowWidthContext } from '../../context/WindowWidthContext';
 import { toast } from 'react-hot-toast'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,7 +13,7 @@ import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
-import Loader from '../components/Loader'
+import Loader from '../../components/Loader'
 // import required modules
 
 

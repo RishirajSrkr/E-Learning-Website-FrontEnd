@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../config/axiosConfig'
+import axios from '../../config/axiosConfig'
 import { useParams } from 'react-router-dom'
 import { ThreeDot } from 'react-loading-indicators';
-import CourseCard from '../components/CourseCard';
+import CourseCard from '../../components/CourseCard';
+import Loader from '../../components/Loader';
 
 function CoursesUploadedByUser() {
 
@@ -52,9 +53,7 @@ function CoursesUploadedByUser() {
             {
                 isLoading ?
                     (
-                        <div className='mt-40 text-center'>
-                            <ThreeDot color="#9CF57F" size="small" />
-                        </div>
+                        <Loader classname={"h-[500px]"} />
                     )
                     :
 

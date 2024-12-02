@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram } from 'react-icons/fa';
 function Footer() {
 
   const location = useLocation();
-  const hideFooter = location.pathname === "/register" || location.pathname === "/login"
+  const hideFooter = location.pathname === "/register" || location.pathname === "/login" || location.pathname.includes("discussions")
 
 
   return (

@@ -74,66 +74,54 @@ function Login() {
 
 
     return (
-        <div className='pt-12 sm:pb-1 bg-bgOne'>
-            <div className='w-full min-h-screen bg-bgOne justify-start sm:justify-center flex flex-col gap-8'>
+             <div className='py-1 bg-bgOne w-full flex flex-col  justify-center items-center'>
 
 
-                {/* ---------- headline ---------- */}
-
-                {/* <div className='w-96 mx-auto'>
-    <h2 className='bg-gradientForBg bg-clip-text text-transparent text-4xl font-semibold'>Welcome Back</h2>
-    <p className='text-gray mt-2'>Please enter your login credentials to continue</p>
-</div> */}
 
 
                 {/* ------------ form -------------- */}
 
-                <div className='bg-gradientForBorderOpposite w-96 mx-auto p-[1px] rounded-lg'>
 
-                    <form className='w-full p-12 rounded-lg flex flex-col justify-center items-start mx-auto bg-bgOne'>
+                    <form className='flex flex-col items-center min-h-screen justify-center w-1/5 gap-6 '>
 
-                        <div className='h-24 w-full'>
+        
+                        <div className='flex mx-auto flex-col gap-4 w-full'>
                             <Input
-                                totalWidth={"w-full"}
-                                className={""}
-                                type={"email"}
                                 name={"email"}
+                                type={"email"}
                                 value={formData.email}
-                                placeholder={"your email"}
                                 onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
-                            />
-
-                        </div>
-
-                        <div className='h-24 w-full '>
-
-                            <Input
                                 totalWidth={"w-full"}
                                 className={""}
-                                type={"password"}
-                                name={"password"}
-                                value={formData.password}
-                                placeholder={"your password"}
-                                onChange={(e) => handleInputChange(e)}
-                                reloadButtonShowOrHide={true}
-                                onClick={(e) => handleReloadButton(e)}
+                                placeholder={"enter your email"}
                             />
 
+                       
 
+                            <Input
+                                name={"password"}
+                                type={"password"}
+                                value={formData.password}
+                                onChange={(e) => handleInputChange(e)}
+                                totalWidth={"w-full"}
+                                className={""}
+                                placeholder={"enter your password"}
+                            />
+
+                        
                         </div>
+
 
                         <PrimaryButton
                             isLoading={isLoading}
                             text={"Login"}
-                            classname={'rounded-full h-10 w-24 py-2 font-semibold'}
+                            classname={'rounded-md h-10 w-full py-2 font-semibold'}
                             onClick={handleSubmit}
                         ></PrimaryButton>
 
 
 
-                        <div className='text-left mt-6 '>
+                        <div>
                             <p className='text-gray text-sm'>Don't have an account? <Link to={"/register"}>Register</Link></p>
                         </div>
 
@@ -142,9 +130,7 @@ function Login() {
                     </form>
 
 
-                </div>
             </div>
-        </div>
     )
 }
 

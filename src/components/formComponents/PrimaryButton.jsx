@@ -3,9 +3,10 @@ import { dotStream } from 'ldrs'
 import { RiArrowRightLine } from "react-icons/ri";
 dotStream.register()
 
-function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
+function PrimaryButton({ text, classname, onClick, isLoading, arrow}) {
   return (
     <button
+   
       className={`${classname} font-medium rounded-full flex items-center h-10 bg-gradientForBg text-bgOne group hover:opacity-90 transition-opacity duration-300`}
       onClick={onClick}
     >

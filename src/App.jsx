@@ -4,9 +4,9 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { Route, Routes } from 'react-router-dom'
 import AllContributers from './pages/AllContributers'
-import AllCourses from './pages/AllCourses'
-import AddCoursePage from './pages/AddCoursePage'
-import FullCoursePage from './pages/FullCoursePage'
+import AllCourses from './pages/course_related/AllCourses'
+import AddCoursePage from './pages/course_related/AddCoursePage.jsx'
+import FullCoursePage from './pages/course_related/FullCoursePage.jsx'
 import Layout from './pages/Layout'
 import About from './pages/About'
 import VoteResources from './pages/VoteResources'
@@ -16,16 +16,17 @@ import { UserContextProvider } from './context/UserContext.jsx'
 import { WindowWidthProvider } from './context/WindowWidthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { Toaster } from 'react-hot-toast'
-import CoursesUploadedByUser from './pages/CoursesUploadedByUser.jsx'
+import CoursesUploadedByUser from './pages/course_related/CoursesUploadedByUser.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import UpdateProfile from './pages/UpdateProfile.jsx'
 import DashBoard from './pages/DashBoard.jsx'
-import EnrolledUserOfACourse from './pages/EnrolledUserOfACourse.jsx'
+import EnrolledUserOfACourse from './pages/course_related/EnrolledUserOfACourse.jsx'
 import Documentation from './pages/Documentation.jsx'
+import CourseDiscussionPage from './pages/course_related/CourseDiscussionPage.jsx'
 function App() {
 
   return (
-  
+
     <AuthProvider>
       <UserContextProvider>
         <WindowWidthProvider >
@@ -77,9 +78,17 @@ function App() {
 
               <Route path='/profile/update' element={<UpdateProfile />} />
 
-              <Route path='/dashboard' element={<DashBoard />}/>
 
-              <Route path='/course/:courseId/enrolled-users'  element={<EnrolledUserOfACourse />}/>
+
+              <Route path='/dashboard' element={
+                <ProtectedRoute >
+                  <DashBoard />
+                </ProtectedRoute>
+              } />
+
+              <Route path='/course/:courseId/enrolled-users' element={<EnrolledUserOfACourse />} />
+
+              <Route path='/course/:courseId/discussions' element={<CourseDiscussionPage />} />
 
             </Route>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../config/axiosConfig'
+import axios from '../../config/axiosConfig'
 import { useParams } from 'react-router-dom'
-import UserCard_Box from '../components/User Specific/UserCard_Box';
+import UserCard_Box from '../../components/User Specific/UserCard_Box';
 import { ThreeDot } from 'react-loading-indicators';
 function EnrolledUserOfACourse() {
 

@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useParams, useLocation, Navigate, useNavigate } from 'react-router-dom'
-import axios from '../config/axiosConfig'
-import GoBack from '../components/GoBack';
+import { useParams, useNavigate } from 'react-router-dom'
+import axios from '../../config/axiosConfig'
 import { toast } from 'react-hot-toast';
-import PrimaryButton from '../components/formComponents/PrimaryButton'
-import SecondaryButton from '../components/formComponents/SecondaryButton'
 import { MdCheckCircle, MdRadioButtonUnchecked } from 'react-icons/md';
-import { AuthContext } from '../context/AuthContext'
-import Loader from '../components/Loader'
+import { AuthContext } from '../../context/AuthContext'
+import Loader from '../../components/Loader'
 import { CgMenuGridR } from "react-icons/cg";
 function FullCoursePage() {
 
@@ -180,6 +177,11 @@ function FullCoursePage() {
     }
 
 
+    function handleDiscussionsClick() {
+
+        
+        navigate(`/course/${courseId}/discussions`)
+    }
 
 
     return (
@@ -195,7 +197,6 @@ function FullCoursePage() {
                     :
 
                     (
-
 
 
                         <div className='w-full relative px-24'>
@@ -219,14 +220,16 @@ function FullCoursePage() {
                                     ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Up Vote</button>
 
                                     <button
-                                        onClick={handleEndCourse}
+                                        onClick={handleDiscussionsClick}
                                         className='text-sm font-medium flex gap-2 items-center justify-start'
-                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>End Course</button>
+                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Discussion</button>
 
                                     <button
                                         onClick={handleEndCourse}
                                         className='text-sm font-medium flex gap-2 items-center justify-start'
-                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Instructor</button>
+                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>End Course</button>
+
+
 
                                 </div>
                             }
@@ -284,7 +287,7 @@ function FullCoursePage() {
                             </div>
 
 
-                    
+
 
                         </div>
                     )

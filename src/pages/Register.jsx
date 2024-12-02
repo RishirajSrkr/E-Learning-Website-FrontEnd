@@ -144,135 +144,115 @@ function Register() {
 
 
     return (
-        <div className='pt-28 sm:pb-24 w-full min-h-screen bg-bgOne sm:justify-center flex flex-col'>
 
-
+        <div className='py-0 bg-bgOne w-full flex flex-col  justify-center items-center'>
             {/* ------------ form -------------- */}
 
-            <div className='bg-gradientForBorderOpposite w-11/12 sm:w-96 mx-auto p-[1px] rounded-lg -mt-16 sm:mt-8'>
 
-                <form className='w-full p-6 sm:p-12 rounded-lg flex flex-col justify-center mx-auto bg-bgOne'>
-
+            <form className='flex flex-col items-center min-h-screen justify-center w-1/5 mt-8 '>
 
 
-
-                    <div className='h-24 w-full '>
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"text"}
-                            name={"name"}
-                            value={formData.name}
-                            placeholder={"your name"}
-                            onChange={(e) => handleInputChange(e)}
-
-                        />
-
-                    </div>
-
-                    <div className='h-24 w-full '>
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"email"}
-                            name={"email"}
-                            value={formData.email}
-                            placeholder={"your email"}
-                            onChange={(e) => handleInputChange(e)}
-
-                        />
-
-                    </div>
+                <div className='flex mx-auto flex-col gap-4 w-full'>
+                    <Input
+                        name={"name"}
+                        type={"text"}
+                        value={formData.name}
+                        onChange={(e) => handleInputChange(e)}
+                        totalWidth={"w-full"}
+                        className={""}
+                        placeholder={"enter your name"}
+                    />
 
 
+                    <Input
+                        name={"email"}
+                        type={"email"}
+                        value={formData.email}
+                        onChange={(e) => handleInputChange(e)}
+                        totalWidth={"w-full"}
+                        className={""}
+                        placeholder={"enter your email"}
+                    />
 
 
-                    <div className='h-24 w-full '>
+                    <Input
+                        name={"password"}
+                        type={"password"}
+                        value={formData.password}
+                        onChange={(e) => handleInputChange(e)}
+                        totalWidth={"w-full"}
+                        className={""}
+                        placeholder={"set a strong password"}
+                    />
 
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"password"}
-                            name={"password"}
-                            value={formData.password}
-                            placeholder={"your password"}
-                            onChange={(e) => handleInputChange(e)}
-
-                        />
-
-                    </div>
-
-                    <div className='h-24 w-full '>
-                        <Input
-                            totalWidth={"w-full"}
-                            className={""}
-                            type={"text"}
-                            name={"bio"}
-                            value={formData.bio}
-                            placeholder={"your bio"}
-                            onChange={(e) => handleInputChange(e)}
-
-                        />
-                    </div>
+                    <Input
+                        name={"bio"}
+                        type={"text"}
+                        value={formData.bio}
+                        onChange={(e) => handleInputChange(e)}
+                        totalWidth={"w-full"}
+                        className={""}
+                        placeholder={"write a short bio about yourself"}
+                    />
 
 
-                    {/* ------------------ image preview ----------------- */}
-
-                    <div className='flex gap-3 items-center mb-10'>
-
-                        <div className=' min-h-12 min-w-12  border border-border border-dashed'>
-                            {imagePreview && (
-
-                                <img src={imagePreview} alt="Profile image preview" className='w-12 h-12 object-cover rounded' />
-
-                            )}
-                        </div>
+                </div>
 
 
+                {/* ------------------ image preview ----------------- */}
 
-                        <input
-                            type="file"
-                            className='hidden'
-                            accept='image/*'
-                            ref={profileImageRef}
-                            name='profileImage'
-                            onChange={handleInputChange}
-                        />
+                <div className='flex w-full gap-3 items-center my-6'>
 
-                        <div
-                            onClick={() => profileImageRef.current.click()}
-                            className='border w-full border-dashed border-border h-12 flex justify-center text-white items-center cursor-pointer text-sm '>
-                            Image Upload
-                        </div>
+                    <div className=' min-h-12 min-w-12  border border-border border-dashed'>
+                        {imagePreview && (
+
+                            <img src={imagePreview} alt="Profile image preview" className='w-12 h-12 object-cover rounded' />
+
+                        )}
                     </div>
 
 
 
+                    <input
+                        type="file"
+                        className='hidden'
+                        accept='image/*'
+                        ref={profileImageRef}
+                        name='profileImage'
+                        onChange={handleInputChange}
+                    />
 
-
-
-                    <PrimaryButton
-                        isLoading={isLoading}
-                        text={"Register"}
-                        classname={'w-28 py-2 rounded-full  font-semibold'}
-                        onClick={handleSubmit}
-                    ></PrimaryButton>
-
-
-
-                    <div className='text-left  mt-4 sm:mt-6'>
-                        <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
+                    <div
+                        onClick={() => profileImageRef.current.click()}
+                        className='border w-full border-dashed border-border h-12 flex justify-center text-white items-center cursor-pointer text-sm '>
+                        Image Upload
                     </div>
+                </div>
 
 
 
-                </form>
+                <PrimaryButton
+                    isLoading={isLoading}
+                    text={"Register"}
+                    classname={'rounded-md h-10 w-full py-2 font-semibold'}
+                    onClick={handleSubmit}
+                ></PrimaryButton>
 
 
-            </div>
+
+
+                <div className='text-left  mt-4 sm:mt-6'>
+                    <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
+                </div>
+
+
+
+            </form>
 
 
         </div>
+
+
     );
 }
 

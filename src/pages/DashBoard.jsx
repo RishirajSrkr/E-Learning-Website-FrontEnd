@@ -178,7 +178,7 @@ function DashBoard() {
                   {
                     Object.keys(uploadedCourses).map((key) => {
                       return <div key={key}
-                        className='text-white bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
+                        className='text-white rounded-md bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
                       >
                         {uploadedCourses[key].courseName}
 
@@ -203,6 +203,8 @@ function DashBoard() {
 
 
                             <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm flex items-center gap-2'>  <FaShareAlt size={12} />Share</Link>
+
+                            
 
                           </motion.div>
                         }
@@ -239,7 +241,7 @@ function DashBoard() {
                   {
                     Object.keys(enrolledCourses).map((key) => {
                       return <div key={key}
-                        className='text-white bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
+                        className='text-white rounded-md bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
                       >
                         {enrolledCourses[key].courseName}
 
