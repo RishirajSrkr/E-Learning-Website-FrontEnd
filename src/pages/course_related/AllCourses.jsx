@@ -5,7 +5,7 @@ import axios from '../../config/axiosConfig'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
 import { motion } from 'framer-motion'
 import { WindowWidthContext } from '../../context/WindowWidthContext';
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
@@ -76,33 +76,19 @@ function AllCourses() {
     async function handleCourseCardClick(id) {
         try {
 
+            toast.success("Course enrolled")
+
             //take me to the full course page
             navigate(`/course/${id}`)
 
 
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${id}`);
-
-            toast.success("Course Enrolled", {
-                position: "top-right",
-                style: {
-                    background: "#131415",
-                    color: "#FFFFFF",
-                }
-
-            })
-
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollment/${id}`);
 
 
         }
         catch (error) {
-            toast.error("Enroll Failed", {
-                position: "top-right",
-                style: {
-                    background: "#131415",
-                    color: "#FFFFFF",
-                }
-
-            })
+            toast.error("Failed to enroll, try again")
+            navigate("/all-courses")
             console.log(error);
 
         }
@@ -279,8 +265,8 @@ function AllCourses() {
 
                     <input
                         type="text"
-                        placeholder="Search Contributor"
-                        className={`pl-10 w-full bg-bgTwo pr-4 text-white border-border focus:border-border focus:ring-0 rounded-md py-2.5 placeholder-gray `}
+                        placeholder="Search Course"
+                        className={`pl-10 w-full bg-bgTwo pr-4 text-white border-none outline-none focus:ring-0 rounded-md py-2.5 placeholder-gray `}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
 

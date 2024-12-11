@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { MdDelete } from "react-icons/md";
 import axios from '../config/axiosConfig'
 import { IoCloseSharp } from "react-icons/io5";
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import SecondaryButton from '../components/formComponents/SecondaryButton'
 import CourseCard from '../components/CourseCard'
 import { AuthContext } from '../context/AuthContext'
@@ -150,14 +150,7 @@ function AddCourseForm() {
       if (response.status === 200) {
 
         //show the success toast
-        toast.success("Course Added", {
-          position: "top-right",
-          style: {
-            background: "#1C1210",
-            color: "#E5E6E6",
-          }
-
-        })
+        toast.success("Course added")
 
         //reset the form only if course was successfully added
         setFormData({
@@ -179,14 +172,7 @@ function AddCourseForm() {
       }
     }
     catch (e) {
-      toast.error("Try Again", {
-        position: "top-right",
-        style: {
-          background: "#1C1210",
-          color: "#E5E6E6",
-        }
-
-      })
+      toast.error("Failed to add course")
       console.log("error while creating course : ", e);
 
     }

@@ -42,10 +42,10 @@ export const AuthProvider = ({ children }) => {
     // Logout function to clear token and update state
     async function logout() {
         try {
-            
+
 
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/logout`);
-localStorage.removeItem('jwtToken');
+            localStorage.removeItem('jwtToken');
 
             setLoggedInUser(null);
 

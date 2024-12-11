@@ -15,7 +15,7 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import { UserContextProvider } from './context/UserContext.jsx'
 import { WindowWidthProvider } from './context/WindowWidthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from 'sonner'
 import CoursesUploadedByUser from './pages/course_related/CoursesUploadedByUser.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import UpdateProfile from './pages/UpdateProfile.jsx'
@@ -30,7 +30,7 @@ function App() {
     <AuthProvider>
       <UserContextProvider>
         <WindowWidthProvider >
-          <Toaster />
+          <Toaster position='bottom-right' />
 
           <Routes>
             <Route path='/' element={<Layout />}>

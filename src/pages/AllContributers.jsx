@@ -69,7 +69,7 @@ function AllContributers() {
                 <input
                     type="text"
                     placeholder="Search Contributor"
-                    className={`pl-12 w-full bg-bgTwo pr-6 text-white border-border focus:border-border focus:ring-0 rounded-full py-3 placeholder-gray `}
+                    className={`pl-12 w-full bg-bgTwo pr-6 text-white border-none outline-none focus:ring-0 rounded-full py-3 placeholder-gray `}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
 

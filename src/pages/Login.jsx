@@ -4,7 +4,7 @@ import axios from '../config/axiosConfig'
 import Input from '../components/formComponents/Input'
 import { AuthContext } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import PrimaryButton from '../components/formComponents/PrimaryButton'
 
 function Login() {
@@ -42,23 +42,10 @@ function Login() {
                 navigate("/")
 
 
-                toast.success("Login Successful!", {
-                    position: "top-right",
-                    style: {
-                        background: "#131415",
-                        color: "#FFFFFF",
-                    }
-
-                })
+                toast.success("Login successful!")
             }
             else {
-                toast.error("Incorrect Credentials", {
-                    position: "top-right",
-                    style: {
-                        background: "#131415",
-                        color: "#FFFFFF",
-                    }
-                })
+                toast.error("Incorrect credentials")
             }
 
 

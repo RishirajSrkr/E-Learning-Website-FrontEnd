@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from '../../config/axiosConfig'
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import { MdCheckCircle, MdRadioButtonUnchecked } from 'react-icons/md';
 import { AuthContext } from '../../context/AuthContext'
 import Loader from '../../components/Loader'
@@ -107,13 +107,7 @@ function FullCoursePage() {
             const data = response.data;
 
             if (response.status == 200) {
-                toast.success("Successfully Voted!", {
-                    position: "top-right",
-                    style: {
-                        background: "#1C1210",
-                        color: "#E5E6E6",
-                    }
-                })
+                toast.success("Successfully voted")
             }
 
 
@@ -123,13 +117,7 @@ function FullCoursePage() {
             if (error.response && error.response.data) {
                 console.log(error.response.data);
 
-                toast.error("Already Voted!", {
-                    position: "top-right",
-                    style: {
-                        background: "#1C1210",
-                        color: "#E5E6E6",
-                    }
-                })
+                toast.warn("Already voted")
 
             }
         }
@@ -142,14 +130,7 @@ function FullCoursePage() {
         try {
             setEndCourseIsLoading(true)
 
-            toast.success("Course removed", {
-                position: "top-right",
-                style: {
-                    background: "#1C1210",
-                    color: "#E5E6E6",
-                }
-
-            })
+            toast.success("Course removed successfully")
 
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/end-course/${courseId}`)
             console.log(response.data);
@@ -159,14 +140,7 @@ function FullCoursePage() {
         }
         catch (e) {
 
-            toast.error("Last action failed", {
-                position: "top-right",
-                style: {
-                    background: "#1C1210",
-                    color: "#E5E6E6",
-                }
-
-            })
+            toast.error("Failed to remove course, try again")
             console.log(e);
 
         }

@@ -23,6 +23,7 @@
     "react-intersection-observer": "^9.13.1",
     "react-loading-indicators": "^1.0.0",
     "react-router-dom": "^6.26.2",
+    "sonner": "^1.7.1",
     "swiper": "^11.1.14"
   },
   "devDependencies": {

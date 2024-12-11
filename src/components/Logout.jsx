@@ -2,6 +2,7 @@ import axios from '../config/axiosConfig';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import {toast} from 'sonner'
 
 function Logout() {
 
@@ -13,6 +14,7 @@ function Logout() {
 
         try {
             const status = await logout();
+            toast.success("Logged out successfully")
             if (status == 200) {
                 console.log("Logout Success");
                 navigate("/");
@@ -20,6 +22,7 @@ function Logout() {
             }
 
         } catch (error) {
+            toast.error("Failed to logout")
             console.error("Error logging out: ", error);
             // Optionally, handle error feedback to the user here
         }

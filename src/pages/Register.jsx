@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
 import Input from '../components/formComponents/Input'
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import PrimaryButton from '../components/formComponents/PrimaryButton';
 
 function Register() {
@@ -85,14 +85,7 @@ function Register() {
             console.log(data);
 
 
-            toast.success("Registered Successfully!", {
-                position: "top-right",
-                style: {
-                    background: "#1C1210",
-                    color: "#E5E6E6",
-                }
-
-            })
+            toast.success("Registered successfully!")
 
             // Successfully registered, navigate to home
 
@@ -103,25 +96,11 @@ function Register() {
                 const errorMessage = error.response.data;
                 if (errorMessage === "Email already exists") {
 
-                    toast.error("Email already exists!", {
-                        position: "top-right",
-                        style: {
-                            background: "#1C1210",
-                            color: "#E5E6E6",
-                        }
-
-                    })
+                    toast.warn("Email already exists")
 
                 }
                 else {
-                    toast.error("Fields cannot be empty", {
-                        position: "top-right",
-                        style: {
-                            background: "#1C1210",
-                            color: "#E5E6E6",
-                        }
-
-                    })
+                    toast.warn("Fields cannot be empty")
                 }
             }
         }
