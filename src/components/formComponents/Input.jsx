@@ -15,7 +15,7 @@ function Input({ className, type, name, value, placeholder, onChange, totalWidth
             <div className='flex items-center justify-center w-full border border-border px-4 py-2 rounded-md'>
                 <input type={type}
                     name={name}
-                    className={`placeholder-gray p-0 w-full text-white bg-transparent flex border-none focus:border-none focus:ring-0 ${className}`}
+                    className={`placeholder-gray p-0 w-full outline-none text-white bg-transparent flex border-none focus:border-none focus:ring-0 ${className}`}
                     value={value}
                     placeholder={placeholder}
                     onChange={onChange}

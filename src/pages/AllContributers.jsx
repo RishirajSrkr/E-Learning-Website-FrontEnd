@@ -12,12 +12,9 @@ function AllContributers() {
 
     const [users, setUsers] = useState({});
     const [isLoading, setIsLoading] = useState(false)
-
     const [searchQuery, setSearchQuery] = useState("");
+    const [filteredUsers, setFilteredUsers] = useState({})
 
-    function setQuery(query) {
-        setSearchQuery(query)
-    }
 
 
 
@@ -46,18 +43,23 @@ function AllContributers() {
 
 
 
-    const filteredUsers = Object.keys(users?.users || {}).filter(key =>
-        users[key].name.toLowerCase().includes(searchQuery.toLowerCase())
-        ||
-        users[key].email.split('@')[0].toLowerCase().includes(searchQuery.toLowerCase())
-    ).map(key => users[key]);
+    useEffect(() => {
 
+        const filteredUsers = Object.keys(users ? users : {}).filter(key =>
+            users[key].name.toLowerCase().includes(searchQuery.toLowerCase())
+        ).map(key => users[key]);
+
+        setFilteredUsers(filteredUsers)
+
+    }, [searchQuery])
 
 
     function handleSeeCoursesClick(userId) {
 
         navigate(`/user/${userId}/uploaded-courses`)
     }
+
+
 
     return (
         <div className='pt-12 pb-10 flex flex-col items-center bg-bgOne h-screen w-full'>
@@ -68,7 +70,7 @@ function AllContributers() {
                     type="text"
                     placeholder="Search Contributor"
                     className={`pl-12 w-full bg-bgTwo pr-6 text-white border-border focus:border-border focus:ring-0 rounded-full py-3 placeholder-gray `}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                 />
 
                 <div className='text-accentColor absolute  top-1/2 -translate-y-1/2 left-5'>

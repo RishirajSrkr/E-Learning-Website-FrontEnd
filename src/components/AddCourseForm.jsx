@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { IoCloseSharp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import axios from '../config/axiosConfig'
-import GoBack from '../components/GoBack'
+import { IoCloseSharp } from "react-icons/io5";
 import { toast } from 'react-hot-toast'
 import SecondaryButton from '../components/formComponents/SecondaryButton'
 import CourseCard from '../components/CourseCard'
@@ -11,8 +10,13 @@ import { MdUpload } from "react-icons/md";
 import { WindowWidthContext } from '../context/WindowWidthContext'
 function AddCourseForm() {
 
+  const ref = useRef(null);
+  const fileInputRef = useRef(null);
+
+
   const { loggedInUser } = useContext(AuthContext)
   const { isMobile } = useContext(WindowWidthContext);
+
 
   //restricting the user to delete a chapter if only one chapter is left
   const [deleteButtonDisable, isDeleteButtonDisable] = useState(false);
@@ -26,7 +30,7 @@ function AddCourseForm() {
     courseTitle: "",
     courseDescription: "",
     courseCategory: "",
-    courseImage: null,
+    courseImage: "https://via.placeholder.com/150",
     chapters: [
       {
         chapterContent: "",
@@ -35,10 +39,10 @@ function AddCourseForm() {
     ]
   });
 
-  const ref = useRef(null);
-  const fileInputRef = useRef(null);
+  const [showNotificationDiv, setShowNotificationDiv] = useState(true)
 
   const [isInitialLoad, setIsInitialLoad] = useState(true)
+
 
   useEffect(() => {
     // If it's the initial load, skip and mark it as loaded
@@ -105,6 +109,17 @@ function AddCourseForm() {
 
   }
 
+
+  function handleNotificationDivClose() {
+    setShowNotificationDiv(false)
+  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowNotificationDiv(false)
+
+    }, 60000);
+    return () => { clearTimeout(timer) }
+  }, [])
 
 
 
@@ -181,166 +196,192 @@ function AddCourseForm() {
 
   return (
 
-    <div className='flex'>
+    <div className='flex flex-col'>
 
-      <div className='py-12 sm:py-14 px-10 w-full sm:w-4/6'>
+      {/* ------------------- notification banner ----------------- */}
 
-        <div className='flex flex-col gap-6 mb-8'>
-          <div className='flex w-full gap-10'>
+      {
+        showNotificationDiv &&
 
-            <div className='w-3/5 flex flex-col items-start justify-center gap-2 '>
-              <label className='text-white' htmlFor="courseTitle">Course Name</label>
+        <div className='bg-gradientForBg w-full text-center py-3'>
+          <p className='text-bgOne font-medium text-sm'>To prevent misuse, users are allowed to upload only one file per day. Please ensure the file is accurate and complete before uploading</p>
+
+
+          <button
+            className='absolute right-4 top-3 text-bgOne'
+            onClick={handleNotificationDivClose}><IoCloseSharp size={17} /></button>
+        </div>
+      }
+
+
+      <div className='flex '>
+
+        <div className='py-12 sm:py-14 px-10 w-full sm:w-4/6'>
+
+
+
+          <div className='flex flex-col gap-6 mb-8'>
+            <div className='flex w-full gap-10'>
+
+
+
+              <div className='w-3/5 flex flex-col items-start justify-center gap-2 '>
+                <label className='text-white' htmlFor="courseTitle">Course Name</label>
+                <input type="text"
+                  name='courseTitle'
+                  className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                  value={formData.courseTitle}
+                  placeholder='Spring Boot & Spring Security'
+                  onChange={(e) => handleChange_Other(e)}
+                />
+                <div className='line-1'></div>
+              </div>
+
+              <div className='w-2/5 flex flex-col items-start justify-center gap-2'>
+                <label className=' text-white' htmlFor="courseCategory">Category</label>
+                <input type="text"
+                  name='courseCategory'
+                  className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                  value={formData.courseCategory}
+                  placeholder='Java, Spring Boot, Spring Security'
+                  onChange={(e) => handleChange_Other(e)}
+                />
+                <div className='line-1'></div>
+              </div>
+
+            </div>
+
+            <div className='w-full flex flex-col items-start justify-center gap-2'>
+              <label className='text-white' htmlFor="courseDescription">Course Description</label>
               <input type="text"
-                name='courseTitle'
+                name='courseDescription'
                 className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
-                value={formData.courseTitle}
-                placeholder='Spring Boot & Spring Security'
+                value={formData.courseDescription}
+                placeholder='Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc.'
                 onChange={(e) => handleChange_Other(e)}
               />
               <div className='line-1'></div>
             </div>
 
-            <div className='w-2/5 flex flex-col items-start justify-center gap-2'>
-              <label className=' text-white' htmlFor="courseCategory">Category</label>
-              <input type="text"
-                name='courseCategory'
-                className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
-                value={formData.courseCategory}
-                placeholder='Java, Spring Boot, Spring Security'
-                onChange={(e) => handleChange_Other(e)}
-              />
-              <div className='line-1'></div>
+
+
+            {/* New Course Image Upload Field */}
+
+            {/* Preview Image */}
+            {previewImage && (
+              <div className='my-4'>
+                <p className='text-white'>Image Preview:</p>
+                <img src={previewImage} alt="Course Preview" className='w-64 h-40 object-cover rounded' />
+              </div>
+            )}
+
+
+
+
+            <input ref={fileInputRef}
+              type="file"
+              id='courseImage'
+              accept='image/*'
+              className='hidden'
+              onChange={handleChange_Image} />
+
+            <div
+              onClick={() => fileInputRef.current.click()}
+              className='border border-dashed border-border h-20 flex justify-center items-center cursor-pointer'>
+              <MdUpload className='text-white' size={24} />
             </div>
 
-          </div>
 
-          <div className='w-full flex flex-col items-start justify-center gap-2'>
-            <label className='text-white' htmlFor="courseDescription">Course Description</label>
-            <input type="text"
-              name='courseDescription'
-              className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
-              value={formData.courseDescription}
-              placeholder='Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc.'
-              onChange={(e) => handleChange_Other(e)}
-            />
-            <div className='line-1'></div>
           </div>
 
 
 
-          {/* New Course Image Upload Field */}
+          {
+            formData.chapters.map((chapter, index) => (
 
-          {/* Preview Image */}
-          {previewImage && (
-            <div className='my-4'>
-              <p className='text-white'>Image Preview:</p>
-              <img src={previewImage} alt="Course Preview" className='w-64 h-40 object-cover rounded' />
-            </div>
-          )}
+              <div key={index} className='relative bg-bgOne border border-border rounded-xl flex flex-col p-8 gap-6 mb-6'>
+
+                <div className='flex flex-col gap-2'>
+                  <label className='text-white' htmlFor="chapterTitle">Chapter Title</label>
+
+                  <input type="text"
+                    name='chapterTitle'
+                    className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                    placeholder='Introduction to Spring Boot.'
+                    value={chapter.chapterTitle}
+                    onChange={(e) => handleChange_Chapter(e, index)}
+                  />
+                  <div className='line-1'></div>
+                </div>
+
+                <div className='flex flex-col gap-2'>
+                  <label className='text-white' htmlFor="chapterContent">Chapter Content</label>
+                  <input type="text"
+                    name='chapterContent'
+                    className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                    placeholder='Spring Boot is an open-source Java framework used for programming standalone, production-grade Spring-based applications with a bundle of libraries that make project startup and management easier.'
+                    value={chapter.chapterContent}
+                    onChange={(e) => handleChange_Chapter(e, index)}
+                  />
+                  <div className='line-1'></div>
+                </div>
 
 
 
+                {/* ------------ delete chapter ----------- */}
 
-          <input ref={fileInputRef}
-            type="file"
-            id='courseImage'
-            accept='image/*'
-            className='hidden'
-            onChange={handleChange_Image} />
+                <button
+                  className={`${deleteButtonDisable ? 'cursor-not-allowed opacity-10' : ''} absolute top-4 right-4 text-gray bg-bgTwo w-10 h-10 flex justify-center items-center rounded-full`}
+                  onClick={() => handleDeleteChapterClick(index)}
+                  disabled={deleteButtonDisable}
+                ><MdDelete /></button>
 
-          <div
-            onClick={() => fileInputRef.current.click()}
-            className='border border-dashed border-border h-20 flex justify-center items-center cursor-pointer'>
-            <MdUpload className='text-white' size={24} />
-          </div>
+              </div>
+            ))
+          }
 
+
+          <SecondaryButton
+            text={"New Chapter"}
+            onClick={handleAddChapterClick}
+            classname={"bg-bgTwo text-gray py-2"}
+          />
+
+
+
+          <button
+            type='submit'
+            className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
+            onClick={handleSubmitClick}
+            disabled={!formData.courseTitle || !formData.courseCategory || !formData.courseDescription}
+          >Submit</button>
+
+
+          <div ref={ref}></div>
 
         </div>
+
 
 
 
         {
-          formData.chapters.map((chapter, index) => (
 
-            <div key={index} className='relative bg-bgOne border border-border rounded-xl flex flex-col p-8 gap-6 mb-6'>
+          !isMobile && <div className='w-2/6 border-l text-white border-border pt-6 px-4 flex justify-center '>
 
-              <div className='flex flex-col gap-2'>
-                <label className='text-white' htmlFor="chapterTitle">Chapter Title</label>
+            <CourseCard
+              imageUrl={`${formData.courseImage == "https://via.placeholder.com/150" ? "https://via.placeholder.com/150" : URL.createObjectURL(formData.courseImage)}`}
+              title={`${formData.courseTitle ? formData.courseTitle : "Spring Boot & Spring Security"}`}
+              instructor={loggedInUser}
+              description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}
+              showCTA={true}
+              text={"Enroll"}
+              vote={0}
+            />
+          </div>
 
-                <input type="text"
-                  name='chapterTitle'
-                  className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
-                  placeholder='Introduction to Spring Boot.'
-                  value={chapter.chapterTitle}
-                  onChange={(e) => handleChange_Chapter(e, index)}
-                />
-                <div className='line-1'></div>
-              </div>
-
-              <div className='flex flex-col gap-2'>
-                <label className='text-white' htmlFor="chapterContent">Chapter Content</label>
-                <input type="text"
-                  name='chapterContent'
-                  className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
-                  placeholder='Spring Boot is an open-source Java framework used for programming standalone, production-grade Spring-based applications with a bundle of libraries that make project startup and management easier.'
-                  value={chapter.chapterContent}
-                  onChange={(e) => handleChange_Chapter(e, index)}
-                />
-                <div className='line-1'></div>
-              </div>
-
-
-
-              {/* ------------ delete chapter ----------- */}
-
-              <button
-                className={`${deleteButtonDisable ? 'cursor-not-allowed opacity-10' : ''} absolute top-4 right-4 text-gray bg-bgTwo w-10 h-10 flex justify-center items-center rounded-full`}
-                onClick={() => handleDeleteChapterClick(index)}
-                disabled={deleteButtonDisable}
-              ><MdDelete /></button>
-
-            </div>
-          ))
         }
 
-
-        <SecondaryButton
-          text={"New Chapter"}
-          onClick={handleAddChapterClick}
-          classname={"text-gray py-2"}
-        />
-
-
-
-        <button
-          type='submit'
-          className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
-          onClick={handleSubmitClick}
-          disabled={!formData.courseTitle || !formData.courseCategory || !formData.courseDescription}
-        >Submit</button>
-
-
-        <div ref={ref}></div>
-
       </div>
-
-
-
-
-      {
-        !isMobile && <div className='w-2/6 border-l text-white border-border pt-12 px-4 flex justify-center '>
-
-          <CourseCard
-            title={`${formData.courseTitle ? formData.courseTitle : "Spring Boot & Spring Security"}`}
-            instructor={loggedInUser}
-            description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}
-            showCTA={true}
-            text={"Enroll"}
-            vote={0}
-          />
-        </div>
-
-      }
 
     </div>
   )
