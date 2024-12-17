@@ -124,9 +124,8 @@ function UpdateProfile() {
 
 
 
-
     return (
-        <div className='min-h-screen bg-bgOne w-full flex flex-col gap-12 justify-center items-center py-32'>
+        <div className='min-h-screen  w-full flex flex-col gap-12 justify-center items-center py-32'>
 
             <form className='flex flex-col w-3/5  gap-12 '>
 
@@ -149,8 +148,8 @@ function UpdateProfile() {
 
                         <div
                             onClick={() => profileImageRef.current.click()}
-                            className='bg-gradientForBg flex cursor-pointer justify-center items-center p-2 rounded-full  absolute bottom-0 right-2'>
-                            <MdEdit className=' text-black' />
+                            className='bg-gray-100 text-black dark:text-gray-100 dark:bg-bgThree flex cursor-pointer justify-center items-center p-2 rounded-full  absolute bottom-0 right-2'>
+                            <MdEdit />
 
                         </div>
                         <input
@@ -163,10 +162,7 @@ function UpdateProfile() {
                         />
                     </div>
 
-                    <div className='flex gap-4'>
-                        <SecondaryButton text={"Remove Picture"} classname={" rounded-md bg-transparent border border-border text-white px-2"} />
-
-                    </div>
+            
                 </div>
 
 

@@ -31,7 +31,7 @@ function Logout() {
     return (
 
         <button
-            className={`w-full rounded-md text-sm px-5 bg-bgTwo text-gray py-3 font-medium`}
+            className={`w-full rounded-md text-sm px-5 dark:bg-bgTwo bg-gray-100 py-3 font-medium`}
             onClick={handleLogout}
         >
             Logout Profile

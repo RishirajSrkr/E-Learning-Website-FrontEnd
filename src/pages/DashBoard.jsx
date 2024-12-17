@@ -96,7 +96,7 @@ function DashBoard() {
 
 
   return (
-    <div className='min-h-screen bg-bgOne flex justify-center w-full' >
+    <div className='min-h-screen dark:bg-black bg-white text-black dark:text-white flex justify-center w-full' >
 
       {
         isLoading ?
@@ -112,13 +112,13 @@ function DashBoard() {
 
           (
 
-            <div className='py-40 flex flex-col  items-center bg-bgOne gap-4 '>
+            <div className='py-40 flex flex-col  items-center  gap-4 '>
 
 
               <div className='flex justify-center items-center gap-4 relative'>
 
-                <div onClick={() => fetchEnrolledCourses()} className='cursor-pointer bg-bgTwo p-2 rounded-full absolute left-0 -top-10'>
-                  <TbReload className='text-accentColor' />
+                <div onClick={() => fetchEnrolledCourses()} className='cursor-pointer bg-gray-50 dark:bg-bgTwo p-2 rounded-full absolute left-0 -top-10'>
+                  <TbReload className='text-gray-500' />
                 </div>
 
                 <DashBoardCard
@@ -126,7 +126,7 @@ function DashBoard() {
                   headtext={"Uploaded Courses"}
                   subtext={"We appreciate your efforts!"}
                   value={Object.keys(uploadedCourses).length}
-                  icon={<RiFileUploadLine className={`${selected === "uploaded-courses" ? "text-accentColor" : "text-gray"}`} />}
+                  icon={<RiFileUploadLine  />}
                   onClick={() => setSelected("uploaded-courses")}
                   isSelected={selected == "uploaded-courses"}
 
@@ -138,7 +138,7 @@ function DashBoard() {
                   headtext={"Enrolled Courses"}
                   subtext={"Level up your skills!"}
                   value={Object.keys(enrolledCourses).length}
-                  icon={<FaBookOpen className={`${selected === "enrolled-courses" ? "text-accentColor" : "text-gray"}`} />}
+                  icon={<FaBookOpen />}
                   onClick={() => setSelected("enrolled-courses")}
                   isSelected={selected == "enrolled-courses"}
 
@@ -149,7 +149,7 @@ function DashBoard() {
                   headtext={"Total Votes"}
                   subtext={"People are loving your courses!"}
                   value={votes}
-                  icon={<BiLike className={`${selected === "top-voted" ? "text-accentColor" : "text-gray"}`} />}
+                  icon={<BiLike />}
                   onClick={() => setSelected("top-voted")}
                   isSelected={selected == "top-voted"}
 
@@ -162,7 +162,7 @@ function DashBoard() {
                 selected == "uploaded-courses" && <div className='flex flex-col gap-2 w-full'>
 
                   {
-                    Object.keys(uploadedCourses).length == 0 && <div className='text-gray text-center'>
+                    Object.keys(uploadedCourses).length == 0 && <div className='text-gray-500 text-center'>
                       <p>You don't have any uploaded courses.</p>
                       <p>Contribute now & be a part of the journey.</p>
 
@@ -178,7 +178,7 @@ function DashBoard() {
                   {
                     Object.keys(uploadedCourses).map((key) => {
                       return <div key={key}
-                        className='text-white rounded-md bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
+                        className='text-black dark:text-white rounded-md bg-gray-100 dark:bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
                       >
                         {uploadedCourses[key].courseName}
 
@@ -193,7 +193,7 @@ function DashBoard() {
                             initial={{ x: 50, opacity: 0 }}
                             animate={{ x: 0, opacity: 100 }}
                             transition={{ delay: 0 }}
-                            className='bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
+                            className='bg-gray-50 dark:bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
                           >
 
 
@@ -222,7 +222,7 @@ function DashBoard() {
                 selected == "enrolled-courses" && <div className='flex flex-col gap-2 w-full'>
 
                   {
-                    Object.keys(enrolledCourses).length == 0 && <div className='text-gray text-center'>
+                    Object.keys(enrolledCourses).length == 0 && <div className='text-gray-500 text-center'>
                       <p>You don't have any enrolled courses.</p>
                       <p>Enroll now & be a part of the journey.</p>
 
@@ -241,7 +241,7 @@ function DashBoard() {
                   {
                     Object.keys(enrolledCourses).map((key) => {
                       return <div key={key}
-                        className='text-white rounded-md bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
+                        className='rounded-md bg-gray-100 dark:bg-bgTwo w-full px-8 py-4 font-medium text-2xl flex justify-between items-center relative'
                       >
                         {enrolledCourses[key].courseName}
 
@@ -252,8 +252,11 @@ function DashBoard() {
                         />
 
                         {
-                          showDropdown === key && <div
-                            className='bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
+                          showDropdown === key && <motion.div
+                          initial={{ x: 50, opacity: 0 }}
+                          animate={{ x: 0, opacity: 100 }}
+                          transition={{ delay: 0 }}
+                             className='bg-gray-50 dark:bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
                           >
 
 
@@ -261,7 +264,7 @@ function DashBoard() {
 
                             <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm flex items-center gap-2'>  <FaShareAlt size={12} />Share</Link>
 
-                          </div>
+                          </motion.div>
                         }
 
                       </div>

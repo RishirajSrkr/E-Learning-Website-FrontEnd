@@ -6,6 +6,8 @@ import { MdCheckCircle, MdRadioButtonUnchecked } from 'react-icons/md';
 import { AuthContext } from '../../context/AuthContext'
 import Loader from '../../components/Loader'
 import { CgMenuGridR } from "react-icons/cg";
+import { motion } from 'framer-motion';
+
 function FullCoursePage() {
 
     const navigate = useNavigate();
@@ -140,20 +142,37 @@ function FullCoursePage() {
             navigate(`/course/${courseId}`)
 
         }
-    
+
 
     }
 
 
     function handleDiscussionsClick() {
 
-        
+
         navigate(`/course/${courseId}/discussions`)
     }
 
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1, // Staggering effect for children
+            },
+        },
+    };
+
+    const buttonVariants = {
+        hidden: { opacity: 0, y: -20 }, // Start above with 0 opacity
+        visible: { opacity: 1, y: 0 },  // Slide down with full opacity
+    };
+
+
+
     return (
-        <div ref={ref} className='bg-bgOne text-white pb-10 min-h-screen w-full'>
+        <div ref={ref} className='dark:bg-black bg-white text-black dark:text-white pb-10 min-h-screen w-full'>
 
             {
                 isLoading ?
@@ -172,31 +191,45 @@ function FullCoursePage() {
                             {
                                 course?.instructorName != loggedInUser && <button
                                     onClick={() => setShowVoteAndOtherOptions(prev => !prev)}
-                                    className='fixed right-10 top-10'
-                                ><CgMenuGridR size={22} /></button>
+                                    className='fixed top-24 right-10 '
+                                ><CgMenuGridR size={24} /></button>
 
                             }
 
                             {
 
-                                showVoteAndOtherOptions && <div className='flex flex-col gap-2 fixed top-20 w-36 right-10 bg-bgTwo p-6 rounded-lg'>
+                                showVoteAndOtherOptions && <div className='flex flex-col gap-1 fixed top-28 right-10  p-6 rounded-lg  text-sm font-medium'>
 
+                                    <motion.div
+                                        variants={containerVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        className="space-y-1" // Adds spacing between buttons
+                                    >
+                                        <motion.button
+                                            variants={buttonVariants}
+                                            onClick={handleVoteClick}
+                                            className="bg-gray-50 dark:bg-bgTwo px-6 py-2 flex gap-2 items-center justify-start w-32"
+                                        >
+                                            Up Vote
+                                        </motion.button>
 
-                                    <button
-                                        onClick={handleVoteClick}
-                                        className='text-sm font-medium flex gap-2 items-center justify-start'
-                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Up Vote</button>
+                                        <motion.button
+                                            variants={buttonVariants}
+                                            onClick={handleDiscussionsClick}
+                                            className="bg-gray-50 dark:bg-bgTwo px-6 py-2 flex gap-2 items-center justify-start w-32"
+                                        >
+                                            Discussion
+                                        </motion.button>
 
-                                    <button
-                                        onClick={handleDiscussionsClick}
-                                        className='text-sm font-medium flex gap-2 items-center justify-start'
-                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>Discussion</button>
-
-                                    <button
-                                        onClick={handleEndCourse}
-                                        className='text-sm font-medium flex gap-2 items-center justify-start'
-                                    ><div className='h-2 w-2 rounded-full bg-accentColor'></div>End Course</button>
-
+                                        <motion.button
+                                            variants={buttonVariants}
+                                            onClick={handleEndCourse}
+                                            className="bg-gray-50 dark:bg-bgTwo px-6 py-2 flex gap-2 items-center justify-start w-32"
+                                        >
+                                            End Course
+                                        </motion.button>
+                                    </motion.div>
 
 
                                 </div>
@@ -209,7 +242,7 @@ function FullCoursePage() {
                                 <div className='flex flex-col gap-4 mb-8'>
                                     <h1 className='text-5xl font-semibold '>{course?.courseName}</h1>
 
-                                    <div className='mt-2 w-full h-[1px] bg-bgThree'></div>
+                                    <div className='mt-2 w-full h-[1px] bg-lightBorder dark:bg-darkBorder '></div>
 
                                     <div className='flex gap-10'>
                                         <div>
@@ -223,13 +256,13 @@ function FullCoursePage() {
                                         </div>
                                     </div>
 
-                                    {/* <div className='bg-bgOne  border border-green w-fit px-6 py-2 rounded-full text-sm font-semibold'>{course?.chapters.length} Chapters</div> */}
+                                    {/* <div className='border border-lightBorder dark:border-darkBorder w-fit px-6 py-2 rounded-full text-sm font-semibold'>{course?.chapters.length} Chapters</div> */}
                                 </div>
 
                                 <div className='w-full'>
                                     {
                                         course?.chapters?.map((chapter, index) => (
-                                            <div key={index} className={`relative mb-8 px-10 py-8 flex w-full flex-col gap-y-4 border border-border rounded-xl ${isChapterMarkedComplete(index) ? "opacity-40" : "opacity-100"}`}>
+                                            <div key={index} className={`relative mb-8 px-10 py-8 flex w-full flex-col gap-y-4 border border-lightBorder dark:border-darkBorder rounded-xl ${isChapterMarkedComplete(index) ? "opacity-40" : "opacity-100"}`}>
 
 
                                                 <button onClick={() => handleMarkClick(index)} className=' absolute right-8 flex w-full items-center justify-end gap-2'>

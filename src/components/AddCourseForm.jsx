@@ -39,7 +39,6 @@ function AddCourseForm() {
     ]
   });
 
-  const [showNotificationDiv, setShowNotificationDiv] = useState(true)
 
   const [isInitialLoad, setIsInitialLoad] = useState(true)
 
@@ -182,27 +181,13 @@ function AddCourseForm() {
 
   return (
 
-    <div className='flex flex-col'>
+    <div className='flex flex-col py-16'>
 
-      {/* ------------------- notification banner ----------------- */}
-
-      {
-        showNotificationDiv &&
-
-        <div className='bg-gradientForBg w-full text-center py-3'>
-          <p className='text-bgOne font-medium text-sm'>To prevent misuse, users are allowed to upload only one file per day. Please ensure the file is accurate and complete before uploading</p>
-
-
-          <button
-            className='absolute right-4 top-3 text-bgOne'
-            onClick={handleNotificationDivClose}><IoCloseSharp size={17} /></button>
-        </div>
-      }
-
+  
 
       <div className='flex '>
 
-        <div className='py-12 sm:py-14 px-10 w-full sm:w-4/6'>
+        <div className=' sm:py-14 px-10 w-full sm:w-4/6'>
 
 
 
@@ -212,41 +197,40 @@ function AddCourseForm() {
 
 
               <div className='w-3/5 flex flex-col items-start justify-center gap-2 '>
-                <label className='text-white' htmlFor="courseTitle">Course Name</label>
+                <label className='' htmlFor="courseTitle">Course Name</label>
                 <input type="text"
                   name='courseTitle'
-                  className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                  className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
                   value={formData.courseTitle}
                   placeholder='Spring Boot & Spring Security'
                   onChange={(e) => handleChange_Other(e)}
                 />
-                <div className='line-1'></div>
+              
               </div>
 
               <div className='w-2/5 flex flex-col items-start justify-center gap-2'>
-                <label className=' text-white' htmlFor="courseCategory">Category</label>
+                <label className=' ' htmlFor="courseCategory">Category</label>
                 <input type="text"
                   name='courseCategory'
-                  className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                  className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent  border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor'
                   value={formData.courseCategory}
                   placeholder='Java, Spring Boot, Spring Security'
                   onChange={(e) => handleChange_Other(e)}
                 />
-                <div className='line-1'></div>
+    
               </div>
 
             </div>
 
             <div className='w-full flex flex-col items-start justify-center gap-2'>
-              <label className='text-white' htmlFor="courseDescription">Course Description</label>
+              <label className='' htmlFor="courseDescription">Course Description</label>
               <input type="text"
                 name='courseDescription'
-                className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent  border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor '
                 value={formData.courseDescription}
                 placeholder='Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc.'
                 onChange={(e) => handleChange_Other(e)}
               />
-              <div className='line-1'></div>
             </div>
 
 
@@ -256,7 +240,7 @@ function AddCourseForm() {
             {/* Preview Image */}
             {previewImage && (
               <div className='my-4'>
-                <p className='text-white'>Image Preview:</p>
+                <p className=''>Image Preview:</p>
                 <img src={previewImage} alt="Course Preview" className='w-64 h-40 object-cover rounded' />
               </div>
             )}
@@ -273,8 +257,8 @@ function AddCourseForm() {
 
             <div
               onClick={() => fileInputRef.current.click()}
-              className='border border-dashed border-border h-20 flex justify-center items-center cursor-pointer'>
-              <MdUpload className='text-white' size={24} />
+              className='border border-dashed border-lightBorder h-20 flex justify-center items-center cursor-pointer'>
+              <MdUpload  size={24} />
             </div>
 
 
@@ -285,31 +269,31 @@ function AddCourseForm() {
           {
             formData.chapters.map((chapter, index) => (
 
-              <div key={index} className='relative bg-bgOne border border-border rounded-xl flex flex-col p-8 gap-6 mb-6'>
+              <div key={index} className='relative dark:bg-black bg-white border border-lightBorder dark:border-darkBorder rounded-xl flex flex-col p-8 gap-6 mb-6'>
 
                 <div className='flex flex-col gap-2'>
-                  <label className='text-white' htmlFor="chapterTitle">Chapter Title</label>
+                  <label className='' htmlFor="chapterTitle">Chapter Title</label>
 
                   <input type="text"
                     name='chapterTitle'
-                    className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none  border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
                     placeholder='Introduction to Spring Boot.'
                     value={chapter.chapterTitle}
                     onChange={(e) => handleChange_Chapter(e, index)}
                   />
-                  <div className='line-1'></div>
+                
                 </div>
 
                 <div className='flex flex-col gap-2'>
                   <label className='text-white' htmlFor="chapterContent">Chapter Content</label>
                   <input type="text"
                     name='chapterContent'
-                    className='pr-6 pl-0 py-0 pt-3 w-full text-white bg-transparent border-none focus:border-none focus:ring-0 placeholder-subtextColor'
+                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
                     placeholder='Spring Boot is an open-source Java framework used for programming standalone, production-grade Spring-based applications with a bundle of libraries that make project startup and management easier.'
                     value={chapter.chapterContent}
                     onChange={(e) => handleChange_Chapter(e, index)}
                   />
-                  <div className='line-1'></div>
+                
                 </div>
 
 
@@ -317,7 +301,7 @@ function AddCourseForm() {
                 {/* ------------ delete chapter ----------- */}
 
                 <button
-                  className={`${deleteButtonDisable ? 'cursor-not-allowed opacity-10' : ''} absolute top-4 right-4 text-gray bg-bgTwo w-10 h-10 flex justify-center items-center rounded-full`}
+                  className={`${deleteButtonDisable ? 'cursor-not-allowed opacity-10' : ''} absolute top-4 right-4 bg-black dark:bg-white text-white dark:text-black w-10 h-10 flex justify-center items-center rounded-full`}
                   onClick={() => handleDeleteChapterClick(index)}
                   disabled={deleteButtonDisable}
                 ><MdDelete /></button>
@@ -330,14 +314,14 @@ function AddCourseForm() {
           <SecondaryButton
             text={"New Chapter"}
             onClick={handleAddChapterClick}
-            classname={"bg-bgTwo text-gray py-2"}
+            classname={"bg-black dark:bg-white text-white dark:text-black py-2"}
           />
 
 
 
           <button
             type='submit'
-            className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-gradientForBg rounded-full text-bgOne px-10 py-3 font-semibold ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
+            className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-black dark:bg-white rounded-full text-white dark:text-black px-10 py-3 font-medium ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
             onClick={handleSubmitClick}
             disabled={!formData.courseTitle || !formData.courseCategory || !formData.courseDescription}
           >Submit</button>
@@ -352,7 +336,7 @@ function AddCourseForm() {
 
         {
 
-          !isMobile && <div className='w-2/6 border-l text-white border-border pt-6 px-4 flex justify-center '>
+          !isMobile && <div className='w-2/6 border-l  border-lightBorder dark:border-darkBorder pt-6 px-4 flex justify-center '>
 
             <CourseCard
               imageUrl={`${formData.courseImage == "https://via.placeholder.com/150" ? "https://via.placeholder.com/150" : URL.createObjectURL(formData.courseImage)}`}

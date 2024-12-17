@@ -17,10 +17,6 @@ function Navbar() {
 
     const location = useLocation();
 
-    const hideNavbarPaths = /^\/course\/[a-zA-Z0-9]+$/; // Regex for '/course/someCourseId'
-    const isFullCoursePage = hideNavbarPaths.test(location.pathname)
-
-
     const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
     const { user } = useContext(UserContext)
@@ -271,7 +267,7 @@ function Navbar() {
 
 
                     (
-                        <div className={`${isFullCoursePage ? "hidden" : ""}  w-full flex flex-col justify-between items-center text-gray  text-sm font-medium fixed top-auto z-50 left-0   bg-transparent backdrop-blur-2xl transition-all duration-300 ease-out`}>
+                        <div className={`w-full flex flex-col justify-between items-center text-gray  text-sm font-medium fixed top-auto z-50 left-0   bg-transparent backdrop-blur-2xl transition-all duration-300 ease-out`}>
 
 
 
@@ -375,7 +371,7 @@ function Navbar() {
                                                     animate={{ y: 0, opacity: 100 }}
                                                     transition={{ delay: 0 }}
 
-                                                    className='bg-bgTwo px-8 py-4 rounded-lg absolute top-16 flex flex-col gap-2 items-start'>
+                                                    className='bg-gray-50 dark:bg-bgTwo px-8 py-4 rounded-lg absolute top-14 flex flex-col gap-2 items-start text-black dark:text-white'>
 
                                                     <Link onClick={handleDropDownClose} className='flex justify-center items-center gap-2' to={"/dashboard"}><RxDashboard /> Dashboard</Link>
                                                     <Link onClick={handleDropDownClose} className='flex justify-center items-center gap-2' to={"/my-profile"}><CgProfile />My Profile</Link>
