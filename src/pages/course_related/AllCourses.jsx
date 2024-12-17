@@ -171,7 +171,7 @@ function AllCourses() {
                                                 imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
                                                 instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
                                                 description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
-                                                vote={searchQuery ? filteredCourses[key].votes : courses[key].votes}
+                                                votes={searchQuery ? filteredCourses[key].votes : courses[key].votes}
                                                 onClick={() => handleCourseEnroll(key)}
                                                 showCTA={true}
                                                 text={"Enroll"}

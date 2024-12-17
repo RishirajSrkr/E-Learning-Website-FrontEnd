@@ -1,22 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { dotStream } from 'ldrs'
 import { RiArrowRightLine } from "react-icons/ri";
 dotStream.register()
 
-function PrimaryButton({ text, classname, onClick, isLoading, arrow}) {
+function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
+
+  const [theme, setTheme] = useState("light");
+
+  const html = document.documentElement;
+
+  useEffect(() => {
+    if (html.classList.contains("dark")) {
+      setTheme("dark");
+    }
+    else{
+      setTheme("light")
+    }
+  }, [])
+
+
   return (
     <button
-   
+
       className={`${classname} font-medium rounded-full flex items-center h-10 bg-bgOne dark:bg-gradientForBg text-offwhite dark:text-bgOne group hover:opacity-90 transition-opacity duration-300`}
       onClick={onClick}
     >
       {isLoading &&
+
         <div className='mx-auto w-full'>
+
           <l-dot-stream
             size="36"
             speed="3.5"
-            color="black"
+            color={theme == "dark" ? "black" : "white" }
           ></l-dot-stream>
+
+
         </div>
       }
 

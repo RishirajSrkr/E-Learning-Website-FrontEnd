@@ -96,11 +96,11 @@ function Register() {
                 const errorMessage = error.response.data;
                 if (errorMessage === "Email already exists") {
 
-                    toast.warn("Email already exists")
+                    toast.warning("Email already exists")
 
                 }
                 else {
-                    toast.warn("Fields cannot be empty")
+                    toast.warning("Fields cannot be empty")
                 }
             }
         }
@@ -203,7 +203,7 @@ function Register() {
 
                     <div
                         onClick={() => profileImageRef.current.click()}
-                        className='border w-full border-dashed border-border h-12 flex justify-center  items-center cursor-pointer text-sm '>
+                        className='border w-full border-dashed dark:border-darkBorder border-lightBorder h-12 flex justify-center  items-center cursor-pointer text-sm '>
                         Image Upload
                     </div>
                 </div>
