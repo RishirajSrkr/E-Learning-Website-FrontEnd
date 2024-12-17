@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@splidejs/react-splide": "^0.7.12",
     "@tailwindcss/forms": "^0.5.9",
     "axios": "^1.7.7",
     "framer-motion": "^11.11.9",

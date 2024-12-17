@@ -62,18 +62,18 @@ function AllContributers() {
 
 
     return (
-        <div className='pt-12 pb-10 flex flex-col items-center bg-bgOne h-screen w-full'>
+        <div className='pt-28 pb-10 flex flex-col items-center bg-white dark:bg-black text-black dark:text-white h-screen w-full'>
 
             <div className='relative w-1/3'>
 
                 <input
                     type="text"
                     placeholder="Search Contributor"
-                    className={`pl-12 w-full bg-bgTwo pr-6 text-white border-none outline-none focus:ring-0 rounded-full py-3 placeholder-gray `}
+                    className={`pl-12 w-full bg-gray-100  dark:bg-bgTwo pr-6 dark:text-white border-none outline-none focus:ring-0 rounded-full py-3 placeholder-gray `}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
 
-                <div className='text-accentColor absolute  top-1/2 -translate-y-1/2 left-5'>
+                <div className='text-gray-500 absolute  top-1/2 -translate-y-1/2 left-5'>
                     <IoPersonSharp />
                 </div>
             </div>
@@ -109,7 +109,7 @@ function AllContributers() {
                                                             name={filteredUsers[key].name}
                                                             email={filteredUsers[key].email}
                                                             bio={filteredUsers[key].bio}
-                                                            uploadedCourse={filteredUsers[key].uploadedCourse}
+                                                            uploadedCourses={filteredUsers[key].uploadedCourses}
                                                             onClick={() => handleSeeCoursesClick(key)}
 
                                                         />
@@ -120,7 +120,7 @@ function AllContributers() {
                                             :
 
                                             (
-                                                <p className='text-center mt-40 text-gray'>No contributors found with the name : {searchQuery}</p>
+                                                <p className='text-center mt-40 text-gray-500'>No contributors found with the name : {searchQuery}</p>
                                             )
                                     )
 
@@ -135,7 +135,7 @@ function AllContributers() {
                                                 name={users[key].name}
                                                 email={users[key].email}
                                                 bio={users[key].bio}
-                                                uploadedCourse={users[key].uploadedCourse}
+                                                uploadedCourses={users[key].uploadedCourses}
                                                 onClick={() => handleSeeCoursesClick(key)}
                                                 profileImage={users[key].profileImage}
 

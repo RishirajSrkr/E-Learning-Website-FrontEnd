@@ -61,7 +61,7 @@ function Login() {
 
 
     return (
-             <div className='py-1 bg-bgOne w-full flex flex-col  justify-center items-center'>
+             <div className='py-1 dark:bg-black bg-white text-black dark:text-white w-full flex flex-col  justify-center items-center'>
 
 
 
@@ -109,7 +109,7 @@ function Login() {
 
 
                         <div>
-                            <p className='text-gray text-sm'>Don't have an account? <Link to={"/register"}>Register</Link></p>
+                            <p className='text-gray-500 text-sm'>Don't have an account? <Link to={"/register"}>Register</Link></p>
                         </div>
 
 

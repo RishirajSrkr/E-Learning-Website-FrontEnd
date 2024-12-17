@@ -124,7 +124,7 @@ function Register() {
 
     return (
 
-        <div className='py-0 bg-bgOne w-full flex flex-col  justify-center items-center'>
+        <div className='py-0 dark:bg-black bg-white text-black dark:text-white w-full flex flex-col  justify-center items-center'>
             {/* ------------ form -------------- */}
 
 
@@ -182,7 +182,7 @@ function Register() {
 
                 <div className='flex w-full gap-3 items-center my-6'>
 
-                    <div className=' min-h-12 min-w-12  border border-border border-dashed'>
+                    <div className=' min-h-12 min-w-12  border border-lightBorder dark:border-darkBorder border-dashed'>
                         {imagePreview && (
 
                             <img src={imagePreview} alt="Profile image preview" className='w-12 h-12 object-cover rounded' />
@@ -203,7 +203,7 @@ function Register() {
 
                     <div
                         onClick={() => profileImageRef.current.click()}
-                        className='border w-full border-dashed border-border h-12 flex justify-center text-white items-center cursor-pointer text-sm '>
+                        className='border w-full border-dashed border-border h-12 flex justify-center  items-center cursor-pointer text-sm '>
                         Image Upload
                     </div>
                 </div>
@@ -221,7 +221,7 @@ function Register() {
 
 
                 <div className='text-left  mt-4 sm:mt-6'>
-                    <p className='text-gray text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
+                    <p className='text-gray-500 text-sm'>Already have an account? <Link to={"/login"}>Login</Link></p>
                 </div>
 
 

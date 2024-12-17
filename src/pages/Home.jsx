@@ -1,20 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CourseCard from '../components/CourseCard';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { FaSearch, FaShare, FaShareAlt, FaThumbsUp, FaUsers, FaVoteYea } from 'react-icons/fa';
 import { IoArrowForwardSharp } from "react-icons/io5";
 import { WindowWidthContext } from '../context/WindowWidthContext';
-import { BsArrowUpRightCircle } from "react-icons/bs";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/pagination';
 import PrimaryButton from '../components/formComponents/PrimaryButton';
+import {Reviews} from '../components/Reviews';
 
-import HomePageComponent from '../components/Home pages/HomePageComponent'
-import Reviews from '../components/Reviews';
+
 function Home() {
 
     const navigate = useNavigate();
@@ -30,7 +22,7 @@ function Home() {
 
     return (
 
-        <div className='  relative bg-bgOne min-h-screen pb-12'>
+        <div className=' relative bg-white dark:bg-bgOne text-bgOne dark:text-white  min-h-screen pb-12'>
 
 
             {/* --------------------------------- HEAD LINE --------------------------------- */}
@@ -38,18 +30,18 @@ function Home() {
             <div className='w-full px-4 sm:min-h-screen flex flex-col justify-center gap-4 sm:px-24 mb-6 sm:mb-0'>
 
 
-                <div className='w-full  p-8 flex flex-col gap-2 text-center rounded-lg sm:p-20 sm:gap-6'>
+                <div className='w-full p-8 flex flex-col gap-2 text-center rounded-lg sm:p-20 sm:gap-6'>
 
 
                     {/* ---------- headline ------------ */}
-                    <div className='bg-gradient-to-r from-gray to-offwhite bg-clip-text text-transparent tracking-tight font-medium sm:text-7xl'>
+                    <div className='tracking-tight font-medium sm:text-7xl'>
                         <h2 className=' mb-1'>Discover the best</h2>
                         <h2>developer resources.</h2>
                     </div>
 
                     {/* ------------- subtext ------------ */}
-                    <div className='text-gray text-xl font-medium mb-4 sm:mb-0'>
-                        <p>Voted by <span className='text-offwhite'>developers like you</span>, for <span className='text-offwhite'>you.</span></p>
+                    <div className='text-gray-500 text-xl font-medium mb-4 sm:mb-0'>
+                        <p>Voted by <span className='text-bgOne dark:text-white'>developers like you</span>, for you.</p>
                     </div>
 
 
@@ -81,52 +73,52 @@ function Home() {
             {/* ----------------------- DESCRIPTION -------------------------- */}
 
             <div className='min-h-screen'>
-                <h2 className="text-3xl font-medium text-gray text-center mb-20">How it works?</h2>
+                <h2 className="text-3xl font-medium text-bgOne dark:text-gray-500 text-center mb-20">How it works?</h2>
 
                 <div className='flex justify-center items-start w-2/3 gap-16 flex-wrap mx-auto text-center'>
 
-                    <div className='text-offwhite flex flex-col gap-3 w-80 items-center '>
-                        <div className='bg-bgTwo w-fit h-fit p-4 text-2xl rounded-lg flex justify-center items-center'>
+                    <div className='text-bgOne dark:text-white flex flex-col gap-3 w-80 items-center '>
+                        <div className='bg-bgTwo w-fit h-fit p-4 text-xl rounded-full flex justify-center items-center text-white dark:text-gray-300'>
                             <FaSearch />
                         </div>
                         <div>
                             <h4 className='font-medium'>Search for Resources</h4>
-                            <p className='text-gray leading-tight'>Find quality learning resources easily by searching for specific topics.</p>
+                            <p className='text-gray-500 leading-tight'>Find quality learning resources easily by searching for specific topics.</p>
                         </div>
                     </div>
 
 
-                    <div className='text-offwhite flex flex-col gap-3 w-80 items-center'>
-                        <div className='bg-bgTwo w-fit h-fit p-4 text-2xl rounded-lg flex justify-center items-center'>
+                    <div className='text-bgOne dark:text-white flex flex-col gap-3 w-80 items-center'>
+                        <div className='bg-bgTwo w-fit h-fit p-4 text-xl rounded-full flex justify-center items-center text-white dark:text-gray-300'>
                             <FaShare />
                         </div>
                         <div>
                             <h4 className='font-medium'>Share Your Favorite Resources</h4>
-                            <p className='text-gray leading-tight'>Share valuable resources that helped you learn something new, from videos to articles.</p>
+                            <p className='text-gray-500 leading-tight'>Share valuable resources that helped you learn something new, from videos to articles.</p>
                         </div>
                     </div>
 
 
-                    <div className='text-offwhite flex flex-col gap-3 w-80 items-center'>
-                        <div className='bg-bgTwo w-fit h-fit p-4 text-2xl rounded-lg flex justify-center items-center'>
+                    <div className='text-bgOne dark:text-white flex flex-col gap-3 w-80 items-center'>
+                        <div className='bg-bgTwo w-fit h-fit p-4 text-xl rounded-full flex justify-center items-center text-white dark:text-gray-300'>
                             <FaUsers />
                         </div>
                         <div>
                             <h4 className='font-medium'>Community-Driven, Free Access</h4>
-                            <p className='text-gray leading-tight'>Join a growing community of learners, contribute freely, and gain access to high-quality resources.</p>
+                            <p className='text-gray-500 leading-tight'>Join a growing community of learners, contribute freely, and gain access to high-quality resources.</p>
                         </div>
                     </div>
 
 
 
 
-                    <div className='text-offwhite flex flex-col gap-3 w-80 items-center'>
-                        <div className='bg-bgTwo w-fit h-fit p-4 text-2xl rounded-lg flex justify-center items-center'>
+                    <div className='text-bgOne dark:text-white flex flex-col gap-3 w-80 items-center'>
+                        <div className='bg-bgTwo w-fit h-fit p-4 text-xl rounded-full flex justify-center items-center text-white dark:text-gray-300'>
                             <FaThumbsUp />
                         </div>
                         <div>
                             <h4 className='font-medium'>Upvote and Curate the Best Content</h4>
-                            <p className='text-gray leading-tight'>Vote for resources that helped you the most and help others find the best content.</p>
+                            <p className='text-gray-500 leading-tight'>Vote for resources that helped you the most and help others find the best content.</p>
                         </div>
                     </div>
 
@@ -142,7 +134,7 @@ function Home() {
 
             <div className='px-32'>
 
-                <h2 className="text-3xl font-medium text-gray text-center mb-16"><span className='text-offwhite'>1200+</span> active learners.</h2>
+                <h2 className="text-3xl font-medium text-bgOne dark:text-gray-500 text-center mb-16">Listen from our learners.</h2>
 
                 <Reviews />
 

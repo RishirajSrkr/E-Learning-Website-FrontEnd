@@ -3,26 +3,41 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import { Route, Routes } from 'react-router-dom'
+
 import AllContributers from './pages/AllContributers'
-import AllCourses from './pages/course_related/AllCourses'
-import AddCoursePage from './pages/course_related/AddCoursePage.jsx'
-import FullCoursePage from './pages/course_related/FullCoursePage.jsx'
+
 import Layout from './pages/Layout'
-import About from './pages/About'
+
+import { Toaster } from 'sonner'
+
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+
 import VoteResources from './pages/VoteResources'
-import MyProfile from './pages/MyProfile'
+
+// context related
 import { AuthProvider } from './context/AuthContext.jsx'
 import { UserContextProvider } from './context/UserContext.jsx'
 import { WindowWidthProvider } from './context/WindowWidthContext.jsx'
-import ProtectedRoute from './components/ProtectedRoute.jsx'
-import { Toaster } from 'sonner'
-import CoursesUploadedByUser from './pages/course_related/CoursesUploadedByUser.jsx'
-import ErrorPage from './pages/ErrorPage.jsx'
+
+// user profile related
+import MyProfile from './pages/MyProfile'
 import UpdateProfile from './pages/UpdateProfile.jsx'
 import DashBoard from './pages/DashBoard.jsx'
+
+// course related
+import AllCourses from './pages/course_related/AllCourses'
+import AddCoursePage from './pages/course_related/AddCoursePage.jsx'
+import FullCoursePage from './pages/course_related/FullCoursePage.jsx'
 import EnrolledUserOfACourse from './pages/course_related/EnrolledUserOfACourse.jsx'
-import Documentation from './pages/Documentation.jsx'
 import CourseDiscussionPage from './pages/course_related/CourseDiscussionPage.jsx'
+import CoursesUploadedByUser from './pages/course_related/CoursesUploadedByUser.jsx'
+
+import PrivacyPolicy from './pages/footer_related/PrivacyPolicy.jsx'
+import TermsOfService from './pages/footer_related/TermsOfService.jsx'
+
+import ErrorPage from './pages/ErrorPage.jsx'
+
+
 function App() {
 
   return (
@@ -55,7 +70,6 @@ function App() {
               } />
 
 
-              <Route path='/doc' element={<Documentation />} />
               <Route path='/vote-resources' element={<VoteResources />} />
 
 
@@ -68,13 +82,6 @@ function App() {
               <Route path='/user/:userId/uploaded-courses' element={<CoursesUploadedByUser />} />
 
               <Route path='*' element={<ErrorPage />} />
-
-
-              {/* <Route path='/profile/update' element={
-                <ProtectedRoute>
-                  <UpdateProfile />
-                </ProtectedRoute>
-              } /> */}
 
               <Route path='/profile/update' element={<UpdateProfile />} />
 
@@ -90,9 +97,19 @@ function App() {
 
               <Route path='/course/:courseId/discussions' element={<CourseDiscussionPage />} />
 
+
+
+              {/* ------------- footer ---------------- */}
+
+              <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+
+              <Route path='/tos' element={<TermsOfService/>}/>
+
             </Route>
 
 
+            {/* -------- error ----------- */}
+            <Route path='*' element={<ErrorPage />} />
 
           </Routes>
 

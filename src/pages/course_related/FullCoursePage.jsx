@@ -15,7 +15,6 @@ function FullCoursePage() {
     const { loggedInUser } = useContext(AuthContext)
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const [endCourseIsLoading, setEndCourseIsLoading] = useState(false)
     const [showVoteAndOtherOptions, setShowVoteAndOtherOptions] = useState(false)
 
     //we need to store this info in localstorage
@@ -128,25 +127,20 @@ function FullCoursePage() {
 
     async function handleEndCourse() {
         try {
-            setEndCourseIsLoading(true)
 
             toast.success("Course removed successfully")
 
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/end-course/${courseId}`)
-            console.log(response.data);
+            navigate("/all-courses")
 
-            navigate("/")
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/end-course/${courseId}`)
 
         }
         catch (e) {
-
-            toast.error("Failed to remove course, try again")
-            console.log(e);
+            toast.error("Failed to remove the course, try again")
+            navigate(`/course/${courseId}`)
 
         }
-        finally {
-            setEndCourseIsLoading(false)
-        }
+    
 
     }
 

@@ -7,7 +7,7 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow}) {
   return (
     <button
    
-      className={`${classname} font-medium rounded-full flex items-center h-10 bg-gradientForBg text-bgOne group hover:opacity-90 transition-opacity duration-300`}
+      className={`${classname} font-medium rounded-full flex items-center h-10 bg-bgOne dark:bg-gradientForBg text-offwhite dark:text-bgOne group hover:opacity-90 transition-opacity duration-300`}
       onClick={onClick}
     >
       {isLoading &&

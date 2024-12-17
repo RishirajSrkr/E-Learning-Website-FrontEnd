@@ -22,11 +22,11 @@ function VotingPageCourseCard({ courseName, instructor, index, imageUrl, vote })
 
             className='flex justify-start items-center w-full h-fit' >
 
-            <div ref={ref} className='w-full  bg-gradient-to-b from-bgTwo to-bgOne rounded-xl px-4 py-4'>
+            <div ref={ref} className='w-full bg-gradient-to-b from-gray-100 to-white  dark:bg-gradient-to-b dark:from-bgTwo dark:to-bgOne rounded-xl px-4 py-4 text-black dark:text-white'>
 
-                <div className='w-full bg-bgTwo to-bgOne rounded-lg px-0.5 py-0.5'>
+                <div className='w-full bg-gray-50 dark:bg-bgTwo rounded-lg p-0.5'>
 
-                    <div className='w-full bg-bgOne rounded-lg gap-4 px-6 text-white flex justify-between'>
+                    <div className='w-full bg-white dark:bg-bgOne rounded-lg gap-4 px-6  flex justify-between'>
 
 
 
@@ -36,7 +36,7 @@ function VotingPageCourseCard({ courseName, instructor, index, imageUrl, vote })
 
 
                         <div className='w-4/6 flex justify-start'>
-                            <h4 className='py-10 text-4xl w-full tracking-tighter font-semibold flex justify-start items-center bg-gradientForBg bg-clip-text text-transparent'>{courseName}</h4>
+                            <h4 className='py-10 text-4xl w-full tracking-tighter font-semibold flex justify-start items-center'>{courseName}</h4>
                         </div>
 
                         <div className='  w-1/6 flex justify-center'>

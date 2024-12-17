@@ -14,6 +14,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import Loader from '../../components/Loader'
+import { AuthContext } from '../../context/AuthContext';
 // import required modules
 
 
@@ -41,6 +42,8 @@ function AllCourses() {
 
     const { isMobile } = useContext(WindowWidthContext)
 
+    const { loggedInUser } = useContext(AuthContext)
+
 
     useEffect(() => {
 
@@ -49,6 +52,8 @@ function AllCourses() {
                 setIsLoading(true);
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/all-courses`);
                 setCourses(response.data)
+                console.log(response.data);
+
 
             }
             catch (e) {
@@ -63,7 +68,6 @@ function AllCourses() {
 
     }, [])
 
-    console.log(courses);
 
 
 
@@ -73,17 +77,23 @@ function AllCourses() {
 
 
 
-    async function handleCourseCardClick(id) {
+    async function handleCourseEnroll(id) {
         try {
 
-            toast.success("Course enrolled")
+            if (!loggedInUser) {
+                navigate("/login")
+            }
+            
+            else {
+                toast.success("Course enrolled")
 
-            //take me to the full course page
-            navigate(`/course/${id}`)
+                //take me to the full course page
+                navigate(`/course/${id}`)
 
 
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollment/${id}`);
+                await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${id}`);
 
+            }
 
         }
         catch (error) {
@@ -118,146 +128,77 @@ function AllCourses() {
 
     return (
 
-        <div className='bg-bgOne min-h-screen py-32 sm:px-20 flex relative overflow-hidden  sm:py-32 w-full gap-12 items-start'>
-
-            {/* 
-            <h3 className='text-3xl px-2 sm:text-6xl font-bold text-center sm:pt-10 text-white'>{headline}</h3>
-
-
-            <h5 className='text-sm sm:text-lg font-medium text-center mt-2 sm:mt-4 mb-6 sm:mb-12 text-gray'>Unlock Your Future Today!</h5> */}
-
-
-
-
+        <div className='bg-white dark:bg-black min-h-screen py-32 sm:px-10 flex relative overflow-hidden text-black dark:text-white sm:py-32 w-full items-start'>
 
 
             {/* ---------------------------- COURSES -------------------------------- */}
 
 
-            <div className='w-4/5'>
+            <div className='w-9/12 relative min-h-screen rounded-lg'>
                 {
                     isLoading &&
-                    <Loader classname={"h-[500px]"} />
+                    <Loader classname={"h-[500px] absolute right-1/2 translate-x-1/2"} />
 
                 }
 
 
-                {
-                    isMobile ?
+                {!isLoading && courses.length == 0 ?
+                    (
+                        <p className='text-gray-500 flex justify-center h-[600px] items-center'>No courses available.</p>
+                    )
 
-                        // --------------------- MOBILE VIEW ----------------------
-                        (
+                    :
 
-
-                            !isLoading && (
-
-
-                                <div className='min-h-96 w-full'>
-
-                                    {searchQuery && filteredCourses.length == 0 && <p className='text-center text-sm text-gray mt-28'>No course found with the name : {searchQuery}</p>}
-
-                                    <Swiper
-                                        slidesPerView={1.2}
-                                        spaceBetween={12}
-                                        freeMode={true}
-
-                                        modules={[FreeMode]}
-                                        className="text-gray w-full mt-4 cursor-move p-4"
-                                    >
-
-                                        {
-
-                                            Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => {
-                                                return <SwiperSlide key={index}>
-                                                    <CourseCard
-                                                        title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
-                                                        imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
-                                                        instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
-                                                        description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
-                                                        vote={searchQuery ? filteredCourses[key].votes : courses[key].votes}
-                                                        onClick={() => handleCourseCardClick(key)}
-                                                        showCTA={true}
-                                                        text={"Enroll"}
-
-                                                    />
-                                                </SwiperSlide>
-                                            })
-                                        }
-                                    </Swiper>
-
-                                </div>
-
-                            )
-                        )
-
-                        :
+                    (
 
 
+                        <div>
 
-                        // --------------------- DESKTOP VIEW -------------------------
-                        (
+                            {searchQuery && filteredCourses.length == 0 && <p className='dark:text-gray-500 flex justify-center items-center h-[600px]'>No course found with the name : {searchQuery}</p>}
 
+                            <div className='masonry'>
+                                {
+                                    Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => {
+                                        return <motion.div
+                                            key={key}
+                                            initial={{ y: (100), opacity: 0 }}
+                                            animate={{ y: 0, opacity: 100 }}
+                                            transition={{ delay: 0.1 * index }}
+                                            className='masonry-item'
+                                        >
+                                            <CourseCard
+                                                title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
+                                                imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
+                                                instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
+                                                description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
+                                                vote={searchQuery ? filteredCourses[key].votes : courses[key].votes}
+                                                onClick={() => handleCourseEnroll(key)}
+                                                showCTA={true}
+                                                text={"Enroll"}
+                                            />
 
-
-                            !isLoading && courses.length == 0 ?
-                                (
-                                    <p className='text-gray flex justify-center h-[600px] items-center'>No courses available.</p>
-                                )
-
-                                :
-
-                                (
-
-                                    (
-                                        <div>
-
-                                            {searchQuery && filteredCourses.length == 0 && <p className='text-gray flex justify-center items-center h-[600px]'>No course found with the name : {searchQuery}</p>}
-
-                                            <div className='masonry'>
-                                                {
-                                                    Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => {
-                                                        return <motion.div
-                                                            key={key}
-                                                            initial={{ y: (100), opacity: 0 }}
-                                                            animate={{ y: 0, opacity: 100 }}
-                                                            transition={{ delay: 0.1 * index }}
-                                                            className='masonry-item'
-                                                        >
-                                                            <CourseCard
-                                                                title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
-                                                                imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
-                                                                instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
-                                                                description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
-                                                                vote={searchQuery ? filteredCourses[key].votes : courses[key].votes}
-                                                                onClick={() => handleCourseCardClick(key)}
-                                                                showCTA={true}
-                                                                text={"Enroll"}
-                                                            />
-
-                                                        </motion.div>
+                                        </motion.div>
 
 
-                                                    })
-                                                }
-                                            </div>
+                                    })
+                                }
+                            </div>
 
-                                        </div>
-                                    )
-                                )
-
-
-                        )
+                        </div>
+                    )
 
 
                 }
+
             </div>
 
 
 
 
 
+            {/* ----------------------------------- filter -------------------------- */}
 
-            <div className='flex flex-col items-start gap-8 w-1/5 border border-border p-4 rounded-lg '>
+            <div className='flex fixed right-10 bg-white  dark:bg-black flex-col items-start gap-8 w-1/5 border border-lightBorder dark:border-darkBorder p-4 rounded-lg '>
 
 
 
@@ -265,12 +206,12 @@ function AllCourses() {
 
                     <input
                         type="text"
-                        placeholder="Search Course"
-                        className={`pl-10 w-full bg-bgTwo pr-4 text-white border-none outline-none focus:ring-0 rounded-md py-2.5 placeholder-gray `}
+                        placeholder="Search courses"
+                        className={`pl-10 w-full bg-gray-100 dark:bg-black pr-4 text-black dark:text-white  outline-none focus:ring-0 rounded-md py-2.5 placeholder-gray-500 border border-lightBorder dark:border-darkBorder `}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
 
-                    <div className='text-accentColor absolute  top-1/2 -translate-y-1/2 left-3'>
+                    <div className='text-gray-500 absolute  top-1/2 -translate-y-1/2 left-3'>
                         <HiMiniDocumentMagnifyingGlass />
                     </div>
                 </div>
@@ -280,7 +221,7 @@ function AllCourses() {
 
 
                 <div>
-                    <form className='flex flex-col items-start gap-1.5 text-white font-medium'>
+                    <form className='flex flex-col items-start gap-1.5 text-black dark:text-white font-medium'>
 
                         <div onClick={() => setSearchQuery("javascript")} className=' flex flex-row-reverse items-center justify-center gap-2'>
                             <label className='cursor-pointer'>JavaScript</label>

@@ -1,15 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/pagination';
-
-
-// import required modules
-import { FreeMode } from 'swiper/modules';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import "@splidejs/splide/dist/css/splide.min.css";
 import { WindowWidthContext } from '../context/WindowWidthContext';
 
 function Reviews() {
@@ -18,90 +10,98 @@ function Reviews() {
 
     const [reviews, setReviews] = useState([]);
 
-    const reviewsData = [
+
+    const dummyReviewsData = [
         {
-            name: "Alice Johnson",
-            review: "An excellent course that exceeded my expectations! The instructor’s explanations were very clear, breaking down complex concepts with real-world examples that made everything so much easier to understand. I particularly appreciated the interactive elements, which helped reinforce each topic. Highly recommend this to both beginners and those looking to strengthen their knowledge."
+            name: "Arjun Sharma",
+            review: "An excellent course that exceeded my expectations! The instructor’s explanations were very clear, breaking down complex concepts with real-world examples that made everything so much easier to understand.",
+            profileImage: "https://via.placeholder.com/150" // Demo profile image
         },
         {
-            name: "Michael Smith",
-            review: "This course was incredibly thorough, covering everything I needed to get started with confidence. The instructor presented the material in a logical and easily digestible manner, making challenging topics accessible. I learned so much, and the Q&A sections were a fantastic bonus, addressing common issues. It’s clear that a lot of thought went into crafting this curriculum."
+            name: "Priya Verma",
+            review: "This course was incredibly thorough, covering everything I needed to get started with confidence. The instructor presented the material in a logical and easily digestible manner, making challenging topics accessible.",
+            profileImage: "https://via.placeholder.com/150" // Demo profile image
         },
         {
-            name: "Samantha Lee",
-            review: "Great content with a very intuitive structure. While the lectures were detailed, I would have liked a few more hands-on projects to practice independently. That said, the resources provided are top-notch, and I feel far more comfortable tackling real-world applications after completing this course. Overall, it’s a comprehensive learning experience."
+            name: "Rohan Mehta",
+            review: "The resources provided are top-notch, and I feel far more comfortable tackling real-world applications after completing this course. Overall, it’s a comprehensive learning experience.",
+            profileImage: "https://via.placeholder.com/150" // Demo profile image
         },
         {
-            name: "David Kim",
-            review: "A fantastic course that delves deeply into the material, providing valuable insights into industry practices and efficient coding techniques. The instructor’s passion for the subject really shines through, and I appreciate how accessible they made advanced topics. I feel well-prepared to apply these skills in a professional setting thanks to this course."
-        },
-        {
-            name: "Emma Brown",
-            review: "This course was exactly what I needed. The curriculum was well-organized and allowed me to progress at a comfortable pace, ensuring I retained each concept. The projects and quizzes were excellent for testing knowledge and helped build my confidence. A must-take for anyone serious about expanding their skills."
-        },
-        {
-            name: "Lucas Garcia",
-            review: "I enjoyed the course thoroughly. The instructor’s pacing and clarity in explanations were spot-on, making even the most complex sections approachable. It’s rare to find courses that maintain quality from start to finish, but this one delivered. I feel much more equipped with a solid foundation in the subject."
-        },
-        {
-            name: "Olivia Martinez",
-            review: "Solid course, but some sections felt a bit rushed, especially toward the end. While I appreciated the challenging content, I would have preferred a few additional practice exercises to ensure I grasped each concept fully. Still, a worthwhile experience with valuable content and insights."
-        },
-        {
-            name: "James Wilson",
-            review: "The quizzes and assignments were challenging, but they significantly boosted my confidence. Each section built upon the previous one, creating a cohesive learning path. The knowledge checks were invaluable for highlighting areas where I needed to focus. This course gave me an in-depth understanding of the topic that I haven’t found elsewhere."
-        },
-        {
-            name: "Sophia Anderson",
-            review: "Very insightful course that exceeded my expectations. The instructor’s explanations were clear, and I appreciated the examples, which were easy to follow and directly applicable. The course has equipped me with both foundational knowledge and practical skills that I am already applying in real projects."
-        },
-        {
-            name: "Benjamin Thomas",
-            review: "An exceptional course with great depth and practical exercises. The material was presented in a very structured manner, allowing for a step-by-step understanding. The real-life examples and hands-on projects truly bridged the gap between theory and practice. I came out of this course feeling confident and prepared to tackle complex projects."
+            name: "Ananya Iyer",
+            review: "A fantastic course that delves deeply into the material, providing valuable insights into industry practices and efficient coding techniques.",
+            profileImage: "https://via.placeholder.com/150" // Demo profile image
         }
     ];
 
+    const dummyProfileImages = [
+        "https://img.freepik.com/premium-psd/indian-ethnicity-cheerful-confident-studio-concept_53876-22458.jpg?ga=GA1.1.1323944647.1725527689&semt=ais_hybrid",
+
+        "https://img.freepik.com/premium-photo/beautiful-indian-traditional-girl-posing-white-wall_136354-5499.jpg?ga=GA1.1.1323944647.1725527689&semt=ais_hybrid",
+
+        "https://img.freepik.com/premium-photo/portrait-young-handsome-indian-hipster-man-outdoors_251136-71679.jpg?ga=GA1.1.1323944647.1725527689&semt=ais_hybrid",
+
+        "https://img.freepik.com/premium-photo/portrait-young-beautiful-cute-cheerful-girl-smiling-gray-wall_136354-3057.jpg?ga=GA1.1.1323944647.1725527689&semt=ais_hybrid"
+    ]
 
     useEffect(() => {
-        setReviews(reviewsData);
+        setReviews(dummyReviewsData);
     }, [])
 
 
-
     return (
-        <>
-            <Swiper
-                slidesPerView={`${isMobile ? 1 : 3}`}
-                spaceBetween={10}
-                freeMode={true}
+        <div className="relative flex h-full">
+            <div className="container max-w-screen-xl mx-auto relative z-20 overflow-x-hidden">
+                <Splide
+                    options={{
+                        type: "loop", // Loop back to the beginning when reaching the end
 
-                modules={[FreeMode]}
-                className="text-gray w-full relative select-none"
-            >
+                        arrows: false, // Hide navigation arrows
+                        pagination: false, // Hide pagination dots
+                        fixedWidth: '500px', // Fixed width for each slide
+                        gap: '20px', // Gap between slides
+                    }}
 
-<div className='h-96 w-48 bg-gradient-to-r from-bgOne to-transparent absolute top-0 z-50'></div>
-<div className='h-96 w-48 bg-gradient-to-l from-bgOne to-transparent absolute top-0 right-0 z-50'></div>
-
-                {
-                    reviews.map((review, index) => {
-                        return <SwiperSlide key={index}
-                            className='w-full p-2 rounded-lg cursor-grab '
-                        >
-                            <div className='border border-border bg-bgOneLight p-6 h-60 rounded-md'>
-                                <h4 className='text-white font-semibold text-base sm:text-xl mb-2'>{review.name}</h4>
-                                <p className='text-sm'>{review.review}</p>
-                            </div>
-                        </SwiperSlide>
-                    })
-                }
-            </Swiper>
-        </>
+                >
+                    {
+                        dummyReviewsData.map((review, index) => {
+                            return <SplideSlide key={index}>
+                                <ReviewComponent review={review} profileImage={dummyProfileImages[index]} />
+                            </SplideSlide>
+                        })
+                    }
+                </Splide>
+            </div>
+        </div>
     );
 
 
 }
 
-export default Reviews
+
+function ReviewComponent({ review, profileImage }) {
+    return (
+            <div className="bg-white dark:bg-bgOne pattern border h-48 border-lightBorder dark:border-darkBorder rounded-lg px-8 py-6"
+            >
+                <div>
+                    <div className="flex gap-4 items-center mb-3">
+                        <img className="w-8 h-8 rounded-full object-cover" src={profileImage} />
+                        
+
+                        <h3 className="dark:text-white font-medium">{review.name}</h3>
+                    </div>
+                    <p className="dark:text-gray-500">{review.review}</p>
+                </div>
+            </div>
+
+
+    );
+
+}
+export { Reviews, ReviewComponent };
+
+
+
 
 
 

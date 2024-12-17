@@ -46,7 +46,7 @@ function CoursesUploadedByUser() {
 
      return (
 
-        <div className='bg-bgOne pt-36 px-12 pb-10 min-h-screen'>
+        <div className='dark:bg-black bg-white text-black dark:text-white pt-36 px-12 pb-10 min-h-screen'>
 
 
 
@@ -66,7 +66,7 @@ function CoursesUploadedByUser() {
 
                                             title={course.courseName}
                                             description={course.courseDescription}
-                                            vote={course.vote}
+                                            votes={course.votes}
                                             showCTA={false}
 
                                         />

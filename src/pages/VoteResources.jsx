@@ -43,7 +43,7 @@ function VoteResources() {
 
     return (
 
-        <div className='w-fill min-h-screen bg-bgOne flex justify-center items-center flex-col pb-32'>
+        <div className='w-fill min-h-screen bg-white text-black dark:bg-black dark:text-white flex justify-center items-center flex-col pb-32'>
 
 
             <motion.div animate={{ x: 100 }} />
@@ -57,13 +57,13 @@ function VoteResources() {
                         initial={{ y: (100), opacity: 0 }}
                         animate={{ y: 0, opacity: 100 }}
                         transition={{ delay: 0.1 }}
-                        className='font-semibold bg-gradient-to-r p-4 w-full from-gray to-offwhite bg-clip-text text-transparent font-md text-7xl tracking-tighter'>Discover,</motion.h2>
+                        className='font-semibold  p-4 w-full font-md text-7xl tracking-tighter'>Discover,</motion.h2>
 
                     <motion.h2
                         initial={{ y: (100), opacity: 0 }}
                         animate={{ y: 0, opacity: 100 }}
                         transition={{ delay: 0.15 }}
-                        className='font-semibold -mx-4 bg-gradient-to-r p-4 w-full from-gray to-offwhite bg-clip-text text-transparent  text-7xl tracking-tighter text'
+                        className='font-semibold -mx-4  p-4 w-full text-7xl tracking-tighter text'
                     >
                         Vote,
                     </motion.h2>
@@ -72,7 +72,7 @@ function VoteResources() {
                         initial={{ y: (100), opacity: 0 }}
                         animate={{ y: 0, opacity: 100 }}
                         transition={{ delay: 0.20 }}
-                        className='font-semibold bg-gradient-to-r p-4 w-full from-gray to-offwhite bg-clip-text text-transparent  text-7xl tracking-tighter text'
+                        className='font-semibold  p-4 w-full   text-7xl tracking-tighter text'
                     >
                         Elevate
                     </motion.h2>
@@ -84,14 +84,13 @@ function VoteResources() {
                     animate={{ y: 0, opacity: 100 }}
                     transition={{ delay: 0.25 }}
 
-                    className=' bg-gradient-to-r from-gray to-offwhite bg-clip-text text-transparent mt-0 font-medium text-3xl tracking-tighter'>the best courses.
+                    className=' bg-white dark:bg-black mt-0 font-medium text-3xl tracking-tighter'>the best courses.
                 </motion.h2>
 
 
             </div>
 
 
-            {/* ----------------- open votes ---------------- */}
 
 
             <div className='w-full flex flex-col px-40 overflow-y-hidden'>
