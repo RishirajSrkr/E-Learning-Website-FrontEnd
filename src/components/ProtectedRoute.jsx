@@ -5,7 +5,6 @@ import { ThreeDot } from 'react-loading-indicators'
 
 function ProtectedRoute({ children }) {
 
-    console.log("Here");
     
     const { loggedInUser, isLoading } = useContext(AuthContext);
 

@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from '../config/axiosConfig'
 import { jwtDecode } from 'jwt-decode';
-import { Navigate } from 'react-router-dom';
 
 
 // Create the context
@@ -43,8 +42,6 @@ export const AuthProvider = ({ children }) => {
     async function logout() {
         try {
 
-
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/public/logout`);
             localStorage.removeItem('jwtToken');
 
             setLoggedInUser(null);

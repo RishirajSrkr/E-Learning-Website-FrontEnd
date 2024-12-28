@@ -36,6 +36,7 @@ import PrivacyPolicy from './pages/footer_related/PrivacyPolicy.jsx'
 import TermsOfService from './pages/footer_related/TermsOfService.jsx'
 
 import ErrorPage from './pages/ErrorPage.jsx'
+import GoogleCallback from './components/GoogleCallback.jsx'
 
 
 function App() {
@@ -103,9 +104,13 @@ function App() {
 
               <Route path='/privacy-policy' element={<PrivacyPolicy />} />
 
-              <Route path='/tos' element={<TermsOfService/>}/>
+              <Route path='/tos' element={<TermsOfService />} />
+
+              <Route path='/auth/callback' element={<GoogleCallback/>} />
 
             </Route>
+
+
 
 
             {/* -------- error ----------- */}

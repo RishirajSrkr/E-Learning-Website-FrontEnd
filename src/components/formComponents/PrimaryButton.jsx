@@ -24,6 +24,7 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
 
       className={`${classname} font-medium rounded-full flex items-center h-10 bg-bgOne dark:bg-gradientForBg text-offwhite dark:text-bgOne group hover:opacity-90 transition-opacity duration-300`}
       onClick={onClick}
+      type='button'
     >
       {isLoading &&
 
