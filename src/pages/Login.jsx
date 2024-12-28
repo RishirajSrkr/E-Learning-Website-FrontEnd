@@ -64,7 +64,7 @@ function Login() {
 
     const googleClientId = "566391648176-repblbg2o63uink35639mmfhldam5145.apps.googleusercontent.com";
 
-    const redirectUri = "http://localhost:5173/auth/callback"; // Replace with your frontend redirect URI
+    const redirectUri = `${import.meta.env.VITE_FRONTEND_URL}/auth/callback`;
 
 
     const handleGoogleLogin = () => {
