@@ -10,7 +10,7 @@ function Footer() {
   const { loggedInUser } = useContext(AuthContext)
 
   const location = useLocation();
-  const hideFooter = location.pathname === "/register" || location.pathname === "/login" || location.pathname.includes("discussions")
+  const hideFooter = location.pathname === "/register" || location.pathname.startsWith("/login") || location.pathname.includes("discussions")
 
   const socials = [
     {

@@ -3,16 +3,17 @@ import { MdDelete } from "react-icons/md";
 import axios from '../config/axiosConfig'
 import { IoCloseSharp } from "react-icons/io5";
 import { toast } from 'sonner'
-import SecondaryButton from '../components/formComponents/SecondaryButton'
-import CourseCard from '../components/CourseCard'
+import SecondaryButton from './formComponents/SecondaryButton'
+import CourseCard from './CourseCard'
 import { AuthContext } from '../context/AuthContext'
 import { MdUpload } from "react-icons/md";
 import { WindowWidthContext } from '../context/WindowWidthContext'
-function AddCourseForm() {
+import { useNavigate } from 'react-router-dom';
+function AddTextResource() {
 
   const ref = useRef(null);
   const fileInputRef = useRef(null);
-
+  const navigate = useNavigate();
 
   const { loggedInUser } = useContext(AuthContext)
   const { isMobile } = useContext(WindowWidthContext);
@@ -52,6 +53,7 @@ function AddCourseForm() {
     // Scroll into view on updates after initial load
     ref.current.scrollIntoView({ behavior: 'smooth' });
   }, [formData.chapters]);
+  
   function handleAddChapterClick() {
 
     setFormData((prev) => (
@@ -150,6 +152,8 @@ function AddCourseForm() {
 
         //show the success toast
         toast.success("Course added")
+
+        navigate("/dashboard")
 
         //reset the form only if course was successfully added
         setFormData({
@@ -357,4 +361,4 @@ function AddCourseForm() {
   )
 }
 
-export default AddCourseForm
+export default AddTextResource

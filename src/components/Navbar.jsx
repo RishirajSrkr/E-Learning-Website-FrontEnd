@@ -24,7 +24,7 @@ function Navbar() {
 
     const [showDropdown, setShowDropdown] = useState(false)
     const [showNavbar, setShowNavbar] = useState(false)
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useState("dark");
 
     function toggleTheme() {
         const newTheme = theme === "light" ? "dark" : "light";
@@ -339,7 +339,7 @@ function Navbar() {
                                                 :
                                                 'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
                                                 }
-                                                to={"/course/create"}
+                                                to={"/resource/create"}
                                             >
                                                 Contribute
 

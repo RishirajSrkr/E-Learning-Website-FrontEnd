@@ -13,7 +13,7 @@ export default {
   theme: {
     extend: {
       colors: {
-
+        
         //bg one is darker
         bgOne: '#050505',
         bgOneLight: '#0A0A0A',
@@ -25,7 +25,7 @@ export default {
         // gray: '#9CA1A4',
         offwhite: '#FFFFF7',
         // accentColor: '#FE5328',
-        accentColor: '#E7B8E8',
+        accentColor: '#CEEB11',
 
         lightBorder: '#E4E4E7',
         darkBorder: '#232323',
@@ -35,10 +35,7 @@ export default {
       },
       backgroundImage: {
 
-        'gradientForBorder': 'linear-gradient(to bottom, #050505, #131415)',
-        'gradientForBorderOpposite': 'linear-gradient(to top, #050505, #131415)',
-
-        'gradientForBg': 'linear-gradient(to right, #FFFFF7, #FFFFFF)',
+      'gradientForBg': 'linear-gradient(to right, #7FEE64, #7FEE64)'
 
       },
       animation: {

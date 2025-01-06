@@ -1,6 +1,6 @@
 import './App.css'
 import Home from './pages/Home'
-import Login from './pages/Login'
+import Login from './pages/login_related/Login.jsx'
 import Register from './pages/Register'
 import { Route, Routes } from 'react-router-dom'
 
@@ -32,11 +32,19 @@ import EnrolledUserOfACourse from './pages/course_related/EnrolledUserOfACourse.
 import CourseDiscussionPage from './pages/course_related/CourseDiscussionPage.jsx'
 import CoursesUploadedByUser from './pages/course_related/CoursesUploadedByUser.jsx'
 
+
+//resource related
+import VideoResourcePage from './pages/resource_realated/VideoResourcePage.jsx'
+
+
 import PrivacyPolicy from './pages/footer_related/PrivacyPolicy.jsx'
 import TermsOfService from './pages/footer_related/TermsOfService.jsx'
 
 import ErrorPage from './pages/ErrorPage.jsx'
 import GoogleCallback from './components/GoogleCallback.jsx'
+import AddVideoResource from './components/AddVideoResource.jsx'
+import AddTextResource from './components/AddTextResource.jsx'
+import LoginWithEmailPassword from './pages/login_related/LoginWithEmailPassword.jsx'
 
 
 function App() {
@@ -52,23 +60,13 @@ function App() {
             <Route path='/' element={<Layout />}>
 
               <Route path='' element={<Home />} />
+              
               <Route path='/login' element={<Login />} />
+              <Route path='/login/email-password' element={<LoginWithEmailPassword />} />
+
               <Route path='/register' element={<Register />} />
               <Route path='/contributors' element={<AllContributers />} />
 
-              <Route path='/course/create' element={
-                <ProtectedRoute>
-                  <AddCoursePage />
-                </ProtectedRoute>
-              } />
-
-              <Route path='/all-courses' element={<AllCourses />} />
-
-              <Route path='/course/:courseId' element={
-                <ProtectedRoute>
-                  <FullCoursePage />
-                </ProtectedRoute>
-              } />
 
 
               <Route path='/vote-resources' element={<VoteResources />} />
@@ -94,9 +92,47 @@ function App() {
                 </ProtectedRoute>
               } />
 
+
+              {/* ------------- course -------------------- */}
+
+
+              <Route path='/all-courses' element={<AllCourses />} />
+
+              <Route path='/course/:courseId' element={
+                <ProtectedRoute>
+                  <FullCoursePage />
+                </ProtectedRoute>
+              } />
+
               <Route path='/course/:courseId/enrolled-users' element={<EnrolledUserOfACourse />} />
 
               <Route path='/course/:courseId/discussions' element={<CourseDiscussionPage />} />
+
+
+
+              <Route path='/resource/create' element={
+                <ProtectedRoute>
+                  <AddCoursePage />
+                </ProtectedRoute>
+              } />
+
+              <Route path='/resource/create/text' element={
+                <ProtectedRoute>
+                  <AddTextResource />
+                </ProtectedRoute>
+              } />
+
+              <Route path='resource/create/video' element={
+                <ProtectedRoute>
+                  <AddVideoResource />
+                </ProtectedRoute>
+              } />
+
+
+              <Route path='/video-resource/:resourceId/:redirect' element={<ProtectedRoute>
+                <VideoResourcePage />
+              </ProtectedRoute>} />
+
 
 
 
@@ -106,7 +142,9 @@ function App() {
 
               <Route path='/tos' element={<TermsOfService />} />
 
-              <Route path='/auth/callback' element={<GoogleCallback/>} />
+              <Route path='/auth/callback' element={<GoogleCallback />} />
+
+
 
             </Route>
 
