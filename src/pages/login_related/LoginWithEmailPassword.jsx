@@ -3,8 +3,12 @@ import Input from '../../components/formComponents/Input';
 import { AuthContext } from '../../context/AuthContext';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import LoaderButton from '../../components/LoaderButton'
+import {  useTheme } from '../../context/ThemeContext';
 
 function LoginWithEmailPassword() {
+
+ const {theme} =  useTheme();
 
     const navigate = useNavigate();
     const { login } = useContext(AuthContext)
@@ -34,6 +38,10 @@ function LoginWithEmailPassword() {
         try {
             setIsLoading(true)
 
+            setTimeout(() => {
+
+            }, 4000);
+            
             const status = await login(formData);
 
             if (status == 200) {
@@ -63,39 +71,7 @@ function LoginWithEmailPassword() {
     return (
         <div className='min-h-screen w-full flex items-center justify-center'>
 
-            <div className='w-[350px] mx-auto flex flex-col gap-5'>
-
-                <Input
-                    name={"email"}
-                    type={"email"}
-                    value={formData.email}
-                    onChange={(e) => handleInputChange(e)}
-                    totalWidth={"w-full"}
-                    className={""}
-                    placeholder={"enter your email"}
-                />
-
-
-
-
-                <Input
-                    name={"password"}
-                    type={"password"}
-                    value={formData.password}
-                    onChange={(e) => handleInputChange(e)}
-                    totalWidth={"w-full"}
-                    className={""}
-                    placeholder={"enter your password"}
-                />
-
-
-                <button type='button' className='flex gap-2 items-center justify-center text-sm text-black dark:text-white font-medium w-full px-5  py-3 rounded-full bg-white dark:bg-zinc-900 border border-lightBorder dark:border-none' onClick={handleEmailLogin}>
-                    {/* <MdEmail size={17} /> */}
-                    Login
-                </button>
-
-
-            </div>
+         
 
 
 

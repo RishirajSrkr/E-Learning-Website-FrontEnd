@@ -2,7 +2,11 @@ import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
-import {jwtDecode} from 'jwt-decode'; // Correct import for jwtDecode
+import { jwtDecode } from 'jwt-decode'; // Correct import for jwtDecode
+import LoaderInfinity from '../components/LoaderInfinity'
+
+import 'ldrs/infinity'
+
 
 function GoogleCallback() {
     const { setLoggedInUser } = useContext(AuthContext);
@@ -54,7 +58,8 @@ function GoogleCallback() {
 
     return (
         <div className='min-h-screen w-full flex items-center justify-center'>
-            {isLoading ? <p>Processing Google Login...</p> : <p>Redirecting...</p>}
+            {isLoading && <LoaderInfinity/>
+            }
         </div>
     );
 }

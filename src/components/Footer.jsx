@@ -5,7 +5,7 @@ import { MdFitbit } from "react-icons/md";
 import { AuthContext } from '../context/AuthContext'
 import { div } from 'framer-motion/client';
 
-function Footer() {
+function Footer({width}) {
 
   const { loggedInUser } = useContext(AuthContext)
 
@@ -33,7 +33,7 @@ function Footer() {
   ]
 
   return (
-    <div className={`w-full ${hideFooter ? 'hidden' : ''} bg-white dark:bg-black flex justify-center items-center px-32 py-4 sm:py-6 border-t border-lightBorder dark:border-darkBorder text-sm `}>
+    <div className={`${width} ${hideFooter ? 'hidden' : ''} bg-white dark:bg-black flex justify-center items-center px-24 py-4 sm:py-6 border-t border-lightBorder dark:border-darkBorder text-sm `}>
 
 
       <div className='w-1/3 flex flex-col text-black dark:text-white '>

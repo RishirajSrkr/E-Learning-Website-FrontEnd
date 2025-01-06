@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import {toast} from 'sonner'
+import { toast } from 'sonner'
 import axios from '../config/axiosConfig'
 import Input, { TextArea } from './formComponents/Input';
 import { useNavigate } from 'react-router-dom';
-
+import { BiErrorCircle } from "react-icons/bi";
 
 function AddVideoResource() {
 
@@ -21,22 +21,22 @@ function AddVideoResource() {
 
 
     async function handleSubmit() {
-        
-        if(thumbnailUrl === ""){
+
+        if (thumbnailUrl === "") {
             toast.warning("Please provide a valid YouTube video link")
             return;
         }
 
         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/video-resource/create`, formData);
 
-        const {resourceId} = response.data;
-        if(resourceId){
+        const { resourceId } = response.data;
+        if (resourceId) {
             //resource already exists, navigate to the resource
             navigate(`/video-resource/${resourceId}/redirect`)
-            
+
         }
         console.log(response.data);
-        
+
     }
 
 
@@ -71,14 +71,15 @@ function AddVideoResource() {
 
             <div className={`flex flex-col gap-6 px-32 w-1/2  `}>
 
-                <Input
-                    type={"text"}
-                    name={"Video URL"}
+                <input
+                    type="text"
+                    name='VideoUrl'
                     value={formData.videoUrl == preDefinedVideoUrl ? "" : formData.videoUrl}
                     placeholder={"https://www.youtube.com/watch?v=XXXXXXXXXXX"}
                     onChange={handleVideoUrlInputChange}
-                    className={"w-full"}
+                    className='px-6 py-4 outline-none ring-0 border dark:border-darkBorder border-lightBorder bg-transparent rounded-md'
                 />
+
 
                 <TextArea
                     type={"text"}
@@ -107,12 +108,18 @@ const VideoContainer = ({ thumbnailUrl, formData }) => {
     return (
         <div className='w-1/2 min-h-screen border-r flex flex-col items-center justify-center border-lightBorder dark:border-darkBorder'>
 
-            {
-                thumbnailUrl &&
-                <div className='mb-6 w-96 rounded-xl bg-gray-50 dark:bg-bgTwo p-4 border border-lightBorder dark:border-darkBorder'>
-                    <img className='rounded-lg border border-lightBorder dark:border-darkBorder' src={thumbnailUrl} />
-                </div>
-            }
+
+            <div className='mb-6 w-96 h-56 rounded-xl flex items-center justify-center bg-gray-50 dark:bg-bgTwo p-4 border border-lightBorder dark:border-darkBorder'>
+                {
+                    !thumbnailUrl &&
+                    <div className='flex gap-2 items-center'>
+                        <BiErrorCircle className='text-accentColor' />
+                        <p className='text-sm'>Oops! Please double check the video link.</p>
+                    </div>
+                }
+
+                {thumbnailUrl && <img className='rounded-lg border border-lightBorder dark:border-darkBorder' src={thumbnailUrl} />}
+            </div>
 
             <div className='w-96 flex bg-gray-50 dark:bg-bgTwo gap-2 items-start border dark:border-darkBorder border-lightBorder p-6 rounded-md relative min-h-20'>
                 <div className='absolute font-medium text-sm bg-accentColor text-black px-3 py-1 rounded-md -top-4'>

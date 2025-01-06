@@ -7,7 +7,7 @@ import SecondaryButton from './formComponents/SecondaryButton';
 const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, text, imageUrl, isLoading }) => {
 
   return (
-    <div className="course-card relative bg-white dark:bg-black p-3 w-74 overflow-hidden  border border-lightBorder dark:border-darkBorder  rounded-md h-fit text-sm sm:w-full sm:text-base sm:96 sm:p-6">
+    <div className="course-card relative bg-white dark:bg-black p-3 max-w-96 overflow-hidden  border border-lightBorder dark:border-darkBorder  rounded-md h-fit text-sm sm:w-full sm:text-base sm:96 sm:p-6">
 
       {imageUrl && (
         <img

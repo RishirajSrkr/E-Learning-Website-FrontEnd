@@ -44,7 +44,7 @@ import ErrorPage from './pages/ErrorPage.jsx'
 import GoogleCallback from './components/GoogleCallback.jsx'
 import AddVideoResource from './components/AddVideoResource.jsx'
 import AddTextResource from './components/AddTextResource.jsx'
-import LoginWithEmailPassword from './pages/login_related/LoginWithEmailPassword.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
 
 
 function App() {
@@ -52,6 +52,7 @@ function App() {
   return (
 
     <AuthProvider>
+      <ThemeProvider>
       <UserContextProvider>
         <WindowWidthProvider >
           <Toaster position='bottom-right' />
@@ -62,7 +63,6 @@ function App() {
               <Route path='' element={<Home />} />
               
               <Route path='/login' element={<Login />} />
-              <Route path='/login/email-password' element={<LoginWithEmailPassword />} />
 
               <Route path='/register' element={<Register />} />
               <Route path='/contributors' element={<AllContributers />} />
@@ -158,6 +158,7 @@ function App() {
 
         </WindowWidthProvider>
       </UserContextProvider>
+      </ThemeProvider>
     </AuthProvider>
 
   )

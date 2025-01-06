@@ -125,9 +125,9 @@ function UpdateProfile() {
 
 
     return (
-        <div className='min-h-screen  w-full flex flex-col gap-12 justify-center items-center py-32'>
+        <div className='min-h-screen  w-full flex flex-col gap-8 justify-center items-center py-24'>
 
-            <form className='flex flex-col w-3/5  gap-12 '>
+            <form className='flex flex-col w-3/5  gap-4 '>
 
                 {/* ---------------- Image -------------- */}
 
@@ -170,7 +170,7 @@ function UpdateProfile() {
 
                 {/* -------------- input fields ------------------ */}
 
-                <div className='flex mx-auto flex-col gap-5 w-1/2'>
+                <div className='flex mx-auto flex-col gap-3 w-1/2'>
                     <Input
                         name={"name"}
                         type={"text"}

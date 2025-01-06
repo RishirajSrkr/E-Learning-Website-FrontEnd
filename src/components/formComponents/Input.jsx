@@ -10,9 +10,8 @@ function Input({ className, type, name, value, placeholder, onChange, totalWidth
     return (
         <div className={`${totalWidth} flex flex-col items-start justify-center gap-1 `}>
 
-            <label className=' text-black font-medium text-sm dark:text-white' htmlFor={name}>{labelName}</label>
 
-            <div className='flex items-center justify-center w-full border border-lightBorder dark:border-darkBorder px-6 py-3 rounded-full'>
+            <div className='flex items-center justify-center w-full border-b border-lightBorder dark:border-darkBorder px-6 py-3 rounded-md'>
                 <input type={type}
                     name={name}
                     className={`placeholder-gray p-0 w-full outline-none  bg-transparent flex border-none focus:border-none focus:ring-0 ${className}`}

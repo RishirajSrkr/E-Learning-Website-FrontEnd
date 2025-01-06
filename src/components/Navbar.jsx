@@ -13,9 +13,11 @@ import { RxDashboard } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
+import { useTheme } from '../context/ThemeContext';
 function Navbar() {
 
     const location = useLocation();
+    const {theme, toggleTheme} = useTheme();
 
     const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
@@ -24,20 +26,10 @@ function Navbar() {
 
     const [showDropdown, setShowDropdown] = useState(false)
     const [showNavbar, setShowNavbar] = useState(false)
-    const [theme, setTheme] = useState("dark");
-
-    function toggleTheme() {
-        const newTheme = theme === "light" ? "dark" : "light";
-        setTheme(newTheme);
-    }
-
-    // Apply the theme class to the <html> tag
-    useEffect(() => {
-        document.documentElement.classList.toggle("dark", theme === "dark");
-    }, [theme]);
 
 
 
+    
     // Effect to handle body scroll behavior
     useEffect(() => {
         if (showNavbar) {
