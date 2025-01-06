@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react'
 import Input from '../../components/formComponents/Input';
 import { AuthContext } from '../../context/AuthContext';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 function LoginWithEmailPassword() {
 
+    const navigate = useNavigate();
     const { login } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -87,7 +89,7 @@ function LoginWithEmailPassword() {
                 />
 
 
-                <button type='button' className='flex gap-2 items-center justify-center text-sm text-black dark:text-white font-medium w-full px-5  py-2.5 rounded-full bg-white dark:bg-bgThree border border-lightBorder dark:border-none' onClick={handleEmailLogin}>
+                <button type='button' className='flex gap-2 items-center justify-center text-sm text-black dark:text-white font-medium w-full px-5  py-3 rounded-full bg-white dark:bg-zinc-900 border border-lightBorder dark:border-none' onClick={handleEmailLogin}>
                     {/* <MdEmail size={17} /> */}
                     Login
                 </button>

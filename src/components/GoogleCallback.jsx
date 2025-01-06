@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
 import { AuthContext } from '../context/AuthContext'
@@ -7,10 +7,11 @@ import { jwtDecode } from 'jwt-decode';
 function GoogleCallback() {
 
     const { setLoggedInUser } = useContext(AuthContext)
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useEffect(async () => {
         // Step 1: Get the authorization code from the URL
         const urlParams = new URLSearchParams(window.location.search);
 
@@ -21,28 +22,34 @@ function GoogleCallback() {
 
 
         if (code) {
-            // Step 2: Send the code to the backend
-            axios
-                .get(`${import.meta.env.VITE_BASE_URL}/auth/google/callback?code=${code}`)
-                .then((response) => {
-                    console.log(response);
+            setIsLoading(true);
 
-                    const token = response.data; // JWT returned from the backend
+            try {
+                // Step 2: Send the code to the backend
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/google/callback?code=${code}`);
+                console.log(response);
 
-                    // Step 3: Store the token in localStorage
-                    localStorage.setItem("jwtToken", token);
+                const token = response.data; // JWT returned from the backend
 
-                    const decoded_jwt = jwtDecode(token);
-                    const name = decoded_jwt.name;
-                    setLoggedInUser(name);
+                // Step 3: Store the token in localStorage
+                localStorage.setItem("jwtToken", token);
 
-                    // Step 4: Redirect the user to the home page
-                    navigate('/');
-                })
-                .catch((error) => {
-                    console.error('Error during Google login:', error);
-                    navigate('/login');
-                });
+                const decoded_jwt = jwtDecode(token);
+                const name = decoded_jwt.name;
+                setLoggedInUser(name);
+
+                // Step 4: Redirect the user to the home page
+                navigate('/');
+
+            }
+            catch (e) {
+                console.log(e);
+                navigate("/login")
+
+            }
+            finally {
+                setIsLoading(false)
+            }
         }
     }, [navigate]);
 
