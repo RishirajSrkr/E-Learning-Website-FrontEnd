@@ -17,6 +17,7 @@
     "hamburger-react": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "ldrs": "^1.0.2",
+    "lucide-react": "^0.469.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",

@@ -33,7 +33,7 @@ function Footer({width}) {
   ]
 
   return (
-    <div className={`${width} ${hideFooter ? 'hidden' : ''} bg-white dark:bg-black flex justify-center items-center px-24 py-4 sm:py-6 border-t border-lightBorder dark:border-darkBorder text-sm `}>
+    <div className={`${width} ${hideFooter ? 'hidden' : ''} bg-white dark:bg-black flex justify-center items-center px-24 py-4 sm:py-6 border-t mt-12 border-lightBorder dark:border-darkBorder text-sm `}>
 
 
       <div className='w-1/3 flex flex-col text-black dark:text-white '>

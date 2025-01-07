@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VotingPageCourseCard from '../components/VotingPageCourseCard';
 import axios from '../config/axiosConfig'
-
+import Footer from '../components/Footer'
 import { motion } from "framer-motion"
 
 
@@ -43,7 +43,7 @@ function VoteResources() {
 
     return (
 
-        <div className='w-fill min-h-screen bg-white text-black dark:bg-black dark:text-white flex justify-center items-center flex-col pb-32'>
+        <div className='w-fill min-h-screen bg-white text-black dark:bg-black dark:text-white flex justify-center items-center flex-col'>
 
 
             <motion.div animate={{ x: 100 }} />
@@ -93,7 +93,7 @@ function VoteResources() {
 
 
 
-            <div className='w-full flex flex-col px-40 overflow-y-hidden'>
+            <div className='w-full flex flex-col px-40 overflow-y-hidden mb-20'>
 
                 {
 
@@ -110,6 +110,8 @@ function VoteResources() {
                 }
 
             </div>
+
+            <Footer width={"w-full"} />
         </div>
     )
 }

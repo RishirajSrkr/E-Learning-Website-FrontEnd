@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaShare, FaShareAlt, FaThumbsUp, FaUsers, FaVoteYea } from 'react-icons/fa';
 import { IoArrowForwardSharp } from "react-icons/io5";
 import { WindowWidthContext } from '../context/WindowWidthContext';
 import PrimaryButton from '../components/formComponents/PrimaryButton';
-import {Reviews} from '../components/Reviews';
-
+import Reviews from '../components/Reviews';
+import Footer from '../components/Footer'
 
 function Home() {
 
@@ -22,12 +22,12 @@ function Home() {
 
     return (
 
-        <div className=' relative bg-white dark:bg-bgOne text-bgOne dark:text-white  min-h-screen pb-12'>
+        <div className=' relative bg-white dark:bg-bgOne text-bgOne dark:text-white  min-h-screen '>
 
 
             {/* --------------------------------- HEAD LINE --------------------------------- */}
 
-            <div className='w-full px-4 sm:min-h-screen flex flex-col justify-center gap-4 sm:px-24 mb-6 sm:mb-0'>
+            <div className='w-full px-4 sm:min-h-screen flex flex-col justify-center gap-4 sm:px-24'>
 
 
                 <div className='w-full p-8 flex flex-col gap-2 text-center rounded-lg sm:p-20 sm:gap-6'>
@@ -132,7 +132,7 @@ function Home() {
             {/* ----------------------------------- REVIEWS ------------------------------------- */}
 
 
-            <div className='px-32'>
+            <div className='px-32 mb-20'>
 
                 <h2 className="text-3xl font-medium text-bgOne dark:text-gray-500 text-center mb-16">Listen from our learners.</h2>
 
@@ -140,10 +140,7 @@ function Home() {
 
             </div>
 
-
-
-
-
+            <Footer />
 
         </div >
 
