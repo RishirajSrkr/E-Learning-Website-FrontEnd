@@ -53,8 +53,7 @@ function AllCourses() {
         //saving the url in session storage, to redirect the url here after login
         const redirectAfterLogin = window.location.href;
         sessionStorage.setItem("redirectAfterLogin", redirectAfterLogin)
-        console.log(redirectAfterLogin);
-
+    
 
         async function getAllCourses() {
             try {

@@ -41,8 +41,15 @@ function GoogleCallback() {
 
                 setLoggedInUser(name);
 
-                // Step 4: Redirect the user to the home page
-                navigate('/');
+                // Step 4: Redirect the user to the home page or previous page
+                
+                const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
+                if (redirectAfterLogin) {
+                    window.location.href = redirectAfterLogin;
+                }
+                else navigate("/")
+
+
                 
             } catch (error) {
                 console.error("Error during Google login callback:", error);

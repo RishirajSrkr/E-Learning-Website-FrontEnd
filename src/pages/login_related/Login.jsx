@@ -26,11 +26,7 @@ function Login() {
 
         const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=email%20profile`;
 
-
-        const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
-        if (redirectAfterLogin) {
-            window.location.href = redirectAfterLogin;
-        }
+        window.location.href = googleAuthUrl;
     };
 
 
