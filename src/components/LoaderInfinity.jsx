@@ -1,4 +1,5 @@
 import React from 'react'
+import 'ldrs/infinity'
 
 function LoaderInfinity() {
     return (

@@ -19,6 +19,7 @@ import Footer from '../../components/Footer';
 // import required modules
 
 
+
 function AllCourses() {
 
     const navigate = useNavigate();
