@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { useTheme } from '../../context/ThemeContext';
 import { AuthContext } from '../../context/AuthContext';
-import LoaderButton from '../../components/LoaderButton';
+import Loader from '../../components/Loader';
 function Login() {
 
     const navigate = useNavigate();
@@ -137,7 +137,7 @@ function Login() {
                 <button type='button' className='flex gap-2 items-center justify-center text-sm text-black dark:text-white font-medium w-full h-12 rounded-full bg-white dark:bg-zinc-900 border border-lightBorder dark:border-none' onClick={handleEmailLogin}>
 
                     {
-                        isLoading ? <LoaderButton theme={theme} /> : "Log in"
+                        isLoading ? <Loader theme={theme} /> : "Log in"
                     }
 
                 </button>

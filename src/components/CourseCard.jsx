@@ -41,7 +41,7 @@ const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, t
       </div>
 
       {
-        showCTA && <SecondaryButton isLoading={isLoading} text={text} classname={"text-white dark:text-black bg-black  dark:bg-white"} onClick={onClick} />
+        showCTA && <SecondaryButton  text={text} classname={"text-white dark:text-black bg-black  dark:bg-white"} onClick={onClick} />
       }
     </div>
   );

@@ -1,22 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CourseCard from '../../components/CourseCard'
+import CourseCardSkeleton from '../../components/CourseCardSkeleton'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axiosConfig'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
 import { motion } from 'framer-motion'
 import { WindowWidthContext } from '../../context/WindowWidthContext';
 import { toast } from 'sonner'
-
+import Loader from '../../components/Loader'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
-import LoaderInfinity from '../../components/LoaderInfinity'
 import { AuthContext } from '../../context/AuthContext';
 import Footer from '../../components/Footer';
 // import required modules
+
 
 
 
@@ -69,6 +70,9 @@ function AllCourses() {
                 console.error("Error fetching courses : ", e);
             }
             finally {
+                setTimeout(() => {
+
+                }, 5000);
                 setIsLoading(false)
             }
         }
@@ -143,8 +147,12 @@ function AllCourses() {
                 <div className='w-10/12 relative min-h-screen rounded-lg  px-20'>
                     {
                         isLoading &&
-                        <div className='min-h-screen w-full flex translate-y-60 justify-center'>
-                            <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} />
+                        <div className='masonry w-full'>
+                            {Array.from({ length: 3 }).map((_, index) => (
+                                <div className='masonry-item'>
+                                    <CourseCardSkeleton />
+                                </div>
+                            ))}
                         </div>
 
                     }

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
 import { jwtDecode } from 'jwt-decode'; // Correct import for jwtDecode
-import LoaderInfinity from '../components/LoaderInfinity'
+import Loader from '../components/Loader'
 
 
 function GoogleCallback() {
@@ -57,7 +57,7 @@ function GoogleCallback() {
 
     return (
         <div className='min-h-screen w-full flex items-center justify-center'>
-            {isLoading && <LoaderInfinity />
+            {isLoading && <Loader />
             }
         </div>
     );
