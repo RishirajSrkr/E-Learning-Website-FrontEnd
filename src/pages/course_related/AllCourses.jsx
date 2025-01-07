@@ -144,8 +144,7 @@ function AllCourses() {
                     {
                         isLoading &&
                         <div className='min-h-screen w-full flex translate-y-60 justify-center'>
-                            Loading resources...
-                            {/* <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} /> */}
+                            <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} />
                         </div>
 
                     }
