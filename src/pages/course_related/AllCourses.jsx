@@ -49,10 +49,16 @@ function AllCourses() {
 
     useEffect(() => {
 
-        setIsLoading(true);
+        //saving the url in session storage, to redirect the url here after login
+        const redirectAfterLogin = window.location.href;
+        sessionStorage.setItem("redirectAfterLogin", redirectAfterLogin)
+        console.log(redirectAfterLogin);
+
 
         async function getAllCourses() {
             try {
+                setIsLoading(true);
+
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/all-courses`);
                 setCourses(response.data)
                 console.log(response.data);
@@ -70,11 +76,6 @@ function AllCourses() {
 
 
     }, [])
-
-
-
-
-
 
 
 
@@ -143,7 +144,8 @@ function AllCourses() {
                     {
                         isLoading &&
                         <div className='min-h-screen w-full flex translate-y-60 justify-center'>
-                            <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} />
+                            Loading resources...
+                            {/* <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} /> */}
                         </div>
 
                     }

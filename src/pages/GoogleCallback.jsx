@@ -5,8 +5,6 @@ import { AuthContext } from '../context/AuthContext';
 import { jwtDecode } from 'jwt-decode'; // Correct import for jwtDecode
 import LoaderInfinity from '../components/LoaderInfinity'
 
-import 'ldrs/infinity'
-
 
 function GoogleCallback() {
     const { setLoggedInUser } = useContext(AuthContext);
@@ -45,6 +43,7 @@ function GoogleCallback() {
 
                 // Step 4: Redirect the user to the home page
                 navigate('/');
+                
             } catch (error) {
                 console.error("Error during Google login callback:", error);
                 navigate("/login");
@@ -58,7 +57,7 @@ function GoogleCallback() {
 
     return (
         <div className='min-h-screen w-full flex items-center justify-center'>
-            {isLoading && <LoaderInfinity/>
+            {isLoading && <LoaderInfinity />
             }
         </div>
     );

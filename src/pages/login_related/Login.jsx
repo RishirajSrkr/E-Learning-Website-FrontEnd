@@ -1,30 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginWithEmailPassword from './LoginWithEmailPassword'
 import { FcGoogle } from "react-icons/fc";
-import { MdEmail } from "react-icons/md";
 import { useTheme } from '../../context/ThemeContext';
 import { AuthContext } from '../../context/AuthContext';
-import Input from '../../components/formComponents/Input';
 import LoaderButton from '../../components/LoaderButton';
 function Login() {
 
     const navigate = useNavigate();
 
     const googleClientId = import.meta.env.VITE_CLIENT_ID;
-    console.log(googleClientId);
-
-
     const redirectUri = `${import.meta.env.VITE_FRONTEND_URL}/auth/callback`;
-
-
-    const handleGoogleLogin = () => {
-
-        const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=email%20profile`;
-
-        window.location.href = googleAuthUrl;
-    };
-
 
     const { theme } = useTheme();
 
@@ -37,6 +22,18 @@ function Login() {
     });
 
 
+    const handleGoogleLogin = () => {
+
+        const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=email%20profile`;
+
+
+        const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
+        if (redirectAfterLogin) {
+            window.location.href = redirectAfterLogin;
+        }
+    };
+
+
     const handleInputChange = (e) => {
 
         setFormData(prev => ({
@@ -44,8 +41,6 @@ function Login() {
         }));
 
     };
-
-
 
 
 
@@ -60,11 +55,16 @@ function Login() {
             }, 4000);
 
             const status = await login(formData);
+            console.log(window.history);
+
 
             if (status == 200) {
 
-                navigate("/")
-
+                const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
+                if (redirectAfterLogin) {
+                    window.location.href = redirectAfterLogin;
+                }
+                else navigate("/")
 
                 toast.success("Login successful!")
             }
@@ -128,7 +128,7 @@ function Login() {
                     value={formData.password}
                     onChange={(e) => handleInputChange(e)}
                     className='w-full rounded-full px-6 py-3 bg-transparent border border-lightBorder dark:border-darkBorder outline-none ring-0'
-                   placeholder="Password (8+ characters)"
+                    placeholder="Password (8+ characters)"
 
                 />
 
