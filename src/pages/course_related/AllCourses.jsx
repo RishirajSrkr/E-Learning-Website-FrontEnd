@@ -48,9 +48,10 @@ function AllCourses() {
 
     useEffect(() => {
 
+        setIsLoading(true);
+
         async function getAllCourses() {
             try {
-                setIsLoading(true);
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/all-courses`);
                 setCourses(response.data)
                 console.log(response.data);
@@ -136,12 +137,12 @@ function AllCourses() {
 
             <div className='w-full mb-12'>
 
-            {/* ---------------------------- COURSES -------------------------------- */}
+                {/* ---------------------------- COURSES -------------------------------- */}
                 <div className='w-10/12 relative min-h-screen rounded-lg  px-20'>
                     {
                         isLoading &&
                         <div className='min-h-screen w-full flex translate-y-60 justify-center'>
-                        <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} />
+                            <LoaderInfinity classname={"h-[500px] absolute right-1/2 translate-x-1/2"} />
                         </div>
 
                     }
