@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { dotStream } from 'ldrs'
+import CircleLoader from '../CircleLoader'
 import { RiArrowRightLine } from "react-icons/ri";
-dotStream.register()
 
 function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
 
@@ -13,7 +12,7 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
     if (html.classList.contains("dark")) {
       setTheme("dark");
     }
-    else{
+    else {
       setTheme("light")
     }
   }, [])
@@ -27,17 +26,9 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
       type='button'
     >
       {isLoading &&
-
-        <div className='mx-auto w-full'>
-
-          <l-dot-stream
-            size="36"
-            speed="3.5"
-            color={theme == "dark" ? "black" : "white" }
-          ></l-dot-stream>
-
-
-        </div>
+       <div className='w-full mx-auto'>
+         <CircleLoader />
+       </div>
       }
 
       {

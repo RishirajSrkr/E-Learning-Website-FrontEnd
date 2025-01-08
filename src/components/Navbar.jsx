@@ -13,11 +13,12 @@ import { RxDashboard } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
+import { FaCircleUser } from "react-icons/fa6";
 import { useTheme } from '../context/ThemeContext';
 function Navbar() {
 
     const location = useLocation();
-    const {theme, toggleTheme} = useTheme();
+    const { theme, toggleTheme } = useTheme();
 
     const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
@@ -29,7 +30,7 @@ function Navbar() {
 
 
 
-    
+
     // Effect to handle body scroll behavior
     useEffect(() => {
         if (showNavbar) {
@@ -272,7 +273,7 @@ function Navbar() {
 
                                 {/* --------------menu------------- */}
                                 <div className='w-2/4 font-normal flex items-center'>
-                                    <div className='w-fit mx-auto flex justify-center items-center gap-8 font-medium  text-gray-500 bg-transparent'>
+                                    <div className='w-fit mx-auto flex justify-center items-center gap-8 font-medium  text-gray-500 bg-transparent py-2'>
 
                                         <NavLink
                                             className={({ isActive }) =>
@@ -290,9 +291,9 @@ function Navbar() {
                                         <NavLink
                                             className={({ isActive }) =>
                                                 isActive
-                                            ? 'text-bgOne dark:text-offwhite'
-                                            :
-                                            'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
+                                                    ? 'text-bgOne dark:text-offwhite'
+                                                    :
+                                                    'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
                                             }
                                             to="/vote-resources"
                                         >
@@ -304,9 +305,9 @@ function Navbar() {
                                         <NavLink
                                             className={({ isActive }) =>
                                                 isActive
-                                            ? 'text-bgOne dark:text-offwhite'
-                                            :
-                                            'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
+                                                    ? 'text-bgOne dark:text-offwhite'
+                                                    :
+                                                    'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
                                             }
                                             to="/contributors"
                                         >
@@ -327,9 +328,9 @@ function Navbar() {
                                             loggedInUser && <NavLink
                                                 className={({ isActive }) =>
                                                     isActive
-                                                ? 'text-bgOne dark:text-offwhite'
-                                                :
-                                                'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
+                                                        ? 'text-bgOne dark:text-offwhite'
+                                                        :
+                                                        'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
                                                 }
                                                 to={"/resource/create"}
                                             >
@@ -352,7 +353,15 @@ function Navbar() {
 
                                         <div className='flex gap-3 justify-center items-center'>
 
-                                            <img className='h-10 w-10 rounded-full border border-border object-cover' src={user?.profileImage} alt="" />
+                                            {/* profile Image */}
+                                            <div className='h-8 w-8'>
+                                                {
+                                                    !user.profileImage ? <FaCircleUser className='w-full dark:text-bgThree h-full' /> : (
+                                                        <img className='w-full h-full  rounded-full border border-border object-cover' src={user?.profileImage} />
+                                                    )
+                                                }
+                                            </div>
+
                                             <Link className='text-bgOne dark:text-offwhite' onClick={handleToggleDropdown} >{loggedInUser}</Link>
 
                                             {
@@ -363,7 +372,7 @@ function Navbar() {
                                                     animate={{ y: 0, opacity: 100 }}
                                                     transition={{ delay: 0 }}
 
-                                                    className='bg-gray-50 dark:bg-bgTwo px-8 py-4 rounded-lg absolute top-14 flex flex-col gap-2 items-start text-black dark:text-white'>
+                                                    className='bg-gray-50 dark:bg-bgTwo px-8 py-4 rounded-lg absolute top-[53px] flex flex-col gap-2 items-start text-black dark:text-white'>
 
                                                     <Link onClick={handleDropDownClose} className='flex justify-center items-center gap-2' to={"/dashboard"}><RxDashboard /> Dashboard</Link>
                                                     <Link onClick={handleDropDownClose} className='flex justify-center items-center gap-2' to={"/my-profile"}><CgProfile />My Profile</Link>
@@ -380,7 +389,7 @@ function Navbar() {
                                     }
 
 
-                         
+
 
 
 

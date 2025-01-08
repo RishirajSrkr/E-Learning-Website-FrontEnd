@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ContributorProfile from '../components/ContributorProfile';
+import { ContributorProfile, ContributorProfileSkeleton } from '../components/ContributorProfile';
 import axios from '../config/axiosConfig'
 import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
@@ -79,75 +79,71 @@ function AllContributers() {
             </div>
 
 
-            {
-                isLoading ?
 
-                    (
 
-                        <Loader classname={"h-[500px]"} />
-                    )
+            <div className='mt-20 overflow-y-scroll flex flex-col w-1/2 gap-2' style={{ scrollbarWidth: "none" }}>
 
-                    :
+                {
+                    isLoading && <div className='flex flex-col gap-2'>
+                        <ContributorProfileSkeleton />
+                        <ContributorProfileSkeleton />
+                    </div>
+                }
 
-                    (
+                {
+                    searchQuery ?
 
-                        <div className='mt-20 overflow-y-scroll flex flex-col w-1/2 gap-2' style={{ scrollbarWidth: "none" }}>
+                        (
+                            Object.keys(filteredUsers).length > 0 ?
 
-                            {
-                                searchQuery ?
-
+                                (
                                     (
-                                        Object.keys(filteredUsers).length > 0 ?
-
-                                            (
-                                                (
-                                                    Object.keys(filteredUsers).map((key) => {
-
-                                                        return <ContributorProfile
-
-                                                            key={key}
-                                                            name={filteredUsers[key].name}
-                                                            email={filteredUsers[key].email}
-                                                            bio={filteredUsers[key].bio}
-                                                            uploadedCourses={filteredUsers[key].uploadedCourses}
-                                                            onClick={() => handleSeeCoursesClick(key)}
-
-                                                        />
-                                                    })
-                                                )
-                                            )
-
-                                            :
-
-                                            (
-                                                <p className='text-center mt-40 text-gray-500'>No contributors found with the name : {searchQuery}</p>
-                                            )
-                                    )
-
-                                    :
-
-                                    (
-                                        Object.keys(users).map((key) => {
+                                        Object.keys(filteredUsers).map((key) => {
 
                                             return <ContributorProfile
 
                                                 key={key}
-                                                name={users[key].name}
-                                                email={users[key].email}
-                                                bio={users[key].bio}
-                                                uploadedCourses={users[key].uploadedCourses}
+                                                name={filteredUsers[key].name}
+                                                email={filteredUsers[key].email}
+                                                bio={filteredUsers[key].bio}
+                                                uploadedCourses={filteredUsers[key].uploadedCourses}
                                                 onClick={() => handleSeeCoursesClick(key)}
-                                                profileImage={users[key].profileImage}
+                                                profileImage={filteredUsers[key].profileImage}
+
 
                                             />
                                         })
                                     )
+                                )
 
-                            }
-                        </div>
-                    )
+                                :
 
-            }
+                                (
+                                    <p className='text-center mt-40 text-gray-500'>No contributors found with the name : {searchQuery}</p>
+                                )
+                        )
+
+                        :
+
+                        (
+                            Object.keys(users).map((key) => (
+
+                                <ContributorProfile
+                                    key={key}
+                                    name={users[key].name}
+                                    email={users[key].email}
+                                    bio={users[key].bio}
+                                    uploadedCourses={users[key].uploadedCourses}
+                                    onClick={() => handleSeeCoursesClick(key)}
+                                    profileImage={users[key].profileImage}
+
+                                />
+                            )
+                            )
+                        )
+
+                }
+            </div>
 
 
 
