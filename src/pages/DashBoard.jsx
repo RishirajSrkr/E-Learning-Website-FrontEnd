@@ -11,11 +11,12 @@ import { TbReload } from "react-icons/tb";
 import { BsThreeDots } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
 import { FaShareAlt } from "react-icons/fa";
-import { toast } from 'react-hot-toast'
 import { motion } from 'framer-motion'
 import { RiArrowRightLine } from "react-icons/ri";
-
+import { TbLoader2 } from 'react-icons/tb';
+import {toast} from 'sonner';
 
 function DashBoard() {
 
@@ -30,6 +31,9 @@ function DashBoard() {
   const [votes, setVotes] = useState(0);
   const [showDropdown, setShowDropdown] = useState(null)
   const [courseLinkToShare, setCourseLinkToShare] = useState(null);
+
+  const [isDeleting, setIsDeleting] = useState(false);
+
 
   console.log(user);
 
@@ -78,7 +82,7 @@ function DashBoard() {
     setShowDropdown(null)
     console.log(courseId);
 
-    const fullCourseLink = `http://localhost:5173/course/${courseId}`
+    const fullCourseLink = `${import.meta.env.VITE_FRONTEND_URL}/course/${courseId}`
 
     navigator.clipboard.writeText(fullCourseLink);
 
@@ -90,6 +94,37 @@ function DashBoard() {
       }
 
     })
+  }
+
+
+
+
+  async function handleCourseDelete(courseId) {
+    try {
+      setIsDeleting(true)
+
+      const remainingUploadedCourses = Object.keys(uploadedCourses)
+      .filter(key => key != courseId)
+      .reduce((acc, key) => {
+        acc[key] = uploadedCourses[key]
+        return acc;
+      }, {})
+    
+      setUploadedCourses(remainingUploadedCourses);
+
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/course/delete/${courseId}`)
+      toast.success("Course deleted successfully")
+      
+      console.log(response.data);
+    }
+    catch (e) {
+      toast.error("Failed to delete the course, please try again")
+      console.log("Error while deleting the course : ", e);
+    }
+    finally {
+      setIsDeleting(false)
+    }
+
   }
 
 
@@ -126,7 +161,7 @@ function DashBoard() {
                   headtext={"Uploaded Courses"}
                   subtext={"We appreciate your efforts!"}
                   value={Object.keys(uploadedCourses).length}
-                  icon={<RiFileUploadLine  />}
+                  icon={<RiFileUploadLine />}
                   onClick={() => setSelected("uploaded-courses")}
                   isSelected={selected == "uploaded-courses"}
 
@@ -193,18 +228,18 @@ function DashBoard() {
                             initial={{ x: 50, opacity: 0 }}
                             animate={{ x: 0, opacity: 100 }}
                             transition={{ delay: 0 }}
-                            className='bg-gray-50 dark:bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
+                            className='bg-gray-50 dark:bg-bgThree w-32 text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
                           >
 
+                            <Link to={`/course/${key}`} className='text-sm h-5 flex items-center gap-1'>  <FaArrowUpRightFromSquare className='w-6' size={12} />View</Link>
 
-                            <Link to={`/course/${key}`} className='text-sm flex items-center gap-2'>  <FaArrowUpRightFromSquare size={12} />View</Link>
-
-                            <Link to={`/course/${key}/enrolled-users`} className='text-sm flex items-center gap-2'><FaUserFriends /> Enrolled</Link>
+                            <Link to={`/course/${key}/enrolled-users`} className='text-sm h-5 flex items-center gap-1'><FaUserFriends className='w-6' /> Enrolled</Link>
 
 
-                            <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm flex items-center gap-2'>  <FaShareAlt size={12} />Share</Link>
+                            <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm h-5 flex items-center gap-1'>  <FaShareAlt className='w-6' size={12} />Share</Link>
 
-                            
+
+                            <Link onClick={() => handleCourseDelete(key)} className='text-sm h-5 flex items-center '>{isDeleting ? <div className='flex items-center gap-1'><TbLoader2 className='animate-spin w-6'/>Deleting</div> : <div className='flex items-center gap-1'><MdDelete className='w-6' size={13} /> Delete</div>}</Link>
 
                           </motion.div>
                         }
@@ -253,10 +288,10 @@ function DashBoard() {
 
                         {
                           showDropdown === key && <motion.div
-                          initial={{ x: 50, opacity: 0 }}
-                          animate={{ x: 0, opacity: 100 }}
-                          transition={{ delay: 0 }}
-                             className='bg-gray-50 dark:bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
+                            initial={{ x: 50, opacity: 0 }}
+                            animate={{ x: 0, opacity: 100 }}
+                            transition={{ delay: 0 }}
+                            className='bg-gray-50 dark:bg-bgThree text-gray px-5 py-3.5 rounded-md absolute right-8 flex flex-col gap-2 top-12 z-50'
                           >
 
 

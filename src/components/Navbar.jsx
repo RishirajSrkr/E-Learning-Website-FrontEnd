@@ -357,7 +357,7 @@ function Navbar() {
                                             <div className='h-8 w-8'>
                                                 {
                                                     !user.profileImage ? <FaCircleUser className='w-full dark:text-bgThree h-full' /> : (
-                                                        <img className='w-full h-full  rounded-full border border-border object-cover' src={user?.profileImage} />
+                                                        <img className='w-full h-full  rounded-full object-cover' src={user?.profileImage} />
                                                     )
                                                 }
                                             </div>

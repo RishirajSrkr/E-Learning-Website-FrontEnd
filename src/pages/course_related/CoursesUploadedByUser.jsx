@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from '../../config/axiosConfig'
 import { useParams } from 'react-router-dom'
 import { ThreeDot } from 'react-loading-indicators';
-import CourseCard from '../../components/CourseCard';
+import {CourseCard} from '../../components/CourseCard';
 import Loader from '../../components/Loader';
 
 function CoursesUploadedByUser() {

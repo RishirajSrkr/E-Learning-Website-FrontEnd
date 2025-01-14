@@ -44,8 +44,8 @@ function Footer({width}) {
         </Link>
 
         <div className='flex items-center gap-1 mb-2'>
-          <p>Build by</p>
-          <Link>@RishirajSarkar</Link>
+          <p>Built by</p>
+          <Link to={"https://www.linkedin.com/in/rishiraj-sarkar/"} >@RishirajSarkar</Link>
         </div>
 
 

@@ -26,7 +26,4 @@ dist-ssr
 .env
 
 notes.txt
-courses.js
-errorMessages.js
-journalData.js
-Users.js
+LoginCopy.jsx

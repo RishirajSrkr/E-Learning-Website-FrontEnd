@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CourseCard from '../../components/CourseCard'
-import CourseCardSkeleton from '../../components/CourseCardSkeleton'
+import {CourseCard} from '../../components/CourseCard'
+import {CourseCardSkeleton} from '../../components/CourseCard'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axiosConfig'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";

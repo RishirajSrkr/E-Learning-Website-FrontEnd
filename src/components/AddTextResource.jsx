@@ -4,11 +4,13 @@ import axios from '../config/axiosConfig'
 import { IoCloseSharp } from "react-icons/io5";
 import { toast } from 'sonner'
 import SecondaryButton from './formComponents/SecondaryButton'
-import CourseCard from './CourseCard'
+import { CourseCard } from './CourseCard'
 import { AuthContext } from '../context/AuthContext'
 import { MdUpload } from "react-icons/md";
 import { WindowWidthContext } from '../context/WindowWidthContext'
 import { useNavigate } from 'react-router-dom';
+import { TbLoader2 } from "react-icons/tb";
+
 function AddTextResource() {
 
   const ref = useRef(null);
@@ -18,13 +20,12 @@ function AddTextResource() {
   const { loggedInUser } = useContext(AuthContext)
   const { isMobile } = useContext(WindowWidthContext);
 
-
   //restricting the user to delete a chapter if only one chapter is left
   const [deleteButtonDisable, isDeleteButtonDisable] = useState(false);
-
-
   //image preview
   const [previewImage, setPreviewImage] = useState(null)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const [formData, setFormData] = useState({
@@ -41,7 +42,6 @@ function AddTextResource() {
   });
 
 
-  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function AddTextResource() {
     // Scroll into view on updates after initial load
     ref.current.scrollIntoView({ behavior: 'smooth' });
   }, [formData.chapters]);
-  
+
   function handleAddChapterClick() {
 
     setFormData((prev) => (
@@ -111,17 +111,6 @@ function AddTextResource() {
   }
 
 
-  function handleNotificationDivClose() {
-    setShowNotificationDiv(false)
-  }
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowNotificationDiv(false)
-
-    }, 60000);
-    return () => { clearTimeout(timer) }
-  }, [])
-
 
 
   async function handleSubmitClick(e) {
@@ -146,7 +135,10 @@ function AddTextResource() {
 
 
     try {
+      setIsLoading(true)
+
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formDataWithImage);
+
 
       if (response.status === 200) {
 
@@ -173,21 +165,34 @@ function AddTextResource() {
         setPreviewImage(null)
 
       }
+
+
     }
+
     catch (e) {
-      toast.error("Failed to add course")
+      if (e.response && e.response.status == 429) {
+        toast.error("You can create a course only once a day.");
+      }
+      else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
       console.log("error while creating course : ", e);
 
     }
+    finally {
+      setIsLoading(false)
+    }
 
   }
+
+
 
 
   return (
 
     <div className='flex flex-col py-16'>
 
-  
+
 
       <div className='flex '>
 
@@ -209,7 +214,7 @@ function AddTextResource() {
                   placeholder='Spring Boot & Spring Security'
                   onChange={(e) => handleChange_Other(e)}
                 />
-              
+
               </div>
 
               <div className='w-2/5 flex flex-col items-start justify-center gap-2'>
@@ -221,7 +226,7 @@ function AddTextResource() {
                   placeholder='Java, Spring Boot, Spring Security'
                   onChange={(e) => handleChange_Other(e)}
                 />
-    
+
               </div>
 
             </div>
@@ -262,7 +267,7 @@ function AddTextResource() {
             <div
               onClick={() => fileInputRef.current.click()}
               className='border border-dashed border-lightBorder h-20 flex justify-center items-center cursor-pointer'>
-              <MdUpload  size={24} />
+              <MdUpload size={24} />
             </div>
 
 
@@ -285,7 +290,7 @@ function AddTextResource() {
                     value={chapter.chapterTitle}
                     onChange={(e) => handleChange_Chapter(e, index)}
                   />
-                
+
                 </div>
 
                 <div className='flex flex-col gap-2'>
@@ -297,7 +302,7 @@ function AddTextResource() {
                     value={chapter.chapterContent}
                     onChange={(e) => handleChange_Chapter(e, index)}
                   />
-                
+
                 </div>
 
 
@@ -325,10 +330,10 @@ function AddTextResource() {
 
           <button
             type='submit'
-            className={`fixed bottom-24 right-4 sm:bottom-10  sm:right-10 mt-10 bg-black dark:bg-white rounded-full text-white dark:text-black px-10 py-3 font-medium ${!formData.courseTitle || !formData.courseCategory || !formData.courseDescription ? 'cursor-not-allowed opacity-50' : ''}`}
+            className={`fixed bottom-24 right-4 sm:bottom-10 text-sm sm:right-10 mt-10 bg-black dark:bg-white rounded-full text-white dark:text-black w-36 h-10 flex justify-center items-center font-medium ${!formData.courseTitle || !formData.courseDescription || !formData.courseCategory || !formData.courseImage || !formData.chapters ? 'cursor-not-allowed opacity-50' : ''}`}
             onClick={handleSubmitClick}
-            disabled={!formData.courseTitle || !formData.courseCategory || !formData.courseDescription}
-          >Submit</button>
+            disabled={!formData.courseTitle || !formData.courseDescription || !formData.courseCategory || !formData.courseImage || !formData.chapters}
+          >{isLoading ? <div className='flex items-center gap-2'><TbLoader2 className='animate-spin' />Creating</div> : "Create Course"}</button>
 
 
           <div ref={ref}></div>

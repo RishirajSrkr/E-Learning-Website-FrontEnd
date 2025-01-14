@@ -54,29 +54,31 @@ const Reviews = () => {
                 {reviews.map((review, index) => (
                     <div
                         key={index}
-                        className="break-inside-avoid-column mb-4  bg-white dark:bg-bgOneLight rounded-lg p-6 shadow-sm"
+                        className="break-inside-avoid-column mb-4 bg-gradient-to-br dark:from-bgThree dark:to-bgOneLight from-lightBorder to-white p-[1px] rounded-lg"
                     >
-                        <div className="flex items-center gap-3 mb-3">
-                            <img
-                                src={review.img}
-                                alt={review.name}
-                                className="w-10 h-10 rounded-full object-cover"
-                            />
-                            <div>
-                                <h3 className="font-medium dark:text-white">{review.name}</h3>
-                                <div className="flex gap-1">
+                        <div className="bg-white dark:bg-bgOneLight rounded-lg p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                                <img
+                                    src={review.img}
+                                    alt={review.name}
+                                    className="w-10 h-10 rounded-full object-cover"
+                                />
+                                <div>
+                                    <h3 className="font-medium dark:text-white">{review.name}</h3>
+                                    {/* <div className="flex gap-1">
                                     {[...Array(review.rating)].map((_, i) => (
                                         <Star
                                             key={i}
                                             className="w-3 h-3 text-zinc-200 fill-zinc-200"
                                         />
                                     ))}
+                                </div> */}
                                 </div>
                             </div>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm">
+                                {review.review}
+                            </p>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm">
-                            "{review.review}"
-                        </p>
                     </div>
                 ))}
             </div>
