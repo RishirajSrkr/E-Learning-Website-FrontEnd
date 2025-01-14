@@ -98,7 +98,9 @@ function AllCourses() {
                 navigate(`/course/${id}`)
 
 
-                await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${id}`);
+                const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${id}`);
+                console.log(response.data);
+                
 
             }
 
@@ -148,7 +150,7 @@ function AllCourses() {
                         isLoading &&
                         <div className='masonry w-full'>
                             {Array.from({ length: 3 }).map((_, index) => (
-                                <div className='masonry-item'>
+                                <div key={index} className='masonry-item'>
                                     <CourseCardSkeleton />
                                 </div>
                             ))}

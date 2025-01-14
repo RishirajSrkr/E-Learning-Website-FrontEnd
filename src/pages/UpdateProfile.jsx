@@ -198,7 +198,7 @@ function UpdateProfile() {
                         onChange={(e) => handleInputChange(e)}
                         totalWidth={"w-full"}
                         className={""}
-                        placeholder={"Oops!   We cannot show the password"}
+                        placeholder={"Oops! We cannot show the password"}
                     />
 
                     <Input
@@ -208,7 +208,7 @@ function UpdateProfile() {
                         onChange={(e) => handleInputChange(e)}
                         totalWidth={"w-full"}
                         className={""}
-                        placeholder={user?.bio}
+                        placeholder={user.bio? user.bio : "Write something about yourself"}
                     />
                 </div>
 
