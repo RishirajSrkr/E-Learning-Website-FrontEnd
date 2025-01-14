@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
-import { useTheme } from '../../context/ThemeContext';
 import { AuthContext } from '../../context/AuthContext';
-import Loader from '../../components/Loader';
-import CircleLoader from '../../components/CircleLoader'
 
 function Login() {
 
@@ -13,7 +10,7 @@ function Login() {
     const googleClientId = import.meta.env.VITE_CLIENT_ID;
     const redirectUri = `${import.meta.env.VITE_FRONTEND_URL}/auth/callback`;
 
-    const { theme } = useTheme();
+  
 
     const { login } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false)
@@ -99,15 +96,15 @@ function Login() {
             </div>
 
 
-            <div className='my-5 flex gap-2 justify-center items-center w-[350px] px-10'>
+            {/* <div className='my-5 flex gap-2 justify-center items-center w-[350px] px-10'>
                 <div className='h-[1px] bg-zinc-400 w-16'></div>
                 <p className='text-center text-xs text-zinc-400 w-full'>or log in with email & password</p>
                 <div className='h-[1px] bg-zinc-400 w-16'></div>
 
-            </div>
+            </div> */}
 
 
-
+{/* 
             <div className='w-[350px] mx-auto flex flex-col gap-3'>
                 <input
                     type="text"
@@ -129,10 +126,6 @@ function Login() {
                     placeholder="Password (8+ characters)"
 
                 />
-{/* 
-                <Link to={"/password-reset"} className='w-full flex justify-end'>
-                    <p className='text-xs pr-2'>Forgot Password?</p>
-                </Link> */}
 
 
                 <button type='button' className='mt-2 flex gap-2 items-center justify-center text-sm text-black dark:text-white font-medium w-full h-12 rounded-full bg-white dark:bg-zinc-900 border border-lightBorder dark:border-none' onClick={handleEmailLogin}>
@@ -144,7 +137,7 @@ function Login() {
                 </button>
 
 
-            </div>
+            </div> */}
 
 
 
