@@ -98,17 +98,17 @@ function Login() {
 
             </div>
 
-
+{/* 
             <div className='my-5 flex gap-2 justify-center items-center w-[350px] px-10'>
                 <div className='h-[1px] bg-zinc-400 w-16'></div>
                 <p className='text-center text-xs text-zinc-400 w-full'>or log in with email & password</p>
                 <div className='h-[1px] bg-zinc-400 w-16'></div>
 
-            </div>
+            </div> */}
 
 
 
-            <div className='w-[350px] mx-auto flex flex-col gap-3'>
+            {/* <div className='w-[350px] mx-auto flex flex-col gap-3'>
                 <input
                     type="text"
                     name='email'
@@ -119,7 +119,7 @@ function Login() {
 
                 />
 
-{/* 
+
                 <input
                     type="password"
                     name='password'
@@ -137,11 +137,11 @@ function Login() {
                         isLoading ? <CircleLoader theme={theme} /> : "Log in"
                     }
 
-                </button> */}
+                </button>
 
 
             </div>
-
+ */}
 
 
 
