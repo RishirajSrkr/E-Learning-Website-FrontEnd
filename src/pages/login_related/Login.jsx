@@ -119,7 +119,7 @@ function Login() {
 
                 />
 
-
+{/* 
                 <input
                     type="password"
                     name='password'
@@ -129,10 +129,6 @@ function Login() {
                     placeholder="Password (8+ characters)"
 
                 />
-{/* 
-                <Link to={"/password-reset"} className='w-full flex justify-end'>
-                    <p className='text-xs pr-2'>Forgot Password?</p>
-                </Link> */}
 
 
                 <button type='button' className='mt-2 flex gap-2 items-center justify-center text-sm text-black dark:text-white font-medium w-full h-12 rounded-full bg-white dark:bg-zinc-900 border border-lightBorder dark:border-none' onClick={handleEmailLogin}>
@@ -141,7 +137,7 @@ function Login() {
                         isLoading ? <CircleLoader theme={theme} /> : "Log in"
                     }
 
-                </button>
+                </button> */}
 
 
             </div>
