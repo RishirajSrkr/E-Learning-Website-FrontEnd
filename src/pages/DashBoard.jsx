@@ -86,14 +86,7 @@ function DashBoard() {
 
     navigator.clipboard.writeText(fullCourseLink);
 
-    toast.success("Link Copied!", {
-      position: "bottom-right",
-      style: {
-        background: "#131415",
-        color: "#FFFFFF",
-      }
-
-    })
+    toast.success("Link copied!")
   }
 
 

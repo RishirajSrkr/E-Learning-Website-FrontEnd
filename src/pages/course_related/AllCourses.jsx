@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {CourseCard} from '../../components/CourseCard'
-import {CourseCardSkeleton} from '../../components/CourseCard'
+import { CourseCard } from '../../components/CourseCard'
+import { CourseCardSkeleton } from '../../components/CourseCard'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../config/axiosConfig'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
@@ -53,7 +53,7 @@ function AllCourses() {
         //saving the url in session storage, to redirect the url here after login
         const redirectAfterLogin = window.location.href;
         sessionStorage.setItem("redirectAfterLogin", redirectAfterLogin)
-    
+
 
         async function getAllCourses() {
             try {
@@ -100,7 +100,7 @@ function AllCourses() {
 
                 const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${id}`);
                 console.log(response.data);
-                
+
 
             }
 
@@ -158,7 +158,6 @@ function AllCourses() {
 
                     }
 
-
                     {!isLoading && courses.length == 0 ?
                         (
                             <p className='text-gray-500 flex justify-center h-[600px] items-center'>No courses available.</p>
@@ -192,6 +191,7 @@ function AllCourses() {
                                                     onClick={() => handleCourseEnroll(key)}
                                                     showCTA={true}
                                                     text={"Enroll"}
+                                                    firstChapter={searchQuery ? filteredCourses[key].chapters[0] : courses[key].chapters[0]}
                                                 />
 
                                             </motion.div>

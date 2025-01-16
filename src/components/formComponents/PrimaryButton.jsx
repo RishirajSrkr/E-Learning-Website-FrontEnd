@@ -21,7 +21,7 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
   return (
     <button
 
-      className={`${classname}  rounded-full flex items-center h-10 bg-gradient-to-l from-orange-300  to-orange-500 text-offwhite dark:text-bgOne group hover:opacity-90 transition-opacity duration-300`}
+      className={`${classname}  rounded-full flex items-center h-10 bg-gradient-to-l from-blue-400  to-blue-600 text-white group hover:opacity-90 transition-opacity duration-300`}
       onClick={onClick}
       type='button'
     >
@@ -33,7 +33,7 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
 
       {
         !isLoading && <div className='flex justify-center items-center  w-full'>
-          <p className=' text-sm  text-center font-semibold'>{text}</p>
+          <p className=' text-sm  text-center font-semibold -tracking-tight'>{text}</p>
 
           {arrow && <RiArrowRightLine className="ml-1 group-hover:translate-x-1.5 transition-transform duration-300" />}
         </div>

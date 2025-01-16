@@ -4,8 +4,22 @@ import { IoPersonSharp } from "react-icons/io5";
 import SecondaryButton from './formComponents/SecondaryButton';
 
 
-const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, text, imageUrl, isLoading }) => {
+const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, text, imageUrl, isLoading, firstChapter }) => {
 
+  
+  function extractVideoIdFromURL(url) {
+    const videoIdMatch = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([\w-]+)/);
+    if (videoIdMatch && videoIdMatch[1]) {
+        const videoId = videoIdMatch[1];
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        return thumbnailUrl;
+    }
+    else return null;
+}
+
+
+
+  
   return (
     <div className="course-card relative bg-white dark:bg-black p-3 max-w-96 overflow-hidden  border border-lightBorder dark:border-darkBorder  rounded-md h-fit text-sm sm:w-full sm:text-base sm:96 sm:p-6">
 
@@ -17,6 +31,13 @@ const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, t
         />
       )}
 
+      {!imageUrl && (
+        <img
+          src={extractVideoIdFromURL(firstChapter.videoLink)}
+          alt="courseThumbnailImage"
+          className="w-full h-40 object-cover rounded-sm mb-6 sm:h-48"
+        />
+      )}
 
       <h3 className="text-xl font-semibold mb-2 text-black dark:text-white sm:text-2xl">{title}</h3>
 
@@ -41,11 +62,12 @@ const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, t
       </div>
 
       {
-        showCTA && <SecondaryButton  text={text} classname={"text-white dark:text-black bg-black  dark:bg-white"} onClick={onClick} />
+        showCTA && <SecondaryButton text={text} classname={"text-white dark:text-black bg-black  dark:bg-white"} onClick={onClick} />
       }
     </div>
   );
 };
+
 
 const CourseCardSkeleton = () => {
   return (
@@ -79,4 +101,4 @@ const CourseCardSkeleton = () => {
 
 
 
-export {CourseCard, CourseCardSkeleton};
+export { CourseCard, CourseCardSkeleton };

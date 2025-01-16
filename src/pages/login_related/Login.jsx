@@ -17,30 +17,30 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row  dark:from-bgOne dark:to-bgTwo px-44">
+        <div className="min-h-screen flex flex-col md:flex-row  dark:from-bgOne dark:to-bgTwo">
             {/* Left Section */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center">
+            <div className="w-full md:w-1/2 flex flex-col justify-center bg-gray-50 dark:bg-bgOneLight items-center">
                 <div className="max-w-lg">
                     <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                        <span className="bg-gradient-to-r dark:from-orange-100 dark:to-orange-600 from-orange-300 to-orange-600 bg-clip-text text-transparent">Access the</span>
+                        <span className="bg-gradient-to-r dark:from-blue-100 dark:to-blue-600 from-blue-300 to-blue-600 bg-clip-text text-transparent">Access the</span>
                         <br />
-                        <span className="bg-gradient-to-r dark:from-orange-200 dark:to-orange-700 from-orange-400 to-orange-700 bg-clip-text text-transparent">Best Learning</span>
+                        <span className="bg-gradient-to-l dark:from-blue-200 dark:to-blue-700 from-blue-400 to-blue-700 bg-clip-text text-transparent">Best Learning</span>
                         <br />
-                        <span className="bg-gradient-to-r dark:from-orange-100 dark:to-orange-700 from-orange-200 to-orange-700 bg-clip-text text-transparent">Experience.</span>
+                        <span className="bg-gradient-to-r dark:from-blue-100 dark:to-blue-700 from-blue-200 to-blue-700 bg-clip-text text-transparent">Resources.</span>
 
                     </h1>
                     <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
                         Join thousands of students worldwide who are already transforming their careers through our platform.
                     </p>
                     <div className="flex items-center gap-2 text-lg text-gray-700 dark:text-gray-200">
-                        <FaRegArrowAltCircleRight className="text-orange-500" />
+                        <FaRegArrowAltCircleRight className="text-blue-500" />
                         <span>Start your learning journey today</span>
                     </div>
                 </div>
             </div>
 
             {/* Right Section - Simplified for Google-only login */}
-            <div className="w-full md:w-1/2 flex items-center justify-end">
+            <div className="w-full md:w-1/2 flex  justify-center items-center">
                 <div className="w-full max-w-md space-y-8 text-center">
                     <div className="mb-8">
                         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Welcome!</h2>
@@ -66,11 +66,11 @@ const Login = () => {
 
                         <div className="text-sm text-gray-500 dark:text-gray-400 mt-8">
                             By continuing, you agree to our{' '}
-                            <a href="/tos" className="text-orange-500 hover:text-orange-600">
+                            <a href="/tos" className="text-blue-500 hover:text-blue-600">
                                 Terms of Service
                             </a>{' '}
                             and{' '}
-                            <a href="/privacy-policy" className="text-orange-500 hover:text-orange-600">
+                            <a href="/privacy-policy" className="text-blue-500 hover:text-blue-600">
                                 Privacy Policy
                             </a>
                         </div>

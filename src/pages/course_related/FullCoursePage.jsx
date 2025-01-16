@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import axios from '../../config/axiosConfig'
 import { toast } from 'sonner';
 import { MdCheckCircle, MdRadioButtonUnchecked } from 'react-icons/md';
@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/AuthContext'
 import Loader from '../../components/Loader'
 import { CgMenuGridR } from "react-icons/cg";
 import { motion } from 'framer-motion';
-
+import { MdPlayCircle } from "react-icons/md";
 function FullCoursePage() {
 
     const navigate = useNavigate();
@@ -92,14 +92,12 @@ function FullCoursePage() {
 
 
     }
+
     function isChapterMarkedComplete(chapterIndex) {
         const ans = markedChapters?.filter(index => index == chapterIndex)
         return ans?.length != 0;
         //if length 0 it means chapterIndex is not present in markedChapters
     }
-
-    console.log(markedChapters);
-
 
     async function handleVoteClick() {
         try {
@@ -151,6 +149,17 @@ function FullCoursePage() {
 
 
         navigate(`/course/${courseId}/discussions`)
+    }
+
+
+    function extractVideoIdFromURL(url) {
+        const videoIdMatch = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([\w-]+)/);
+        if (videoIdMatch && videoIdMatch[1]) {
+            const videoId = videoIdMatch[1];
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+            return thumbnailUrl;
+        }
+        else return null;
     }
 
 
@@ -262,7 +271,7 @@ function FullCoursePage() {
                                 <div className='w-full'>
                                     {
                                         course?.chapters?.map((chapter, index) => (
-                                            <div key={index} className={`relative mb-8 px-10 py-8 flex w-full flex-col gap-y-4 border border-lightBorder dark:border-darkBorder rounded-xl ${isChapterMarkedComplete(index) ? "opacity-40" : "opacity-100"}`}>
+                                            <div key={index} className={`relative mb-8 px-10 py-8 flex w-full flex-col gap-y-4 border border-lightBorder dark:border-darkBorder rounded-lg ${isChapterMarkedComplete(index) ? "opacity-40" : "opacity-100"}`}>
 
 
                                                 <button onClick={() => handleMarkClick(index)} className=' absolute right-8 flex w-full items-center justify-end gap-2'>
@@ -271,14 +280,29 @@ function FullCoursePage() {
                                                 </button>
 
 
-                                                <div className='flex gap-4 items-center w-full'>
+                                                <div className='flex gap-4 items-center w-3/4'>
                                                     <div className='h-3 w-3 bg-accentColor rounded-full'></div>
-                                                    <h2 className='font-semibold text-4xl break-words w-3/4'>{chapter.chapterName}</h2>
+                                                    <h2 className='font-semibold text-3xl break-words w-3/4'>{chapter.chapterName}</h2>
                                                 </div>
 
 
-                                                <div className=''>
-                                                    <p className='text-lg'>{chapter.chapterContent}</p>
+
+                                                <div className='w-full flex gap-16'>
+
+                                                    <div className='w-2/3 px-6 py-2 '>
+                                                        <p className='text-lg'>{chapter.chapterContent}</p>
+                                                    </div>
+
+
+                                                    <div className=' dark:bg-bgOne  rounded-sm w-1/3 border border-lightBorder dark:border-darkBorder'>
+                                                        <Link to={chapter.videoLink} target='_blank' className='w-full relative'>
+                                                            <img
+                                                                className='w-full'
+                                                                src={extractVideoIdFromURL(chapter.videoLink)} />
+
+                                                            <MdPlayCircle size={60} className='text-white absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2' />
+                                                        </Link>
+                                                    </div>
                                                 </div>
 
                                             </div>

@@ -95,7 +95,7 @@ function CourseDiscussionPage() {
 
   return (
 
-    <div className='bg-bgOne h-screen w-full py-36 text-offwhite'>
+    <div className='h-screen w-full pt-36 '>
 
 
       <div className='w-96 mx-auto flex flex-col justify-between'>
@@ -108,10 +108,10 @@ function CourseDiscussionPage() {
             comments?.map((comment, index) => {
 
               return <div key={index}
-                className='border border-border rounded-lg p-4'
+                className='border border-lightBorder dark:border-darkBorder rounded-lg p-4'
               >
-                <div className='text-gray flex justify-between font-medium text-sm'>
-                  <h3>{comment.username}</h3>
+                <div className='text-gray flex justify-between font-medium mb-1 text-sm'>
+                  <h3 className='font-semibold'>{comment.username}</h3>
                   <p className='text-xs'>{formatCommentTime(comment.createdAt)}</p>
                 </div>
                 <p>{comment.content}</p>
@@ -150,7 +150,7 @@ function CourseDiscussionPage() {
               value={comment.content}
               onChange={(e) => setComment({ ...comment, content: e.target.value })}
 
-              className='rounded-lg w-full border border-border focus:border-border  bg-bgOne focus:ring-0'
+              className='rounded-lg w-full  outline-none bg-gray-50 border border-lightBorder dark:border-darkBorder dark:bg-bgTwo  px-6 py-2 focus:ring-0'
             />
 
           </div>

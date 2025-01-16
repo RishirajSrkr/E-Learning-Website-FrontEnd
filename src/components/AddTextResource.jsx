@@ -36,7 +36,8 @@ function AddTextResource() {
     chapters: [
       {
         chapterContent: "",
-        chapterTitle: ""
+        chapterTitle: "",
+        videoLink: "",
       }
     ]
   });
@@ -57,7 +58,7 @@ function AddTextResource() {
   function handleAddChapterClick() {
 
     setFormData((prev) => (
-      { ...prev, chapters: [...prev.chapters, { chapterTitle: "", chapterContent: "" }] }
+      { ...prev, chapters: [...prev.chapters, { chapterTitle: "", chapterContent: "", videoLink: "" }] }
     ))
   }
 
@@ -124,12 +125,13 @@ function AddTextResource() {
       courseDescription: formData.courseDescription,
       courseCategory: formData.courseCategory,
     }
+
     formDataWithImage.append("courseDto", JSON.stringify(courseDto));
 
     if (formData.courseImage) {
       formDataWithImage.append("file", formData.courseImage);
     }
-
+    
     formDataWithImage.append("chapters", JSON.stringify(formData.chapters))
 
 
@@ -137,6 +139,8 @@ function AddTextResource() {
     try {
       setIsLoading(true)
 
+      console.log("Course data :: ", formDataWithImage);
+      
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formDataWithImage);
 
 
@@ -156,7 +160,8 @@ function AddTextResource() {
           chapters: [
             {
               chapterContent: "",
-              chapterTitle: ""
+              chapterTitle: "",
+              videoLink: "",
             }
           ]
         })
@@ -209,7 +214,7 @@ function AddTextResource() {
                 <label className='' htmlFor="courseTitle">Course Name</label>
                 <input type="text"
                   name='courseTitle'
-                  className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
+                  className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b pb-1 border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
                   value={formData.courseTitle}
                   placeholder='Spring Boot & Spring Security'
                   onChange={(e) => handleChange_Other(e)}
@@ -221,7 +226,7 @@ function AddTextResource() {
                 <label className=' ' htmlFor="courseCategory">Category</label>
                 <input type="text"
                   name='courseCategory'
-                  className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent  border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor'
+                  className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent pb-1 border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor'
                   value={formData.courseCategory}
                   placeholder='Java, Spring Boot, Spring Security'
                   onChange={(e) => handleChange_Other(e)}
@@ -235,7 +240,7 @@ function AddTextResource() {
               <label className='' htmlFor="courseDescription">Course Description</label>
               <input type="text"
                 name='courseDescription'
-                className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent  border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor '
+                className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent pb-1  border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor '
                 value={formData.courseDescription}
                 placeholder='Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc.'
                 onChange={(e) => handleChange_Other(e)}
@@ -253,8 +258,6 @@ function AddTextResource() {
                 <img src={previewImage} alt="Course Preview" className='w-64 h-40 object-cover rounded' />
               </div>
             )}
-
-
 
 
             <input ref={fileInputRef}
@@ -285,7 +288,7 @@ function AddTextResource() {
 
                   <input type="text"
                     name='chapterTitle'
-                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none  border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
+                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none pb-1 border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
                     placeholder='Introduction to Spring Boot.'
                     value={chapter.chapterTitle}
                     onChange={(e) => handleChange_Chapter(e, index)}
@@ -297,13 +300,28 @@ function AddTextResource() {
                   <label className='text-white' htmlFor="chapterContent">Chapter Content</label>
                   <input type="text"
                     name='chapterContent'
-                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
+                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b pb-1 border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
                     placeholder='Spring Boot is an open-source Java framework used for programming standalone, production-grade Spring-based applications with a bundle of libraries that make project startup and management easier.'
                     value={chapter.chapterContent}
                     onChange={(e) => handleChange_Chapter(e, index)}
                   />
 
                 </div>
+
+                <div className='flex flex-col gap-2'>
+                  <label className='text-white' htmlFor="chapterContent">Video Link</label>
+                  <input type="text"
+                    name='videoLink'
+                    className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b pb-1 border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
+                    placeholder='https://youtu.be/example_video_url'
+                    value={chapter.videoLink}
+                    onChange={(e) => handleChange_Chapter(e, index)}
+                  />
+
+                </div>
+
+
+
 
 
 
