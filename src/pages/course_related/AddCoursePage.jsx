@@ -10,9 +10,9 @@ function AddCoursePage() {
             <TipsComponent />
 
             <div className='flex gap-6 w-96 mt-4 text-sm'>
-                <button className='border border-lightBorder dark:border-darkBorder px-3 py-1.5 rounded-md' onClick={() => navigate("/resource/create/video")}>YouTube Video</button>
+                {/* <button className='border border-lightBorder dark:border-darkBorder px-3 py-1.5 rounded-md' onClick={() => navigate("/resource/create/video")}>YouTube Video</button> */}
 
-                <button className='border border-lightBorder dark:border-darkBorder px-3 py-1.5 rounded-md' onClick={() => navigate("/resource/create/text")}>Create your own</button>
+                <button className='border border-lightBorder dark:border-darkBorder px-5 py-1.5 rounded-md' onClick={() => navigate("/resource/create/text")}>Create</button>
             </div>
         </div>
     )
@@ -26,7 +26,7 @@ const TipsComponent = () => {
             <p >
                 <li className=''>Share helpful, reliable resources.</li>
                 <li className=''>Use clear titles and descriptions. </li>
-                <li className=''>   Avoid spam or copied content.</li>
+                <li className=''>Avoid spam or copied content.</li>
             </p>
             <p className='mt-4'>Let’s make learning easy and fun for everyone!</p>
         </div>
