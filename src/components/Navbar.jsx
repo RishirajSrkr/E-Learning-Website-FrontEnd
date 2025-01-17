@@ -106,7 +106,7 @@ function Navbar() {
 
                                 <Hamburger size={24} color='white' toggled={showNavbar} toggle={setShowNavbar} />
 
-                                <Link to={"/"} className='font-bold bg-gradientForBg text-2xl bg-clip-text text-transparent '>BitByBit</Link>
+                                <Link to={"/"} className='font-semibold text-2xl'>BitByBit</Link>
 
 
 

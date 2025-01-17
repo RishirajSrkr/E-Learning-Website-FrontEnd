@@ -16,6 +16,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { AuthContext } from '../../context/AuthContext';
 import Footer from '../../components/Footer';
+import MobileCourseView from './MobileView/MobileCourseView'
 // import required modules
 
 
@@ -137,12 +138,28 @@ function AllCourses() {
 
     return (
 
-        <div className='bg-white dark:bg-black min-h-screen flex flex-col relative overflow-hidden text-black dark:text-white w-full pt-32 '>
+        <div className='bg-white dark:bg-black min-h-screen flex flex-col relative overflow-hidden text-black dark:text-white w-full '>
 
+        {
 
+            isMobile ? 
+            (
 
+                <MobileCourseView
+                courses={courses}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                filteredCourses={filteredCourses}
+                handleCourseEnroll={handleCourseEnroll}
+                isLoading={isLoading}
+              />
+            )
 
-            <div className='w-full mb-12'>
+            :
+
+            (
+
+                <div className='w-full mb-12 pt-32'>
 
                 {/* ---------------------------- COURSES -------------------------------- */}
                 <div className='w-10/12 relative min-h-screen rounded-lg  px-20'>
@@ -291,10 +308,12 @@ function AllCourses() {
 
                 </div>
             </div>
+            )
+        }
 
 
 
-            <Footer width={"w-10/12"} />
+            <Footer width={isMobile ? "w-full" : "w-10/12"} />
         </div >
 
     )
