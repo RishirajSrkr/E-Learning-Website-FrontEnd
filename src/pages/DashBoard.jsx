@@ -226,7 +226,7 @@ function DashBoard() {
 
                             <Link to={`/course/${key}`} className='text-sm h-5 flex items-center gap-1'>  <FaArrowUpRightFromSquare className='w-6' size={12} />View</Link>
 
-                            <Link to={`/course/${key}/enrolled-users`} className='text-sm h-5 flex items-center gap-1'><FaUserFriends className='w-6' /> Enrolled</Link>
+                            {/* <Link to={`/course/${key}/enrolled-users`} className='text-sm h-5 flex items-center gap-1'><FaUserFriends className='w-6' /> Enrolled</Link> */}
 
 
                             <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm h-5 flex items-center gap-1'>  <FaShareAlt className='w-6' size={12} />Share</Link>

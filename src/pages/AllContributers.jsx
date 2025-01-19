@@ -56,7 +56,7 @@ function AllContributers() {
 
     function handleSeeCoursesClick(userId) {
 
-        navigate(`/user/${userId}/uploaded-courses`)
+        // navigate(`/user/${userId}/uploaded-courses`)
     }
 
 

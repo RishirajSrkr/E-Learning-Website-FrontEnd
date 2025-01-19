@@ -151,7 +151,7 @@ function Navbar() {
                                             transition={{ delay: 0.1 }}
                                         >
                                             <Link
-                                                to="/all-courses"
+                                                to="/all-resources"
                                                 onClick={handleNavLinkClick}
                                                 className=' flex gap-2 items-center'
 
@@ -282,7 +282,7 @@ function Navbar() {
                                                     :
                                                     'hover:text-bgOne dark:hover:text-offwhite  transition-all duration-300 '
                                             }
-                                            to="/all-courses"
+                                            to="/all-resources"
                                         >
                                             Resources
                                         </NavLink>
@@ -311,7 +311,7 @@ function Navbar() {
                                             }
                                             to="/contributors"
                                         >
-                                            Contributor
+                                            Contributors
                                         </NavLink>
 
 

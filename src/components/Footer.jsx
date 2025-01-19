@@ -60,9 +60,9 @@ function Footer({width}) {
         <div className='flex flex-col text-black dark:text-white'>
           <p className='mb-3 font-semibold'>Pages</p>
           <div className='flex flex-col gap-2'>
-            <Link>Resources</Link>
-            <Link>Top Voted</Link>
-            <Link>Contributers</Link>
+            <Link to={"/all-resources"}>Resources</Link>
+            <Link to={"/vote-resources"}>Top Voted</Link>
+            <Link to={"/contributors"}>Contributers</Link>
             {loggedInUser && <Link>Contribute</Link>}
           </div>
         </div>

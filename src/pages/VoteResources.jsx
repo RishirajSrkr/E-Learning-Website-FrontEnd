@@ -84,7 +84,7 @@ function VoteResources() {
                     animate={{ y: 0, opacity: 100 }}
                     transition={{ delay: 0.25 }}
 
-                    className=' bg-white dark:bg-black mt-0 font-medium text-3xl tracking-tighter'>the best courses.
+                    className=' bg-white dark:bg-black mt-0 font-medium text-3xl tracking-tighter'>the best resources.
                 </motion.h2>
 
 

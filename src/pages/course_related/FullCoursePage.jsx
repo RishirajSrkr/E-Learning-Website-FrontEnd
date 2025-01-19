@@ -8,6 +8,7 @@ import Loader from '../../components/Loader'
 import { CgMenuGridR } from "react-icons/cg";
 import { motion } from 'framer-motion';
 import { MdPlayCircle } from "react-icons/md";
+import { UserContext } from '../../context/UserContext';
 function FullCoursePage() {
 
     const navigate = useNavigate();
@@ -15,8 +16,11 @@ function FullCoursePage() {
     const { courseId } = useParams();
 
     const { loggedInUser } = useContext(AuthContext)
+    const {user} = useContext(UserContext)
+
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [courseUploadedBy, setCourseUplaodedBy] = useState()
     const [showVoteAndOtherOptions, setShowVoteAndOtherOptions] = useState(false)
 
     //we need to store this info in localstorage
@@ -45,7 +49,6 @@ function FullCoursePage() {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/course/${courseId}`);
                 const data = response.data;
                 console.log(data);
-
                 setCourse(data);
             }
             catch (e) {
@@ -130,7 +133,7 @@ function FullCoursePage() {
 
             toast.success("Course removed successfully")
 
-            navigate("/all-courses")
+            navigate("/all-resources")
 
             await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/end-course/${courseId}`)
 
@@ -152,6 +155,7 @@ function FullCoursePage() {
     }
 
 
+
     function extractVideoIdFromURL(url) {
         const videoIdMatch = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([\w-]+)/);
         if (videoIdMatch && videoIdMatch[1]) {
@@ -162,6 +166,16 @@ function FullCoursePage() {
         else return null;
     }
 
+    useEffect(() => {
+        async function fetchCourseUploadedBy() {
+            if (course?.instructorEmail) {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/${course.instructorEmail}`)
+                console.log(response.data);
+                setCourseUplaodedBy(response.data);
+            }
+        }
+        fetchCourseUploadedBy();
+    }, [course])
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -177,6 +191,13 @@ function FullCoursePage() {
         hidden: { opacity: 0, y: -20 }, // Start above with 0 opacity
         visible: { opacity: 1, y: 0 },  // Slide down with full opacity
     };
+
+
+
+    console.log(courseUploadedBy?.email);
+    console.log(user.email);
+    
+    
 
 
 
@@ -198,7 +219,7 @@ function FullCoursePage() {
                         <div className='w-full relative px-24'>
 
                             {
-                                course?.instructorName != loggedInUser && <button
+                                courseUploadedBy?.email != user.email && <button
                                     onClick={() => setShowVoteAndOtherOptions(prev => !prev)}
                                     className='fixed top-24 right-10 '
                                 ><CgMenuGridR size={24} /></button>
@@ -262,6 +283,11 @@ function FullCoursePage() {
                                         <div>
                                             <p className='text-gray font-medium'>Last Updated</p>
                                             <p className='font-semibold'>{convertDateToSuitableFormat(course?.createdAt)}</p>
+                                        </div>
+
+                                        <div className='flex gap-2 items-center' >
+                                            <img className='h-8 w-8 object-cover rounded-full border dark:border-zinc-500 border-lightBorder' src={courseUploadedBy?.profileImage} />
+                                            <p className='font-semibold'>{courseUploadedBy?.name}</p>
                                         </div>
                                     </div>
 

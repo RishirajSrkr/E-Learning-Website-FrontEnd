@@ -25,7 +25,7 @@ export default {
         // gray: '#9CA1A4',
         offwhite: '#FFFFF7',
         // accentColor: '#FE5328',
-        accentColor: '#CEEB11',
+        accentColor: '#FF4533',
 
         lightBorder: '#E4E4E7',
         darkBorder: '#232323',

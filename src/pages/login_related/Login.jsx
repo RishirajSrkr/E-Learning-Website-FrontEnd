@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { useTheme } from '../../context/ThemeContext';
-import { AuthContext } from '../../context/AuthContext';
-import { FaRegArrowAltCircleRight } from "react-icons/fa";
-
+import { IoMdCheckmark } from "react-icons/io";
+import { MdFitbit } from "react-icons/md";
 const Login = () => {
-    const navigate = useNavigate();
     const googleClientId = import.meta.env.VITE_CLIENT_ID;
     const redirectUri = `${import.meta.env.VITE_FRONTEND_URL}/auth/callback`;
-    const { theme } = useTheme();
+
+    const [isLogin, setIsLogin] = useState("");
 
     const handleGoogleLogin = () => {
         const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=email%20profile`;
@@ -17,66 +14,83 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row  dark:from-bgOne dark:to-bgTwo">
-            {/* Left Section */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center bg-gray-50 dark:bg-bgOneLight items-center">
-                <div className="max-w-lg">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                        <span className="bg-gradient-to-r dark:from-blue-100 dark:to-blue-600 from-blue-300 to-blue-600 bg-clip-text text-transparent">Access the</span>
-                        <br />
-                        <span className="bg-gradient-to-l dark:from-blue-200 dark:to-blue-700 from-blue-400 to-blue-700 bg-clip-text text-transparent">Best Learning</span>
-                        <br />
-                        <span className="bg-gradient-to-r dark:from-blue-100 dark:to-blue-700 from-blue-200 to-blue-700 bg-clip-text text-transparent">Resources.</span>
-
-                    </h1>
-                    <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
-                        Join thousands of students worldwide who are already transforming their careers through our platform.
-                    </p>
-                    <div className="flex items-center gap-2 text-lg text-gray-700 dark:text-gray-200">
-                        <FaRegArrowAltCircleRight className="text-blue-500" />
-                        <span>Start your learning journey today</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Right Section - Simplified for Google-only login */}
-            <div className="w-full md:w-1/2 flex  justify-center items-center">
-                <div className="w-full max-w-md space-y-8 text-center">
+        <div className="min-h-screen w-full flex flex-col md:flex-row overflow-hidden">
+            {/* Left Section - Hero */}
+            <div className="w-full md:w-1/2 relative flex items-center justify-center p-8 md:p-16 bg-gradient-to-br from-orange-50 to-white dark:from-bgTwo dark:to-bgOne">
+                <div className="absolute inset-0 bg-grid-slate-900/[0.04] dark:bg-grid-slate-100/[0.03]" />
+                <div className="relative max-w-2xl">
                     <div className="mb-8">
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Welcome!</h2>
-                        <p className="text-gray-600 dark:text-gray-300 text-lg mb-2">
-                            Sign in securely with your Google account
-                        </p>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm">
-                            We use Google Sign-In to ensure the highest level of account security
-                        </p>
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-accentColor dark:text-accentColor">
+                            <span className="block  py-2 -mb-3">
+                                Share Knowledge,
+                            </span>
+                            <span className="block mt-2 py-2">
+                                Empower Learning.
+                            </span>
+                        </h1>
                     </div>
 
-                    <div className="space-y-6">
-                        <button
-                            type="button"
-                            onClick={handleGoogleLogin}
-                            className="w-3/4 mx-auto flex items-center justify-center gap-3 py-2.5 px-6  rounded-full bg-white dark:bg-bgTwo border border-lightBorder dark:border-darkBorder"
-                        >
-                            <FcGoogle size={24} />
-                            <span className="text-gray-700 dark:text-gray-200 font-medium ">
-                                Continue with Google
-                            </span>
-                        </button>
+                    <p className=" text-lg md:text-xl font-medium mb-8">
+                        Discover, share, and learn with curated resources from a <br /> community of passionate learners.
+                    </p>
 
-                        <div className="text-sm text-gray-500 dark:text-gray-400 mt-8">
-                            By continuing, you agree to our{' '}
-                            <a href="/tos" className="text-blue-500 hover:text-blue-600">
-                                Terms of Service
-                            </a>{' '}
-                            and{' '}
-                            <a href="/privacy-policy" className="text-blue-500 hover:text-blue-600">
-                                Privacy Policy
-                            </a>
+                    <div className="flex flex-col gap-2 font-medium">
+                        <div className="flex items-center gap-2">
+                            <IoMdCheckmark className='text-accentColor' />
+                            <span>Find top-rated learning resources</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <IoMdCheckmark className='text-accentColor' />
+                            <span>Curate your own learning journey</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <IoMdCheckmark className='text-accentColor' />
+                            <span>Join a supportive learning community</span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Right Section - Login */}
+            <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-bgOne">
+                <div className="w-full max-w-md">
+                    <div className="text-center mb-12 w-full">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 justify-center flex items-center gap-2 w-full">
+                            < MdFitbit />
+                            BitByBit
+                        </h2>
+                        <p className="text-slate-600 dark:text-slate-400">
+                            Join our platform to discover, share, and organize learning resources effortlessly.
+                            Continue building your knowledge or get started today!
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={handleGoogleLogin}
+                        className="w-full group relative flex items-center justify-center gap-3 px-6 py-4 bg-white dark:bg-bgOne border border-lightBorder dark:border-darkBorder rounded-full "
+                    >
+                        <FcGoogle className="w-6 h-6" />
+                        <span className="text-slate-700 dark:text-slate-200 font-medium">
+                            {isLogin ? "Continue with Google" : "Sign up with Google"}
+                        </span>
+                    </button>
+
+                    <div className="mt-8 text-center">
+                        <p className="text-sm text-slate-500 dark:text-slate-400">
+                            By {isLogin ? "logging in" : "signing up"}, you agree to our{' '}
+                            <a href="/tos" className="text-accentColor hover:underline">
+                                Terms of Service
+                            </a>
+                            {' '}and{' '}
+                            <a href="/privacy-policy" className="text-accentColor hover:underline">
+                                Privacy Policy
+                            </a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     );
 };

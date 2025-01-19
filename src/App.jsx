@@ -96,7 +96,7 @@ function App() {
               {/* ------------- course -------------------- */}
 
 
-              <Route path='/all-courses' element={<AllCourses />} />
+              <Route path='/all-resources' element={<AllCourses />} />
 
               <Route path='/course/:courseId' element={
                 <ProtectedRoute>
@@ -104,7 +104,7 @@ function App() {
                 </ProtectedRoute>
               } />
 
-              <Route path='/course/:courseId/enrolled-users' element={<EnrolledUserOfACourse />} />
+              {/* <Route path='/course/:courseId/enrolled-users' element={<EnrolledUserOfACourse />} /> */}
 
               <Route path='/course/:courseId/discussions' element={<CourseDiscussionPage />} />
 

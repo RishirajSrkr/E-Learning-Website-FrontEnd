@@ -16,7 +16,7 @@ function Home() {
     const { isMobile } = useContext(WindowWidthContext)
 
     function handleViewAllCourse() {
-        navigate("/all-courses")
+        navigate("/all-resources")
     }
 
 

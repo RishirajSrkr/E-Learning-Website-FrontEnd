@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../config/axiosConfig';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import PrimaryButton from '../components/formComponents/PrimaryButton';
 import Input from '../components/formComponents/Input';
 import SecondaryButton from '../components/formComponents/SecondaryButton';
@@ -10,6 +10,8 @@ import { UserContext } from '../context/UserContext';
 import { AuthContext } from '../context/AuthContext';
 import Logout from '../components/Logout';
 import { MdEdit } from "react-icons/md";
+import CircleLoader from '../components/CircleLoader';
+
 function UpdateProfile() {
 
     const { user } = useContext(UserContext);
@@ -65,7 +67,7 @@ function UpdateProfile() {
 
         const registerUserDto = {
             name: formData.name,
-            email: formData.email,
+            email: formData.email ? formData.email : user?.email,
             bio: formData.bio,
             password: formData.password,
         }
@@ -84,17 +86,8 @@ function UpdateProfile() {
 
             const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/user/update-profile`, formDataWithImage);
 
-
-            navigate("/my-profile")
-
-            toast.success("Updated Successfully!", {
-                position: "top-right",
-                style: {
-                    background: "#1C1210",
-                    color: "#E5E6E6",
-                }
-
-            })
+            
+            toast.success("Updated Successfully")
 
         } catch (error) {
             if (error.response && error.response.data) {
@@ -162,7 +155,7 @@ function UpdateProfile() {
                         />
                     </div>
 
-            
+
                 </div>
 
 
@@ -187,8 +180,8 @@ function UpdateProfile() {
                         value={formData.email}
                         onChange={(e) => handleInputChange(e)}
                         totalWidth={"w-full"}
-                        className={""}
                         placeholder={user?.email}
+                        disabled={true}
                     />
 
                     <Input
@@ -208,7 +201,7 @@ function UpdateProfile() {
                         onChange={(e) => handleInputChange(e)}
                         totalWidth={"w-full"}
                         className={""}
-                        placeholder={user.bio? user.bio : "Write something about yourself"}
+                        placeholder={user.bio ? user.bio : "Write something about yourself"}
                     />
                 </div>
 
@@ -217,7 +210,7 @@ function UpdateProfile() {
 
             <div className='flex w-3/5 mx-auto gap-4 items-center justify-center'>
                 <div className='w-1/2 flex gap-4'>
-                    <PrimaryButton
+                <PrimaryButton
                         isLoading={isLoading}
                         text={"Update Profile"}
                         classname={' py-3 w-full rounded-md font-semibold'}

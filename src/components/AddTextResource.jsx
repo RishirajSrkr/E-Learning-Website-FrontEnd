@@ -6,10 +6,12 @@ import { toast } from 'sonner'
 import SecondaryButton from './formComponents/SecondaryButton'
 import { CourseCard } from './CourseCard'
 import { AuthContext } from '../context/AuthContext'
-import { MdUpload } from "react-icons/md";
+import { GrDocumentUpload } from "react-icons/gr";
 import { WindowWidthContext } from '../context/WindowWidthContext'
 import { useNavigate } from 'react-router-dom';
 import { TbLoader2 } from "react-icons/tb";
+import { PiWarningCircle } from "react-icons/pi";
+import { IoMdCheckmark } from "react-icons/io";
 
 function AddTextResource() {
 
@@ -131,7 +133,7 @@ function AddTextResource() {
     if (formData.courseImage) {
       formDataWithImage.append("file", formData.courseImage);
     }
-    
+
     formDataWithImage.append("chapters", JSON.stringify(formData.chapters))
 
 
@@ -140,7 +142,7 @@ function AddTextResource() {
       setIsLoading(true)
 
       console.log("Course data :: ", formDataWithImage);
-      
+
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/create`, formDataWithImage);
 
 
@@ -211,7 +213,7 @@ function AddTextResource() {
 
 
               <div className='w-3/5 flex flex-col items-start justify-center gap-2 '>
-                <label className='' htmlFor="courseTitle">Course Name</label>
+                <label className='' htmlFor="courseTitle">Resource Title</label>
                 <input type="text"
                   name='courseTitle'
                   className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent outline-none border-b pb-1 border-lightBorder dark:border-darkBorder  focus:ring-0 placeholder-subtextColor'
@@ -237,7 +239,7 @@ function AddTextResource() {
             </div>
 
             <div className='w-full flex flex-col items-start justify-center gap-2'>
-              <label className='' htmlFor="courseDescription">Course Description</label>
+              <label className='' htmlFor="courseDescription">Description</label>
               <input type="text"
                 name='courseDescription'
                 className='pr-6 pl-0 py-0 pt-3 w-full bg-transparent pb-1  border-b border-lightBorder dark:border-darkBorder outline-none focus:ring-0 placeholder-subtextColor '
@@ -251,14 +253,6 @@ function AddTextResource() {
 
             {/* New Course Image Upload Field */}
 
-            {/* Preview Image */}
-            {previewImage && (
-              <div className='my-4'>
-                <p className=''>Image Preview:</p>
-                <img src={previewImage} alt="Course Preview" className='w-64 h-40 object-cover rounded' />
-              </div>
-            )}
-
 
             <input ref={fileInputRef}
               type="file"
@@ -267,10 +261,31 @@ function AddTextResource() {
               className='hidden'
               onChange={handleChange_Image} />
 
+
+            {
+              !previewImage ?
+                (
+                  <p className='flex gap-1 items-center text-sm'> <PiWarningCircle /> Adding an image is optional. The first YouTube video's thumbnail is considered as default.</p>
+                )
+
+                :
+
+                (
+                  <div className='flex items-start gap-6'>
+                    <p className='flex gap-2 items-center text-sm'> <IoMdCheckmark className='text-accentColor' /> Image added successfully! </p>
+
+                    <p className='flex gap-1.5 items-center text-sm cursor-pointer underline underline-offset-2'> <MdDelete/>Remove Image</p>
+                  </div>
+
+                )
+            }
+
+
             <div
               onClick={() => fileInputRef.current.click()}
-              className='border border-dashed border-lightBorder h-20 flex justify-center items-center cursor-pointer'>
-              <MdUpload size={24} />
+              className='border border-dashed border-lightBorder h-20 flex  justify-center items-center cursor-pointer'>
+              <GrDocumentUpload size={15} />
+              <p className='ml-3'>Upload Image</p>
             </div>
 
 
@@ -371,7 +386,7 @@ function AddTextResource() {
               instructor={loggedInUser}
               description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}
               showCTA={true}
-              text={"Enroll"}
+              text={"View"}
               vote={0}
             />
           </div>

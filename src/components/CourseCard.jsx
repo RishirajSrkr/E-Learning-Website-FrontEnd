@@ -4,7 +4,7 @@ import { IoPersonSharp } from "react-icons/io5";
 import SecondaryButton from './formComponents/SecondaryButton';
 
 
-const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, text, imageUrl, isLoading, firstChapter }) => {
+const CourseCard = ({ onClick, title,  description, votes, showCTA, text, imageUrl, isLoading, firstChapter }) => {
 
   
   function extractVideoIdFromURL(url) {
@@ -45,14 +45,7 @@ const CourseCard = ({ onClick, title, instructor, description, votes, showCTA, t
       <div className='text-gray'>
 
 
-        {
-          instructor && <div className=' flex gap-2 items-center mb-2'>
-            <IoPersonSharp className='text-accentColor text-sm' />
-            <p className="font-semibold ">{instructor}</p>
-          </div>
-        }
-
-
+  
         <p className="mb-4">{description}</p>
 
         <div className="course-card-rating absolute top-0 right-0 flex items-center bg-gray-200 text-black min-w-4 min-h-4 p-2 m-2 rounded">

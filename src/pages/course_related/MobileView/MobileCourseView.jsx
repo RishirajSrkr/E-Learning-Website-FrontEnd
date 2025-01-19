@@ -105,12 +105,11 @@ const MobileCourseView = ({
                     <CourseCard
                       title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
                       imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
-                      instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
                       description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
                       votes={searchQuery ? filteredCourses[key].votes : courses[key].votes}
                       onClick={() => handleCourseEnroll(key)}
                       showCTA={true}
-                      text="Enroll"
+                      text="View"
                       firstChapter={searchQuery ? filteredCourses[key].chapters[0] : courses[key].chapters[0]}
                     />
                   </motion.div>

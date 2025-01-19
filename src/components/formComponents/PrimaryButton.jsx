@@ -21,7 +21,7 @@ function PrimaryButton({ text, classname, onClick, isLoading, arrow }) {
   return (
     <button
 
-      className={`${classname}  rounded-full flex items-center h-10 bg-gradient-to-l from-blue-400  to-blue-600 text-white group hover:opacity-90 transition-opacity duration-300`}
+      className={`${classname}  rounded-full flex items-center h-10 bg-accentColor text-white group hover:opacity-90 transition-opacity duration-300`}
       onClick={onClick}
       type='button'
     >

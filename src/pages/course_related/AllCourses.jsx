@@ -17,10 +17,8 @@ import 'swiper/css/pagination';
 import { AuthContext } from '../../context/AuthContext';
 import Footer from '../../components/Footer';
 import MobileCourseView from './MobileView/MobileCourseView'
-// import required modules
-
-
-
+import { GrPowerReset } from "react-icons/gr";
+import Masonry from 'react-masonry-css'
 
 function AllCourses() {
 
@@ -118,7 +116,7 @@ function AllCourses() {
 
     useEffect(() => {
 
-        if(searchQuery == "") return;
+        if (searchQuery == "") return;
 
         const filteredCourses = Object.keys(courses).filter(key =>
             courses[key].courseName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -177,48 +175,51 @@ function AllCourses() {
 
                                 {!isLoading && courses.length == 0 ?
                                     (
-                                        <p className='text-gray-500 flex justify-center h-[600px] items-center'>No courses available.</p>
+                                        <p className='text-zinc-500 flex justify-center h-[600px] items-center'>No courses available.</p>
                                     )
 
                                     :
 
                                     (
 
-
                                         <div>
+                                            {searchQuery && filteredCourses.length == 0 &&
+                                                <p className='dark:text-zinc-500 flex flex-wrap justify-center items-center h-[500px]'>
+                                                    No courses available.
+                                                </p>
+                                            }
 
-                                            {searchQuery && filteredCourses.length == 0 && <p className='dark:text-gray-500 flex flex-wrap justify-center items-center h-[500px]'>No courses available.</p>}
-
-                                            <div className='masonry'>
+                                            <Masonry
+                                                breakpointCols={3}
+                                                className="flex" // compensate for padding
+                                                columnClassName="pl-4" // padding between columns
+                                            >
                                                 {
-                                                    Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => {
-                                                        return <motion.div
+                                                    Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => (
+                                                        <motion.div
                                                             key={key}
                                                             initial={{ y: (100), opacity: 0 }}
                                                             animate={{ y: 0, opacity: 100 }}
                                                             transition={{ delay: 0.1 * index }}
-                                                            className='masonry-item'
+                                                            className='mb-4'
                                                         >
                                                             <CourseCard
                                                                 title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
                                                                 imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
-                                                                instructor={searchQuery ? filteredCourses[key].instructorName : courses[key].instructorName}
                                                                 description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
                                                                 votes={searchQuery ? filteredCourses[key].votes : courses[key].votes}
                                                                 onClick={() => handleCourseEnroll(key)}
                                                                 showCTA={true}
-                                                                text={"Enroll"}
+                                                                text={"View"}
                                                                 firstChapter={searchQuery ? filteredCourses[key].chapters[0] : courses[key].chapters[0]}
                                                             />
-
                                                         </motion.div>
-
-
-                                                    })
+                                                    ))
                                                 }
-                                            </div>
-
+                                            </Masonry>
                                         </div>
+
+
                                     )
 
 
@@ -229,20 +230,20 @@ function AllCourses() {
 
                             {/* ----------------------------------- filter -------------------------- */}
 
-                            <div className='flex fixed right-0 top-14 bottom-0  bg-white  dark:bg-bgOneLight flex-col  gap-8 w-2/12 border-l border-lightBorder dark:border-darkBorder p-4 '>
+                            <div className='flex fixed right-0 top-14 bottom-0  bg-white  dark:bg-bgOneLight flex-col  w-2/12 border-l border-lightBorder dark:border-darkBorder p-4 '>
 
 
 
-                                <div className='relative w-full'>
+                                <div className='relative w-full mb-4'>
 
                                     <input
                                         type="text"
-                                        placeholder="Search courses"
-                                        className={`pl-10 w-full bg-gray-100 dark:bg-black pr-4 text-black dark:text-white  outline-none focus:ring-0 rounded-md py-2.5 placeholder-gray-500 border border-lightBorder dark:border-darkBorder `}
+                                        placeholder="Search resources"
+                                        className={`pl-10 w-full bg-white dark:bg-black pr-4 text-black dark:text-white  outline-none focus:ring-0 rounded-md py-2.5 placeholder-zinc-500 border border-lightBorder dark:border-darkBorder `}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                     />
 
-                                    <div className='text-gray-500 absolute  top-1/2 -translate-y-1/2 left-3'>
+                                    <div className='text-zinc-500 absolute  top-1/2 -translate-y-1/2 left-3'>
                                         <HiMiniDocumentMagnifyingGlass />
                                     </div>
                                 </div>
@@ -251,56 +252,64 @@ function AllCourses() {
 
 
 
-                                <div>
-                                    <form className='flex flex-col items-start gap-1 text-black dark:text-white font-medium'>
+                                <div className='h-full'>
+                                    <form className=' text-black dark:text-white font-medium flex flex-col relative h-full'>
 
-                                        <div onClick={() => setSearchQuery("javascript")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="javascript" checked={searchQuery === "javascript"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>JavaScript</label>
+
+                                        <div className='w-full flex flex-col gap-1 '>
+
+
+                                            <div onClick={() => setSearchQuery("javascript")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="javascript" checked={searchQuery === "javascript"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>JavaScript</label>
+                                            </div>
+
+
+                                            <div onClick={() => setSearchQuery("machine")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="machine" checked={searchQuery === "machine"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>AI / ML</label>
+                                            </div>
+
+
+
+                                            <div onClick={() => setSearchQuery("redis")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="redis" checked={searchQuery === "redis"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Redis Caching</label>
+                                            </div>
+
+
+
+                                            <div onClick={() => setSearchQuery("react")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="react" checked={searchQuery === "react"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>React JS</label>
+                                            </div>
+
+
+                                            <div onClick={() => setSearchQuery("fullstack")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="fullstack" checked={searchQuery === "fullstack"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Full Stack</label>
+                                            </div>
+
+
+                                            <div onClick={() => setSearchQuery("java")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="java" checked={searchQuery === "java"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Core Java</label>
+                                            </div>
+
+
+                                            <div onClick={() => setSearchQuery("spring")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="spring" checked={searchQuery === "spring"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Spring Boot</label>
+                                            </div>
+
                                         </div>
 
 
-                                        <div onClick={() => setSearchQuery("machine")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="machine" checked={searchQuery === "machine"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>AI / ML</label>
+                                        <div onClick={() => setSearchQuery("")} className='absolute right-0 bottom-0 flex items-center gap-2 w-full'>
+                                            <label className='cursor-pointer shadow-sm hover:shadow-md flex items-center gap-2 dark:hover:bg-zinc-800 transition-all duration-300 ease-in-out bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'><GrPowerReset size={14} />Reset</label>
                                         </div>
 
 
-
-                                        <div onClick={() => setSearchQuery("redis")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="redis" checked={searchQuery === "redis"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Redis Caching</label>
-                                        </div>
-
-
-
-                                        <div onClick={() => setSearchQuery("react")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="react" checked={searchQuery === "react"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>React JS</label>
-                                        </div>
-
-
-                                        <div onClick={() => setSearchQuery("fullstack")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="fullstack" checked={searchQuery === "fullstack"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Full Stack</label>
-                                        </div>
-
-
-                                        <div onClick={() => setSearchQuery("java")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="java" checked={searchQuery === "java"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Core Java</label>
-                                        </div>
-
-
-                                        <div onClick={() => setSearchQuery("spring")} className=' flex items-center gap-2 w-full'>
-                                            <input className='peer hidden cursor-pointer' type="radio" value="spring" checked={searchQuery === "spring"} onChange={handleOptionChange} multiple={true} />
-                                            <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:bg-gray-200 bg-gray-50 dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Spring Boot</label>
-                                        </div>
-
-
-                                        
-
-                                        <button onClick={() => setSearchQuery("")} className='text-sm text-gray underline'>Reset</button>
 
 
                                     </form>
