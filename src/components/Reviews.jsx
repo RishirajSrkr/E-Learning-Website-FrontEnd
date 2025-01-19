@@ -4,47 +4,48 @@ import { Star } from "lucide-react";
 const reviews = [
     {
         name: "Arjun S.",
-        img: "https://img.freepik.com/free-photo/portrait-young-handsome-man-smiling_144627-29283.jpg", // Replace with actual image
+        img: "https://img.freepik.com/free-photo/portrait-young-handsome-man-smiling_144627-29283.jpg",
         rating: 5,
         review:
-            "Learning to code seemed daunting at first, but the step-by-step lessons made it so approachable. Built my first website in just 3 weeks!",
+            "Finding the right React tutorials used to be overwhelming. Thanks to this platform, I discovered the best-voted resources and finished my React journey without wasting time. A must-have for any beginner!",
     },
     {
         name: "Priya V.",
-        img: "https://img.freepik.com/free-photo/beautiful-indian-woman-traditional-clothes-posing-studio_23-2148907318.jpg", // Replace with actual image
+        img: "https://img.freepik.com/free-photo/beautiful-indian-woman-traditional-clothes-posing-studio_23-2148907318.jpg",
         rating: 5,
         review:
-            "Perfect for beginners. The JavaScript course was exactly what I needed.",
+            "As someone who creates educational content, I love how easy it is to share my YouTube videos here and create structured courses. It’s a great way to help others learn effectively!",
     },
     {
         name: "Mike T.",
-        img: "https://img.freepik.com/free-photo/happy-young-man-suit_144627-31898.jpg", // Replace with actual image
+        img: "https://img.freepik.com/free-photo/happy-young-man-suit_144627-31898.jpg",
         rating: 5,
         review:
-            "The community support is incredible. Whenever I hit a roadblock, someone was there to help. Completed the full stack course and built three projects. Now I'm confident in my coding skills!",
+            "This platform solved my biggest problem: finding trusted learning resources. I even created my own curated Python course using YouTube videos and articles. Such a helpful tool for learners and creators alike!",
     },
     {
         name: "Sarah K.",
-        img: "https://img.freepik.com/free-photo/cheerful-african-american-woman-with-afro-hairstyle-smiling_197531-22523.jpg", // Replace with actual image
+        img: "https://img.freepik.com/free-photo/cheerful-african-american-woman-with-afro-hairstyle-smiling_197531-22523.jpg",
         rating: 5,
         review:
-            "As a designer, I loved how the courses connected design principles with coding. Now I can build what I design!",
+            "As a designer learning to code, I often felt lost among hundreds of videos. This platform helped me focus on the best-voted resources and even create a small design-to-code course for others. Love it!",
     },
     {
         name: "Alex R.",
-        img: "https://img.freepik.com/free-photo/casual-caucasian-man-smiling-standing-isolated-white_53876-128797.jpg", // Replace with actual image
+        img: "https://img.freepik.com/free-photo/casual-caucasian-man-smiling-standing-isolated-white_53876-128797.jpg",
         rating: 5,
         review:
-            "The Python course was fantastic. Clear explanations and practical projects helped me learn quickly. Highly recommend for beginners!",
+            "The voting system is brilliant! I quickly found the most effective JavaScript tutorials and even shared my favorite resources with others. The community aspect makes it even better.",
     },
     {
         name: "Nina L.",
-        img: "https://img.freepik.com/free-photo/beautiful-blonde-young-woman-smiling_144627-30961.jpg", // Replace with actual image
+        img: "https://img.freepik.com/free-photo/beautiful-blonde-young-woman-smiling_144627-30961.jpg",
         rating: 5,
         review:
-            "From complete beginner to building React apps in months. The project-based learning approach really works!",
+            "From feeling confused about where to start, to creating my own curated React course—it’s been an amazing experience! This platform not only saves time but also helps learners and creators connect.",
     },
 ];
+
 
 
 const Reviews = () => {
