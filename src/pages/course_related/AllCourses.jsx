@@ -259,25 +259,6 @@ function AllCourses() {
                                         <div className='w-full flex flex-col gap-1 '>
 
 
-                                            <div onClick={() => setSearchQuery("javascript")} className=' flex items-center gap-2 w-full'>
-                                                <input className='peer hidden cursor-pointer' type="radio" value="javascript" checked={searchQuery === "javascript"} onChange={handleOptionChange} multiple={true} />
-                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>JavaScript</label>
-                                            </div>
-
-
-                                            <div onClick={() => setSearchQuery("machine")} className=' flex items-center gap-2 w-full'>
-                                                <input className='peer hidden cursor-pointer' type="radio" value="machine" checked={searchQuery === "machine"} onChange={handleOptionChange} multiple={true} />
-                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>AI / ML</label>
-                                            </div>
-
-
-
-                                            <div onClick={() => setSearchQuery("redis")} className=' flex items-center gap-2 w-full'>
-                                                <input className='peer hidden cursor-pointer' type="radio" value="redis" checked={searchQuery === "redis"} onChange={handleOptionChange} multiple={true} />
-                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Redis Caching</label>
-                                            </div>
-
-
 
                                             <div onClick={() => setSearchQuery("react")} className=' flex items-center gap-2 w-full'>
                                                 <input className='peer hidden cursor-pointer' type="radio" value="react" checked={searchQuery === "react"} onChange={handleOptionChange} multiple={true} />
@@ -301,6 +282,29 @@ function AllCourses() {
                                                 <input className='peer hidden cursor-pointer' type="radio" value="spring" checked={searchQuery === "spring"} onChange={handleOptionChange} multiple={true} />
                                                 <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Spring Boot</label>
                                             </div>
+
+
+
+                                            <div onClick={() => setSearchQuery("javascript")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="javascript" checked={searchQuery === "javascript"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>JavaScript</label>
+                                            </div>
+
+
+                                            <div onClick={() => setSearchQuery("machine")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="machine" checked={searchQuery === "machine"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>AI / ML</label>
+                                            </div>
+
+                                            
+                                            <div onClick={() => setSearchQuery("redis")} className=' flex items-center gap-2 w-full'>
+                                                <input className='peer hidden cursor-pointer' type="radio" value="redis" checked={searchQuery === "redis"} onChange={handleOptionChange} multiple={true} />
+                                                <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Redis Caching</label>
+                                            </div>
+
+
+
+
 
                                         </div>
 
