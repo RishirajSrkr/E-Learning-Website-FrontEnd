@@ -15,6 +15,7 @@ import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { FaCircleUser } from "react-icons/fa6";
 import { useTheme } from '../context/ThemeContext';
+import { MdFitbit } from "react-icons/md";
 function Navbar() {
 
     const location = useLocation();
@@ -268,7 +269,7 @@ function Navbar() {
 
                                 {/* -------------logo----------- */}
                                 <div className='w-1/4 flex justify-center items-center'>
-                                    <Link className='text-bgOne dark:text-offwhite font-semibold text-xl' to={"/"}>BitByBit</Link>
+                                    <Link className='text-bgOne dark:text-offwhite font-semibold text-xl flex items-center gap-2' to={"/"}><MdFitbit/>BitByBit</Link>
                                 </div>
 
                                 {/* --------------menu------------- */}
