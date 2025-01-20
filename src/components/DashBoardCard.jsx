@@ -8,7 +8,7 @@ function DashBoardCard({user, headtext, onClick, subtext, value, icon, classname
     
             <div className='flex justify-between items-center'>
               <h3 className='text-5xl font-semibold'>{`${value < 10 ? "0" + value : value}`}</h3>
-              <div className={`bg-gray-100 dark:bg-bgTwo w-fit p-3 rounded-full ${isSelected ? "text-black dark:text-white" : "text-gray-400 dark:text-gray-600"}`}>
+              <div className={`bg-gray-100 dark:bg-bgTwo w-fit p-3 rounded-full ${isSelected ? "text-black dark:text-accentColor" : "text-gray-400 dark:text-gray-600"}`}>
               {icon}
               </div>
             </div>

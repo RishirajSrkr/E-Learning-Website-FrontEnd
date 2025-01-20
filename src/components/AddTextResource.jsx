@@ -34,7 +34,7 @@ function AddTextResource() {
     courseTitle: "",
     courseDescription: "",
     courseCategory: "",
-    courseImage: "https://via.placeholder.com/150",
+    courseImage: "https://placehold.co/600x400",
     chapters: [
       {
         chapterContent: "",
@@ -274,7 +274,10 @@ function AddTextResource() {
                   <div className='flex items-start gap-6'>
                     <p className='flex gap-2 items-center text-sm'> <IoMdCheckmark className='text-accentColor' /> Image added successfully! </p>
 
-                    <p className='flex gap-1.5 items-center text-sm cursor-pointer underline underline-offset-2'> <MdDelete/>Remove Image</p>
+                    <p onClick={() => {
+                      setPreviewImage(null); 
+                       formData.courseImage = "https://placehold.co/600x400";
+                      }} className='flex gap-1.5 items-center text-sm cursor-pointer underline underline-offset-2'> <MdDelete/>Remove Image</p>
                   </div>
 
                 )
@@ -381,7 +384,7 @@ function AddTextResource() {
           !isMobile && <div className='w-2/6 border-l  border-lightBorder dark:border-darkBorder pt-6 px-4 flex justify-center '>
 
             <CourseCard
-              imageUrl={`${formData.courseImage == "https://via.placeholder.com/150" ? "https://via.placeholder.com/150" : URL.createObjectURL(formData.courseImage)}`}
+              imageUrl={`${formData.courseImage == "https://placehold.co/600x400" ? "https://placehold.co/600x400" : URL.createObjectURL(formData.courseImage)}`}
               title={`${formData.courseTitle ? formData.courseTitle : "Spring Boot & Spring Security"}`}
               instructor={loggedInUser}
               description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}

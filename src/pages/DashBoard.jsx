@@ -16,7 +16,7 @@ import { FaShareAlt } from "react-icons/fa";
 import { motion } from 'framer-motion'
 import { RiArrowRightLine } from "react-icons/ri";
 import { TbLoader2 } from 'react-icons/tb';
-import {toast} from 'sonner';
+import { toast } from 'sonner';
 
 function DashBoard() {
 
@@ -97,17 +97,17 @@ function DashBoard() {
       setIsDeleting(true)
 
       const remainingUploadedCourses = Object.keys(uploadedCourses)
-      .filter(key => key != courseId)
-      .reduce((acc, key) => {
-        acc[key] = uploadedCourses[key]
-        return acc;
-      }, {})
-    
+        .filter(key => key != courseId)
+        .reduce((acc, key) => {
+          acc[key] = uploadedCourses[key]
+          return acc;
+        }, {})
+
       setUploadedCourses(remainingUploadedCourses);
 
       const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/course/delete/${courseId}`)
       toast.success("Course deleted successfully")
-      
+
       console.log(response.data);
     }
     catch (e) {
@@ -149,9 +149,22 @@ function DashBoard() {
                   <TbReload className='text-gray-500' />
                 </div>
 
+
                 <DashBoardCard
                   user={user}
-                  headtext={"Uploaded Courses"}
+                  headtext={"Enrolled Resources"}
+                  subtext={"Level up your skills!"}
+                  value={Object.keys(enrolledCourses).length}
+                  icon={<FaBookOpen />}
+                  onClick={() => setSelected("enrolled-courses")}
+                  isSelected={selected == "enrolled-courses"}
+
+                />
+
+
+                <DashBoardCard
+                  user={user}
+                  headtext={"Uploaded Resources"}
                   subtext={"We appreciate your efforts!"}
                   value={Object.keys(uploadedCourses).length}
                   icon={<RiFileUploadLine />}
@@ -161,16 +174,6 @@ function DashBoard() {
 
                 />
 
-                <DashBoardCard
-                  user={user}
-                  headtext={"Enrolled Courses"}
-                  subtext={"Level up your skills!"}
-                  value={Object.keys(enrolledCourses).length}
-                  icon={<FaBookOpen />}
-                  onClick={() => setSelected("enrolled-courses")}
-                  isSelected={selected == "enrolled-courses"}
-
-                />
 
                 <DashBoardCard
                   user={user}
@@ -232,7 +235,7 @@ function DashBoard() {
                             <Link onClick={() => handleCourseLinkToShare(key)} className='text-sm h-5 flex items-center gap-1'>  <FaShareAlt className='w-6' size={12} />Share</Link>
 
 
-                            <Link onClick={() => handleCourseDelete(key)} className='text-sm h-5 flex items-center '>{isDeleting ? <div className='flex items-center gap-1'><TbLoader2 className='animate-spin w-6'/>Deleting</div> : <div className='flex items-center gap-1'><MdDelete className='w-6' size={13} /> Delete</div>}</Link>
+                            <Link onClick={() => handleCourseDelete(key)} className='text-sm h-5 flex items-center '>{isDeleting ? <div className='flex items-center gap-1'><TbLoader2 className='animate-spin w-6' />Deleting</div> : <div className='flex items-center gap-1'><MdDelete className='w-6' size={13} /> Delete</div>}</Link>
 
                           </motion.div>
                         }

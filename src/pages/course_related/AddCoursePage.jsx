@@ -22,7 +22,7 @@ function AddCoursePage() {
 const TipsComponent = () => {
     return (
         <div className='w-96'>
-            <p className='font-medium text-lg mb-4 flex items-center gap-1'><FiZap /> Tips for Creating a Great Course</p>
+            <p className='font-medium text-lg mb-4 flex items-center gap-1'><FiZap /> Tips for Creating a Great Resource</p>
             <p >
                 <li className=''>Share helpful, reliable resources.</li>
                 <li className=''>Use clear titles and descriptions. </li>
