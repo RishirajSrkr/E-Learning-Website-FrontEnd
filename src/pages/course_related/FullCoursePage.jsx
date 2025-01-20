@@ -16,7 +16,7 @@ function FullCoursePage() {
     const { courseId } = useParams();
 
     const { loggedInUser } = useContext(AuthContext)
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -196,8 +196,8 @@ function FullCoursePage() {
 
     console.log(courseUploadedBy?.email);
     console.log(user.email);
-    
-    
+
+
 
 
 
@@ -219,10 +219,12 @@ function FullCoursePage() {
                         <div className='w-full relative px-24'>
 
                             {
-                                courseUploadedBy?.email != user.email && <button
+                               courseUploadedBy?.email && user?.email && courseUploadedBy.email != user.email && <button
                                     onClick={() => setShowVoteAndOtherOptions(prev => !prev)}
                                     className='fixed top-24 right-10 '
-                                ><CgMenuGridR size={24} /></button>
+                                >
+                                    <CgMenuGridR size={24} />
+                                </button>
 
                             }
 
@@ -234,7 +236,7 @@ function FullCoursePage() {
                                         variants={containerVariants}
                                         initial="hidden"
                                         animate="visible"
-                                        className="space-y-1" // Adds spacing between buttons
+                                        className="space-y-1" 
                                     >
                                         <motion.button
                                             variants={buttonVariants}
@@ -286,8 +288,20 @@ function FullCoursePage() {
                                         </div>
 
                                         <div className='flex gap-2 items-center' >
-                                            <img className='h-8 w-8 object-cover rounded-full border dark:border-zinc-500 border-lightBorder' src={courseUploadedBy?.profileImage} />
-                                            <p className='font-semibold'>{courseUploadedBy?.name}</p>
+                                           {
+                                            courseUploadedBy?.profileImage ?
+                                            
+                                            (<img className='h-8 w-8 object-cover rounded-full border dark:border-zinc-500 border-lightBorder' src={courseUploadedBy?.profileImage} />)
+                                            :
+                                            (<div className='h-9 w-9 bg-bgTwo rounded-full animate-pulse'></div>)
+
+                                           }
+                                            {
+                                               courseUploadedBy?.name ? 
+                                               (<p className='font-semibold'>{courseUploadedBy?.name}</p>)
+                                               :
+                                               (<p className='w-36 h-5 rounded-md bg-bgTwo animate-pulse'></p>)
+                                            }
                                         </div>
                                     </div>
 
