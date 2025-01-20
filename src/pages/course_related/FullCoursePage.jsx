@@ -228,7 +228,7 @@ function FullCoursePage() {
 
                             {
 
-                                showVoteAndOtherOptions && <div className='flex flex-col gap-1 fixed top-28 right-10  p-6 rounded-lg  text-sm font-medium'>
+                                showVoteAndOtherOptions == true && <div className='flex flex-col gap-1 fixed top-28 right-10  p-6 rounded-lg  text-sm font-medium'>
 
                                     <motion.div
                                         variants={containerVariants}
