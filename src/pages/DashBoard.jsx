@@ -25,7 +25,7 @@ function DashBoard() {
   const { user, isLoading } = useContext(UserContext)
 
 
-  const [selected, setSelected] = useState("uploaded-courses");
+  const [selected, setSelected] = useState("enrolled-courses");
   const [enrolledCourses, setEnrolledCourses] = useState({})
   const [uploadedCourses, setUploadedCourses] = useState({})
   const [votes, setVotes] = useState(0);
