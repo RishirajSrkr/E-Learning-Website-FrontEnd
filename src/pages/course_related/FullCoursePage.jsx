@@ -9,6 +9,7 @@ import { CgMenuGridR } from "react-icons/cg";
 import { motion } from 'framer-motion';
 import { MdPlayCircle } from "react-icons/md";
 import { UserContext } from '../../context/UserContext';
+
 function FullCoursePage() {
 
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function FullCoursePage() {
     const { courseId } = useParams();
 
     const { loggedInUser } = useContext(AuthContext)
-    const { user } = useContext(UserContext)
+    const { user, fetchUser } = useContext(UserContext)
 
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -136,6 +137,8 @@ function FullCoursePage() {
             navigate("/all-resources")
 
             await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/end-course/${courseId}`)
+
+            fetchUser();
 
         }
         catch (e) {
@@ -293,14 +296,14 @@ function FullCoursePage() {
                                             
                                             (<img className='h-8 w-8 object-cover rounded-full border dark:border-zinc-500 border-lightBorder' src={courseUploadedBy?.profileImage} />)
                                             :
-                                            (<div className='h-9 w-9 bg-bgTwo rounded-full animate-pulse'></div>)
+                                            (<div className='h-9 w-9 bg-zinc-400 dark:bg-bgTwo rounded-full animate-pulse'></div>)
 
                                            }
                                             {
                                                courseUploadedBy?.name ? 
                                                (<p className='font-semibold'>{courseUploadedBy?.name}</p>)
                                                :
-                                               (<p className='w-36 h-5 rounded-md bg-bgTwo animate-pulse'></p>)
+                                               (<p className='w-36 h-5 rounded-md bg-zinc-400 dark:bg-bgTwo animate-pulse'></p>)
                                             }
                                         </div>
                                     </div>

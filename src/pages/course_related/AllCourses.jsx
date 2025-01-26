@@ -19,12 +19,11 @@ import Footer from '../../components/Footer';
 import MobileCourseView from './MobileView/MobileCourseView'
 import { GrPowerReset } from "react-icons/gr";
 import Masonry from 'react-masonry-css'
+import { UserContext } from '../../context/UserContext'
 
 function AllCourses() {
 
     const navigate = useNavigate();
-
-
 
 
     function handleOptionChange(e) {
@@ -37,15 +36,13 @@ function AllCourses() {
 
 
     const [courses, setCourses] = useState({})
-
     const [searchQuery, setSearchQuery] = useState("");
-
     const [filteredCourses, setFilteredCourses] = useState({});
 
     const { isMobile } = useContext(WindowWidthContext)
 
     const { loggedInUser } = useContext(AuthContext)
-
+    const { user, isLoading: loggedInUserIsLoading, fetchUser } = useContext(UserContext)
 
     useEffect(() => {
 
@@ -54,6 +51,8 @@ function AllCourses() {
         sessionStorage.setItem("redirectAfterLogin", redirectAfterLogin)
 
 
+        fetchUser();
+
         async function getAllCourses() {
             try {
                 setIsLoading(true);
@@ -61,7 +60,6 @@ function AllCourses() {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/all-courses`);
                 setCourses(response.data)
                 console.log(response.data);
-
 
             }
             catch (e) {
@@ -82,31 +80,47 @@ function AllCourses() {
 
 
 
+    console.log(courses);
 
-    async function handleCourseEnroll(id) {
+
+    async function handleCourseEnroll(courseId) {
         try {
 
             if (!loggedInUser) {
                 navigate("/login")
             }
-
             else {
-                toast.success("Course enrolled")
 
-                //take me to the full course page
-                navigate(`/course/${id}`)
+                if (searchQuery) {
+                    if (filteredCourses[courseId].instructorEmail == user.email) {
+                        navigate(`/course/${courseId}`)
+                        return;
+                    }
+                } else {
+                    if (courses[courseId].instructorEmail == user.email) {
+                        navigate(`/course/${courseId}`)
+                        return;
+                    }
+                }
 
 
-                const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${id}`);
-                console.log(response.data);
+                if (user.enrolledCourses.includes(courseId)) {
+                    navigate(`/course/${courseId}`)
+                    return;
+                }
+                else {
+                    toast.success("Course enrolled")
+                    navigate(`/course/${courseId}`)
+                    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${courseId}`);
+                    console.log(response.data);
 
-
+                    fetchUser();
+                }
             }
-
         }
         catch (error) {
             toast.error("Failed to enroll, try again")
-            navigate("/all-courses")
+            navigate("/all-resources")
             console.log(error);
 
         }
@@ -131,7 +145,6 @@ function AllCourses() {
 
 
 
-    const headline = "</ Learn for Free />"
 
 
     return (
@@ -162,7 +175,7 @@ function AllCourses() {
                             {/* ---------------------------- COURSES -------------------------------- */}
                             <div className='w-10/12 relative min-h-screen rounded-lg  px-20'>
                                 {
-                                    isLoading &&
+                                    isLoading || loggedInUserIsLoading &&
                                     <div className='masonry w-full'>
                                         {Array.from({ length: 3 }).map((_, index) => (
                                             <div key={index} className='masonry-item'>
@@ -173,54 +186,58 @@ function AllCourses() {
 
                                 }
 
-                                {!isLoading && courses.length == 0 ?
-                                    (
-                                        <p className='text-zinc-500 flex justify-center h-[600px] items-center'>No courses available.</p>
-                                    )
+                                {
+                                    !loggedInUserIsLoading && !isLoading &&
 
-                                    :
+                                    <div>
+                                        {
+                                            courses.length == 0 && <p className='text-zinc-500 flex justify-center h-[600px] items-center'>No courses available.</p>
+                                        }
 
-                                    (
+                                        {
 
-                                        <div>
-                                            {searchQuery && filteredCourses.length == 0 &&
-                                                <p className='dark:text-zinc-500 flex flex-wrap justify-center items-center h-[500px]'>
-                                                    No courses available.
-                                                </p>
-                                            }
+                                            courses.length != 0 &&
 
-                                            <Masonry
-                                                breakpointCols={3}
-                                                className="flex" // compensate for padding
-                                                columnClassName="pl-4" // padding between columns
-                                            >
-                                                {
-                                                    Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => (
-                                                        <motion.div
-                                                            key={key}
-                                                            initial={{ y: (100), opacity: 0 }}
-                                                            animate={{ y: 0, opacity: 100 }}
-                                                            transition={{ delay: 0.1 * index }}
-                                                            className='mb-4'
-                                                        >
-                                                            <CourseCard
-                                                                title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
-                                                                imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
-                                                                description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
-                                                                votes={searchQuery ? filteredCourses[key].votes : courses[key].votes}
-                                                                onClick={() => handleCourseEnroll(key)}
-                                                                showCTA={true}
-                                                                text={"View"}
-                                                                firstChapter={searchQuery ? filteredCourses[key].chapters[0] : courses[key].chapters[0]}
-                                                            />
-                                                        </motion.div>
-                                                    ))
+                                            <div>
+                                                {searchQuery && filteredCourses.length == 0 &&
+                                                    <p className='dark:text-zinc-500 flex flex-wrap justify-center items-center h-[500px]'>
+                                                        No courses available.
+                                                    </p>
                                                 }
-                                            </Masonry>
-                                        </div>
 
+                                                <Masonry
+                                                    breakpointCols={3}
+                                                    className="flex" // compensate for padding
+                                                    columnClassName="pl-4" // padding between columns
+                                                >
+                                                    {
+                                                        Object.keys(searchQuery ? filteredCourses : courses).map((key, index) => (
+                                                            <motion.div
+                                                                key={key}
+                                                                initial={{ y: (100), opacity: 0 }}
+                                                                animate={{ y: 0, opacity: 100 }}
+                                                                transition={{ delay: 0.1 * index }}
+                                                                className='mb-4'
+                                                            >
+                                                                <CourseCard
+                                                                    courseId={key}
+                                                                    title={searchQuery ? filteredCourses[key].courseName : courses[key].courseName}
+                                                                    imageUrl={searchQuery ? filteredCourses[key].imageUrl : courses[key].imageUrl}
+                                                                    description={searchQuery ? filteredCourses[key].courseDescription : courses[key].courseDescription}
+                                                                    votes={searchQuery ? filteredCourses[key].votes : courses[key].votes}
+                                                                    onClick={() => handleCourseEnroll(key)}
+                                                                    showCTA={true}
+                                                                    uploadedBy={searchQuery ? filteredCourses[key].instructorEmail : courses[key].instructorEmail}
+                                                                    firstChapter={searchQuery ? filteredCourses[key].chapters[0] : courses[key].chapters[0]}
+                                                                />
+                                                            </motion.div>
+                                                        ))
+                                                    }
+                                                </Masonry>
+                                            </div>
+                                        }
+                                    </div>
 
-                                    )
 
 
                                 }
@@ -296,7 +313,7 @@ function AllCourses() {
                                                 <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>AI / ML</label>
                                             </div>
 
-                                            
+
                                             <div onClick={() => setSearchQuery("redis")} className=' flex items-center gap-2 w-full'>
                                                 <input className='peer hidden cursor-pointer' type="radio" value="redis" checked={searchQuery === "redis"} onChange={handleOptionChange} multiple={true} />
                                                 <label className='cursor-pointer dark:peer-checked:text-white peer-checked:text-black dark:peer-checked:bg-zinc-700 peer-checked:shadow-md shadow-sm bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'>Redis Caching</label>

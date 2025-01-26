@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../config/axiosConfig';
-import { AuthContext } from '../context/AuthContext';
+import axios from '../../config/axiosConfig';
+import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from 'jwt-decode'; // Correct import for jwtDecode
-import Loader from '../components/Loader'
+import Loader from '../../components/Loader'
 
 
 function GoogleCallback() {

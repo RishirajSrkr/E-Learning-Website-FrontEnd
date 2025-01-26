@@ -3,13 +3,21 @@ import VotingPageCourseCard from '../components/VotingPageCourseCard';
 import axios from '../config/axiosConfig'
 import Footer from '../components/Footer'
 import { motion } from "framer-motion"
+import { useLocation } from 'react-router-dom';
 
 
 function VoteResources() {
 
-    const [courses, setCourses] = useState([]);
+    const [courses, setCourses] = useState({});
+
 
     useEffect(() => {
+
+        const redirectToFullTopVotedCourse = window.location.href;
+        console.log(redirectToFullTopVotedCourse);
+        
+        sessionStorage.setItem("redirectToFullTopVotedCourse", redirectToFullTopVotedCourse)
+
 
         async function getTopVotedCourses() {
             try {
@@ -97,16 +105,17 @@ function VoteResources() {
 
                 {
 
-                    courses?.map((course, index) => {
+                    Object.keys(courses).map((key, index) => {
                         return <VotingPageCourseCard
                             key={index}
-                            courseName={course.courseName}
-                            instructor={course.instructorName}
-                            imageUrl={course.imageUrl}
+                            courseName={courses[key].courseName}
+                            imageUrl={courses[key].imageUrl}
                             index={index + 1}
-                            vote={course.votes}
+                            vote={courses[key].votes}
+                            courseId={key}
                         />
                     })
+
                 }
 
             </div>

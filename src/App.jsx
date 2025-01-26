@@ -41,7 +41,7 @@ import PrivacyPolicy from './pages/footer_related/PrivacyPolicy.jsx'
 import TermsOfService from './pages/footer_related/TermsOfService.jsx'
 
 import ErrorPage from './pages/ErrorPage.jsx'
-import GoogleCallback from './pages/GoogleCallback.jsx'
+import GoogleCallback from './pages/login_related/GoogleCallback.jsx'
 import AddVideoResource from './components/AddVideoResource.jsx'
 import AddTextResource from './components/AddTextResource.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
@@ -104,7 +104,7 @@ function App() {
                 </ProtectedRoute>
               } />
 
-              {/* <Route path='/course/:courseId/enrolled-users' element={<EnrolledUserOfACourse />} /> */}
+  
 
               <Route path='/course/:courseId/discussions' element={<CourseDiscussionPage />} />
 
