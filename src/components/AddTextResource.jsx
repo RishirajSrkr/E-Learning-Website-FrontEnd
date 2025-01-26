@@ -346,7 +346,7 @@ function AddTextResource() {
                 {/* ------------ delete chapter ----------- */}
 
                 <button
-                  className={`${deleteButtonDisable ? 'cursor-not-allowed opacity-10' : ''} absolute top-4 right-4 bg-black dark:bg-white text-white dark:text-black w-10 h-10 flex justify-center items-center rounded-full`}
+                  className={`${deleteButtonDisable ? 'cursor-not-allowed opacity-10' : ''} absolute top-4 right-4 bg-zinc-200 dark:bg-bgThree text-zinc-500 dark:text-zinc-400 w-8 h-8 flex justify-center items-center rounded-full`}
                   onClick={() => handleDeleteChapterClick(index)}
                   disabled={deleteButtonDisable}
                 ><MdDelete /></button>
@@ -359,7 +359,7 @@ function AddTextResource() {
           <SecondaryButton
             text={"New Chapter"}
             onClick={handleAddChapterClick}
-            classname={"bg-black dark:bg-white text-white dark:text-black py-2"}
+           
           />
 
 
@@ -386,11 +386,10 @@ function AddTextResource() {
             <CourseCard
               imageUrl={`${formData.courseImage == "https://placehold.co/600x400" ? "https://placehold.co/600x400" : URL.createObjectURL(formData.courseImage)}`}
               title={`${formData.courseTitle ? formData.courseTitle : "Spring Boot & Spring Security"}`}
-              instructor={loggedInUser}
               description={`${formData.courseDescription ? formData.courseDescription : "Learn Spring Boot & Spring Security in 12 hours. Topics covered : Redis, JUnit, Kafka etc."}`}
               showCTA={true}
               text={"View"}
-              vote={0}
+              votes={150}
             />
           </div>
 

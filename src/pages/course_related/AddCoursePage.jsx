@@ -26,7 +26,7 @@ const TipsComponent = () => {
             <p >
                 <li className=''>Share helpful, reliable resources.</li>
                 <li className=''>Use clear titles and descriptions. </li>
-                <li className=''>Avoid spam or copied content.</li>
+                <li className=''>Avoid spam or irrelevant content.</li>
             </p>
             <p className='mt-4'>Let’s make learning easy and fun for everyone!</p>
         </div>

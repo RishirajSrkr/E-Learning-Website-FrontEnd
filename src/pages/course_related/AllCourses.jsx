@@ -175,7 +175,7 @@ function AllCourses() {
                             {/* ---------------------------- COURSES -------------------------------- */}
                             <div className='w-10/12 relative min-h-screen rounded-lg  px-20'>
                                 {
-                                    isLoading || loggedInUserIsLoading &&
+                                    (isLoading || loggedInUserIsLoading) &&
                                     <div className='masonry w-full'>
                                         {Array.from({ length: 3 }).map((_, index) => (
                                             <div key={index} className='masonry-item'>

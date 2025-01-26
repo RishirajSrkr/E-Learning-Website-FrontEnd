@@ -55,10 +55,7 @@ const CourseCard = ({ onClick, title, description, votes, showCTA, imageUrl, fir
             className="w-full h-40 object-cover rounded-sm mb-6 sm:h-48"
           />
 
-
-
-          <div className=' flex gap-2 justify-center items-center font-semibold text-xs h-8 bg-bgTwo rounded-lg px-4 '>{votes < 300 ? 300 : votes} <BiSolidUpvote size={10} className='-mt-0.5' /></div>
-
+          <div className='absolute -top-4 -right-4 flex  gap-2 justify-center items-center font-semibold text-xs h-8 bg-zinc-50 dark:bg-bgTwo rounded-md px-3 '><BiSolidLike size={12} className='-mt-0.5' /> {votes}</div>
 
         </div>
       )}
@@ -78,8 +75,6 @@ const CourseCard = ({ onClick, title, description, votes, showCTA, imageUrl, fir
         </div>
 
       )}
-
-
 
 
       <h3 className="text-xl font-semibold mb-2 text-black dark:text-white sm:text-2xl">{title}</h3>
