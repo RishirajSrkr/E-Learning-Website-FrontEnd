@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CourseCard } from '../../components/CourseCard'
 import { CourseCardSkeleton } from '../../components/CourseCard'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import axios from '../../config/axiosConfig'
 import { HiMiniDocumentMagnifyingGlass } from "react-icons/hi2";
 import { motion } from 'framer-motion'
@@ -17,13 +17,20 @@ import 'swiper/css/pagination';
 import { AuthContext } from '../../context/AuthContext';
 import Footer from '../../components/Footer';
 import MobileCourseView from './MobileView/MobileCourseView'
-import { GrPowerReset } from "react-icons/gr";
+import { GrPowerReset } from "react-icons/gr"
 import Masonry from 'react-masonry-css'
 import { UserContext } from '../../context/UserContext'
+import { FaUser } from "react-icons/fa";
 
 function AllCourses() {
 
     const navigate = useNavigate();
+
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get("q");
+    const name = searchParams.get("name")
+    console.log(query);
+    console.log(name);
 
 
     function handleOptionChange(e) {
@@ -33,14 +40,12 @@ function AllCourses() {
 
 
     const [isLoading, setIsLoading] = useState(true);
-
-
     const [courses, setCourses] = useState({})
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredCourses, setFilteredCourses] = useState({});
 
-    const { isMobile } = useContext(WindowWidthContext)
 
+    const { isMobile } = useContext(WindowWidthContext)
     const { loggedInUser } = useContext(AuthContext)
     const { user, isLoading: loggedInUserIsLoading, fetchUser } = useContext(UserContext)
 
@@ -127,25 +132,42 @@ function AllCourses() {
 
     }
 
+    useEffect(() => {
+        if (query) {
+            setSearchQuery(query)
+        }
+    }, [])
+
 
     useEffect(() => {
 
-        if (searchQuery == "") return;
 
-        const filteredCourses = Object.keys(courses).filter(key =>
-            courses[key].courseName.toLowerCase().includes(searchQuery.toLowerCase())
-            ||
-            courses[key].courseDescription.toLowerCase().includes(searchQuery.toLowerCase())
+        function handleFilter() {
+            if (!courses || Object.keys(courses).length === 0) return;
 
-        ).map(key => courses[key]);
+           const filtered =  Object.keys(courses).reduce((acc,  key) => {
+                const course = courses[key];
+                if(course.courseName.toLowerCase().includes(searchQuery)
+                    || course.courseDescription.toLowerCase().includes(searchQuery)
+                || course.instructorEmail.split('@')[0].toLowerCase().includes(searchQuery)
+                ){
+                    acc[key] = course;
+                }
 
-        setFilteredCourses(filteredCourses);
+                return acc;
 
-    }, [searchQuery])
+            }, {})
+
+            setFilteredCourses(filtered)
+        }
+
+        handleFilter();
+    }, [searchQuery, courses]);
 
 
-
-
+    console.log("Filtered :: ", filteredCourses);
+    console.log("All :: ", courses);
+    
 
     return (
 
@@ -172,8 +194,32 @@ function AllCourses() {
 
                         <div className='w-full mb-12 pt-32'>
 
+
+
                             {/* ---------------------------- COURSES -------------------------------- */}
                             <div className='w-10/12 relative min-h-screen rounded-lg  px-20'>
+
+
+                                {/* If user came to this page by clicking on "view courses" of a user card, then show a "go back" button that will take the user to the normal all resource page view */}
+                                {
+
+                                    query && <div className='w-full bg-zinc-50 dark:bg-bgTwo border border-lightBorder dark:border-darkBorder mb-8 flex items-center justify-between px-3 pl-6 h-[50px] rounded-lg'>
+                                        <span className='flex items-center gap-5 font-medium '>
+                                            <p>Resources uploaded by</p>
+                                            <span className='flex items-center gap-2'> < FaUser size={12} className='text-zinc-500 -translate-y-[1px]' /> <p>{name}</p> </span>
+                                        </span>
+                                        <div
+                                            onClick={() => {
+                                                navigate("/all-resources");
+                                                setSearchQuery("")
+                                            }}
+                                            className='cursor-pointer bg-accentColor px-3 text-white text-sm font-medium py-1 rounded-md'>Go back</div>
+                                    </div>
+                                }
+
+
+
+
                                 {
                                     (isLoading || loggedInUserIsLoading) &&
                                     <div className='masonry w-full'>
@@ -187,6 +233,7 @@ function AllCourses() {
                                 }
 
                                 {
+
                                     !loggedInUserIsLoading && !isLoading &&
 
                                     <div>
@@ -326,7 +373,14 @@ function AllCourses() {
                                         </div>
 
 
-                                        <div onClick={() => setSearchQuery("")} className='absolute right-0 bottom-0 flex items-center gap-2 w-full'>
+                                        <div onClick={() => {
+
+                                            setSearchQuery("");
+                                            setFilteredCourses({});
+                                            if (query) { navigate("/all-resources") }
+                                        }}
+
+                                            className='absolute right-0 bottom-0 flex items-center gap-2 w-full'>
                                             <label className='cursor-pointer shadow-sm hover:shadow-md flex items-center gap-2 dark:hover:bg-zinc-800 transition-all duration-300 ease-in-out bg-white dark:bg-bgTwo px-5 py-2 rounded-md w-full'><GrPowerReset size={14} />Reset</label>
                                         </div>
 

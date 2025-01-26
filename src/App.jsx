@@ -93,7 +93,7 @@ function App() {
               } />
 
 
-              {/* ------------- course -------------------- */}
+              {/* ------------- resources -------------------- */}
 
 
               <Route path='/all-resources' element={<AllCourses />} />
