@@ -9,6 +9,7 @@ import { CgMenuGridR } from "react-icons/cg";
 import { motion } from 'framer-motion';
 import { MdPlayCircle } from "react-icons/md";
 import { UserContext } from '../../context/UserContext';
+import { TbLoader2 } from "react-icons/tb";
 
 function FullCoursePage() {
 
@@ -21,6 +22,7 @@ function FullCoursePage() {
 
     const [course, setCourse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [isVoting, setIsVoting] = useState(false)
     const [courseUploadedBy, setCourseUplaodedBy] = useState()
     const [showVoteAndOtherOptions, setShowVoteAndOtherOptions] = useState(false)
 
@@ -105,6 +107,7 @@ function FullCoursePage() {
 
     async function handleVoteClick() {
         try {
+            setIsVoting(true)
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/course/${courseId}/vote-course`);
 
             const data = response.data;
@@ -120,9 +123,12 @@ function FullCoursePage() {
             if (error.response && error.response.data) {
                 console.log(error.response.data);
 
-                toast.warn("Already voted")
+                toast.warning("You have already voted the course")
 
             }
+        }
+        finally{
+            setIsVoting(false)
         }
 
 
@@ -221,8 +227,11 @@ function FullCoursePage() {
 
                         <div className='w-full relative px-24'>
 
+
+
+
                             {
-                               courseUploadedBy?.email && user?.email && courseUploadedBy.email != user.email && <button
+                                courseUploadedBy?.email && user?.email && courseUploadedBy.email != user.email && <button
                                     onClick={() => setShowVoteAndOtherOptions(prev => !prev)}
                                     className='fixed top-24 right-10 '
                                 >
@@ -239,14 +248,14 @@ function FullCoursePage() {
                                         variants={containerVariants}
                                         initial="hidden"
                                         animate="visible"
-                                        className="space-y-1" 
+                                        className="space-y-1"
                                     >
                                         <motion.button
                                             variants={buttonVariants}
                                             onClick={handleVoteClick}
-                                            className="bg-gray-50 dark:bg-bgTwo px-6 py-2 flex gap-2 items-center justify-start w-32"
+                                            className="bg-gray-50 dark:bg-bgTwo px-6 h-[37px]  flex gap-2 items-center justify-start w-32"
                                         >
-                                            Up Vote
+                                            {isVoting ? <span className='flex gap-2 items-center text-zinc-500'><p>Voting</p> <TbLoader2 className='animate-spin' /></span> : "Up Vote"}
                                         </motion.button>
 
                                         <motion.button
@@ -272,6 +281,7 @@ function FullCoursePage() {
 
 
 
+
                             <div className='w-5/6 pt-24 '>
 
                                 <div className='flex flex-col gap-4 mb-8'>
@@ -291,19 +301,19 @@ function FullCoursePage() {
                                         </div>
 
                                         <div className='flex gap-2 items-center' >
-                                           {
-                                            courseUploadedBy?.profileImage ?
-                                            
-                                            (<img className='h-8 w-8 object-cover rounded-full border dark:border-zinc-500 border-lightBorder' src={courseUploadedBy?.profileImage} />)
-                                            :
-                                            (<div className='h-9 w-9 bg-zinc-400 dark:bg-bgTwo rounded-full animate-pulse'></div>)
-
-                                           }
                                             {
-                                               courseUploadedBy?.name ? 
-                                               (<p className='font-semibold'>{courseUploadedBy?.name}</p>)
-                                               :
-                                               (<p className='w-36 h-5 rounded-md bg-zinc-400 dark:bg-bgTwo animate-pulse'></p>)
+                                                courseUploadedBy?.profileImage ?
+
+                                                    (<img className='h-8 w-8 object-cover rounded-full border dark:border-zinc-500 border-lightBorder' src={courseUploadedBy?.profileImage} />)
+                                                    :
+                                                    (<div className='h-9 w-9 bg-zinc-400 dark:bg-bgTwo rounded-full animate-pulse'></div>)
+
+                                            }
+                                            {
+                                                courseUploadedBy?.name ?
+                                                    (<p className='font-semibold'>{courseUploadedBy?.name}</p>)
+                                                    :
+                                                    (<p className='w-36 h-5 rounded-md bg-zinc-400 dark:bg-bgTwo animate-pulse'></p>)
                                             }
                                         </div>
                                     </div>

@@ -41,6 +41,8 @@ function DashBoard() {
   useEffect(() => {
     (async () => {
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/total-votes`);
+      console.log(response.data);
+      
       setVotes(response.data)
     })();
   }, [])

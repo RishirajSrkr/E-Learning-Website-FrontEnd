@@ -13,7 +13,7 @@ import { TbLoader2 } from "react-icons/tb";
 import { PiWarningCircle } from "react-icons/pi";
 import { IoMdCheckmark } from "react-icons/io";
 
-function AddTextResource({ initialData, isUpdateMode = false, courseId }) {
+function AddTextResource() {
 
   const ref = useRef(null);
   const fileInputRef = useRef(null);
@@ -30,28 +30,21 @@ function AddTextResource({ initialData, isUpdateMode = false, courseId }) {
   const [isLoading, setIsLoading] = useState(false)
 
 
-  const [formData, setFormData] = useState(
-    initialData || {
-      courseTitle: "",
-      courseDescription: "",
-      courseCategory: "",
-      courseImage: "https://placehold.co/600x400",
-      chapters: [
-        {
-          chapterContent: "",
-          chapterTitle: "",
-          videoLink: "",
-        }
-      ]
-    });
+  const [formData, setFormData] = useState({
+    courseTitle: "",
+    courseDescription: "",
+    courseCategory: "",
+    courseImage: "https://placehold.co/600x400",
+    chapters: [
+      {
+        chapterContent: "",
+        chapterTitle: "",
+        videoLink: "",
+      }
+    ]
+  });
 
 
-     // Update the API endpoint based on the mode
-     const apiUrl = isUpdateMode
-     ? `${import.meta.env.VITE_BASE_URL}/course/update/${courseId}`
-     : `${import.meta.env.VITE_BASE_URL}/course/create`;
-
-     
 
 
   useEffect(() => {
@@ -282,9 +275,9 @@ function AddTextResource({ initialData, isUpdateMode = false, courseId }) {
                     <p className='flex gap-2 items-center text-sm'> <IoMdCheckmark className='text-accentColor' /> Image added successfully! </p>
 
                     <p onClick={() => {
-                      setPreviewImage(null);
-                      formData.courseImage = "https://placehold.co/600x400";
-                    }} className='flex gap-1.5 items-center text-sm cursor-pointer underline underline-offset-2'> <MdDelete />Remove Image</p>
+                      setPreviewImage(null); 
+                       formData.courseImage = "https://placehold.co/600x400";
+                      }} className='flex gap-1.5 items-center text-sm cursor-pointer underline underline-offset-2'> <MdDelete/>Remove Image</p>
                   </div>
 
                 )
@@ -366,7 +359,7 @@ function AddTextResource({ initialData, isUpdateMode = false, courseId }) {
           <SecondaryButton
             text={"New Chapter"}
             onClick={handleAddChapterClick}
-
+           
           />
 
 
