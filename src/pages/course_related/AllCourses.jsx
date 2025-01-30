@@ -114,7 +114,7 @@ function AllCourses() {
                     return;
                 }
                 else {
-                    toast.success("Course enrolled")
+                    toast.success("Enrolled!")
                     navigate(`/course/${courseId}`)
                     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/enrollments/${courseId}`);
                     console.log(response.data);

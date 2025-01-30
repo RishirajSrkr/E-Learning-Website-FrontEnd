@@ -138,7 +138,7 @@ function FullCoursePage() {
     async function handleEndCourse() {
         try {
 
-            toast.success("Course removed successfully")
+            toast.success("Removed successfull!")
 
             navigate("/all-resources")
 
@@ -148,7 +148,7 @@ function FullCoursePage() {
 
         }
         catch (e) {
-            toast.error("Failed to remove the course, try again")
+            toast.error("Failed to remove the resource, try again")
             navigate(`/course/${courseId}`)
 
         }
@@ -271,7 +271,7 @@ function FullCoursePage() {
                                             onClick={handleEndCourse}
                                             className="bg-gray-50 dark:bg-bgTwo px-6 py-2 flex gap-2 items-center justify-start w-32"
                                         >
-                                            End Course
+                                            Remove
                                         </motion.button>
                                     </motion.div>
 
