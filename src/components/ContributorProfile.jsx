@@ -18,7 +18,7 @@ function ContributorProfile({ name, email, uploadedCourses, profileImage, onClic
               <span className="block text-2xl font-bold accentColor">
                 {uploadedCourses}
               </span>
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">Courses</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">Resources</span>
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@ function ContributorProfile({ name, email, uploadedCourses, profileImage, onClic
           onClick={onClick}
           className="mt-4 w-full px-4 py-2 text-sm font-medium accentColor bg-zinc-100 dark:bg-zinc-800 rounded-lg"
         >
-          View Courses
+          View resources
         </button>
       </div>
     );

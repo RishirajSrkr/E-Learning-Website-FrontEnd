@@ -180,7 +180,7 @@ function DashBoard() {
                 <DashBoardCard
                   user={user}
                   headtext={"Total Votes"}
-                  subtext={"People are loving your courses!"}
+                  subtext={"People are loving your resources!"}
                   value={votes}
                   icon={<BiLike />}
                   onClick={() => setSelected("top-voted")}
@@ -263,7 +263,7 @@ function DashBoard() {
                         className='mt-3 flex gap-1 text-white  mx-auto items-center underline underline-offset-2'
                         onClick={() => navigate("/all-courses")}
                       >
-                        <p>All Courses</p>
+                        <p>All Resources</p>
                       </button>
 
                     </div>

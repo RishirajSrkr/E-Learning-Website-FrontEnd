@@ -369,7 +369,7 @@ function AddTextResource() {
             className={`fixed bottom-24 right-4 sm:bottom-10 text-sm sm:right-10 mt-10 bg-black dark:bg-white rounded-full text-white dark:text-black w-36 h-10 flex justify-center items-center font-medium ${!formData.courseTitle || !formData.courseDescription || !formData.courseCategory || !formData.courseImage || !formData.chapters ? 'cursor-not-allowed opacity-50' : ''}`}
             onClick={handleSubmitClick}
             disabled={!formData.courseTitle || !formData.courseDescription || !formData.courseCategory || !formData.courseImage || !formData.chapters}
-          >{isLoading ? <div className='flex items-center gap-2'><TbLoader2 className='animate-spin' />Creating</div> : "Create Course"}</button>
+          >{isLoading ? <div className='flex items-center gap-2'><TbLoader2 className='animate-spin' />Creating</div> : "Create Resource"}</button>
 
 
           <div ref={ref}></div>

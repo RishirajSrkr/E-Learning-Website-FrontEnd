@@ -79,7 +79,7 @@ function AllContributers() {
                   <BookOpen className="h-8 w-8 " />
                   <span className="text-4xl font-bold ">{stats.totalCourses}</span>
                 </div>
-                <p className="mt-2 text-sm  text-center">Courses Created</p>
+                <p className="mt-2 text-sm  text-center">Resources Created</p>
               </div>
             </div>
           </div>
