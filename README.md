@@ -1,57 +1,23 @@
-**FEATURES**
+🎯 BitByBit - E-Learning Platform 📚🚀
+🌍 Live at: bitbybit.rishirajsarkar.in
 
-**Core Features**
+📢 Learn. Share. Grow. BitByBit is an interactive platform where developers can create courses, explore coding resources, and upvote the best learning materials.
 
-User Authentication: Sign up, login, and logout functionalities with secure token-based authentication. Role-based access for instructors and learners.
+Features
+✅ User authentication with JWT, Role based authentication.
+✅ Upvote and discuss on resources
+✅ Explore categorized learning materials
+✅ Secure backend with Spring Boot
+✅ Responsive UI built with React
 
-Course Management: Instructors can create, update, and delete courses. Learners can browse and enroll in courses.
+Tech Stack
+Frontend:
+React.js
+React Router
+Tailwind CSS
 
-Voting System: Courses can be upvoted by learners to promote quality content. Votes are cached in Redis for efficiency and persisted to the database periodically.
-
-Review System: Learners can add ratings and reviews for courses. Reviews contribute to a course's overall rating and popularity.
-
-
-
-**Additional Features**
-
-Responsive Design: Fully functional across devices.
-
-Performance Optimizations: Utilizes Redis caching for high-frequency operations.
-
-Scalability: Modular design enables easy addition of new features.
-
-
-
-
-**TECHNICAL ARCHITECTURE**
-
-**Frontend**
-
-Framework: React.js
-
-Key Libraries: Axios for API communication, React-Router for navigation, Tailwind CSS for styling, React Hot Toast for notifications.
-
-
-**Backend**
-
-Framework: Spring Boot
-
-Database: MongoDB (NoSQL for flexibility and scalability)
-
-Caching: Redis (used for temporary vote tracking)
-
-Security: Spring Security with JWT-based authentication
-
-File Uploads: Integrated with a cloud storage service for profile images and course materials
-
-
-**DevOps**
-
-Environment Variables: Managed via .env files.
-
-API Deployment: Dockerized Spring Boot application.
-
-Frontend Hosting: Deployed on a modern platform like Vercel or Netlify.
-
-Monitoring: Logs and scheduled tasks handled via SLF4J and Spring's scheduling framework
-
+Backend:
+Java & Spring Boot
+Spring Security (JWT Authentication)
+RESTful APIs
+MongoDB
